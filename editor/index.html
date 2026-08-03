@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>AIWC — Content editor</title>
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     A CMS with no server, no token and no third party.
+
+     It reads the published JSON, builds a form from the data's own shape,
+     renders a live preview with the SITE'S OWN renderer, and hands the
+     result to GitHub's editor to save. GitHub does the authentication —
+     you are already logged in there — so this page never touches a
+     credential.
+     ═══════════════════════════════════════════════════════════════════ */
+  :root {
+    --ink:#0A1A24; --paper:#FAF7F2; --sand:#EFE8DC; --white:#fff;
+    --line:rgb(10 26 36 / .14); --muted:#5C6B72; --teal:#2E8078; --ochre:#BC5A24;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --sans:"Inter Tight",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font:15px/1.55 var(--sans);color:var(--ink);background:var(--paper);height:100vh;display:flex;flex-direction:column;overflow:hidden}
+  button,input,select,textarea{font:inherit;color:inherit}
+
+  header{display:flex;gap:14px;align-items:center;flex-wrap:wrap;padding:11px 18px;background:var(--ink);color:#fff;flex:0 0 auto}
+  header .brand{font-weight:600;letter-spacing:.04em;margin-right:6px}
+  header select{padding:7px 11px;border-radius:5px;border:1px solid rgb(255 255 255/.22);background:rgb(255 255 255/.08);color:#fff;max-width:340px}
+  header select option{color:#000;background:#fff}
+  .grow{flex:1}
+  .btn{padding:8px 14px;border-radius:5px;border:1px solid rgb(255 255 255/.28);background:none;color:#fff;cursor:pointer;font:500 .78rem/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+  .btn:hover{background:rgb(255 255 255/.12)}
+  .btn.go{background:var(--teal);border-color:var(--teal)}
+  .btn.go:hover{background:#26635d}
+  .btn[disabled]{opacity:.4;cursor:not-allowed}
+
+  main{flex:1;display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);min-height:0}
+  @media (max-width:900px){main{grid-template-columns:1fr;grid-template-rows:1fr 1fr}}
+
+  .pane{overflow:auto;min-height:0}
+  .form{padding:16px 18px 60px;border-right:1px solid var(--line);background:var(--white)}
+  .preview{background:var(--paper)}
+  .preview iframe{width:100%;height:100%;border:0;display:block}
+
+  .status{padding:10px 18px;font:.76rem/1.4 var(--mono);color:var(--muted);background:var(--sand);border-bottom:1px solid var(--line)}
+  .status b{color:var(--ochre)}
+
+  fieldset{border:1px solid var(--line);border-radius:6px;margin:0 0 10px;padding:10px 12px;background:var(--white)}
+  legend{font:500 .68rem/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:0 5px}
+  label{display:block;margin:0 0 9px}
+  label>span{display:block;font:500 .68rem/1.5 var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+  input[type=text],textarea,input[type=number]{width:100%;padding:7px 9px;border:1px solid var(--line);border-radius:4px;background:var(--white)}
+  textarea{resize:vertical;min-height:66px;font:inherit;line-height:1.5}
+  input:focus,textarea:focus,select:focus{outline:2px solid var(--teal);outline-offset:1px}
+  .row{display:flex;gap:6px;align-items:center;margin-bottom:6px}
+  .row .idx{font:.66rem/1 var(--mono);color:var(--muted);min-width:22px}
+  .mini{padding:3px 7px;font:.66rem/1 var(--mono);border:1px solid var(--line);border-radius:4px;background:var(--white);cursor:pointer;color:var(--muted)}
+  .mini:hover{border-color:var(--ink);color:var(--ink)}
+  .mini.danger:hover{border-color:#a33131;color:#a33131}
+  .add{margin-top:4px}
+  .empty{color:var(--muted);font-size:.86rem;padding:4px 0}
+
+  dialog{border:1px solid var(--line);border-radius:8px;padding:0;max-width:min(760px,92vw);width:100%}
+  dialog::backdrop{background:rgb(10 26 36 / .5)}
+  .dlg-head{padding:14px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px}
+  .dlg-head h2{margin:0;font-size:1.05rem}
+  .dlg-body{padding:16px 18px}
+  .dlg-body ol{margin:0 0 14px;padding-left:20px}
+  .dlg-body li{margin:.4em 0}
+  .dlg-body textarea{width:100%;height:220px;font:.78rem/1.5 var(--mono)}
+  .dlg-foot{padding:12px 18px;border-top:1px solid var(--line);display:flex;gap:9px;justify-content:flex-end;background:var(--sand)}
+  .dlg-foot .btn{color:var(--ink);border-color:var(--line)}
+  .dlg-foot .btn:hover{background:var(--white)}
+  .dlg-foot .btn.go{color:#fff}
+</style>
+</head>
+<body>
+
+<header>
+  <span class="brand">AIWC editor</span>
+  <label class="sr" style="display:contents">
+    <select id="file" aria-label="Choose what to edit"><option>Loading…</option></select>
+  </label>
+  <span class="grow"></span>
+  <button class="btn" id="reset" disabled>Revert</button>
+  <button class="btn go" id="save" disabled>Save changes →</button>
+</header>
+
+<p class="status" id="status">Pick a page, researcher or partner to edit.</p>
+
+<main>
+  <div class="pane form" id="form"></div>
+  <div class="pane preview"><iframe id="preview" title="Live preview"></iframe></div>
+</main>
+
+<dialog id="saveDlg">
+  <div class="dlg-head"><h2>Save to GitHub</h2></div>
+  <div class="dlg-body">
+    <ol>
+      <li><b>Copy</b> the JSON below (the button does it).</li>
+      <li><b>Open the file on GitHub</b> — the second button. You are already signed in there, so nothing else to log into.</li>
+      <li>Select everything in GitHub's editor (<kbd>Ctrl/Cmd</kbd>+<kbd>A</kbd>), paste, then <b>Commit changes</b>.</li>
+    </ol>
+    <p style="margin:0 0 8px;color:var(--muted);font-size:.88rem">The site rebuilds automatically — your change is live in about 40 seconds. If the JSON is ever malformed the build fails and the live site keeps serving the last good version.</p>
+    <textarea id="out" readonly spellcheck="false"></textarea>
+  </div>
+  <div class="dlg-foot">
+    <button class="btn" id="close">Close</button>
+    <button class="btn" id="copy">Copy JSON</button>
+    <a class="btn go" id="ghLink" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center">Open file on GitHub ↗</a>
+  </div>
+</dialog>
+
+<script type="module">
+/**
+ * Everything is derived at runtime from what the site already publishes:
+ *   /assets/collections.json  — what exists
+ *   /content/<kind>/<slug>.json — the entry being edited
+ *   /assets/templates.mjs     — the real renderer, for the preview
+ *   /assets/site.css          — the real stylesheet, for the preview
+ *
+ * The base path is taken from this page's own URL, so the editor keeps
+ * working if a CNAME later moves the site to a domain root.
+ */
+const BASE = new URL('.', location.href).pathname.replace(/\/editor\/$/, '');
+const GH = 'https://github.com/AIWC2020/aiwc_website';
+
+const $ = (id) => document.getElementById(id);
+const status = $('status');
+const say = (html) => { status.innerHTML = html; };
+
+const [{ renderPage, renderPerson, renderPartner }, collections] = await Promise.all([
+  import(`${BASE}/assets/templates.mjs`),
+  fetch(`${BASE}/assets/collections.json`).then((r) => r.json()),
+]);
+
+/* ── what can be edited ─────────────────────────────────────────────── */
+
+const FILES = [
+  ...collections.pages.map((p) => ({ kind: 'pages', slug: p.slug, label: `Page — ${p.menuName}` })),
+  ...collections.people.map((p) => ({ kind: 'people', slug: p.slug, label: `Researcher — ${p.name}` })),
+  ...collections.partners.map((p) => ({ kind: 'partners', slug: p.slug, label: `Partner — ${p.name}` })),
+];
+
+const select = $('file');
+select.innerHTML = '<option value="">Choose what to edit…</option>' +
+  FILES.map((f, i) => `<option value="${i}">${f.label.replace(/</g, '&lt;')}</option>`).join('');
+
+/* ── state ──────────────────────────────────────────────────────────── */
+
+let current = null;   // { kind, slug, label }
+let original = null;  // pristine JSON text, for Revert
+let data = null;      // the object being edited
+
+const ctx = {
+  people: collections.people,
+  partners: collections.partners,
+  urlFor: () => '#',
+  entryUrl: () => '#',
+  t: (k) => k,
+};
+
+/* ── form, generated from the data's own shape ──────────────────────── */
+
+/** Long strings and anything with newlines get a textarea, not an input. */
+const isLong = (v) => typeof v === 'string' && (v.length > 68 || v.includes('\n'));
+
+const titleCase = (k) =>
+  k.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/^./, (c) => c.toUpperCase());
+
+/**
+ * Renders `value` (found at `path` within the document) as form controls.
+ * Every control writes straight back into `data` and re-renders the preview,
+ * so the preview is never a separate model that can drift.
+ */
+function field(key, value, path, onReplace) {
+  const set = (v) => {
+    let node = data;
+    for (let i = 0; i < path.length - 1; i++) node = node[path[i]];
+    if (path.length) node[path[path.length - 1]] = v;
+    else data = v;
+    touched();
+  };
+
+  if (value === null || value === undefined) value = '';
+
+  if (typeof value === 'boolean') {
+    const l = document.createElement('label');
+    l.style.display = 'flex'; l.style.gap = '7px'; l.style.alignItems = 'center';
+    const cb = document.createElement('input');
+    cb.type = 'checkbox'; cb.checked = value;
+    cb.onchange = () => set(cb.checked);
+    const s = document.createElement('span');
+    s.textContent = titleCase(key); s.style.margin = '0';
+    l.append(cb, s);
+    return l;
+  }
+
+  if (typeof value === 'number') {
+    const l = document.createElement('label');
+    l.innerHTML = `<span>${titleCase(key)}</span>`;
+    const inp = document.createElement('input');
+    inp.type = 'number'; inp.value = value;
+    inp.oninput = () => set(inp.value === '' ? 0 : Number(inp.value));
+    l.appendChild(inp);
+    return l;
+  }
+
+  if (typeof value === 'string') {
+    const l = document.createElement('label');
+    l.innerHTML = `<span>${titleCase(key)}</span>`;
+    const inp = document.createElement(isLong(value) ? 'textarea' : 'input');
+    if (inp.tagName === 'INPUT') inp.type = 'text';
+    inp.value = value;
+    inp.oninput = () => set(inp.value);
+    l.appendChild(inp);
+    return l;
+  }
+
+  if (Array.isArray(value)) {
+    const fs = document.createElement('fieldset');
+    const lg = document.createElement('legend');
+    lg.textContent = `${titleCase(key)} (${value.length})`;
+    fs.appendChild(lg);
+
+    if (!value.length) fs.appendChild(Object.assign(document.createElement('p'), { className: 'empty', textContent: 'None yet.' }));
+
+    value.forEach((item, i) => {
+      const row = document.createElement('div');
+      row.className = 'row';
+      row.style.alignItems = 'flex-start';
+
+      const idx = document.createElement('span');
+      idx.className = 'idx';
+      idx.textContent = String(i + 1).padStart(2, '0');
+      row.appendChild(idx);
+
+      const body = document.createElement('div');
+      body.style.flex = '1';
+      body.appendChild(field(
+        typeof item === 'object' && item ? (item.type || item.title || item.name || `Item ${i + 1}`) : `Item ${i + 1}`,
+        item, [...path, i]
+      ));
+      row.appendChild(body);
+
+      const tools = document.createElement('div');
+      tools.style.display = 'grid'; tools.style.gap = '3px';
+      const mk = (label, title, fn) => {
+        const b = document.createElement('button');
+        b.className = 'mini' + (label === '×' ? ' danger' : '');
+        b.textContent = label; b.title = title; b.type = 'button';
+        b.onclick = () => { fn(); onReplace ? onReplace() : rebuild(); };
+        return b;
+      };
+      if (i > 0) tools.appendChild(mk('↑', 'Move up', () => { const a = value; [a[i - 1], a[i]] = [a[i], a[i - 1]]; }));
+      if (i < value.length - 1) tools.appendChild(mk('↓', 'Move down', () => { const a = value; [a[i], a[i + 1]] = [a[i + 1], a[i]]; }));
+      tools.appendChild(mk('×', 'Remove', () => value.splice(i, 1)));
+      row.appendChild(tools);
+
+      fs.appendChild(row);
+    });
+
+    // Adding copies the shape of the last entry, blanked out — the only way
+    // to know what a new item should look like without a schema.
+    if (value.length) {
+      const add = document.createElement('button');
+      add.className = 'mini add'; add.type = 'button'; add.textContent = '+ Add another';
+      add.onclick = () => { value.push(blankLike(value[value.length - 1])); rebuild(); };
+      fs.appendChild(add);
+    }
+    return fs;
+  }
+
+  /* object */
+  const fs = document.createElement('fieldset');
+  const lg = document.createElement('legend');
+  lg.textContent = titleCase(String(key));
+  fs.appendChild(lg);
+  for (const [k, v] of Object.entries(value)) {
+    if (k === 'i18n') continue;               // translation keys are machinery
+    fs.appendChild(field(k, v, [...path, k]));
+  }
+  return fs;
+}
+
+/** A copy of `sample` with the values emptied but the shape kept. */
+const blankLike = (sample) => {
+  if (Array.isArray(sample)) return [];
+  if (sample && typeof sample === 'object') {
+    return Object.fromEntries(Object.entries(sample).map(([k, v]) => [k, k === 'type' ? v : blankLike(v)]));
+  }
+  if (typeof sample === 'number') return 0;
+  if (typeof sample === 'boolean') return false;
+  return '';
+};
+
+/* ── preview, drawn with the site's real renderer ───────────────────── */
+
+const RENDER = { pages: renderPage, people: renderPerson, partners: renderPartner };
+
+function draw() {
+  const frame = $('preview');
+  const doc = frame.contentDocument;
+  doc.open();
+  doc.write(`<!doctype html><html><head><meta charset="utf-8">
+    <link rel="stylesheet" href="${BASE}/assets/site.css">
+    <style>
+      html,body{margin:0;background:var(--paper,#FAF7F2)}
+      main{margin-left:0}
+      .panel{min-height:0}
+      .hero{min-height:56vh}
+      .reveal{opacity:1!important;transform:none!important}
+      .wrap,.wrap-tight{width:min(940px,calc(100% - 40px))}
+    </style></head><body><main></main></body></html>`);
+  doc.close();
+
+  try {
+    const node = RENDER[current.kind](doc, normalised(), ctx);
+    doc.querySelector('main').appendChild(node);
+  } catch (err) {
+    doc.body.innerHTML = `<p style="font:14px system-ui;padding:36px;color:#a33131">
+      Preview unavailable — ${String(err.message).replace(/</g, '&lt;')}</p>`;
+  }
+}
+
+/** Fill in the fields a renderer assumes exist, without touching `data`. */
+function normalised() {
+  const d = structuredClone(data);
+  if (current.kind === 'pages') {
+    d.slug ||= 'preview'; d.menuName ||= 'Untitled';
+    d.template ||= 'standard'; d.intro ||= {}; d.blocks ||= [];
+  } else {
+    d.slug ||= 'preview'; d.country ||= 'Australia';
+    d.bio ||= []; d.sections ||= []; d.body ||= []; d.profiles ||= [];
+    if (current.kind === 'people') d.name ||= 'Unnamed';
+    else d.name ||= 'Unnamed institution';
+  }
+  return d;
+}
+
+/* ── wiring ─────────────────────────────────────────────────────────── */
+
+const dirty = () => JSON.stringify(data, null, 2) + '\n' !== original;
+
+function touched() {
+  draw();
+  $('save').disabled = !dirty();
+  $('reset').disabled = !dirty();
+  say(dirty()
+    ? `<b>Unsaved changes</b> — ${current.label}. Nothing is written until you save through GitHub.`
+    : `${current.label} — no changes yet.`);
+}
+
+function rebuild() {
+  const host = $('form');
+  host.innerHTML = '';
+  for (const [k, v] of Object.entries(data)) {
+    if (k === 'i18n') continue;
+    host.appendChild(field(k, v, [k]));
+  }
+  touched();
+}
+
+async function load(index) {
+  if (index === '') return;
+  current = FILES[Number(index)];
+  say(`Loading ${current.label}…`);
+  const res = await fetch(`${BASE}/content/${current.kind}/${current.slug}.json`, { cache: 'no-store' });
+  if (!res.ok) { say(`<b>Could not load</b> ${current.kind}/${current.slug}.json (${res.status}).`); return; }
+  original = await res.text();
+  data = JSON.parse(original);
+  $('ghLink').href = `${GH}/edit/main/content/${current.kind}/${current.slug}.json`;
+  rebuild();
+}
+
+select.onchange = () => load(select.value);
+
+$('reset').onclick = () => { data = JSON.parse(original); rebuild(); };
+
+$('save').onclick = () => {
+  $('out').value = JSON.stringify(data, null, 2) + '\n';
+  $('saveDlg').showModal();
+};
+$('close').onclick = () => $('saveDlg').close();
+$('copy').onclick = async () => {
+  const text = JSON.stringify(data, null, 2) + '\n';
+  try {
+    await navigator.clipboard.writeText(text);
+    $('copy').textContent = 'Copied ✓';
+  } catch {
+    // Clipboard API needs a secure context; selecting is the fallback.
+    $('out').select();
+    $('copy').textContent = 'Press Ctrl/Cmd+C';
+  }
+  setTimeout(() => ($('copy').textContent = 'Copy JSON'), 2200);
+};
+
+say('Ready — pick a page, researcher or partner above.');
+</script>
+</body>
+</html>
