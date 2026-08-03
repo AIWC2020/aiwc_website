@@ -10,7 +10,6 @@ backend:
   branch: "{{BRANCH}}"
   base_url: "{{AUTH_URL}}"
 
-local_backend: true
 
 media_folder: "assets/photos"
 # Must carry the site's base path, or images an editor uploads are written

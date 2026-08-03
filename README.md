@@ -62,34 +62,60 @@ never the deployed `/admin/config.yml`.
 
 ```jsonc
 "cms": {
-  "repo": "marvi-groundwater/aiwc",
+  "repo": "AIWC2020/aiwc_website",
   "branch": "main",
-  "authUrl": "https://sveltia-cms-auth.marvi-groundwater.workers.dev"
+  "authUrl": null          // null = no OAuth broker; token sign-in only
 }
 ```
 
-GitHub has no client-side OAuth for browser apps yet, so signing in needs
-either a broker or a personal access token. Three workable setups:
+This site runs **Sveltia CMS** with **no OAuth broker**, so the CMS depends on
+nothing but GitHub itself — no Cloudflare Worker, no third-party service
+holding a client secret.
 
-| Setup | `authUrl` | What an editor does | Cost |
-| --- | --- | --- | --- |
-| **Share MARVI's broker** *(current)* | the shared worker | Clicks "Login with GitHub" | The site's domain must be in that worker's `ALLOWED_DOMAINS` |
-| **AIWC's own broker** | AIWC's worker URL | Clicks "Login with GitHub" | A second Cloudflare Worker + its own GitHub OAuth App |
-| **No broker** | `null` | Pastes a GitHub personal access token once | Every editor needs a PAT — fine for developers, poor for admin staff |
+The trade-off is how editors sign in. GitHub's OAuth code flow requires a
+*server* to exchange the auth code for a token using a client secret, and
+GitHub Pages only serves static files. So a one-click "Login with GitHub"
+button is impossible without hosting something somewhere. The serverless
+alternative is a personal access token.
 
-The broker allowlists by **domain, not repository**. If login fails with *"Your
-domain is not allowed to use the authenticator"*, the site's hostname is
-missing from `ALLOWED_DOMAINS` on the worker — that is a Cloudflare dashboard
-change, nothing in this repo will fix it.
+**To sign in at `/admin/`:**
 
-To stand up a separate broker: deploy
-[sveltia/sveltia-cms-auth](https://github.com/sveltia/sveltia-cms-auth) to
-Cloudflare Workers, register a GitHub OAuth App whose callback URL is
-`<WORKER_URL>/callback`, set `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET` and
-`ALLOWED_DOMAINS` on the worker, then point `cms.authUrl` at it.
+1. Create a [fine-grained personal access token](https://github.com/settings/personal-access-tokens/new)
+   - Repository access: **Only select repositories** → `AIWC2020/aiwc_website`
+   - Permissions → Repository → **Contents: Read and write**
+   - Set an expiry you are comfortable with; the token must be recreated after it lapses
+2. Open `/admin/`, click **Sign In Using Access Token**, paste it
 
-Setting `authUrl` to `null` removes the `base_url` line entirely, which is what
-the token-based setup expects.
+The token is stored in that browser's local storage, so it is entered once per
+browser. Give each editor their own token — never share one.
+
+**What the admin page depends on.** The CMS bundle is vendored into
+`assets/cms/`, so nothing has to be fetched to start it. Sveltia still makes a
+few optional requests at runtime — a version check on `unpkg.com`, two web
+fonts from `cdn.jsdelivr.net`, and a status banner from `githubstatus.com`.
+None are required: if all three were blocked the CMS still works, with
+fallback fonts and no banners. They are anonymous CDN reads, not accounts
+anyone has to hold or maintain — which is the point. The thing this setup
+removes is the *managed* dependency: an OAuth broker on someone's Cloudflare
+account, holding a client secret, that breaks sign-in if it lapses.
+
+> **Note on the "Sign In with GitHub" button.** Sveltia shows it even with no
+> `base_url`, and it then falls back to *Netlify's* OAuth broker — a third
+> party. There is currently no documented way to hide the button, so tell
+> editors to use **Sign In Using Access Token**.
+
+**If you would rather have the one-click button**, set `cms.authUrl` to an
+OAuth broker URL and the token step disappears. That means hosting
+[sveltia/sveltia-cms-auth](https://github.com/sveltia/sveltia-cms-auth) —
+Cloudflare Workers' free tier is ample — plus a GitHub OAuth App whose
+callback is `<WORKER_URL>/callback`, with `GITHUB_CLIENT_ID`,
+`GITHUB_CLIENT_SECRET` and `ALLOWED_DOMAINS` set on the worker. The broker
+allowlists by **domain, not repository**, so `ALLOWED_DOMAINS` must contain
+`aiwc2020.github.io`.
+
+GitHub has announced client-side PKCE, which would give a one-click sign-in
+with no server at all. It is not shipped yet; when it is, this setup gets
+strictly better with no migration.
 
 ## Structure
 
