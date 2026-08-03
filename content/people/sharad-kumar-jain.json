@@ -1,0 +1,47 @@
+{
+  "slug": "sharad-kumar-jain",
+  "name": "Sharad Kumar Jain",
+  "sortName": "Sharad Kumar Jain",
+  "designation": "Visiting Professor, Civil Engineering Department",
+  "institute": "Indian Institute of Technology Roorkee, India",
+  "instituteSlug": "indian-institute-of-technology-roorkee-india",
+  "country": "India",
+  "qualification": "Doctor of Philosophy, University of Roorkee, Roorkee (now Indian Institute of Technology)",
+  "interests": "Surface Water Hydrology, Water Resources Planning and Management, Impact of Climate Change on Water Resources, Water Governance, and Application of Advanced Tools such as Artificial Neural Networks, Remote Sensing and GIS.",
+  "email": "s_k_jain@yahoo.com",
+  "homepage": null,
+  "profiles": [
+    "https://scholar.google.com/citations?hl=en&user=269avwoAAAAJ&view_op=list_works"
+  ],
+  "photo": {
+    "image": "/assets/people/sharad-kumar-jain.webp",
+    "positionX": 50,
+    "positionY": 22
+  },
+  "bio": [
+    "Dr Sharad Jain is currently Visiting Professor, Civil Engineering Department, IIT Roorkee. He was the Director, National Institute of Hydrology, India, during 2017-20.",
+    "Dr Jain has co-authored five books: a) Water Resources Systems Planning and Management, Elsevier, b) Hydrology and Water Resources of India, Springer, c) Risk and Reliability Analysis: A Handbook for Civil and Environmental Engineers, American Society of Civil Engineers, and d) Water Resources Systems, Institution of Engineers (I), and e) Engineering Hydrology. His group has developed a software package to perform a range of analyses related with reservoirs including operation of a system of reservoirs and has set up an instrumented experimental basin on Henval river in the Upper Ganga Basin.",
+    "Dr Jain is the Chairman of Expert Appraisal Committee (River Valley and Hydroelectric Projects), Min. of Env. & Forests; Member – Project Appraisal & Monitoring Comm. (Hydrol. and Cryosphere), Ministry of Earth Sc.; and Member of many national committees on water resources."
+  ],
+  "sections": [
+    {
+      "title": "Research Project",
+      "items": [
+        "Vigorously worked on National Hydrology Project (NHP), a flagship program of Ministry of Jalshakti, Govt. of India. A MoU was signed and work is in progress to develop Decision Support System (DSS) under NHP; development of an indigenous hydrologic model jointly with IIT Kharagpur is progressing well.",
+        "Assessment of Environmental Flows for Upper Yamuna Basin,",
+        "Project-wise Water Availability and Integrated Operation Analysis of Major Projects in Krishna Basin, India"
+      ]
+    },
+    {
+      "title": "Key Publications/Reports",
+      "items": [
+        "Engineering Hydrology: An Introduction to Processes, Analysis, and Modeling, by Sharad K Jain and V P Singh, published by McGraw Hill Education, Feb. 2019.",
+        "Special report: Jain, S.K., and P.K. Singh (2019), Editors. Climate change and its impacts on water resources with focus on India. Special Report – 1/19, National Institute of Hydrology, Roorkee. 275pp.",
+        "Jain, Sharad K. and M.C. Acreman (2017). Environmental Flows, Chapter 134 in Handbook of Applied Hydrology, edited by V.P. Singh, McGraw-Hill, New York.",
+        "Jain, Sharad K, M Jeuland, L. Bharati and Zahirul Haque Khan (2016). Surface Water Resources. Chapter in the book: Ganges River Basin: Status and Challenges in Water, Environment, and Livelihood. Published by IWMI.",
+        "Goel, M. K., Sharad K. Jain, Deepti Rani, G. V. Subrahmanyam, and M. Visweswararao (2020). Developing operation procedures for individual reservoirs in a large multi-state river basin in context of tribunal awards. Journal of Water Resources Planning and Management, ASCE (in press)."
+      ]
+    }
+  ],
+  "source": "https://aiwc.org.au/sharad-kumar-jain/"
+}

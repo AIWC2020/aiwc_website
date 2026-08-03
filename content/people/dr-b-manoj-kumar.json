@@ -1,0 +1,47 @@
+{
+  "slug": "dr-b-manoj-kumar",
+  "name": "Dr. B Manoj Kumar",
+  "sortName": "B Manoj Kumar",
+  "designation": "Professor & Head",
+  "institute": "JSS Science and Technology University, Mysuru",
+  "instituteSlug": "jss-science-and-technology-university-mysuru",
+  "country": "India",
+  "qualification": "Ph.D, Indian Institute of Technology, Mumbai",
+  "interests": "Mathematical Modelling & Monitoring of water quality in lakes and rivers, Advanced water and wastewater treatment, Environmental Impact Assessment.",
+  "email": "bmanoj@sjce.ac.in",
+  "homepage": "http://jssstuniv.in/",
+  "profiles": [
+    "https://scholar.google.co.in/citations?user=s_C6b5EAAAAJ&hl=en"
+  ],
+  "photo": {
+    "image": "/assets/people/dr-b-manoj-kumar.webp",
+    "positionX": 50,
+    "positionY": 22
+  },
+  "bio": [
+    "Dr. B Manoj Kumar is Professor in the Department of Environmental Engineering with 27 years of teaching B.E and M.Tech Programs in Environmental Engineering; Health Sciences & Water Engineering and Energy System & Management as well as M.Sc. (Environmental Science), University of Mysore and JSS Academy of Higher Education & Research, Mysore and nearly 25 years of research experience. He is PI for three major research projects funded by government organisations and published 36 journal articles and over 18 articles in conference proceedings, and co-authored a book chapter. He is fellow of Institution of Engineers (India) and life member of ISTE, IWWA, IAAPC, INS and Indian Institute of Valuers. He has coordinated several Refresher Courses, Workshops and STC and delivered invited talks in refresher courses, workshops, symposiums and continuing education programmes for working professionals of various Government organizations of different states of India. Dr. B. Manoj Kumar has contributed to Industrial Development in the form of Consultancy for nearly 30 major consultancy projects on lake & river water quality monitoring and modelling (rivers: Ganga in Bihar, Cauvery, Thungabhadra, Kali, Thunga, Bhadra, Kabini, and Belandur Lake at Bangalore), environmental impact assessment, design of wastewater treatment system for industries and institutes, ground water quality monitoring, etc. He served as a technical member of Karnataka Tank Conservation & Development Authority (KTCDA), Bangalore (2018 onwards), Karnataka State Environmental Appraisal Committee, Department of Ecology and Environment, Government of Karnataka (constituted by MoEF&CC, Government of India) and Committee of Experts constituted for examination of report submitted by EMPRI on protection of Thippegondanahalli Reservoir (TGR), Bangalore, Indi, among others."
+  ],
+  "sections": [
+    {
+      "title": "Research Project",
+      "items": [
+        "Dr. B. Manoj Kumar, Principal Investigator, (Dr. PuspaTuppad (Co-PI), Rohini (Collaborator – CDD)),”Biological nutrient removal from wastewater in modified DEWATS system for reduced land and energy footprint”, Department and Science and Technology under Water Technology Initiative. DST funding: Rs. 35 lakhs; Collaborator: Rs. 12 lakhs.",
+        "Dr. B. Manoj Kumar, Principal Investigator, (Dr. H. S. Ramesh (C0-PI) for the research project on ”River Water Quality Modelling Studies to Mitigate the Pollution Load from Coffee Processing Units around Cauvery River Basin” Ministry of Environment and Forests, Government of India, New Delhi. Total cost of the project is Rs. 18.54 Lakhs.",
+        "Dr, B. Manoj Kumar, Principal Investigator for the research project on ”Advanced Treatment Techniques for Fluoride, Hardness and Nitrate Removal” Visvesvaraya Technological University, Karnataka. Total Cost of the research project is Rs. 11.81 Lakhs."
+      ]
+    },
+    {
+      "title": "Key Publications/Reports",
+      "items": [
+        "Krishna B. M.; Usha N. Murthy; Manoj Kumar B., Lokesh K. S., (2010), “Electrochemical Pre-treatment of Distillery Wastewater using Aluminum Electrode”, International journal Applied Electrochemistry; Vol. 40, No. 3, pp 663-673.",
+        "Manoj Kumar B., Savitha U Ulavi, H. S. Ramesh, G. Asha, and Pallavi R. (2012), “Pre-treatment of Coffee Pulping Wastewater by Fenton’s reagent” Indian Journal of Chemical Technology, Vol. 19, No. 3, pp. 213-217.",
+        "Basappa B Kori, Manoj Kumar B., Shashikant R Mise, (2016), “Application of MIXPIPOX model to Karanja River water quality”, Procedia Earth and Planetary Science, Vol. 11, (2015), pp 260 – 265.",
+        "K.S. Veethahavyaa, Rajath B.S., Sabike Noobia, Manoj Kumar B., (2016), “Biodegradation of Low Density Polyethylene in Aqueous Media”, Procedia Environmental Sciences, Vol. 35, (2016) pp 709 – 713.",
+        "K.P. Jayaramu , Asavari Devadiga and Manoj Kumar B, (2015), “Connecting the last mile: water access policy in action”, Waterlines, Volume 34, Issue 2.",
+        "Jayaramu K P., Zachary Burt, Manoj Kumar B., (2015), “A Study of the Consumption Pattern in a Continuous Water Service Demonstration Zone and Bulk Water Demand Forecasting for Hubli-Dharwad, India”, Journal of Water, Sanitation and Hygiene for Development, Vol. 1, No. 1, Feb 2015, pp 201-212.",
+        "Thanushree S., Lokesh K. S., Manoj Kumar B, Jayaramu K, (2018), “Assessment of Non-Revenue Water (NRW) in Mysore City – A means to accomplish 24×7 Water Supply”, Journal of Indian Water Works Association, Vol. 1, No. 2, April-June 2018, pp 108-113."
+      ]
+    }
+  ],
+  "source": "https://aiwc.org.au/dr-b-manoj-kumar/"
+}

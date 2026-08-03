@@ -1,0 +1,43 @@
+{
+  "slug": "dr-anthony-stickland",
+  "name": "Dr Anthony Stickland",
+  "sortName": "Anthony Stickland",
+  "designation": "Senior Lecturer",
+  "institute": "University of Melbourne",
+  "instituteSlug": "university-of-melbourne",
+  "country": "Australia",
+  "qualification": "PhD (Chemical Engineering), The University of Melbourne",
+  "interests": "Solid-liquid separation, suspension rheology, wastewater treatment, minerals processing",
+  "email": "stad@unimelb.edu.au",
+  "homepage": "https://findanexpert.unimelb.edu.au/profile/4239-anthony-stickland",
+  "profiles": [],
+  "photo": {
+    "image": "/assets/people/dr-anthony-stickland.webp",
+    "positionX": 50,
+    "positionY": 22
+  },
+  "bio": [
+    "After completing his PhD in 2005, Dr Stickland worked as a Research Scientist for ICI and AkzoNobel in the United Kingdom for several years, studying coatings and adhesives. Returning to academia in 2009, his primary research area is the flow and deformation (or rheology) of particulate suspensions. Suspensions may be under a shear load such as in pipe flow and flow down a slope, or under a compressional load such as in filtration and centrifugation. This work is applied across a wide range of industries including mineral processing and wastewater treatment. This includes development and validation of experimental characterisation methods and modelling tools for sedimentation, thickening, filtration, centrifugation, drying and evaporation applications."
+  ],
+  "sections": [
+    {
+      "title": "Research Project",
+      "items": [
+        "ARC Centre of Excellence for Enabling Eco-Efficient Beneficiation of Minerals",
+        "ARC Linkage Project, ‘Biosolid flow, separation and activity in anaerobic lagoons’",
+        "ARC Linkage Project, ‘Reducing land and infrastructure requirements for water evaporation from biosludge through dry stacking’"
+      ]
+    },
+    {
+      "title": "Key Publications/Reports",
+      "items": [
+        "Höfgen E, Collini D, Batterham RJ, Scales PJ, Stickland AD (2019), ‘High pressure dewatering rolls: Comparison of a novel prototype to existing industrial technology’, Chem. Eng. Sci., 205, 106-120",
+        "Stickland AD, Skinner SJ, Cavalida RG, Scales PJ (2018), ‘Optimisation of filter design and operation for wastewater treatment sludge’, Separ. Purif. Technol. 198, 31-37",
+        "Stickland AD (2015), ‘Compressional rheology: A tool for understanding compressibility effects in sludge dewatering’, Water Research, 82, 37-46",
+        "Skinner SJ, Studer LJ, Dixon DR, Hillis P, Rees CA, Wall RC, Cavalida RG, Usher SP, Stickland AD, Scales PJ (2015), ‘Quantification of wastewater sludge dewatering’, Water Research, 82, 2-13",
+        "Stickland AD, Kumar A, Kusuma TE, Scales PJ, Tindley A, Biggs S, Buscall R (2015), ‘The effect of premature wall yield on the creep testing of strongly-flocculated suspensions’, Rheol. Acta. 54(5), 337-352"
+      ]
+    }
+  ],
+  "source": "https://aiwc.org.au/dr-anthony-stickland/"
+}

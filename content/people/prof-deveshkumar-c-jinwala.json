@@ -1,0 +1,49 @@
+{
+  "slug": "prof-deveshkumar-c-jinwala",
+  "name": "PROF DEVESHKUMAR C JINWALA",
+  "sortName": "DEVESHKUMAR C JINWALA",
+  "designation": "Professor (HAG)",
+  "institute": "Sardar Vallabhbhai National Institute of Technology",
+  "instituteSlug": "sardar-vallabhbhai-national-institute-of-technology",
+  "country": "India",
+  "qualification": "PhD, S V National Institute of Technology, Surat",
+  "interests": "Internet of Things and its Applications. Information Security and Privacy in Resource Constrained Environments; Software Requirements Specifications",
+  "email": "dcjinwala@acm.org",
+  "homepage": null,
+  "profiles": [],
+  "photo": {
+    "image": "/assets/people/prof-deveshkumar-c-jinwala.webp",
+    "positionX": 50,
+    "positionY": 22
+  },
+  "bio": [
+    "Devesh C Jinwala, is a Professor in Computer Engineering at the Department of Computer Engineering, Sardar Vallabhbhai National Institute of Technology (SVNIT), Surat, India. He also currently acts as Adjunct Professor in Computer Science and Engineering at IIT Jammu and as Dean(Faculty Affairs) at IIT Jammu.",
+    "He is currently teaching the topics on the Internet of Things and its applications in Civil Engineering as part of the Course Sustainable and Smart Cities at IIT Jammu in collaboration with Prof Ashoke Sarkar, Professor in Civil Engineering at IIT Jammu. He is also teaching the course on Internet of Things at SVNIT, Surat in the current semester.",
+    "In the past, he has served as Professor on deputation in Computer Science and Engineering, IIT Jammu (July 2018 – Dec 2019), and as Visiting Professor, Daniel Felix Ritchie School of Engineering and Computer Science, University of Denver, Denver, USA; (July 2016 – June 2017).",
+    "Devesh C Jinwala has carried out successfully three research projects viz. one funded under the RESPOND program of ISRO on Design and Implementation of Link Layer Security Architecture for Wireless Sensor Networks, second funded by the Department of Electronics and Information Technology, Ministry of Communications and Information Technology, Govt of India on A Secure Data Aggregation System and an Intrusion Detection Systems for Wireless Sensor Networks and the third one funded by the Gujarat Council of Science and Technology (GUJCOST) on Investigating Anti-Replay algorithm for link layer security architecture in wireless sensor networks .",
+    "His research focus mainly is in the Internet of Things, Applications and Deployment Issues, with specific focus on Smart Agriculture, Water resources and Flood Monitoring. Prof Jinwala also focusses on the security protocols for the deployment of IoT and/or resource constrained environments and in Information Security, Privacy Issues in General and in Resource Constrained Environments.",
+    "In the project titled “Design and Implementation of the Security Attributes driven Energy Efficient Link Layer Security Architecture for Wireless Sensor Networks” funded under the RESPOND program, the test application used was analysing the deployment of the sensors in the catchment areas of the Ukai dam on the upstream of the river Tapi for flood monitoring; for evaluating the security protocol devised."
+  ],
+  "sections": [
+    {
+      "title": "Research Project",
+      "items": [
+        "“Information Security Education and Awareness Project Phase II” of Ministry of Communications and Information Technology, at SVNIT. Ongoing.",
+        "“A Secure Data Aggregation System and an Intrusion Detection Systems for Wireless Sensor Networks” Sponsored by the Department of Electronics and Information Technology, Ministry of Communications and Information Technology, Govt of India, New Delhi. Completed",
+        "”Design and Implementation of the Security Attributes driven Energy Efficient Link Layer Security Architecture for Wireless Sensor Networks” under the RESPOND programme of ISRO."
+      ]
+    },
+    {
+      "title": "Key Publications/Reports",
+      "items": [
+        "Kaushal A. Shah, Devesh C. Jinwala: Novel Approach of Key Pre-distribution for Grid Based Sensor Networks. Wireless Personal Communications. 108(2): 939-955 (2019)",
+        "Mukti Padhya, Devesh C. Jinwala: BTG-RKASE: Privacy Preserving Revocable Key Aggregate Searchable Encryption with Fine-grained Multi-delegation & Break-The-Glass Access Control, SECRYPT 2019 at ICETE (2) 2019: 109-124.",
+        "Hasmukh Patel, Devesh C. Jinwala: LPM: A lightweight authenticated packet marking approach for IP traceback. Computer Networks 140: 41-50 (2018)",
+        "Dhruti Sharma, Devesh C. Jinwala: Multiuser Searchable Encryption with Token Freshness Verification. Security and Communication Networks, 2017: 6435138:1-6435138:16 (2017)",
+        "Kaushal A. Shah, Devesh C. Jinwala:Novel Approach for Pre-distributing Keys in WSNs for Linear Infrastructure. Wireless Personal Communications. 95(4): 3905-3921 (2017).",
+        "Keyur Parmar, Devesh C. Jinwala:Concealed data aggregation in wireless sensor networks: A comprehensive survey. Computer Networks 103: 207-227 (2016)"
+      ]
+    }
+  ],
+  "source": "https://aiwc.org.au/prof-deveshkumar-c-jinwala/"
+}

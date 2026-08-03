@@ -1,0 +1,38 @@
+{
+  "slug": "andrew-western",
+  "name": "Andrew Western",
+  "sortName": "Andrew Western",
+  "designation": "Professor and Head, Department of Infrastructure Engineering",
+  "institute": "University of Melbourne",
+  "instituteSlug": "university-of-melbourne",
+  "country": "Australia",
+  "qualification": "PhD, University of Melbourne",
+  "interests": "Catchment Water quality Water Resource Management Hydrologic Modelling",
+  "email": "a.western@unimelb.edu.au",
+  "homepage": "https://findanexpert.unimelb.edu.au/profile/15205-andrew-western",
+  "profiles": [
+    "https://scholar.google.com.au/citations?hl=en&user=Ht7N9MIAAAAJ"
+  ],
+  "photo": {
+    "image": "/assets/people/andrew-western.webp",
+    "positionX": 50,
+    "positionY": 22
+  },
+  "bio": [],
+  "sections": [
+    {
+      "title": "Research Project",
+      "items": [
+        "Prof. Western is Head of Department of Infrastructure Engineering at the University of Melbourne. He completed his PhD over the period 1991-1994 on hydraulic and hydrologic modelling to support environmental flow management in the Wimmera River. Prof Western has expertise in field experimentation, physically-based and conceptual catchment and river modelling, catchment analysis and remote sensing and has concentrated on integrating these areas to support catchment system understanding and management. He has undertaken major field programs in Australia and New Zealand investigating catchment behaviour and has made leading contributions to spatial analysis in hydrology, particularly in the area of spatial soil moisture variability, patterns and processes.",
+        "A range of active collaborations with industry allow Prof Western to maintain the industry relevance of his work. These include projects concentrating on estuarine management, groundwater resources, catchment monitoring, water resources management and, through eWater CRC, catchment and stream water quality. He has contributed to development of a variety of catchment and water models, models of salinity stratification in inland rivers and is currently working on water quality, groundwater analytics, flood modelling, and understand and predicting the impacts of prolonged drought and climate change on catchment response. In addition to his research and consulting work, Prof Western teaches surface hydrology, earth processes and environmental modelling and supervises a number of PhD students."
+      ]
+    },
+    {
+      "title": "Key Publications/Reports",
+      "items": [
+        "https://findanexpert.unimelb.edu.au/profile/15205-andrew-western"
+      ]
+    }
+  ],
+  "source": "https://aiwc.org.au/andrew-western/"
+}

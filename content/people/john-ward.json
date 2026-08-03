@@ -1,0 +1,45 @@
+{
+  "slug": "john-ward",
+  "name": "John Ward",
+  "sortName": "John Ward",
+  "designation": "Principal Scientist, Adjunct Professor",
+  "institute": "Western Sydney University",
+  "instituteSlug": "western-sydney-university",
+  "country": "Australia",
+  "qualification": "PhD, Griffith University",
+  "interests": "Water and natural resource planning; research for sustainable development; science-policy interfaces; institutional and behavioural economics; M&E of participatory processes; social-ecological systems analysis.",
+  "email": "John.ward@merfi.org",
+  "homepage": "https://www.merfi.org/",
+  "profiles": [],
+  "photo": {
+    "image": "/assets/people/john-ward.webp",
+    "positionX": 50,
+    "positionY": 22
+  },
+  "bio": [
+    "Dr Ward has a science background, with doctoral qualifications in institutional, resource and experimental economics and experience in water and natural resources research for development. He has led trans-disciplinary research teams focused on evidence-based water and natural resource policy design, the valuation of ecosystem services and payment for ecosystem services mechanisms, instruments to manage whole of basin water and natural resources, formally evaluated research for development participatory processes and science policy interactions. He is currently engaged in multi-disciplinary research for development focussed on whole of river basin management in south-east Asia and India. Dr Ward has published more than 150 journal publications and technical reports and has been based in Laos since 2010."
+  ],
+  "sections": [
+    {
+      "title": "Research Project",
+      "items": [
+        "Exploring Mekong Region Futures-2010-2014: DFAT and CSIRO",
+        "Social, economic and cumulative impact assessment of the Mekong River Basin: Mekong River Commission Council Study (2018)",
+        "Improved Village Scale Groundwater Recharge and Management for Agriculture and Livelihood Development in India; Funding: Australian Centre for International Agricultural Research."
+      ]
+    },
+    {
+      "title": "Key Publications/Reports",
+      "items": [
+        "Maheshwari, B., et al, 2014. The Role of Transdisciplinary Approach and Community Participation in Village Scale Groundwater Management: Insights from Gujarat and Rajasthan, India. Water 6 (11), 3386-3408.",
+        "Ward, J., Varua, M.E., et al. 2016 Exploring the Relationship Between Subjective Wellbeing and Groundwater Attitudes and Practices of Farmers in Rural India. Journal of Hydrology 540: 1-16.",
+        "Smajgl, A., Ward, J. and Pluschke, L. 2016. The water-food-energy Nexus – realising a new paradigm. Journal of Hydrology 533 (2016): 533-540.",
+        "Smajgl, A. and Ward, J. 2015. Evaluating participatory research: framework, methods and implementation results. Journal of Environmental Management 157 (2015): 311-319.",
+        "Smajgl, A., Toan, T.Q., Nhan, D.K., Ward, J., Trung, N.H., Tri, L.Q., Tri, V.P.D. and Vu, P.T. 2015. Responding to rising sea levels in the Mekong Delta. Nature Climate Change 5 (2015): 167-174.",
+        "Smajgl, A. and Ward, J. 2013. A framework to bridge science and policy in complex decision making arenas. Futures 52 (2013): 52-58.",
+        "Smajgl, A. and Ward, J. (eds), 2013. The Water-Food-Energy Nexus in the Mekong Region. New York, Springer."
+      ]
+    }
+  ],
+  "source": "https://aiwc.org.au/john-ward/"
+}

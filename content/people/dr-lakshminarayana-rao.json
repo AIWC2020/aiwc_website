@@ -1,0 +1,45 @@
+{
+  "slug": "dr-lakshminarayana-rao",
+  "name": "Dr. Lakshminarayana Rao",
+  "sortName": "Lakshminarayana Rao",
+  "designation": "Assistant Professor",
+  "institute": "Indian Institute of Science, Bangalore, India",
+  "instituteSlug": "indian-institute-of-science-bangalore-india",
+  "country": "India",
+  "qualification": "PhD, McGill University, Montreal, Canada",
+  "interests": "Wastewater Treatment and Reuse, Water Quality Monitoring, Plasma Technology, Advanced Oxidation",
+  "email": "narayana@iisc.ac.in",
+  "homepage": null,
+  "profiles": [
+    "https://scholar.google.co.in/citations?hl=en&user=rmeQNxoAAAAJ&view_op=list_works&gmla=AJsN-F5gxDP5iijCB-lNFsrZLo1TcSPhPCrZCgwRpri0ZQ8hnamjZ9KaZ3wAia69ueld6-9XmpyuiFjGgbFpX6KwbUBtjxc5qBS5lovFgRu2M6LRJPyTfOh1Am7D02vwHjJkff524cPY"
+  ],
+  "photo": {
+    "image": "/assets/people/dr-lakshminarayana-rao.webp",
+    "positionX": 50,
+    "positionY": 22
+  },
+  "bio": [
+    "Dr. Lakshminarayana Rao has a PhD in from McGill University, Montreal, Canada, for his thesis on development of superior plasma torch electrodes, and has over 9 years of industrial experience working in the field of plasma technology. Over the past 15 years Dr. Rao has worked in various areas of plasma research, developing technologies in both thermal and non- thermal plasmas for water and wastewater treatment and reuse. Dr. Rao has worked in various aspects of plasma technology development starting from concept building to commercial products. To date, Dr. Rao has 7 granted US patents, authored and co-authored 25 international journal articles, conference papers and 6 patent applications are pending review."
+  ],
+  "sections": [
+    {
+      "title": "Research Project",
+      "items": [
+        "Decentralized wastewater treatment – global innovation for sustainable rural communities. Funded by James Hutton Institute.",
+        "Small Scale and Sustainable Household Wastewater Recycling (S3HWR). GoI funded.",
+        "Environmental Impact Assessment Studies of KC Valley Project. GoK funded"
+      ]
+    },
+    {
+      "title": "Key Publications/Reports",
+      "items": [
+        "Harsha Rao, Lakshminarayana Rao , HN Chanakya, Design and Characterization of Cold Plasma Ozonator for Wastewater Treatment, Proceeding of the 8th IconSWM 2018, Guntur, Volume 1, 2018, Page # 985-992",
+        "Sharath Chandra, Niveditha, Chanakya H N, Puttanna C and Lakshminarayana Rao, Wastewater treatment and recycling in a bus depot-a case study from Bangalore, Proceedings of ICONSWM 2019, Bhubaneshwar, India",
+        "Reshma Mohan T, Lakshminarayana Rao and M.S. Mohan Kumar, Oxygen Transfer Predictions for Diffused Aeration System in Wastewater Treatment Plants: A Numerical Approach, AGU Fall Meeting, San Francisco, 9 – 13 December 2019.",
+        "Reshmi Das, Chanakya H N and Lakshminarayana Rao, Water Quality assessment of Bellandur lake, Bangalore Karnataka, Proceedings of ICONSWM 2019, Bhubaneshwar, India",
+        "P. Narayanappa, A. Singh, L. Rao and S. Dasappa, Decentralized Grey Water Recovery System Using Cold Plasma for Rural India, Proceeding of the 23rd International Symposium on Plasma Chemistry, Montreal, Canada, July 30th –August 4th , 2017"
+      ]
+    }
+  ],
+  "source": "https://aiwc.org.au/dr-lakshminarayana-rao/"
+}

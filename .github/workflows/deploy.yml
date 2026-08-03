@@ -1,0 +1,65 @@
+name: Build and deploy
+
+# Renders content/ into _site/ (one real URL per page, per researcher and per
+# partner), verifies the output, then publishes to GitHub Pages.
+#
+# Requires Pages to be set to Source: GitHub Actions.
+
+on:
+  push:
+    branches: [main]
+  # Build and check pull requests too — otherwise a broken link or a block
+  # with no CMS editor is only caught after it is already on main.
+  pull_request:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never let two deploys race; the newest content wins. Pull requests get
+# their own group so a PR build cannot cancel a live deploy.
+concurrency:
+  group: pages-${{ github.event_name == 'pull_request' && github.head_ref || 'main' }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build static site
+        run: npm run build
+
+      - name: Verify structure, links and images
+        run: npm run verify
+
+      - name: Test the researcher directory
+        run: node scripts/test-directory.mjs
+
+      - uses: actions/upload-pages-artifact@v3
+        if: github.event_name != 'pull_request'
+        with:
+          path: _site
+
+  # Only main publishes. Pull requests stop after the checks above.
+  deploy:
+    needs: build
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

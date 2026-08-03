@@ -1,0 +1,16 @@
+{
+  "name": "AIWC",
+  "fullName": "Australia India Water Centre",
+  "tagline": "A partnership for sustainable water futures",
+  "description": "The Australia India Water Centre — a partnership of 33 institutions and 108 researchers across Australia and India, working on research, education, training and outreach for sustainable water futures.",
+  "url": "https://aiwc2020.github.io",
+  "base": "/aiwc_website",
+  "languages": [
+    "en"
+  ],
+  "cms": {
+    "repo": "AIWC2020/aiwc_website",
+    "branch": "main",
+    "authUrl": "https://sveltia-cms-auth.marvi-groundwater.workers.dev"
+  }
+}

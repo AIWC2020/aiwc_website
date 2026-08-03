@@ -1,0 +1,47 @@
+{
+  "slug": "hippu-salk-kristle-nathan",
+  "name": "Hippu Salk Kristle Nathan",
+  "sortName": "Hippu Salk Kristle Nathan",
+  "designation": "Professor",
+  "institute": "Institute of Rural Management Anand",
+  "instituteSlug": "institute-of-rural-management-anand",
+  "country": "India",
+  "qualification": "PhD in Developing Studies from Indira Gandhi Institute of Development Research, Mumbai",
+  "interests": "Economic measurement, sustainable use of resources, energy, water, human development, disarmament, world peace, and socio-political reforms.",
+  "email": "hippu@irma.ac.in",
+  "homepage": "https://irma.ac.in/faculty-research/faculty-members/449",
+  "profiles": [
+    "https://works.bepress.com/hippu/",
+    "https://scholar.google.com/citations?user=m-0B97MAAAAJ",
+    "https://orcid.org/0000-0002-0329-4898"
+  ],
+  "photo": {
+    "image": "/assets/people/hippu-salk-kristle-nathan.webp",
+    "positionX": 50,
+    "positionY": 22
+  },
+  "bio": [
+    "Dr. Hippu Salk Kristle Nathan is an engineer-turned development researcher with an MTech from the Indian Institute of Technology, Delhi, and PhD in Development Studies from Indira Gandhi Institute of Development Research, Mumbai. Dr. Nathan has won the Elsevier-National Academy of Sciences, India Young Scientist Award 2017 in Social Sciences. He was the Subir Chowdhury Post-doctoral Fellow at the London School of Economics. Dr. Nathan is also one of the winners in the GDN Awards and Medals Competition in the category of Outstanding Research on Development. He is a recipient of Young Scientist Award conferred at Odisha Environment Congress-2012. His most significant research contributions are ‘Conceptualization and development of frameworks for both, structuring and selection of sustainable development indicators’; and in co-authored works he has proposed an alternative approach to measure human development index and conceived a novel method to assess energy poverty."
+  ],
+  "sections": [
+    {
+      "title": "Research Project",
+      "items": [
+        "A quick Assessment of Chief Minister’s Solar Agriculture Movement Program (MSKVY – Mukhyamantri Saur Krushi Vahini Yojana) in Maharashtra supported by International Water Management Institute (IWMI) (https://solar.iwmi.org/reports/india/a-quick-assessment-of-the-mukhyamantri-saur-krishi-vahini-yojana-mskvy-in-maharashtra-irma/)",
+        "Institution and Socio-economic Assessment of Water Users Association under West Bengal Accelerated Development of Minor Irrigation Project (WBADMIP) sponsored by World Bank. The project was supported by WBADMIP, Govt. of West Bengal.",
+        "A study of Sustainable Tourism in Gujarat. This project was supported by Tourism Corporation of Gujarat Limited and the Department of Tourism, Govt. of Gujarat."
+      ]
+    },
+    {
+      "title": "Key Publications/Reports",
+      "items": [
+        "“Structural and Institutional Arrangements Impacting Collective Actions in WUAs of West Bengal, India”, submitted to International Journal of Water Resources Development, 2022. Jointly with Indranil De, Soumyadip Chattopadhyay, Prabhat Mishra, Akhilesh Parey, and Subhasish Dutta.",
+        "“Rural Microgrids– ‘Tragedy of Commons’ or ‘Community Collective Action’”, Journal of Environmental Policy & Planning, January 2022. doi:10.1080/1523908X.2021.2022466. Jointly with Soumyadeep Das and Anantha Padmanabhan PS.",
+        "“Towards a new approach in measuring energy poverty: Household level analysis of urban India”, Energy Policy, Vol. 140, May 2020. Jointly with L. Hari.",
+        "“A MANUSH or HUMANS Characterisation of the Human Development Index”, Journal of Human Development and Capabilities, Vol. 19, No. 3, pp. 398–415, 2018. Jointly with Srijit Mishra.",
+        "“India’s 100GW of solar by 2022 – Pragmatism or Targetitis”, Economic and Political Weekly.Vol. L, No. 50, pp. 10–14, Dec 12, 2015."
+      ]
+    }
+  ],
+  "source": "https://aiwc.org.au/hippu-salk-kristle-nathan/"
+}

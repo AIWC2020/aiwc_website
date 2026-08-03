@@ -1,0 +1,50 @@
+{
+  "slug": "jyothi-prasad",
+  "name": "Jyothi Prasad",
+  "sortName": "Jyothi Prasad",
+  "designation": "Professor",
+  "institute": "G. B. University of Agriculture & Technology, Pantnagar, India",
+  "instituteSlug": "g-b-university-of-agriculture-technology-pantnagar-india",
+  "country": "India",
+  "qualification": "PhD, National Institute of Technology (NIT), Warangal, Telengana State",
+  "interests": "Hydrology and Water Resources, Surface Water Management, Watershed Management, Irrigation water Management",
+  "email": "Profjyothiprasad@gmail.com",
+  "homepage": "https://gbpuat.ac.in/colleges/COT/D1/jyothi_prasad_profile.html",
+  "profiles": [],
+  "photo": {
+    "image": "/assets/people/jyothi-prasad.webp",
+    "positionX": 50,
+    "positionY": 22
+  },
+  "bio": [
+    "Professor Jyothi has over 32 years’ professional experience and her work has involved inter-disciplinary approach to water research. She got more than thirty two (32) years of teaching research and industrial experience at different institutions/universities/organisations.",
+    "She has more than Fifty five (55nos) publications at National and International Journals / Conferences to her credit and guided Nine (9 nos) M. Tech Students (1M.Tech Co guide), 18 B.Tech Projects, five small students projects under TEQIP funded project of the World bank and one project of asset mapping by the IIRS.",
+    "She has coordinated three Global Initiative Academic Network Programmes (GIAN) on “Hydrologic Modelling and Climate Change” sponsored by MHRD, Govt of India with International expert as Prof Vijay P Singh, Department of Biological and Agricultural Engineering, Department of Civil Engineering, Texas A & M University, USA. Dec 05-16, 2016, “Water future for Urban & Rural Landscape during Feb 9-13,2018 with International expert Prof. Basant Maheshwari Western Sydney University, Australia and another programme “Water Quality Regulations And Modelling Approaches” during Sept 4-8,2018 with Inter National Expert as Dr Ali Mahdavi Mazdeh, Water Engineering Department, Imam Khomeini International University Qazvin, IRAN.",
+    "She has organized sixteen (16) training / workshop programmes for the faculty of engineering colleges, field engineers funded by MHRD, DST, AICTE-ISTE, TEQIP WORLD BANK project and organized Science academies sponsored Refresher course “Hydrology of floods” during 8th Jan-19th 2018 and ICAR, sponsored course Mountain Hydrology and Climate Change during March 19 -29, 2018. She has undergone Thirty five(35) at national level, Seven (7) International and training /workshop programmes organised by UNESCO, DFID, SDC, DST, DOE, AICTE, ISTE, NAAC, ICH, NORAD, IGSH etc",
+    "She has attended International (Credited) Training / Workshop Programmes at University of Sterling, Sterling (U.K.), Kathmandu, (NEPAL); Thimpu, (BHUTAN), Trondheim & Oslo (NORWAY); Bochum, (Germany), sponsored with full funding by Ministry of Earth Sciences & IUKWC, NORAD / UNESCO. Presented papers at International Conferences at Muscat, (Oman); Beijing, (China); Dhaka(Bangladesh) sponsored by UNESCO, TWOWS and IWFM."
+  ],
+  "sections": [
+    {
+      "title": "Research Project",
+      "items": [
+        "Collaborative research project under Scheme for Promotion of Academic and Research Collaboration (SPARC) sponsored by MHRD, Govt. of India on “Recharge Process of Springs and Its Management to mitigate anthropogenic and climate change impact for water Security A case study in part of Kumaun Lesser Himalaya, India” with International collaboration from Western Sydney University and Melbourne University, Australia for a duration of 2 years with a grant amounting to Indian Rupees 75 lakhs as Principal- Investigator.",
+        "National Mission On Himalayan Studies (NMHS) working on “Study of Arsenic and other Water Contaminants in Uttarakhand State” Collaboration with Kumuan University, Nainital of project duration 3 years with a grant of Rs. 34 Lakhs as Co–investigator of the project.",
+        "AICTE, research promotion scheme (RPS) project on “Reservoir Management Using Neural Network” of duration 2 years with a grant amounting to Rs. 6 lakhs as Co- Investigator."
+      ]
+    },
+    {
+      "title": "Key Publications/Reports",
+      "items": [
+        "Jyothi Prasad, Ankita Swai and H J Shiva Prasad, “Dam breach analysis- A case study of Haripura Dam of Uttarakhand” at International Humboldt Kolleg on “Climate, Water and Environment” (LIMIT-2019) at Uttarakhand Academy of Administration (ATI), Nainital during September 25-27, 2019.",
+        "Prakhar Sharma, Jyothi Prasad and H. J. Shiva Prasad, “Mountain Sprigs are the life line of hilly region” at International Humboldt Kolleg on “Climate, Water and Environment” (LIMIT-2019) at Uttarakhand Academy of Administration (ATI), Nainital during September 25-27, 2019.",
+        "Ankita Sawai and Jyothi Prasad “Unsteady Flow Simulation of Haripura Dam using HEC-RAS” Published in International Journal of Research in Engineering Application and Management, www.ijream.org (IJREAM), ISSN 2454-9150, Vol 5, Issue 02, Impact Factor- 5.834,May 2019",
+        "Jyothi Prasad “Open Softwares in Hydrology and Water resources” at International Conference on Recent Advancecs in Civil and Environmental Engineering RACEE2017,at Walchand College of Engineering Sangli during 4-5th March 2017.",
+        "Jyothi Prasad and H J Shiva Prasad, “Development Of Uttarakhand Using Alternative Energy Source As Micro Hydropower” during International Conference on Water, Environment, Energy and Society (ICWEES-2016) at AISECT University, Bhopal, India and Texas A&M University, USA in association with ICE WaRM, Australia during March 15 – 18, 2016 at Bhopal, M.P., India",
+        "Jyothi Prasad and H J Shiva Prasad,“ Performance Study Of Kotabagh Micro Hydropower Project Of Uttrakhand” at International Conference On Hydropower For Sustainable Development at Dehradun during Feb-5-7.2015.",
+        "Jyothi Prasad and H J Shiva Prasad, “Small Hydro Power-a boon for remote hilly terrain rural village and their performance” at OWSD Fifth International Conference Women Scientist in a Quest for Sustainability and Development at Mexico during September 17-20, 2014.",
+        "“Suggesting Best Fitting Distribution For Estimating Flood For River Sarda at Uttarakhand, India”: Saurabh Sah, Jyothi Prasad and H J Shiva Prasad; IJRET-International Journal of Research in Engineering and Technology Volume 4, August 2015. e-ISSN:2319-1163,P-ISSN:2321-7308, Issue 8, Page No:312-315; Impact Factor:2.375"
+      ]
+    }
+  ],
+  "source": "https://aiwc.org.au/jyothi-prasad/"
+}

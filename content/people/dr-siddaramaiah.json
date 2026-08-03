@@ -1,0 +1,46 @@
+{
+  "slug": "dr-siddaramaiah",
+  "name": "Dr. Siddaramaiah",
+  "sortName": "Siddaramaiah",
+  "designation": "Dean, Faculty of Science, Head and Professor",
+  "institute": "JSS Science and Technology University, Mysuru",
+  "instituteSlug": "jss-science-and-technology-university-mysuru",
+  "country": "India",
+  "qualification": "PhD, University of Mysore, Mysore",
+  "interests": "Castor oil based polyurethanes (PUs), its interpenetrating polymer networks of: Chain extended PUs and their composites; Polymer blends, Toughening mechanisms: Polymer composites/green composites/ nanocomposites; Tribological behaviour; Molecular transport behaviour; Conducting polymers and its composites: Controlled release of drugs through polymeric devices: Polymer nanocomposites /smart materials for energy harvest",
+  "email": "siddaramaiah@gmail.com",
+  "homepage": "https://jssstuniv.in/",
+  "profiles": [],
+  "photo": {
+    "image": "/assets/people/dr-siddaramaiah.webp",
+    "positionX": 50,
+    "positionY": 22
+  },
+  "bio": [
+    "Prof. Siddaramaiah obtained Ph.D., (1993) degree from University of Mysore. He worked as a Post Doctoral Research Fellow under Brain Korea (BK-21) Fellowship for one year (2007-08), Chonbuk National University, South Korea. He visited University of Federal, Rio de Janeiro, Brasil, two times (2005 and 2009 for 3 months each under UNESCO-TWAS visiting Fellowship. He is the recipient of SERC Visiting Fellowship from DST, Delhi (2000) and Visiting Scientist fellowship from IIT, Kharagpur (2000).",
+    "He has authored more than 330 research articles in referred journals, more than 300 Conference Papers, 12 Book Chapters, 5 Review Articles, 2 Books (CBS and Elsevier), three monographs and co-inventor of 3 Indian Patents. 28 students have successfully completed their Ph.D., degree under his supervision and supervised 9 M.Sc., (Engg) by research/M.Phil/ MDS.",
+    "He is a recipient of “Young Scientist Award-1997”, in ‘Chemical Science’ awarded by KAAS, Bangalore and “Sir C.V. Raman Young Scientist Award – 1999” in ‘Chemical Technology’ by KSCST, Government of Karnataka (2002). He is the recipient of ‘PROJECT OF THE YEAR’ award three times and “Certificate of Commendation”, award from KSCST, Bangalore. Recently he received, “Silver Trophy Plasticon Award-2012, in the category of Best Research, Plastindia Foundation.",
+    "He is the recipient of Runner-Up of 6th National Award for Technology Innovation 2015-16, Dept. of Chemicals & Petrochemicals Ministry, Govt. of India, 20th Jan 2016. Award for Research Publications (ARP) by VGST, Government of Karnataka, 2016-17. Very recently he is the recipient of Runner-Up of 9th National Award in Polymer Science & Tech., Feb 2020."
+  ],
+  "sections": [
+    {
+      "title": "Research Project",
+      "items": [
+        "“Studies on biopolymers based drug delivery system” (8023/BOR/RPS-6/2006-07, dtd Feb 26, 2007), amount Rs 10.00 lakh, AICTE, Delhi, 2007-2010.",
+        "“Investigation on microporous polymer membrane based systems for drug delivery”, No. 22(0458)/ 08/EMRI-II, Dtd. 30/4/2008, amount Rs 7.17 lakh, CSIR, Delhi, 2008-11.",
+        "“Investigation on thermoset plastic grind waste and naturally occurring/ mineral fillers incorporated hybrid rubber composites”, VTU/Aca/2009-10/A-9/11472, dtd. 2-01-2010, VTU, Belgaum, amount Rs 7.5 lakh, 2010-13"
+      ]
+    },
+    {
+      "title": "Key Publications/Reports",
+      "items": [
+        "K.S. Nithin; K.N. Shilpa, S. Sachhidananda and Siddaramaiah: “Highly flexible and visibly transparent poly(vinyl alcohol)/calcium zincate nanocomposite films for UVA shielding applications as assessed by novel ultraviolet photons induced fluorescence quenching”, Macromolecules, 49 (7) (2016), 2791-2801. ISSN: 0024-9297 Web Edition ISSN: 1520-5835.",
+        "K.S.Nithin and Siddaramaiah: “Opto-electrical characteristics of poly(vinyl alcohol)/cesium zincate nano dielectrics”, The Journal of Physical Chemistry, Part C,119 (35) (2015) pp 20244-20255. Print Edition ISSN: 1932-7447Web Edition ISSN: 1932-7455.",
+        "Johnsy George, V.A. Sajeevkumar, K.V.Ramana, S.N.Sabapathy and Siddaramaiah: “Augmented properties of PVA hybrid nanocomposites containing cellulose nanocrystals and silver nanoparticles”, J. Materials Chem., 22 (42) (2012), 22433–22439. ISSN No:22433-22439, Impact factor: 6.643.",
+        "Johnsy George and Siddaramaiah: “High performance edible nanocomposite films containing bacterial cellulose nanocrystals”, Carbohydrate Polymers, 87(3) (2012), pp. 2031-2037.",
+        "Johnsy George, R. Kumar, R. Ramalingam, V.A. Sajeevkumar, K.V.Ramana, V. Abhishek, S.N. Sabapathy and Siddaramaiah: “Hybrid HPMC nanocomposites containing bacterial cellulose nanocrystals and silver nanoparticles”, Carbohydrate Polymers, 105 (2014) 285–292.ISSN No: 01448617, Impact factor: 4.074."
+      ]
+    }
+  ],
+  "source": "https://aiwc.org.au/dr-siddaramaiah/"
+}

@@ -1,0 +1,26 @@
+{
+  "slug": "flinders-university",
+  "name": "Flinders University",
+  "country": "Australia",
+  "instituteName": "Flinders University",
+  "logo": {
+    "image": "/assets/logos/flinders-university.jpg"
+  },
+  "summary": "Flinders University’s bold mission of changing lives and changing the world makes it a leading international university in South Australia with a record of excellence and innovation in…",
+  "body": [
+    "Flinders University’s bold mission of changing lives and changing the world makes it a leading international university in South Australia with a record of excellence and innovation in teaching. It provides undergraduate and postgraduate educational programs in hydrology, groundwater and water resources management. It headquarters the National Centre for Groundwater Research and Training (NCGRT, http://groundwater.com.au/).",
+    "The NCGRT undertakes in collaboration with many university and industry partners research in all aspects of groundwater and leads the training of the next generation of hydrogeologists and groundwater specialists. Flinders is ranked 17th in Shanghai’s 2021 Global Ranking of Academic Subjects for Water Resources."
+  ],
+  "sections": [
+    {
+      "title": "Projects",
+      "items": [
+        "Support to the development of a Groundwater Profile for Lao PDR and a Sustainable Groundwater Management Plan for the Sekong Basin. Australia-Mekong Water Facility, Australian Water Partnership, 2020-2022.",
+        "https://waterpartnership.org.au/sustainable-groundwater-management-for-the-sekong-basin/",
+        "Exploring opportunities to expand groundwater use for livelihood enhancement and climate change adaptation in Laos. Australian Centre for International Agricultural Research in collaboration with International Water Management Institute, 2019-2020.",
+        "https://www.aciar.gov.au/project/wac-2018-167"
+      ]
+    }
+  ],
+  "source": "https://aiwc.org.au/flinders-university/"
+}

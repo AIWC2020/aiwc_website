@@ -1,0 +1,44 @@
+{
+  "slug": "dr-smita-jauhari",
+  "name": "Dr Smita Jauhari",
+  "sortName": "Smita Jauhari",
+  "designation": "Professor",
+  "institute": "Sardar Vallabhbhai National Institute of Technology",
+  "instituteSlug": "sardar-vallabhbhai-national-institute-of-technology",
+  "country": "India",
+  "qualification": "PhD, South Gujarat University, Surat, India",
+  "interests": "Water Chemistry ,Water adsorbent materials, Synthetic Organic Chemistry, Polymers, Corrosion",
+  "email": "sj@chem.svnit.ac.in",
+  "homepage": "http://www.svnit.ac.in/web/department/applied_chemistry/faculty_acd.php",
+  "profiles": [
+    "https://www.researchgate.net/profile/Smita_Jauhari2"
+  ],
+  "photo": {
+    "image": "/assets/people/dr-smita-jauhari.webp",
+    "positionX": 50,
+    "positionY": 22
+  },
+  "bio": [
+    "Smita Jauhari is a Professor in Applied Chemistry Department, and has over 19 years of teaching and research experience. Her current research interest is in: Water Chemistry with focus on Quality of water and treatment of Industrial wastewater. Synthetic organic chemistry for pharmacological application and corrosion. Synthesis of Polymer from renewable source of energy. Her research accomplishment includes she has more than 43 publications in peer–reviewed international journal. She has authored three book chapters.. She has successfully supervised several PhD students. She has successfully completed an externally funded project and has a patent to her credit."
+  ],
+  "sections": [
+    {
+      "title": "Research Project",
+      "items": [
+        "Project entitled ,” Development of model to predict the concentration of Radionuclides in Aquatic System at KAPS,-Board of Research in Nuclear Sciences(BRNS), DAE,(Co-investigator).",
+        "Granted Patent “Novel 6-Nitro-3-(4-oxo-thiazolidin-2- ylideneamino)-2-phenyl-3H-quinazolin-4-one and 5-benzylidine derivatives thereof” with Patent No. 33657 Application No. 149 MUM 2013 dated 17th January, 2013 on 08/5/2020."
+      ]
+    },
+    {
+      "title": "Key Publications/Reports",
+      "items": [
+        "Ami H. Vyas, Smita Jauhari and Z.V.P. Murthy, Chemically modified rice husk adsorbents, characterization and removal of palladium(II) from aqueous solutions, Journal of Dispersion Science and Technology, Vol.34(No.3) (2013) 369-380. DOI: 10.1080/01932691.2012.667719 (Taylor & Francis Group Publication, USA)",
+        "Smita Jauhari, BharatkumarZ.Dholakiya, VimalS.Prajapati “Synthesis and performance evaluation of vegetable oil based wood finish polyurethane coating” Bioresource Technology Reports, Elsevier Ltd., 88 to 94, Vol: 3, 2018.",
+        "Ami H. Vyas, Smita Jauhari and Z.V.P. Murthy, Separation of Pt(IV) from industrial wastewater using rice husk adsorbent and its derivatives, Journal of Dispersion Science and Technology, Vol.35(No.1) (2014) 1-20. DOI:10.1080/01932691.2013.812939 (Taylor & Francis Group Publication, USA).",
+        "Smita Jauhari, Aniruddha Rana, Kishor Desai, “Synthesis, characterization, and pharmacological evaluation of 1-[2-(6-nitro-4-oxo-2-phenyl-4H-quinazolin-3-yl)-ethyl]- 3-phenyl ureas”, Medicinal Chemistry Research, Springer, 22, 225-233 (2013).",
+        "Smita Jauhari, Bharatkumar Z. Dholakiya, Kalpesh I. Patel, & Ashish J. Raychura: Development of Non-Traditional Vegetable-Oil-Based Two-Pack Polyurethane for Wood-Finished Coating: An Alternative Approach, Chemistry Select, Wiley-VCH Verlag GmbH & Co., Page Nos. 10837 to 10842, 2018"
+      ]
+    }
+  ],
+  "source": "https://aiwc.org.au/dr-smita-jauhari/"
+}

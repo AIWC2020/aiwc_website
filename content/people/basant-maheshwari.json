@@ -1,0 +1,45 @@
+{
+  "slug": "basant-maheshwari",
+  "name": "Basant Maheshwari",
+  "sortName": "Basant Maheshwari",
+  "designation": "Professor",
+  "institute": "Western Sydney University",
+  "instituteSlug": "western-sydney-university",
+  "country": "Australia",
+  "qualification": "PhD, University of Melbourne",
+  "interests": "Water resources planning, surface and groundwater management and irrigation and environmental hydrology with a focus on engaging stakeholders, community and government agencies to enhance sustainability of water and land use in both urban and rural landscapes.",
+  "email": "b.maheshwari@westernsydney.edu.au",
+  "homepage": "http://www.westernsydney.edu.au/staff_profiles/uws_profiles/professor_basant_maheshwari",
+  "profiles": [
+    "https://scholar.google.com.au/citations?user=g8Pn5w0AAAAJ&hl=en"
+  ],
+  "photo": {
+    "image": "/assets/people/basant-maheshwari.webp",
+    "positionX": 50,
+    "positionY": 22
+  },
+  "bio": [
+    "Basant Maheshwari is a professor in water, environment and sustainability and has over 30 years’ teaching, research and outreach experience. His current research has a particular focus on: water resources modelling; groundwater monitoring and management; urban water; river health; irrigation; water education, engagement and capacity building; environmental sustainability; and water for livelihood and wellbeing. He is passionate about understanding the social, economic, cultural, policy and institutional aspects of water management, and engaging communities, governments and other stakeholders to address local and regional water issues. He has more than 230 publications to his name, including over 100 articles in peer-reviewed, international journals and led several major externally funded research projects."
+  ],
+  "sections": [
+    {
+      "title": "Research Project",
+      "items": [
+        "Outscaling of MARVI (Managing Aquifer Recharge and Sustaining Groundwater Use through Village-level Intervention); Funding: Australian Water Partnership",
+        "Improved Village Scale Groundwater Recharge and Management for Agriculture and Livelihood Development in India; Funding: Australian Centre for International Agricultural Research",
+        "Urbanisation and its Impact on Peri-urban Water and Food Security in Africa: Developing Research Collaboration and Capacity Building; Funding: Australia Africa Universities Network"
+      ]
+    },
+    {
+      "title": "Key Publications/Reports",
+      "items": [
+        "Maheshwari, B. and Mehta, A., 2019.MARVI – An innovative approach to groundwater management. Western Sydney University and ACIAR, Australia, 84p.",
+        "Maheshwari, B., Singh, V.P. and Thoradeniya, B., 2016. Balanced Urban Development: Options and Strategies for Liveable Cities. Springer Nature, Switzerland, 623p.",
+        "Chinnasamy P., Maheshwari B., and Prathapar S., 2015, Understanding groundwater storage changes and recharge in Rajasthan, India through remote sensing, Water, 7:5547-5565.",
+        "Maheshwari, B., et al, 2014. The Role of Transdisciplinary Approach and Community Participation in Village Scale Groundwater Management: Insights from Gujarat and Rajasthan, India. Water 6 (11), 3386-3408.",
+        "Pinto, U. and Maheshwari, B., 2014. A framework for assessing river health in peri-urban landscapes. Ecohydrology & Hydrobiology, 14:121–131."
+      ]
+    }
+  ],
+  "source": "https://aiwc.org.au/basant-maheshwari/"
+}

@@ -1,0 +1,45 @@
+{
+  "slug": "buddhi-wijesiri",
+  "name": "Buddhi Wijesiri",
+  "sortName": "Buddhi Wijesiri",
+  "designation": "Postdoctoral Researcher",
+  "institute": "QUT Queensland University of Technology",
+  "instituteSlug": "qut-queensland-university-of-technology",
+  "country": "Australia",
+  "qualification": "PhD, Queensland University of Technology (QUT)",
+  "interests": "Urban liveabilityWater pollutionModelling and uncertainty assessmentStormwater and receiving waters (rivers and estuarine environments)Impacts of climate changeHuman and ecosystem health risks",
+  "email": "b.mahappukankanamalage@qut.edu.au",
+  "homepage": null,
+  "profiles": [
+    "https://scholar.google.com.au/citations?user=ZD4B2ZQAAAAJ&hl=en"
+  ],
+  "photo": {
+    "image": "/assets/people/buddhi-wijesiri.webp",
+    "positionX": 50,
+    "positionY": 22
+  },
+  "bio": [
+    "Buddhi is a postdoctoral researcher at the School of Civil and Environmental Engineering-Queensland University of Technology (QUT). His research aims at safeguarding conventional water resources such as rivers and transforming underutilised resources such as stormwater into cost effective alternatives with low carbon footprint, and thereby ensuring access to adequate and safe water now and for the future. As such, he creates knowledge and tools (mechanistic and statistical modelling) to understand the processes that degrade water resources, essential for designing effective pollution mitigation measures. He currently investigates climate change impacts on urban water quality.."
+  ],
+  "sections": [
+    {
+      "title": "Research Project",
+      "items": [
+        "Investigation of the water pollution implications on urban liveability in China and Australia; Funding – Shenzhen University and Shenzhen Government, China, China Postdoctoral Science Foundation, and QUT",
+        "Generation characteristics and human health risk prediction of high-risk pollutants in urban road stormwater runoff; Funding – Guangdong Basic and Applied Basic Research Foundation, China",
+        "Development of a comprehensive research agenda to overcome challenges in urban water management in Brazil and Australia; Funding – São Paulo State Research Foundation (FAPESP), Brazil and Australian Technology Network (ATN)"
+      ]
+    },
+    {
+      "title": "Key Publications/Reports",
+      "items": [
+        "Wijesiri, B., Egodawatta, P., McGree, J., Goonetilleke, A. (2015). Process variability of pollutant build-up on urban road surfaces. Science of the Total Environment, 518-519, 434-440.",
+        "Wijesiri, B., Egodawatta, P., McGree, J., Goonetilleke, A. (2015). Influence of pollutant build-up on variability in wash-off from urban road surfaces. Science of the Total Environment, 527-528, 344-350.",
+        "Wijesiri, B., Egodawatta, P., McGree, J., Goonetilleke, A. (2016). Understanding the uncertainty associated with particle-bound pollutant build-up and wash-off: A critical review. Water Research, 101, 582-596.",
+        "Wijesiri, B., Egodawatta, P., McGree, J., Goonetilleke, A. (2016). Assessing uncertainty in pollutant build-up and wash-off processes. Environmental Pollution, 212, 48-56.",
+        "Wijesiri, B., Liu, A., Goonetilleke, A. (2020). Impact of global warming on urban stormwater quality: From the perspective of an alternative water resource. Journal of Cleaner Production, 262, 121330."
+      ]
+    }
+  ],
+  "source": "https://aiwc.org.au/buddhi-wijesiri/"
+}

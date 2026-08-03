@@ -1,0 +1,43 @@
+{
+  "slug": "dr-pankaj-kumar",
+  "name": "Dr Pankaj Kumar",
+  "sortName": "Pankaj Kumar",
+  "designation": "Associate Professor",
+  "institute": "G. B. University of Agriculture & Technology, Pantnagar, India",
+  "instituteSlug": "g-b-university-of-agriculture-technology-pantnagar-india",
+  "country": "India",
+  "qualification": "PhD",
+  "interests": "Water Resource Management, Hydrologic Modelling, Watershed Sciences, Geoinformatics",
+  "email": "Pankaj591@gmail.com",
+  "homepage": "https://www.gbpuat.ac.in/colleges/COT/D11/pankaj_profile.html",
+  "profiles": [
+    "https://scholar.google.com/citations?user=KskT54IAAAAJ&hl=en"
+  ],
+  "photo": {
+    "image": "/assets/people/dr-pankaj-kumar.jpg",
+    "positionX": 50,
+    "positionY": 22
+  },
+  "bio": [
+    "Dr. Pankaj Kumar, an Associate Professor at G.B. Pant University, specializes in Soil and Water Conservation Engineering with over 17 years of experience. His work spans Watershed Management, Hydrological Modeling, Applied Machine Learning, Assessment of Ecosystem Services and the application of Remote Sensing and GIS for Watershed Management. He was a visiting scholar at the Department of Agricultural and Biological Engineering at Penn State University. He is an ECC member of the International Association of Hydrological Sciences. Dr. Kumar is currently working on ecosystem services assessment, mainly in Himalayan watersheds. He is a life member of Institution of Engineers (India), Indian Society of Agricultural Engineers, IAHS and Society for Ecological Restoration."
+  ],
+  "sections": [
+    {
+      "title": "Research Project",
+      "items": [
+        "Economics of Ecosystems and Biodiversity: Promoting Sustainable Agriculture and Food Systems (TEEB Agri-Food)"
+      ]
+    },
+    {
+      "title": "Key Publications/Reports",
+      "items": [
+        "Markuna, S., Kumar, P., Ali, R., Vishwkarma, D. K., Kushwaha, K. S., Kumar, R., Singh, V. K., Chaudhary, S., & Kuriqi, A. (2023). Application of innovative machine learning techniques for long-term rainfall prediction. Pure and Applied Geophysics, 180(1), 335–363. https://doi.org/10.1007/s00024-022-03189-4",
+        "Sarkar, P., Kumar, P., Vishwakarma, D. K., Ashok, A., Elbeltagi, A., Gupta, S., & Kuriqi, A. (2022). Watershed prioritization using morphometric analysis by MCDM approaches. Ecological Informatics, 70. https://doi.org/10.1016/j.ecoinf.2022.101763",
+        "Singh, A. K., Kumar, P., Ali, R., Al-Ansari, N., Vishwakarma, D. K., Kushwaha, K. S., Panda, K. C., Sagar, A., Mirzania, E., Elbeltagi, A., Kuriqi, A., & Heddam, S. (2022). An integrated statistical-machine learning approach for runoff prediction. Sustainability, 14(13), 8209. https://doi.org/10.3390/su14138209",
+        "Kumar, P., & Sarkar, P. (2022). A comparison of the AHP and TOPSIS multi-criteria decision-making tools for prioritizing sub-watersheds using morphometric parameters’ analysis. Modeling Earth Systems and Environment, 8(3), 3973–3983. https://doi.org/10.1007/s40808-021-01334-x",
+        "Kumar, P. R. S., Sharma, D., A., Singh, G., Kumar, A., & Kumar. (2021). Comparison of Different Interpolation Techniques for Mean Areal Rainfall Estimation of Uttarakhand using GIS. New England Water Works Association, 129(3), 43–55."
+      ]
+    }
+  ],
+  "source": "https://aiwc.org.au/dr-pankaj-kumar/"
+}

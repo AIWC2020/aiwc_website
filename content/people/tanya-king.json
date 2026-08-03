@@ -1,0 +1,44 @@
+{
+  "slug": "tanya-king",
+  "name": "Tanya King",
+  "sortName": "Tanya King",
+  "designation": "Dr.",
+  "institute": "Deakin University",
+  "instituteSlug": "deakin-university",
+  "country": "Australia",
+  "qualification": "PhD, University of Melbourne, Australia",
+  "interests": "Anthropology, political ecology, water policy implementation, public attitudes to alternative water sources.",
+  "email": "tanya.king@deakin.edu.au",
+  "homepage": null,
+  "profiles": [],
+  "photo": {
+    "image": "/assets/people/tanya-king.jpg",
+    "positionX": 50,
+    "positionY": 22
+  },
+  "bio": [
+    "Dr King’s research considers natural resource management issues relating to various environmental resources, including fresh water, and marine resources. Her research explores the political, ideological and cultural barriers to implementing natural resource initiatives, particularly in contexts where stakeholders express competing perceptions and valuations of the resource. Her methodological expertise incorporates both locally-embedded, long-term participant observation and critical discourse analysis, as well as national survey design. At the core of her work is the recognition that natural resource management requires at least as much understanding of human stakeholder groups as it does of the resource itself."
+  ],
+  "sections": [
+    {
+      "title": "Research projects",
+      "items": [
+        "‘Public perceptions of, and responses to, desalination in Australia’ (National Centre of Excellence in Desalination – 2010).",
+        "‘Sustainable Fishing Families – Developing industry human capital through health, wellbeing, safety and resilience’ (Fisheries Research and Development Corporation – 2017).",
+        "‘CCMA stakeholder satisfaction – A new strategic plan’ (Corangamite Catchment Management Authority – 2019)."
+      ]
+    },
+    {
+      "title": "Key publications/reports",
+      "items": [
+        "2020. King, Tanya J and Shaya Kaartinen-Price. ‘Corangamite Catchment Management Authority: A Report Informing the 2020 Regional Catchment Strategy Renewal Process’. Report to the Corangamite Catchment Management Authority. Geelong, Victoria. Deakin University. ISBN 13: 978-0-6487136-0-92019.",
+        "2019. King, Tanya J. ‘Formal and informal territoriality’, in King, Tanya J and Gary Robinson (eds.) At Home on the Waves: Human Habitation of the Sea from the Mesolithic to Today London: Berghahn Books.",
+        "2018. King, Tanya J and Dayne O’Meara. ‘“The people have spoken”: When cultural narratives politically trump the best available science (BAS)’. Maritime Studies (MAST).",
+        "2012. King, Tanya J., Ooi, Daniel, Cary, John, Fisher, Adrian, Schibeci, Renato, Murphy, Kristina, O’Toole, Kevin, Mearns, Malcolm, Donaldson, Jilleen A. ‘Public Perceptions of, and Responses to, Desalination in Australia: A Report on Findings’. Alfred Deakin Research Institute Working Paper Series, Series Two, No.39.pp.1-141.",
+        "2010. King, T.J. ‘Damming the flow – Cultural barriers to perceived ‘procedural justice’ in Wonthaggi, Victoria’ Cultural Studies Review. 16(1):119-30.",
+        "2009. King, T.J. and K. Murphy ‘Procedural Justice and Community Acceptance of Australian Environmental Sustainability Projects – Addressing conflict in the case of the Wonthaggi water desalination plant’ Public Policy 4(2):105–121."
+      ]
+    }
+  ],
+  "source": "https://aiwc.org.au/tanya-king/"
+}

@@ -1,0 +1,24 @@
+{
+  "slug": "howard-fallowfield",
+  "name": "Howard Fallowfield",
+  "sortName": "Howard Fallowfield",
+  "designation": "Professor",
+  "institute": "Flinders University",
+  "instituteSlug": "flinders-university",
+  "country": "Australia",
+  "qualification": "PhD (Biological Sciences). University of Dundee.",
+  "interests": "",
+  "email": "howard.fallowfield@flinders.edu.au",
+  "homepage": "https://researchnow.flinders.edu.au/en/persons/howard-fallowfield-2",
+  "profiles": [
+    "https://orcid.org/0000-0002-9156-8421"
+  ],
+  "photo": {
+    "image": "/assets/people/howard-fallowfield.webp",
+    "positionX": 50,
+    "positionY": 22
+  },
+  "bio": [],
+  "sections": [],
+  "source": "https://aiwc.org.au/howard-fallowfield/"
+}

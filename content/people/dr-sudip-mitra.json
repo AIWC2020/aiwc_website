@@ -1,0 +1,46 @@
+{
+  "slug": "dr-sudip-mitra",
+  "name": "Dr. Sudip Mitra",
+  "sortName": "Sudip Mitra",
+  "designation": "Associate Professor",
+  "institute": "Indian Institute of Technology Guwahati",
+  "instituteSlug": "indian-institute-of-technology-guwahati",
+  "country": "India",
+  "qualification": "Post Doctorate from Centre for Development Research (ZEF), University of Bonn, Germany. PhD from International Rice Research Institute (IRRI, Philippines) and Indian Agricultural Research Institute (IARI, New Delhi)",
+  "interests": "Climate Change-Vulnerability & adaptation at the rural sector (CBA approach). Agricultural consumptive use of water. SPAC system analysis and GHG management from agriculture sector. Agro-ecotechnology for DRR in rural sector.",
+  "email": "sudipmitra@iitg.ac.in",
+  "homepage": "http://www.iitg.ac.in/crt/sudip_mitra/",
+  "profiles": [
+    "https://www.researchgate.net/profile/Sudip_Mitra/research"
+  ],
+  "photo": {
+    "image": "/assets/people/dr-sudip-mitra.webp",
+    "positionX": 50,
+    "positionY": 22
+  },
+  "bio": [
+    "In his 20 years of professional career Dr. Mitra enriched himself working in Government, Non-Government, and National & International Universities & Institutions. To name a few Jawaharlal Nehru University (JNU), New Delhi; Tezpur (Central) University, Assam; National Institute of Disaster Management (NIDM), New Delhi. He also served as Project Director at M S Swaminathan Research Foundation (MSSRF), Chennai; The Energy and Resources Institute (TERI) and TERI University; Centre for Development Research (ZEF), University of Bonn, Germany etc. His contribution as one of the youngest consultants in one project coordinated by the Inter Academy Council-Amsterdam, the Netherlands is noteworthy. This project studied the Science and Technology Strategies for Improving Agricultural Productivity, Food Security and Environment in Africa and was carried out on request of then UN Secretary General Mr. Kofi Annan. As a Fulbright Scholar (2012), he worked with Prof Johan Six at the University of California, Davis, USA."
+  ],
+  "sections": [
+    {
+      "title": "Research Project",
+      "items": [
+        "Designing Policies that can Adapt to a World of Uncertainty, Change and Surprise: Adaptive Policymaking for Agriculture and Water Resources, sponsored by International Development Research Centre (IDRC ), Canada. (completed)",
+        "Vulnerability and Adaptation in Indian Agriculture within the context of economic changes, sponsored by Canadian International Development Agency (CIDA) and Government of Norway. (completed)",
+        "Greenhouse gas emission, mitigation & adaptation: strategies for better inventory and management of such gases in rice ecosystems of two agro-climatic zones of Assam (ongoing)."
+      ]
+    },
+    {
+      "title": "Key Publications/Reports",
+      "items": [
+        "Singh, P., Purakayastha, T.J., Mitra, S.*, Bhowmik, A., Tsang, D.C.W. (2020). River water irrigation with heavy metal load influences soil biological activities and risk factors. Journal of Environmental Management (accepted, in press). Elsevier [IF= 4.865]",
+        "Borah, P., Gujre, N., Rene, E. R., Rangan, L., Paul, R. K., Karak, T., & Mitra, S.* (2020). Assessment of mobility and environmental risks associated with copper, manganese and zinc in soils of a dumping site around a Ramsar site. Chemosphere, 126852. Elsevier [IF= 5.134]",
+        "Paul, A., Deka, J., Gujre, N., Rangan, L., & Mitra, S*. (2019). Does nature of livelihood regulate the urban community’s vulnerability to climate change? Guwahati city, a case study from North East India. Journal of Environmental Management, 251, 109591. Elsevier [IF= 4.865]",
+        "Borah, P., Singh, P., Rangan, L., Karak, T. and Mitra, S.* (2018) Mobility, bioavailability and ecological risk assessment of cadmium and chromium in soils contaminated by paper mill wastes, Groundwater for Sustainable Development (Elsevier), 6: 189-199. Elsevier [IF= 1.076]",
+        "Borah, P., Paul, A., Bora, P., Bhattacharyya, P., Karak, T. and Mitra, S*., (2017) Assessment of heavy metal pollution in soils around a paper mill using metal fractionation and multivariate analysis. International Journal of Environmental Science and Technology, pp.1-14. Springer [IF= 2.031]",
+        "Basak, S., Kesari, V., Ramesh, A. M., Rangan, L., Parida, A., & Mitra, S. (2017). Assessment of genetic variation among nineteen turmeric cultivars of Northeast India: nuclear DNA content and molecular marker approach. Acta Physiologiae Plantarum, 39(2), 45. Springer [IF= 1.608]"
+      ]
+    }
+  ],
+  "source": "https://aiwc.org.au/dr-sudip-mitra/"
+}

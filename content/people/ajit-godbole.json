@@ -1,0 +1,44 @@
+{
+  "slug": "ajit-godbole",
+  "name": "Ajit Godbole",
+  "sortName": "Ajit Godbole",
+  "designation": "Senior Research Fellow",
+  "institute": "University of Wollongong",
+  "instituteSlug": "university-of-wollongong",
+  "country": "Australia",
+  "qualification": "Ph D University of Wollongong, Australia",
+  "interests": "Science of flows (fluids, heat, etc)",
+  "email": "agodbole@uow.edu.au",
+  "homepage": null,
+  "profiles": [],
+  "photo": {
+    "image": "/assets/people/ajit-godbole.jpg",
+    "positionX": 50,
+    "positionY": 22
+  },
+  "bio": [
+    "Ajit Godbole is currently a Senior Research Fellow in the School of Mechanical, Mechatronics, Materials and Biomedical Engineering at the University of Wollongong, Australia. He was educated at IIT Bombay, India, University of Tennessee, Knoxville, USA, and University of Wollongong, Australia. He has more than 35 years’ experience in university-level teaching and research, besides a 4 year experience as research engineer (CFD) in France and India.",
+    "Ajit is interested in the science of flows, encompassing the fields of fluid dynamics, heat transfer and thermodynamics, among others.",
+    "Ajit has been one of the key researchers with the Energy Pipelines Cooperative Research Centre (EPCRC), and is currently engaged in research under the Future Fuels CRC (FFCRC) banner."
+  ],
+  "sections": [
+    {
+      "title": "Research Project",
+      "items": [
+        "Proximity distance and ventilation requirements in gas distribution networks adapted to ‘future fuels’ (on-going )",
+        "Atmospheric dispersion of CO2 following full-scale burst tests (2018)"
+      ]
+    },
+    {
+      "title": "Key Publications/Reports",
+      "items": [
+        "Ajit Godbole, Xiong Liu, Guillaume Michal, Bradley Davis, Cheng Lu, Keith Armstrong and Clara Huescar Medina (2018), Atmospheric dispersion of CO2 following full-scale burst tests, 14th Int Conf. on Greenhouse Gas Control Technologies (GHGT 14), 21-25 October, Melbourne, Australia",
+        "Ajit Godbole, Guillaume Michal, Cheng Lu, Xiong Liu, Philip Venton and Noel Laidlaw (2014) Venting of a 32 km NG pipeline – field measurements and CFD simulations, Paper IPC2014-33287, Proc 2014 10th Int Pipeline Conference IPC2014, Sept 29-Oct 3, Calgary, Alberta, Canada",
+        "Ajit Godbole, Guillaume Michal, Chang Lu, Philip Venton and Philip Colvin (2016), Thermal response of gas pipeline metal to gas decompression, Paper IPC2016-64333, Proc 2014 11th Int Pipeline Conference IPC2016, Sept 26-30, Calgary, Alberta, Canada",
+        "Ajit Godbole (2016), Descriptivism and Science Education, Chapter 9 in Practitioners as Researchers, Case studies into innovative practice, Tins A Doe and Ken Sell eds, Primrose Hall Publishing Group, Sydney, Australia, London, UK",
+        "Ajit Godbole, Guillaume Michal, Xiong Liu, Cheng Lu and Philip Venton (2015), Pipeline Blowdown: Field tests, CFD simulations and analysis, Paper 26, 20th Joint Technical Meeting on Pipeline Research, (20th JTM), Paris, France, 3-8 May"
+      ]
+    }
+  ],
+  "source": "https://aiwc.org.au/ajit-godbole/"
+}

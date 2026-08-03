@@ -1,0 +1,48 @@
+{
+  "slug": "mallickarjun-joshi",
+  "name": "Mallickarjun Joshi",
+  "sortName": "Mallickarjun Joshi",
+  "designation": "Professor",
+  "institute": "Banaras Hindu University",
+  "instituteSlug": "banaras-hindu-university",
+  "country": "India",
+  "qualification": "PhD, Banaras Hindu University",
+  "interests": "Environmental Geology Geohydrology and strategy for sustainable development of Headwater springs to restore Lesser Himalayan watersheds An integrated approach to understand hydrological systems in the Himalaya that includes geology, earthquakes and tectonics Efforts and strategies to reverse the increasing trend of rivers in the Himalayan watershed to turn ephemeral, which is crucial to increase the lean season flow in the Ganga system",
+  "email": "mallickbhu@gmail.com",
+  "homepage": "https://www.bhu.ac.in/science/geology/",
+  "profiles": [
+    "https://scholar.google.com/citations?user=rKVovLMAAAAJ"
+  ],
+  "photo": {
+    "image": "/assets/people/mallickarjun-joshi.webp",
+    "positionX": 50,
+    "positionY": 22
+  },
+  "bio": [
+    "Mallickarjun Joshi is a professor in Geology with over 40 years’ of teaching, research, and professional field experience. His current research on integrated environmental understanding includes water resources, seismology, landslides and tectonics. He is interested in addressing social issues through geology particularly the water security. He has about 70 publications in peer reviewed national and international journals and books. He has been involved in a large number of research projects funded by agencies outside the University."
+  ],
+  "sections": [
+    {
+      "title": "Research Project",
+      "items": [
+        "Recharge Process of Springs and Its management to mitigate anthropogenic and climatge change impact for water Security: A case study in parts of Kumaun Lesser Himalaya, India, SPARC-MHRD, Govt. of India. Ongoing",
+        "Climate Change and Hidden Heritage: Lessons from Majuli, Pilot project funded by Global Challenge Research Fund, U.K.& IGNCA, GOI, New Delhi. Completed",
+        "Geological and geomorphological investigation of the landslides in the Kumaun Lesser Himalaya, its causes and preventions, Dept. of Environment, Govt. of India, New Delhi",
+        "Evolution of India subcontinental Lithospheric Mantle: Insights from Mineral Chemistry etc., DST, Govt. of India, New Delhi",
+        "Kinematic analysis and P-T conditions during the evolution of the North Almora Shear Zone in the Someshwar-Binsar sector, U.P., DST, Govt. of India, New Delhi"
+      ]
+    },
+    {
+      "title": "Key Publications/Reports",
+      "items": [
+        "Joshi, M. with Rawat, J.S., Govind Ajit, Rawat, G., Rai, S.P., and Gahlot, N., 2016, Perennial to ephemeral transformation of a Lesser Himalayan watershed, Current Science, V. 111, No. 4., pp. 686-693.",
+        "Rawat, J.S., Joshi M. and Rawat, G. (2013) Geohydrology and strategy for sustainable development of Headwater springs, The Khulgad Watershed, India, pp. 77-94, In Rawat, J.S., Joshi M. eds.) Environmental Hydrology, Gyanodaya Prakashan, Nainital",
+        "Rawat, J.S., Mathpal, K. N. and Joshi M. (2013) Human impact on hydrology and physicochemical properties of stream water, a study of Nana Kosi watershed, Central Himalaya, pp.125-137, In Rawat, J.S., Joshi M. eds.) Environmental Hydrology, Gyanodaya Prakashan, Nainital.",
+        "Rawat, J.S. & Joshi. M. (2013) Environmental Hydrology, Gyanodaya Prakashan, Nainital.), 260p.",
+        "Joshi, M. with P. N. S. Roy and S. K. Mondal (2012) Seismic hazards assessment of Kumaun Himalaya and adjacent region, Nat. Hazard, Springer, Vol. 64, Issue 1, pp 283-297",
+        "Joshi, M., Kumar, Ghosh, P., Devi, M. Ph. And Das, B.P. (2019) North Almora Fault: A crucial missing link in the strike slip tectonics of western Himalaya, Journal of Asian Earth Sciences, Elsevier, 172, 249-263."
+      ]
+    }
+  ],
+  "source": "https://aiwc.org.au/mallickarjun-joshi/"
+}

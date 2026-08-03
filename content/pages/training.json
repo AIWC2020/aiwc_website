@@ -1,0 +1,254 @@
+{
+  "menuName": "Training",
+  "slug": "training",
+  "order": 6,
+  "parent": "work",
+  "published": true,
+  "template": "standard",
+  "intro": {
+    "eyebrow": "Our work · Training & capacity building",
+    "title": "Training that moves practice,\nnot just knowledge.",
+    "lede": "Five programmes, from village-level groundwater monitoring in Rajasthan and Gujarat to dam safety training for India’s Central Water Commission officers in New South Wales."
+  },
+  "blocks": [
+    {
+      "type": "cards",
+      "tone": "sand",
+      "compact": true,
+      "columns": 3,
+      "items": [
+        {
+          "number": "01",
+          "title": "Managing Aquifer Recharge and Sustaining Groundwater Use through Village-level Interventions",
+          "text": "The MARVI project is focused on developing a village level participatory approach, models and tools to assist in improving…",
+          "href": "#managing-groundwater-use-and-sustaining-aquifer-recharge-through-village-level-interventions-marvi",
+          "cta": "Read"
+        },
+        {
+          "number": "02",
+          "title": "The Young Water Professionals Program",
+          "text": "The YWP program is a unique, transdisciplinary training initiative aimed at equipping young professionals with skills in…",
+          "href": "#the-young-water-professionals-program-ywp",
+          "cta": "Read"
+        },
+        {
+          "number": "03",
+          "title": "Dam Rehabilitation Improvement Project",
+          "text": "This collaborative project focused on knowledge exchange and capacity building to improve dam safety practices in India. The…",
+          "href": "#dam-rehabilitation-improvement-project-drip-ii",
+          "cta": "Read"
+        },
+        {
+          "number": "04",
+          "title": "Training Program on Dam Safety and Risk Management in Australia",
+          "text": "Drawing on the success of DRIP II, the “Training Program on Dam Safety and Risk Management in Australia” focused on equipping…",
+          "href": "#training-program-on-dam-safety-and-risk-management-in-australia",
+          "cta": "Read"
+        },
+        {
+          "number": "05",
+          "title": "Village Groundwater Cooperatives",
+          "text": "Emerging from the MARVI initiative, Village Groundwater Cooperatives (VGCs) offer a promising institutional mechanism for…",
+          "href": "#village-groundwater-cooperatives-vgcs",
+          "cta": "Read"
+        }
+      ]
+    },
+    {
+      "type": "prose",
+      "tone": "paper",
+      "label": "01 — Programme",
+      "title": "Managing Aquifer Recharge and Sustaining Groundwater Use through Village-level Interventions (MARVI)",
+      "anchor": "managing-groundwater-use-and-sustaining-aquifer-recharge-through-village-level-interventions-marvi",
+      "body": [
+        "The MARVI project is focused on developing a village level participatory approach, models and tools to assist in improving groundwater supplies and reducing its demand through the direct involvement of farmers and other affected stakeholders.",
+        "A unique feature of MARVI is the use of scientific measurements by citizens through the engagement of Bhujal Jankaars (BJs), a Hindi word meaning ‘groundwater informed’ volunteers. With appropriate training and capacity building, BJs monitor groundwater levels and quality, making sense for the village perspective of what is happening to village groundwater availability. BJs convey this information to farmers and others in their own language.",
+        "Groundwater level represents the integration of recharge, pumping and flow processes and is a direct measure of groundwater availability and the success of any collective management practices. BJs are an effective, trusted and valuable interface between village communities and government agencies, NGOs and researchers.",
+        "An approach for community based participatory groundwater monitoring and management has been developed through a close collaboration with research and development agencies and village communities.",
+        "Watertable data monitored by both BJs and sensors have enabled the estimation of local hydro-geologic parameters and the development of simple groundwater balance. The monitoring of rainfall and water levels in checkdams has led to partition of aquifer recharge due to checkdams and natural recharge in relation to subsequent groundwater use.",
+        "The SMS system and MyWell app developed helps with easy collection of watertable, rainfall and checkdam water level data from any location in India and making those data available on the web.",
+        "BJs are proving to be significant change agents and through their scientific measurement, understanding and communication in the two watersheds. They are also an important interface between researchers and village communities.",
+        "As a result of the effective engagement of village communities and evidence shown through local data collected over the last four years, there is an indication that farmers now have started to understand their local groundwater system, accept that groundwater is limited and that the falling watertable is a village level issue and it needs to be tackled at the village level.",
+        "The work through MARVI has strengthened the farmers’ view that individual effort alone will not work to solve their groundwater problem. The groundwater level data reveals that deepening wells or installing deeper tubewells is like snatching each other’s groundwater, and overall, no extra water is to be gained by drilling deeper. They have already taken measures to stop deeper drilling, to remove sediment from recharge structures, to determine rabi crop areas from post-monsoon groundwater levels and to improve mulching and water use efficiency and diversify crop types. The farming community in the two watersheds is now debating the concept of sharing groundwater through ‘village groundwater cooperatives’ (VGC). The concept of water productivity, rather than crop productivity, is gaining momentum among the farmers. These are important outcomes from MARVI.",
+        "The developed MARVI approach has been tested in two watersheds in Rajasthan and Gujarat over four years, and it is now ready for upscaling to other areas in the two states.",
+        "Currently AIWC are in discussions to move towards out scaling MARVI through Southeast Asia, China and Africa."
+      ]
+    },
+    {
+      "type": "prose",
+      "tone": "sand",
+      "label": "02 — Programme",
+      "title": "The Young Water Professionals Program (YWP)",
+      "anchor": "the-young-water-professionals-program-ywp",
+      "body": [
+        "The YWP program is a unique, transdisciplinary training initiative aimed at equipping young professionals with skills in leadership, critical and transdisciplinary thinking, and effective communication, along with technical, social, water policy and governance knowledge, to address India’s complex water challenges. The training focuses beyond traditional disciplinary boundaries, integrating insights from various fields to foster a holistic understanding of water resource management.",
+        "In late 2024, the Australia India Water Centre (AIWC) proudly celebrated the achievements of 20 exceptional young professionals from India’s central and state water departments through the Young Water Professionals (YWP) Training Program, funded by India’s National Hydrology Project, National Water Academy. This was the second cohort of YWPs.",
+        "As part of their training, the YWPs worked on a client-based project called Situation Understanding and Improvement Projects (SUIP). The SUIP is the ‘heart’ of this training program, helping YWPs develop recommendations for the client to act upon and develop their skills in leadership, critical and transdisciplinary thinking, networking and effective communication.",
+        "To date, forty dynamic professionals have been trained with the necessary skills, knowledge, behaviours and networks to better enable them to contribute to the development and management of water resources and water management reforms in India. They are set to apply their knowledge in real-world settings, advancing sustainable water management throughout India.",
+        "What made this workshop unique?",
+        {
+          "kind": "list",
+          "items": [
+            "Transdisciplinary Approach: We went beyond traditional boundaries, integrating knowledge from diverse fields like engineering, hydrology, social science, and policy.",
+            "Hands-On Learning: Participants tackled real-world water challenges by developing the Situation Understanding and Improvement Project (SUIP) proposal, paving the way for practical experience and making a tangible impact.",
+            "Mentorship and Networking: YWPs connected with experienced professionals, building valuable relationships and expanding their networks.",
+            "Focus on Sustainability: We emphasised the importance of sustainable water management practices in addressing India’s pressing water challenges."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "prose",
+      "tone": "paper",
+      "label": "03 — Programme",
+      "title": "Dam Rehabilitation Improvement Project (DRIP II)",
+      "anchor": "dam-rehabilitation-improvement-project-drip-ii",
+      "body": [
+        "This collaborative project focused on knowledge exchange and capacity building to improve dam safety practices in India. The project aimed to achieve the following objectives:",
+        {
+          "kind": "list",
+          "items": [
+            "Enhance knowledge sharing between Indian and Australian dam safety professionals.",
+            "Empower Indian dam professionals with a deeper understanding of Australian best practices.",
+            "Foster collaboration between dam safety institutions in both countries.",
+            "Develop a framework for long-term collaboration in dam safety research, training, and knowledge exchange."
+          ]
+        },
+        {
+          "kind": "h",
+          "text": "Project Activities"
+        },
+        "The project implemented a multifaceted approach to achieve its goals. Key activities included:",
+        {
+          "kind": "list",
+          "items": [
+            "Workshops and Conferences: A series of virtual and in-person workshops brought together dam safety experts from India and Australia. These sessions facilitated knowledge exchange on dam rehabilitation strategies and regulatory frameworks to stakeholder engagement, disaster management and integrating Gender, Equity, Diversity, and Social Inclusion (GEDSI) principles into dam safety management.",
+            "Field Visits: Participants from both countries visited key dam infrastructure sites. Indian professionals observed Australian dam safety practices at dams like Warragamba Dam and Manly Dam, gaining insights into spillway design, dam operation, and SCADA system implementation. Conversely, Australian experts visited Indian dams like Bhatsa Dam, gaining firsthand experience with the challenges faced by Indian dam authorities.",
+            "Online Resources: The project documented its activities and presentations to improve knowledge accessibility on dam safety aspects. These resources are uploaded to the Australia India Water Centre (AIWC) website and YouTube channel, creating a readily available repository for dam safety professionals in India and beyond.",
+            "Agreement for longer-term collaboration through signing of a Memorandum of Understanding (MOU): A significant outcome was the signing of an MOU between Western Sydney University (WSU) and the Indian Institute of Technology Roorkee’s (IITR) newly established International Centre of Excellence for Dams (ICED) by the end of June 2024. This MOU will establish a framework for ongoing collaboration through joint training programs, research projects, and student and staff exchange programs. There is also an agreement to extend the MOU to include Dam Safety NSW and Water NSW for a greater partnership and collaboration between Australia and India in Dam Safety and Rehabilitation."
+          ]
+        },
+        {
+          "kind": "h",
+          "text": "Outcomes and Impacts"
+        },
+        "The project has yielded several significant outcomes and lasting impacts that will resonate for years to come.",
+        {
+          "kind": "h",
+          "text": "Enhanced Knowledge Sharing"
+        },
+        {
+          "kind": "list",
+          "items": [
+            "The project established a robust platform for knowledge exchange between Indian and Australian dam safety professionals. Experts from both counties shared best practices on dam rehabilitation, regulatory frameworks, stakeholder engagement, flood disaster management and GEDSI principles.",
+            "Online resources ensure the project’s knowledge remains accessible for dam safety professionals in the future.",
+            "The focus on GEDSI principles promoted inclusive dam management practices that consider the needs of all stakeholders."
+          ]
+        },
+        {
+          "kind": "h",
+          "text": "Improved Capacity Building"
+        },
+        {
+          "kind": "list",
+          "items": [
+            "Indian dam professionals gained a deeper understanding of Australian dam safety practices through workshops, field visits, and interactive sessions.",
+            "The project facilitated the identification of critical priorities for improvement in India’s dam safety program, such as prioritising dam safety interventions based on risk potential.",
+            "The WSU-IITR-ICED MOU paves the way for developing the next generation of dam safety leaders through joint training programs and student exchange initiatives."
+          ]
+        },
+        {
+          "kind": "h",
+          "text": "Strengthened Collaboration"
+        },
+        {
+          "kind": "list",
+          "items": [
+            "The documented project activities and online resources will continue to promote knowledge exchange beyond the project’s lifespan.",
+            "The agreement to sign the WSU-IITR-ICED MOU formalises a long-term partnership for collaborative dam safety research, training, and project management efforts.",
+            "The project fostered strong relationships between dam safety professionals from both countries, creating a network for ongoing communication and knowledge exchange."
+          ]
+        },
+        {
+          "kind": "h",
+          "text": "Potential for Broader Benefits:"
+        },
+        {
+          "kind": "list",
+          "items": [
+            "The project’s knowledge-sharing activities can be adapted for dam safety education in Australia, incorporating Indian experiences.",
+            "The WSU-IITR-ICED collaboration can potentially establish a global hub for dam safety expertise, offering valuable resources for professionals in India and Australia."
+          ]
+        },
+        "This project on dam safety in India stands as a successful example of Australian cooperation in addressing a critical challenge. The project has significantly improved dam safety practices in India by prioritising knowledge exchange, capacity building, and collaboration. The project’s lasting impacts will ensure the continued safety and performance of dams across India, contributing to water security and sustainable development in future. Additionally, the established framework for ongoing collaboration between India and Australia through IIT Roorkee holds immense potential for advancing dam safety practices and building capacity for both countries’ dam safety potential."
+      ]
+    },
+    {
+      "type": "prose",
+      "tone": "sand",
+      "label": "04 — Programme",
+      "title": "Training Program on Dam Safety and Risk Management in Australia",
+      "anchor": "training-program-on-dam-safety-and-risk-management-in-australia",
+      "body": [
+        "Drawing on the success of DRIP II, the “Training Program on Dam Safety and Risk Management in Australia” focused on equipping Indian dam safety professionals with comprehensive knowledge and practical experience in advanced safety practices, focusing on risk management, structural health monitoring, and emergency preparedness. The Program fostered collaboration between Indian and Australian experts, leveraging Australia’s well-established regulatory frameworks, cutting-edge research, and innovative technological solutions to enhance the safety and resilience of dam infrastructure.",
+        "AIWC Australia proudly welcomed the second cohort of 15 Indian Dam Safety Officers to Australia for a specialised Dam Safety and Risk Management Training Program led by Distinguished Professor Basant Maheshwari, Director, Australia India Water Centre (AIWC) at School of Science, Western Sydney University.",
+        "The program, a collaboration between WSU, AIWC, the Ministry of Jal Shakti (the Federal Water Ministry, Government of India), Dam Safety NSW, Water NSW, the Hunter Water and the Snowy Hydro Corporation, enhanced knowledge exchange and best practices in dam safety.",
+        "The two-week training journey began on March 17, 2025.",
+        "The diverse cohort of participants included senior officials from India’s Central Water Commission, National Dam Safety Authority, and various state water resource departments.",
+        "The training offered a blend of expert-led workshops and immersive field trips to key locations within NSW Australia, including Warragamba Dam, Hunter Water facilities, the State Emergency Service NSW facility in Wollongong, the Cotter Dam, and Snowy Hydro. The program provided participants with valuable insights into Australia’s regulatory frameworks and technological advancements in dam safety.",
+        {
+          "kind": "h",
+          "text": "Key Highlights and Learnings"
+        },
+        {
+          "kind": "list",
+          "items": [
+            "Immersive Field Visits: Participants explored Australia’s most significant dam infrastructures, including Warragamba Dam, Cotter Dam, Talbingo Dam, Blowering Dam, and the iconic Snowy Hydro Scheme. These visits provided first-hand exposure to cutting-edge practices in dam safety, innovative structural designs such as fuse gates and roller-compacted concrete dams, sophisticated instrumentation, and advanced monitoring technologies.",
+            "Expert-led Workshops and Discussions: The training featured comprehensive workshops by leading authorities, including Dam Safety NSW, WaterNSW, Hunter Water Corporation, Banzi Consulting, State Emergency Service (SES), and Snowy Hydro. These workshops emphasised critical aspects of emergency preparedness, robust risk mitigation strategies, state-of-the-art technology integration, and the pivotal role of stakeholder and community engagement in maintaining dam safety and sustainability.",
+            "Daily Reflections and Synthesis: Each day concluded with detailed reflective sessions, allowing participants to consolidate their observations, learnings, and insights. This ensured a comprehensive understanding of each day’s outcomes and strengthened the practical applicability of lessons learned.",
+            "Transdisciplinary Collaboration: Throughout the training, a primary emphasis was placed on promoting a holistic and integrative approach by bringing together expertise from diverse fields – engineering, environmental science, economics, sociology, and policymaking, to address the multifaceted challenges of dam safety management effectively."
+          ]
+        },
+        {
+          "kind": "h",
+          "text": "SUIP Presentations – Knowledge to Action"
+        },
+        "On the final day, participants presented their Situation Understanding and Improvement Projects (SUIP), synthesising their extensive learning journey. These presentations highlighted promising practices currently implemented in India, identified gaps, and proposed strategic opportunities for further collaboration and knowledge exchange between Australia and India, underlining the training’s tangible outcomes and future potential.",
+        "This initiative has laid a robust foundation for ongoing bilateral engagement, facilitating future knowledge and expertise exchanges. Participants are now equipped with actionable insights and strategies to advance dam safety and risk management practices in India.",
+        "The dedication, collaborative spirit, and enthusiasm exhibited throughout this training program added to a positive learning environment. We eagerly anticipate witnessing the transformative outcomes and the lasting positive impacts these valuable lessons will have on India’s dam safety landscape and water resource management.",
+        "This initiative strengthens global collaboration in dam safety and risk management, ensuring more resilient and sustainable water infrastructure for future generations."
+      ]
+    },
+    {
+      "type": "prose",
+      "tone": "paper",
+      "label": "05 — Programme",
+      "title": "Village Groundwater Cooperatives (VGCs)",
+      "anchor": "village-groundwater-cooperatives-vgcs",
+      "body": [
+        "Emerging from the MARVI initiative, Village Groundwater Cooperatives (VGCs) offer a promising institutional mechanism for community-led groundwater governance. These cooperatives bring together farmers and local stakeholders to share groundwater information, plan water-saving measures, and collectively recharge and manage their aquifer. The concept builds on the participatory ethos of MARVI and adapts Australia’s rich experience with cooperative groundwater management frameworks to suit Indian village contexts.",
+        "Piloted in selected villages in Rajasthan and Gujarat, VGCs are designed to be inclusive, democratic, and data driven. VGC members meet regularly to review rainfall and groundwater trends, supported by the information generated by Bhujal Jaankaars and the MyWell app. These meetings serve as forums for discussing seasonal cropping decisions, organising recharge activities, and addressing local water-sharing conflicts. Importantly, women are actively involved in many of these cooperative operations, contributing to gender equity in water governance.",
+        "The VGC model fosters a sense of ownership over groundwater as a shared resource, rather than a private commodity. This has helped sharing of groundwater among themselves, increased groundwater recharge, and promoted more sustainable farming practices. VGCs also serve as a platform for dialogue between villagers and externals, such as NGOs, researchers, and government agencies.",
+        "Supported by the Australian Water Partnership and Australian Centre for International Agricultural Research and implemented in partnership with the ICICI Foundation, local NGOs and Panchayats, VGCs are now being recognised as a potential institutional innovation that can be scaled across other parts of India. They illustrate how sustained engagement, local empowerment, and Australian cooperation can generate lasting solutions to complex water challenges.",
+        "The Village Groundwater Cooperative in Rajasthan – the implementation of the VGC led to significant increases in wheat production this year. Normally they harvest 15,000 kg from the VGC area and this year they have harvested close to 70,000 kg due to fencing of the area to protect the crop from ‘blue bull’, access to more groundwater and improved seed varieties."
+      ]
+    },
+    {
+      "type": "callout",
+      "tone": "paper",
+      "title": "Training is expanding under the 2030 agenda.",
+      "text": "Partners at AIWC@5 recommended expanding the Young Water Professionals model, developing micro-credentials, and building shared training modules across IITs, ICAR institutes, Australian universities and State Agricultural Universities.",
+      "actions": [
+        {
+          "label": "AIWC@5 outcomes",
+          "page": "aiwc5",
+          "primary": true
+        },
+        {
+          "label": "Contact the Centre",
+          "page": "contact"
+        }
+      ]
+    }
+  ]
+}
