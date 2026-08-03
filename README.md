@@ -55,15 +55,23 @@ first time someone saved that page.
 
 ### Two ways to edit
 
-**`/editor/` — no sign-in at all.** A form-based editor with a live preview,
-which needs no token, no OAuth and no third-party service. It reads the
-published JSON, builds a form from the data's own shape, previews the entry
-with `src/templates.mjs` — the site's real renderer — and then hands the JSON
-to GitHub's own editor to commit. GitHub does the authentication, because you
-are already signed in there.
+**`/editor/` — forms, live preview, and two ways to save.** It reads the
+published JSON, builds a form from the data's own shape, and previews the
+entry with `src/templates.mjs` — the site's real renderer, so the preview *is*
+the page.
 
-Its only limits: it cannot upload images (point `image` fields at a path
-already in `assets/`), and saving is copy-paste rather than one click.
+- **Publish →** commits straight to GitHub. Needs a token, entered once and
+  kept in that browser's local storage. Add or remove it with **Token…**.
+- **Save manually…** needs no token at all: copy the JSON, open the file on
+  GitHub, paste, commit. GitHub does the authentication because you are
+  already signed in there.
+
+Publishing reads the file's blob sha when the entry loads and sends it with
+the write, so if someone else changed the file first the publish is refused
+rather than silently overwriting them.
+
+Its remaining limit: no image upload — point `image` fields at a path already
+in `assets/`.
 
 **`/admin/` — Sveltia CMS.** Image upload, direct commits, entry creation and
 deletion. Needs a token, set up below.
