@@ -61,6 +61,8 @@
   .mini.danger:hover{border-color:#a33131;color:#a33131}
   .add{margin-top:4px}
   .empty{color:var(--muted);font-size:.86rem;padding:4px 0}
+  .warn{margin:4px 0 0;font:.74rem/1.45 var(--sans);color:var(--ochre)}
+  input.risky{border-color:var(--ochre);background:#fff8f4}
 
   dialog{border:1px solid var(--line);border-radius:8px;padding:0;max-width:min(760px,92vw);width:100%}
   dialog::backdrop{background:rgb(10 26 36 / .5)}
@@ -251,8 +253,28 @@ function field(key, value, path, onReplace) {
     const inp = document.createElement(isLong(value) ? 'textarea' : 'input');
     if (inp.tagName === 'INPUT') inp.type = 'text';
     inp.value = value;
-    inp.oninput = () => set(inp.value);
+
+    // `slug` is the page's web address, not a title. Editing it silently
+    // moves the page and 404s every existing link — which has happened.
+    const isSlug = key === 'slug' && path.length === 1;
+    const startedAs = value;
+    const note = document.createElement('p');
+    note.className = 'warn';
+    const check = () => {
+      if (!isSlug) return;
+      const changed = inp.value !== startedAs;
+      const malformed = !/^[a-z0-9-]+$/.test(inp.value);
+      inp.classList.toggle('risky', changed || malformed);
+      note.textContent = malformed
+        ? '⚠ A web address may only use lower-case letters, numbers and hyphens.'
+        : changed
+          ? `⚠ This is the page's web address, not its title. Saving moves the page to /${inp.value}/ and breaks every existing link to /${startedAs}/.`
+          : '';
+    };
+
+    inp.oninput = () => { set(inp.value); check(); };
     l.appendChild(inp);
+    if (isSlug) { l.appendChild(note); check(); }
     return l;
   }
 
