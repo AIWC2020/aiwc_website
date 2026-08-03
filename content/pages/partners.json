@@ -6,7 +6,7 @@
   "template": "standard",
   "intro": {
     "eyebrow": "Our partners",
-    "title": "Thirty-three institutions,\ntwo countries.",
+    "title": "Thirty-three institutions,\ntwo countries.sd",
     "lede": "Universities, national research institutes, government departments and water businesses — the consortium that established the Centre and sustains it.",
     "eyebrowSize": 100,
     "titleSize": 70,
@@ -16,6 +16,20 @@
     "textWidth": 100,
     "textOffsetX": 0,
     "textOffsetY": 0
+  },
+  "heroImage": {
+    "image": "/assets/photos/page-aiwc5-conference-3.jpg",
+    "zoom": 100,
+    "positionX": 50,
+    "positionY": 45,
+    "fit": "cover"
+  },
+  "menuImage": {
+    "image": "/assets/photos/page-aiwc5-conference-3.jpg",
+    "zoom": 100,
+    "positionX": 50,
+    "positionY": 50,
+    "fit": "cover"
   },
   "blocks": [
     {
@@ -28,22 +42,24 @@
       "type": "partnerDirectory",
       "items": [
         {
-          "slug": "australia-india-institute",
+          "source": null,
           "name": "Australia India Institute",
+          "slug": "australia-india-institute",
           "country": "Australia",
+          "sections": [],
           "instituteName": "Australia India Insitute",
           "logo": {
             "image": "/assets/photos/page-home-1.jpg"
           },
           "summary": "",
-          "body": [],
-          "sections": [],
-          "source": null
+          "body": []
         },
         {
-          "slug": "deakin-university",
+          "source": "https://aiwc.org.au/deakin-university/",
           "name": "Deakin University",
+          "slug": "deakin-university",
           "country": "Australia",
+          "sections": [],
           "instituteName": "Deakin University",
           "logo": {
             "image": "/assets/logos/deakin-university.jpg"
@@ -52,20 +68,13 @@
           "body": [
             "Deakin is a leading Australian university with over 60,000 students and a global research ranking in the top 1 per cent (ShanghaiRanking’s ARWU). Deakin was the first Australian university to establish an office in India, where the TERI Deakin Nanobiotechnology Centre and The Energy and Resources Institute combine strengths to address water quality issues.",
             "Deakin has extensive capacity in impact-driven research and teaching with an emphasis on water security in urban, regional and rural systems. Its expertise includes irrigation; hydrology; groundwater; water modelling; water treatment; climate adaptation; blue-green infrastructure, land management and planning; sensing and training technologies; water policy; and social sciences."
-          ],
-          "sections": [],
-          "source": "https://aiwc.org.au/deakin-university/"
+          ]
         },
         {
-          "slug": "department-for-environment-and-water-south-australia",
+          "source": "https://aiwc.org.au/department-for-environment-and-water-government-of-south-australia/",
           "name": "Department for Environment and Water, South Australia",
+          "slug": "department-for-environment-and-water-south-australia",
           "country": "Australia",
-          "instituteName": "Department for Environment and Water, South Australia",
-          "logo": {
-            "image": "/assets/photos/page-home-6.jpg"
-          },
-          "summary": "",
-          "body": [],
           "sections": [
             {
               "title": "Brief profile your University/Institute in the context AIWC",
@@ -80,21 +89,18 @@
               ]
             }
           ],
-          "source": "https://aiwc.org.au/department-for-environment-and-water-government-of-south-australia/"
+          "instituteName": "Department for Environment and Water, South Australia",
+          "logo": {
+            "image": "/assets/photos/page-home-6.jpg"
+          },
+          "summary": "",
+          "body": []
         },
         {
-          "slug": "flinders-university",
+          "source": "https://aiwc.org.au/flinders-university/",
           "name": "Flinders University",
+          "slug": "flinders-university",
           "country": "Australia",
-          "instituteName": "Flinders University",
-          "logo": {
-            "image": "/assets/logos/flinders-university.jpg"
-          },
-          "summary": "Flinders University’s bold mission of changing lives and changing the world makes it a leading international university in South Australia with a record of excellence and innovation in…",
-          "body": [
-            "Flinders University’s bold mission of changing lives and changing the world makes it a leading international university in South Australia with a record of excellence and innovation in teaching. It provides undergraduate and postgraduate educational programs in hydrology, groundwater and water resources management. It headquarters the National Centre for Groundwater Research and Training (NCGRT, http://groundwater.com.au/).",
-            "The NCGRT undertakes in collaboration with many university and industry partners research in all aspects of groundwater and leads the training of the next generation of hydrogeologists and groundwater specialists. Flinders is ranked 17th in Shanghai’s 2021 Global Ranking of Academic Subjects for Water Resources."
-          ],
           "sections": [
             {
               "title": "Projects",
@@ -106,12 +112,22 @@
               ]
             }
           ],
-          "source": "https://aiwc.org.au/flinders-university/"
+          "instituteName": "Flinders University",
+          "logo": {
+            "image": "/assets/logos/flinders-university.jpg"
+          },
+          "summary": "Flinders University’s bold mission of changing lives and changing the world makes it a leading international university in South Australia with a record of excellence and innovation in…",
+          "body": [
+            "Flinders University’s bold mission of changing lives and changing the world makes it a leading international university in South Australia with a record of excellence and innovation in teaching. It provides undergraduate and postgraduate educational programs in hydrology, groundwater and water resources management. It headquarters the National Centre for Groundwater Research and Training (NCGRT, http://groundwater.com.au/).",
+            "The NCGRT undertakes in collaboration with many university and industry partners research in all aspects of groundwater and leads the training of the next generation of hydrogeologists and groundwater specialists. Flinders is ranked 17th in Shanghai’s 2021 Global Ranking of Academic Subjects for Water Resources."
+          ]
         },
         {
-          "slug": "griffith-university",
+          "source": "https://aiwc.org.au/griffith-university/",
           "name": "Griffith University",
+          "slug": "griffith-university",
           "country": "Australia",
+          "sections": [],
           "instituteName": "Griffith University",
           "logo": {
             "image": "/assets/logos/griffith-university.jpg"
@@ -119,22 +135,13 @@
           "summary": "",
           "body": [
             "Details will be updated soon."
-          ],
-          "sections": [],
-          "source": "https://aiwc.org.au/griffith-university/"
+          ]
         },
         {
-          "slug": "queensland-university-of-technology",
+          "source": "https://aiwc.org.au/queensland-university-of-technology/",
           "name": "QUT Queensland University of Technology",
+          "slug": "queensland-university-of-technology",
           "country": "Australia",
-          "instituteName": "QUT Queensland University of Technology",
-          "logo": {
-            "image": "/assets/logos/queensland-university-of-technology.jpg"
-          },
-          "summary": "Queensland University of Technology (QUT) is a highly successful Australian university with an applied emphasis on education and research. QUT is internationally recognised for its focus on…",
-          "body": [
-            "Queensland University of Technology (QUT) is a highly successful Australian university with an applied emphasis on education and research. QUT is internationally recognised for its focus on ‘real-world’, education, engagement and applied research with a strong emphasis on industry and community linkages. As a leading university of technology, QUT aims to strengthen its distinctive national and international reputation by combining academic strength and practical engagement with the world of the professions, industry, government, and the broader community, and the translation of research outcomes to practical application for finding solutions to problems affecting society and industry."
-          ],
           "sections": [
             {
               "title": "Projects",
@@ -144,20 +151,20 @@
               ]
             }
           ],
-          "source": "https://aiwc.org.au/queensland-university-of-technology/"
+          "instituteName": "QUT Queensland University of Technology",
+          "logo": {
+            "image": "/assets/logos/queensland-university-of-technology.jpg"
+          },
+          "summary": "Queensland University of Technology (QUT) is a highly successful Australian university with an applied emphasis on education and research. QUT is internationally recognised for its focus on…",
+          "body": [
+            "Queensland University of Technology (QUT) is a highly successful Australian university with an applied emphasis on education and research. QUT is internationally recognised for its focus on ‘real-world’, education, engagement and applied research with a strong emphasis on industry and community linkages. As a leading university of technology, QUT aims to strengthen its distinctive national and international reputation by combining academic strength and practical engagement with the world of the professions, industry, government, and the broader community, and the translation of research outcomes to practical application for finding solutions to problems affecting society and industry."
+          ]
         },
         {
-          "slug": "university-of-melbourne",
+          "source": "https://aiwc.org.au/the-university-of-melbourne/",
           "name": "University of Melbourne",
+          "slug": "university-of-melbourne",
           "country": "Australia",
-          "instituteName": "University of Melbourne",
-          "logo": {
-            "image": "/assets/photos/page-home-7.jpg"
-          },
-          "summary": "Established in 1853, the University of Melbourne is a public-spirited institution that makes distinctive contributions to society in research, learning and teaching and engagement. It’s…",
-          "body": [
-            "Established in 1853, the University of Melbourne is a public-spirited institution that makes distinctive contributions to society in research, learning and teaching and engagement. It’s consistently ranked among the leading universities in the world, with international rankings of world universities placing it as number 1 in Australia and number 32 in the world (Times Higher Education World University Rankings 2017-2018)."
-          ],
           "sections": [
             {
               "title": "Projects relevant to AIWC",
@@ -168,12 +175,21 @@
               ]
             }
           ],
-          "source": "https://aiwc.org.au/the-university-of-melbourne/"
+          "instituteName": "University of Melbourne",
+          "logo": {
+            "image": "/assets/photos/page-home-7.jpg"
+          },
+          "summary": "Established in 1853, the University of Melbourne is a public-spirited institution that makes distinctive contributions to society in research, learning and teaching and engagement. It’s…",
+          "body": [
+            "Established in 1853, the University of Melbourne is a public-spirited institution that makes distinctive contributions to society in research, learning and teaching and engagement. It’s consistently ranked among the leading universities in the world, with international rankings of world universities placing it as number 1 in Australia and number 32 in the world (Times Higher Education World University Rankings 2017-2018)."
+          ]
         },
         {
-          "slug": "university-of-new-south-wales",
+          "source": "https://aiwc.org.au/unsw-global-water-institute/",
           "name": "University of New South Wales",
+          "slug": "university-of-new-south-wales",
           "country": "Australia",
+          "sections": [],
           "instituteName": "University of New South Wales",
           "logo": {
             "image": "/assets/photos/page-home-8.jpg"
@@ -181,14 +197,14 @@
           "summary": "The UNSW Global Water Institute (UNSW-GWI) is a world leader in water research, innovation and problem solving. The Institute is a truly multi-disciplinary venture. Drawing on water…",
           "body": [
             "The UNSW Global Water Institute (UNSW-GWI) is a world leader in water research, innovation and problem solving. The Institute is a truly multi-disciplinary venture. Drawing on water expertise from seven faculties and 13 specialist centres across the University we have created the Nation’s most advanced water knowledge hub. Clean water is essential for all life on our planet, but global water issues have never been so prominent, and the demand for solutions never so high. Our research activities span an incredible variety of water-related fields but our researchers have one thing in common: they are driven by the urgent need to protect this essential resource in perpetuity."
-          ],
-          "sections": [],
-          "source": "https://aiwc.org.au/unsw-global-water-institute/"
+          ]
         },
         {
-          "slug": "university-of-western-australia",
+          "source": "https://aiwc.org.au/the-university-of-western-australia/",
           "name": "University of Western Australia",
+          "slug": "university-of-western-australia",
           "country": "Australia",
+          "sections": [],
           "instituteName": "University of Western Australia",
           "logo": {
             "image": "/assets/photos/page-home-9.jpg"
@@ -198,27 +214,27 @@
             "UWA has a very significant effort in research on different aspects of water and there is an estimated >170 staff and postgraduate students involved. There is internationally significant research capabilities in the fields of water and the environment, water and food and social and economic aspects of water management.",
             "An analysis of funding sources for research on water at UWA over the last three years revealed a strong spread of support for R&D across the fundamental to applied research continuum, with the Australian Research Council, the CRC Water Sensitive Cities, GRDC and DAFF dominating. There are existing collaborations with the WA Department of Water and WA Water Corporation.",
             "Mapping of UWA capability against the future global and Australian issues in water management revealed that the University is currently positioned to contribute in some major areas."
-          ],
-          "sections": [],
-          "source": "https://aiwc.org.au/the-university-of-western-australia/"
+          ]
         },
         {
-          "slug": "university-of-wollongong",
+          "source": "https://aiwc.org.au/university-of-wollongong/",
           "name": "University of Wollongong",
+          "slug": "university-of-wollongong",
           "country": "Australia",
+          "sections": [],
           "instituteName": "University of Wollongong",
           "logo": {
             "image": "/assets/logos/university-of-wollongong.jpg"
           },
           "summary": "",
-          "body": [],
-          "sections": [],
-          "source": "https://aiwc.org.au/university-of-wollongong/"
+          "body": []
         },
         {
-          "slug": "western-sydney-university",
+          "source": "https://aiwc.org.au/western-sydney-university/",
           "name": "Western Sydney University",
+          "slug": "western-sydney-university",
           "country": "Australia",
+          "sections": [],
           "instituteName": "Western Sydney University",
           "logo": {
             "image": "/assets/logos/western-sydney-university.jpg"
@@ -226,295 +242,293 @@
           "summary": "Western Sydney University is a multi-campus university in the Greater Western region of Sydney. It has over 40,000 students and is in world’s top 300 universities in Times Higher Education…",
           "body": [
             "Western Sydney University is a multi-campus university in the Greater Western region of Sydney. It has over 40,000 students and is in world’s top 300 universities in Times Higher Education ranking. The water research at the University is driven by impact with a focus on sustaining diverse urban, agricultural and natural systems. The University has significant capacity in teaching, research and capacity building in the area of surface and groundwater management, irrigation, stormwater, water quality, river health, cultural behaviour regarding water and water policy and governance."
-          ],
-          "sections": [],
-          "source": "https://aiwc.org.au/western-sydney-university/"
+          ]
         },
         {
-          "slug": "banaras-hindu-university",
+          "source": null,
           "name": "Banaras Hindu University",
+          "slug": "banaras-hindu-university",
           "country": "India",
+          "sections": [],
           "instituteName": "Banaras Hindu University",
           "logo": {
             "image": "/assets/photos/page-home-25.webp"
           },
           "summary": "",
-          "body": [],
-          "sections": [],
-          "source": null
+          "body": []
         },
         {
-          "slug": "centre-for-water-and-sanitation",
+          "source": null,
           "name": "Centre for Water and Sanitation (CWS)",
+          "slug": "centre-for-water-and-sanitation",
           "country": "India",
+          "sections": [],
           "instituteName": "Centre for Water and Sanitation (CWS)",
           "logo": {
             "image": "/assets/photos/page-home-31.jpg"
           },
           "summary": "",
-          "body": [],
-          "sections": [],
-          "source": null
+          "body": []
         },
         {
-          "slug": "g-b-pant-university-of-agriculture-and-technology",
+          "source": null,
           "name": "G. B. Pant University of Agriculture & Technology, Pantnagar",
+          "slug": "g-b-pant-university-of-agriculture-and-technology",
           "country": "India",
+          "sections": [],
           "instituteName": "G. B. University of Agriculture & Technology, Pantnagar, India",
           "logo": {
             "image": "/assets/photos/page-home-26.webp"
           },
           "summary": "",
-          "body": [],
-          "sections": [],
-          "source": null
+          "body": []
         },
         {
-          "slug": "indian-council-of-agricultural-research",
+          "source": null,
           "name": "Indian Council of Agricultural Research (ICAR)",
+          "slug": "indian-council-of-agricultural-research",
           "country": "India",
+          "sections": [],
           "instituteName": "Indian Council of Agricultural Research (ICAR)",
           "logo": {
             "image": "/assets/photos/page-home-32.jpg"
           },
           "summary": "",
-          "body": [],
-          "sections": [],
-          "source": null
+          "body": []
         },
         {
-          "slug": "indian-institute-of-information-technology-dharwad",
+          "source": null,
           "name": "Indian Institute of Information Technology Dharwad",
+          "slug": "indian-institute-of-information-technology-dharwad",
           "country": "India",
+          "sections": [],
           "instituteName": "Indian Institute of Information Technology Dharwad",
           "logo": {
             "image": "/assets/photos/page-home-23.webp"
           },
           "summary": "",
-          "body": [],
-          "sections": [],
-          "source": null
+          "body": []
         },
         {
-          "slug": "indian-institute-of-science-bangalore",
+          "source": null,
           "name": "Indian Institute of Science, Bangalore",
+          "slug": "indian-institute-of-science-bangalore",
           "country": "India",
+          "sections": [],
           "instituteName": "Indian Institute of Science, Bangalore, India",
           "logo": {
             "image": "/assets/photos/page-home-24.webp"
           },
           "summary": "",
-          "body": [],
-          "sections": [],
-          "source": null
+          "body": []
         },
         {
-          "slug": "indian-institute-of-technology-bhu-varanasi",
+          "source": null,
           "name": "Indian Institute of Technology (BHU) Varanasi",
+          "slug": "indian-institute-of-technology-bhu-varanasi",
           "country": "India",
+          "sections": [],
           "instituteName": "Indian Institute of Technology (BHU) Varanasi",
           "logo": {
             "image": "/assets/photos/page-home-33.jpg"
           },
           "summary": "",
-          "body": [],
-          "sections": [],
-          "source": null
+          "body": []
         },
         {
-          "slug": "indian-institute-of-technology-guwahati",
+          "source": null,
           "name": "Indian Institute of Technology Guwahati",
+          "slug": "indian-institute-of-technology-guwahati",
           "country": "India",
+          "sections": [],
           "instituteName": "Indian Institute of Technology Guwahati",
           "logo": {
             "image": "/assets/photos/page-home-19.webp"
           },
           "summary": "",
-          "body": [],
-          "sections": [],
-          "source": null
+          "body": []
         },
         {
-          "slug": "indian-institute-of-technology-kharagpur",
+          "source": null,
           "name": "Indian Institute of Technology Kharagpur",
+          "slug": "indian-institute-of-technology-kharagpur",
           "country": "India",
+          "sections": [],
           "instituteName": "Indian Institute of Technology Kharagpur",
           "logo": {
             "image": "/assets/photos/page-home-21.webp"
           },
           "summary": "",
-          "body": [],
-          "sections": [],
-          "source": null
+          "body": []
         },
         {
-          "slug": "indian-institute-of-technology-madras",
+          "source": null,
           "name": "Indian Institute of Technology Madras",
+          "slug": "indian-institute-of-technology-madras",
           "country": "India",
+          "sections": [],
           "instituteName": "Indian Institute of Technology Madras",
           "logo": {
             "image": "/assets/photos/page-home-28.jpg"
           },
           "summary": "",
-          "body": [],
-          "sections": [],
-          "source": null
+          "body": []
         },
         {
-          "slug": "indian-institute-of-technology-roorkee",
+          "source": null,
           "name": "Indian Institute of Technology Roorkee",
+          "slug": "indian-institute-of-technology-roorkee",
           "country": "India",
+          "sections": [],
           "instituteName": "Indian Institute of Technology Roorkee, India",
           "logo": {
             "image": "/assets/photos/page-home-22.webp"
           },
           "summary": "",
-          "body": [],
-          "sections": [],
-          "source": null
+          "body": []
         },
         {
-          "slug": "institute-of-land-and-disaster-management",
+          "source": null,
           "name": "Institute of Land and Disaster Management",
+          "slug": "institute-of-land-and-disaster-management",
           "country": "India",
+          "sections": [],
           "instituteName": "Institute of Land and Disaster Management",
           "logo": {
             "image": "/assets/photos/page-home-29.jpg"
           },
           "summary": "",
-          "body": [],
-          "sections": [],
-          "source": null
+          "body": []
         },
         {
-          "slug": "institute-of-rural-management-anand",
+          "source": null,
           "name": "Institute of Rural Management Anand",
+          "slug": "institute-of-rural-management-anand",
           "country": "India",
+          "sections": [],
           "instituteName": "Institute of Rural Management Anand",
           "logo": {
             "image": "/assets/photos/page-home-20.webp"
           },
           "summary": "",
-          "body": [],
-          "sections": [],
-          "source": null
+          "body": []
         },
         {
-          "slug": "jawaharlal-nehru-technological-university-hyderabad",
+          "source": null,
           "name": "Jawaharlal Nehru Technological University, Hyderabad",
+          "slug": "jawaharlal-nehru-technological-university-hyderabad",
           "country": "India",
+          "sections": [],
           "instituteName": "Jawaharlal Nehru Technological University, Hyderabad",
           "logo": {
             "image": "/assets/photos/page-home-17.webp"
           },
           "summary": "",
-          "body": [],
-          "sections": [],
-          "source": null
+          "body": []
         },
         {
-          "slug": "jss-science-and-technology-university-mysuru",
+          "source": null,
           "name": "JSS Science and Technology University, Mysuru",
+          "slug": "jss-science-and-technology-university-mysuru",
           "country": "India",
+          "sections": [],
           "instituteName": "JSS Science and Technology University, Mysuru",
           "logo": {
             "image": "/assets/photos/page-home-18.webp"
           },
           "summary": "",
-          "body": [],
-          "sections": [],
-          "source": null
+          "body": []
         },
         {
-          "slug": "maharana-pratap-university-of-agriculture-and-technology",
+          "source": null,
           "name": "Maharana Pratap University of Agriculture and Technology, Udaipur",
+          "slug": "maharana-pratap-university-of-agriculture-and-technology",
           "country": "India",
+          "sections": [],
           "instituteName": "Maharana Pratap University of Agriculture and Technology, Udaipur, Rajasthan, India",
           "logo": {
             "image": "/assets/photos/page-home-15.webp"
           },
           "summary": "",
-          "body": [],
-          "sections": [],
-          "source": null
+          "body": []
         },
         {
-          "slug": "national-institute-of-hydrology",
+          "source": null,
           "name": "National Institute of Hydrology, Roorkee",
+          "slug": "national-institute-of-hydrology",
           "country": "India",
+          "sections": [],
           "instituteName": "National Institute of Hydrology",
           "logo": {
             "image": "/assets/photos/page-home-16.webp"
           },
           "summary": "",
-          "body": [],
-          "sections": [],
-          "source": null
+          "body": []
         },
         {
-          "slug": "national-institute-of-technology-karnataka",
+          "source": null,
           "name": "National Institute of Technology Karnataka",
+          "slug": "national-institute-of-technology-karnataka",
           "country": "India",
+          "sections": [],
           "instituteName": "National Institute of Technology Karnataka",
           "logo": {
             "image": "/assets/photos/page-home-13.webp"
           },
           "summary": "",
-          "body": [],
-          "sections": [],
-          "source": null
+          "body": []
         },
         {
-          "slug": "public-health-engineering-department",
+          "source": null,
           "name": "Public Health Engineering Department (PHED)",
+          "slug": "public-health-engineering-department",
           "country": "India",
+          "sections": [],
           "instituteName": "Public Health Engineering Department (PHED)",
           "logo": {
             "image": "/assets/photos/page-home-30.jpg"
           },
           "summary": "",
-          "body": [],
-          "sections": [],
-          "source": null
+          "body": []
         },
         {
-          "slug": "sardar-vallabhbhai-national-institute-of-technology",
+          "source": null,
           "name": "Sardar Vallabhbhai National Institute of Technology, Surat",
+          "slug": "sardar-vallabhbhai-national-institute-of-technology",
           "country": "India",
+          "sections": [],
           "instituteName": "Sardar Vallabhbhai National Institute of Technology",
           "logo": {
             "image": "/assets/photos/page-home-14.webp"
           },
           "summary": "",
-          "body": [],
-          "sections": [],
-          "source": null
+          "body": []
         },
         {
-          "slug": "university-of-agricultural-sciences-bangalore",
+          "source": null,
           "name": "University of Agricultural Sciences, Bangalore",
+          "slug": "university-of-agricultural-sciences-bangalore",
           "country": "India",
+          "sections": [],
           "instituteName": "University of Agricultural Sciences, Bangalore",
           "logo": {
             "image": "/assets/photos/page-home-12.webp"
           },
           "summary": "",
-          "body": [],
-          "sections": [],
-          "source": null
+          "body": []
         },
         {
-          "slug": "water-resources-department-maharashtra",
+          "source": null,
           "name": "Water Resources Department, Maharashtra",
+          "slug": "water-resources-department-maharashtra",
           "country": "India",
+          "sections": [],
           "instituteName": "Water Resources Department, Maharashtra",
           "logo": {
             "image": "/assets/photos/page-home-27.jpg"
           },
           "summary": "",
-          "body": [],
-          "sections": [],
-          "source": null
+          "body": []
         }
       ]
     },
@@ -529,19 +543,5 @@
       "heading": "Become a partner institution.",
       "body": "AIWC is built on equal partnership between Australia and India, with support for all partners for their growth and benefits. If your institution works on water, we would like to talk."
     }
-  ],
-  "menuImage": {
-    "image": "/assets/photos/page-aiwc5-conference-3.jpg",
-    "zoom": 100,
-    "positionX": 50,
-    "positionY": 50,
-    "fit": "cover"
-  },
-  "heroImage": {
-    "image": "/assets/photos/page-aiwc5-conference-3.jpg",
-    "zoom": 100,
-    "positionX": 50,
-    "positionY": 45,
-    "fit": "cover"
-  }
+  ]
 }
