@@ -314,6 +314,44 @@ cpSync(join(ROOT, 'src/templates.mjs'), join(OUT, 'assets/templates.mjs'));
 const styles = [...parseHTML(template).document.querySelectorAll('style')].map((n) => n.textContent).join('\n');
 write('assets/site.css', styles);
 
+/**
+ * A blank example of every list item the content uses, keyed by the path the
+ * list sits at. The editor needs this: with an empty array there is nothing
+ * to copy the shape from, so "add the first item" is otherwise impossible —
+ * which meant a researcher with no biography could never be given one.
+ *
+ * Derived from the real content, so a new block type is covered the moment
+ * one exists anywhere.
+ */
+const shapes = {};
+const blank = (v) => {
+  if (Array.isArray(v)) return [];
+  if (v && typeof v === 'object') {
+    return Object.fromEntries(Object.entries(v).map(([k, x]) => [k, k === 'type' ? x : blank(x)]));
+  }
+  return typeof v === 'number' ? 0 : typeof v === 'boolean' ? false : '';
+};
+const learn = (value, path) => {
+  if (Array.isArray(value)) {
+    // Keyed by field name, and by type for blocks, so `blocks` can offer
+    // every variant rather than whichever happened to be first.
+    if (value.length) {
+      const key = path[path.length - 1];
+      if (!shapes[key]) shapes[key] = blank(value[0]);
+      for (const item of value) {
+        if (item && typeof item === 'object' && item.type) {
+          shapes[`${key}:${item.type}`] ||= blank(item);
+        }
+      }
+    }
+    value.forEach((v, i) => learn(v, [...path, i]));
+  } else if (value && typeof value === 'object') {
+    for (const [k, v] of Object.entries(value)) learn(v, [...path, k]);
+  }
+};
+for (const record of [...PAGES, ...people, ...partners]) learn(record, []);
+write('assets/shapes.json', JSON.stringify(shapes));
+
 // Blocks like peopleGrid and logoWall render from the whole collection, which
 // the CMS does not hand to a preview — it only has the entry being edited.
 // Publishing a trimmed index lets the preview draw them for real.
@@ -334,7 +372,7 @@ write(
 
 // The no-server editor at /editor/ fetches these at runtime; without them
 // it loads but every entry comes back 404.
-for (const needed of ['content/pages', 'content/people', 'content/partners', 'assets/collections.json']) {
+for (const needed of ['content/pages', 'content/people', 'content/partners', 'assets/collections.json', 'assets/shapes.json']) {
   if (!existsSync(join(OUT, needed))) throw new Error(`${needed} was not published — /editor/ depends on it`);
 }
 
