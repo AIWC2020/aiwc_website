@@ -89,6 +89,16 @@ alternative is a personal access token.
 The token is stored in that browser's local storage, so it is entered once per
 browser. Give each editor their own token — never share one.
 
+**What the admin page depends on.** The CMS bundle is vendored into
+`assets/cms/`, so nothing has to be fetched to start it. Sveltia still makes a
+few optional requests at runtime — a version check on `unpkg.com`, two web
+fonts from `cdn.jsdelivr.net`, and a status banner from `githubstatus.com`.
+None are required: if all three were blocked the CMS still works, with
+fallback fonts and no banners. They are anonymous CDN reads, not accounts
+anyone has to hold or maintain — which is the point. The thing this setup
+removes is the *managed* dependency: an OAuth broker on someone's Cloudflare
+account, holding a client secret, that breaks sign-in if it lapses.
+
 > **Note on the "Sign In with GitHub" button.** Sveltia shows it even with no
 > `base_url`, and it then falls back to *Netlify's* OAuth broker — a third
 > party. There is currently no documented way to hide the button, so tell

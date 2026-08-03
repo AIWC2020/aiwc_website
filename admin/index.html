@@ -7,10 +7,18 @@
     <title>AIWC — Content admin</title>
   </head>
   <body>
-    <!-- Sveltia CMS. Deliberately NOT type="module": the bundle is a classic
-         script, and marking it as a module stops it exposing window.CMS / window.h,
-         which preview.js needs. -->
-    <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
+    <!-- Sveltia CMS, vendored into this repository rather than loaded from a
+         CDN, so the admin page depends on nothing outside GitHub. Pinned by
+         filename: upgrading means dropping in a new file and changing this
+         line, which makes the version visible in the diff.
+
+         Deliberately NOT type="module": the bundle is a classic script, and
+         marking it as a module stops it exposing window.CMS / window.h,
+         which preview.js needs.
+
+         The path is relative so it resolves whatever the site's base path is
+         (/aiwc_website today, a domain root if a CNAME is added later). -->
+    <script src="../assets/cms/sveltia-cms-0.177.1.js"></script>
     <!-- Live preview: renders entries with the site's own renderer
          (/assets/templates.mjs), so it cannot drift from the real page. -->
     <script type="module" src="preview.js"></script>
