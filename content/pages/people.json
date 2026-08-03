@@ -7,12 +7,33 @@
   "intro": {
     "eyebrow": "Our people",
     "title": "One hundred and eight\nwater researchers.",
-    "lede": "Engineering, ecology, social science, law and agriculture — filter by country or institution, and open any profile for areas of interest, current projects and key publications."
+    "lede": "Engineering, ecology, social science, law and agriculture — filter by country or institution, and open any profile for areas of interest, current projects and key publications.",
+    "eyebrowSize": 100,
+    "titleSize": 70,
+    "ledeSize": 100,
+    "textAlign": "left",
+    "textPosition": "bottom",
+    "textWidth": 100,
+    "textOffsetX": 0,
+    "textOffsetY": 0
   },
   "blocks": [
     {
-      "type": "peopleGrid",
-      "tone": "paper"
+      "type": "portraitDirectory"
     }
-  ]
+  ],
+  "menuImage": {
+    "image": "/assets/photos/page-aiwc5-conference-2.jpg",
+    "zoom": 100,
+    "positionX": 50,
+    "positionY": 50,
+    "fit": "cover"
+  },
+  "heroImage": {
+    "image": "/assets/photos/page-aiwc5-conference-2.jpg",
+    "zoom": 100,
+    "positionX": 50,
+    "positionY": 45,
+    "fit": "cover"
+  }
 }

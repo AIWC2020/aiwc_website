@@ -7,107 +7,126 @@
   "intro": {
     "eyebrow": "News & events",
     "title": "What is happening\nat the Centre.",
-    "lede": "Symposia, webinars and the WATER TALKS series — open to researchers, policy-makers, practitioners and students across Australia, India and the Asia Pacific."
+    "lede": "Symposia, webinars and the WATER TALKS series — open to researchers, policy-makers, practitioners and students across Australia, India and the Asia Pacific.",
+    "eyebrowSize": 100,
+    "titleSize": 70,
+    "ledeSize": 100,
+    "textAlign": "left",
+    "textPosition": "bottom",
+    "textWidth": 100,
+    "textOffsetX": 0,
+    "textOffsetY": 0
   },
   "blocks": [
     {
-      "type": "prose",
-      "tone": "paper",
-      "label": "Symposium",
+      "type": "banner",
+      "eyebrow": "Symposium",
       "title": "AIWC@5 International Symposium",
-      "body": [
-        "Water Futures and Climate Resilience — bold ideas, real solutions, resilient futures. Two days, 18 and 19 November 2025, across Australia, India and the Asia Pacific, for researchers, policymakers, practitioners and students.",
-        "As global water and climate challenges reach critical levels, it’s time to act together. The AIWC@5 Symposium is your gateway to shaping sustainable water futures through bold thinking, deep collaboration, and actionable innovation.",
-        {
-          "kind": "h",
-          "text": "Join leading voices from across the region to"
-        },
-        {
-          "kind": "list",
-          "items": [
-            "Exchange cutting-edge research",
-            "Spotlight real-world case studies",
-            "Showcase community-driven innovation",
-            "Drive policy and digital transformation"
-          ]
-        },
-        {
-          "kind": "h",
-          "text": "Focus areas"
-        },
-        {
-          "kind": "list",
-          "items": [
-            "Climate Adaptation & Resilience",
-            "River & Groundwater Sustainability",
-            "Agricultural Water Management",
-            "Urban Water Transitions",
-            "Digital Tools & Policy Innovation"
-          ]
-        },
-        "The symposium is a catalyst for change. Be part of a growing movement driving inclusive, climate-resilient water solutions across the Asia Pacific."
-      ]
+      "lede": ""
     },
     {
-      "type": "linkList",
-      "tone": "sand",
-      "label": "Symposium documents",
+      "type": "split",
+      "left": {
+        "kind": "prose",
+        "paragraphs": [
+          "Water Futures and Climate Resilience — bold ideas, real solutions, resilient futures. Two days, 18 and 19 November 2025, across Australia, India and the Asia Pacific, for researchers, policymakers, practitioners and students.",
+          "As global water and climate challenges reach critical levels, it’s time to act together. The AIWC@5 Symposium is your gateway to shaping sustainable water futures through bold thinking, deep collaboration, and actionable innovation.",
+          "Join leading voices from across the region to",
+          "• Exchange cutting-edge research",
+          "• Spotlight real-world case studies",
+          "• Showcase community-driven innovation",
+          "• Drive policy and digital transformation"
+        ]
+      },
+      "right": {
+        "kind": "prose",
+        "paragraphs": [
+          "Focus areas",
+          "• Climate Adaptation & Resilience",
+          "• River & Groundwater Sustainability",
+          "• Agricultural Water Management",
+          "• Urban Water Transitions",
+          "• Digital Tools & Policy Innovation",
+          "The symposium is a catalyst for change. Be part of a growing movement driving inclusive, climate-resilient water solutions across the Asia Pacific."
+        ]
+      }
+    },
+    {
+      "type": "banner",
+      "eyebrow": "Symposium documents",
+      "title": "",
+      "lede": ""
+    },
+    {
+      "type": "toolList",
       "items": [
         {
-          "title": "Programme and themes",
-          "text": "The full symposium flyer.",
-          "href": "https://aiwc.org.au/wp-content/uploads/2025/08/FLYER-International-Symposium-General.pdf"
+          "name": "Programme and themes",
+          "description": "The full symposium flyer.",
+          "url": "https://aiwc.org.au/wp-content/uploads/2025/08/FLYER-International-Symposium-General.pdf",
+          "linkLabel": "Open",
+          "target": "_blank"
         },
         {
-          "title": "The venue",
-          "text": "Venue details for the 2025 symposium.",
-          "href": "https://aiwc.org.au/wp-content/uploads/2025/08/Symposium-Venue-2025.pdf"
+          "name": "The venue",
+          "description": "Venue details for the 2025 symposium.",
+          "url": "https://aiwc.org.au/wp-content/uploads/2025/08/Symposium-Venue-2025.pdf",
+          "linkLabel": "Open",
+          "target": "_blank"
         }
       ]
     },
     {
-      "type": "prose",
-      "tone": "paper",
-      "label": "Webinar series",
+      "type": "banner",
+      "eyebrow": "Webinar series",
       "title": "WATER TALKS 2025",
-      "body": [
-        {
-          "kind": "h",
-          "text": "WATER TALKS | October 2025"
-        },
-        {
-          "kind": "h",
-          "text": "10 October 2025Time: 3:00 – 4:00 pm (AEST) 10:30 – 11:30 am (IST)"
-        },
-        {
-          "kind": "h",
-          "text": "Evaluation of direct use of recycled water compared to indirectly recharged borewell water and rain-fed borewell water on soil and crop parameters in Semi-arid regionsProfessor L N Rao"
-        },
-        "Urban Decentralised Water Recycling: Opportunities for IrrigationMr Alex Sommer",
-        "In this presentation, Alex will begin with an introduction to Aquacell, providing an overview of the organisation and its work in the field. The session will then explore landscape of decentralised water recycling in Australia, highlighting the key drivers behind the growing interest in water reuse. To illustrate these concepts, Alex will present examples and case studies of both in-building and off-grid schemes. The presentation will also examine the role of irrigation within the water recycling systems and discuss what these developments mean for the future of agriculture.",
-        "Alex Sommer leads Aquacell’s business development and sustainability for the Australian market. In previous positions within state government, listed developers and industrial manufacturers, he developed water efficiency and water stewardship strategies and programs as part of his broader sustainability and ESG remit. At Aquacell his mission is to drive the discourse on climate and economic resilience through water recycling, providing end-to-end in-building and decentralised wastewater treatment and reuse solutions.",
-        "_____________________________________________________________________________________________________________________________",
-        "WATER TALKS August 2025",
-        "8 August 2025",
-        "Great DiscussionListen to the full webinar on YouTube WATER TALKS AUGUST 202",
-        "Policy Pathways for Water Security: Lessons from Australia’s Journey towards Integrated Water Reform",
-        "Karlene Maywald, Global Water Leader and Climate Resilience AdvocateKarlene Maywald is an internationally respected water policy expert and governance leader, currently serving as the South Australian Government Water Ambassador. With a career spanning ministerial leadership, international advisory roles, and community recovery efforts, Karlene has consistently championed the message that climate change is water change.",
-        "As South Australia’s former Minister for Water Security and the River Murray, she led landmark reforms during the Millennium Drought, including the state’s Water for Good strategy and major infrastructure investments. Internationally, she has worked across Asia supporting climate-resilient water governance and transboundary cooperation through the Australian Water Partnership.",
-        "Karlene chairs WaterAid Australia, the CRC for Solving Antimicrobial Resistance, and the Cancer Council SA, and advises CSIRO and WaterTrust. A sought-after global speaker and facilitator at events like COP27, COP28, COP29 and World Water Week, Karlene is a driving force for inclusive, sustainable water futures."
-      ]
+      "lede": ""
+    },
+    {
+      "type": "split",
+      "left": {
+        "kind": "prose",
+        "paragraphs": [
+          "WATER TALKS | October 2025",
+          "10 October 2025Time: 3:00 – 4:00 pm (AEST) 10:30 – 11:30 am (IST)",
+          "Evaluation of direct use of recycled water compared to indirectly recharged borewell water and rain-fed borewell water on soil and crop parameters in Semi-arid regionsProfessor L N Rao",
+          "Urban Decentralised Water Recycling: Opportunities for IrrigationMr Alex Sommer",
+          "In this presentation, Alex will begin with an introduction to Aquacell, providing an overview of the organisation and its work in the field. The session will then explore landscape of decentralised water recycling in Australia, highlighting the key drivers behind the growing interest in water reuse. To illustrate these concepts, Alex will present examples and case studies of both in-building and off-grid schemes. The presentation will also examine the role of irrigation within the water recycling systems and discuss what these developments mean for the future of agriculture.",
+          "Alex Sommer leads Aquacell’s business development and sustainability for the Australian market. In previous positions within state government, listed developers and industrial manufacturers, he developed water efficiency and water stewardship strategies and programs as part of his broader sustainability and ESG remit. At Aquacell his mission is to drive the discourse on climate and economic resilience through water recycling, providing end-to-end in-building and decentralised wastewater treatment and reuse solutions.",
+          "_____________________________________________________________________________________________________________________________"
+        ]
+      },
+      "right": {
+        "kind": "prose",
+        "paragraphs": [
+          "WATER TALKS August 2025",
+          "8 August 2025",
+          "Great DiscussionListen to the full webinar on YouTube WATER TALKS AUGUST 202",
+          "Policy Pathways for Water Security: Lessons from Australia’s Journey towards Integrated Water Reform",
+          "Karlene Maywald, Global Water Leader and Climate Resilience AdvocateKarlene Maywald is an internationally respected water policy expert and governance leader, currently serving as the South Australian Government Water Ambassador. With a career spanning ministerial leadership, international advisory roles, and community recovery efforts, Karlene has consistently championed the message that climate change is water change.",
+          "As South Australia’s former Minister for Water Security and the River Murray, she led landmark reforms during the Millennium Drought, including the state’s Water for Good strategy and major infrastructure investments. Internationally, she has worked across Asia supporting climate-resilient water governance and transboundary cooperation through the Australian Water Partnership.",
+          "Karlene chairs WaterAid Australia, the CRC for Solving Antimicrobial Resistance, and the Cancer Council SA, and advises CSIRO and WaterTrust. A sought-after global speaker and facilitator at events like COP27, COP28, COP29 and World Water Week, Karlene is a driving force for inclusive, sustainable water futures."
+        ]
+      }
     },
     {
       "type": "callout",
-      "tone": "paper",
-      "title": "Read what came out of AIWC@5.",
-      "text": "Five thematic breakout sessions set the Centre’s agenda to 2030 — research and innovation, training and education, policy partnerships, global positioning, and funding.",
-      "actions": [
-        {
-          "label": "AIWC@5 outcomes",
-          "page": "aiwc5",
-          "primary": true
-        }
-      ]
+      "heading": "Read what came out of AIWC@5.",
+      "body": "Five thematic breakout sessions set the Centre’s agenda to 2030 — research and innovation, training and education, policy partnerships, global positioning, and funding."
     }
-  ]
+  ],
+  "menuImage": {
+    "image": "/assets/photos/page-aiwc5-conference-6.jpg",
+    "zoom": 100,
+    "positionX": 50,
+    "positionY": 50,
+    "fit": "cover"
+  },
+  "heroImage": {
+    "image": "/assets/photos/page-aiwc5-conference-6.jpg",
+    "zoom": 100,
+    "positionX": 50,
+    "positionY": 45,
+    "fit": "cover"
+  }
 }

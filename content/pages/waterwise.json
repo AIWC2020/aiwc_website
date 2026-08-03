@@ -7,51 +7,106 @@
   "intro": {
     "eyebrow": "WaterWise",
     "title": "The AIWC blog for\n‘Sustainable Water Futures’.",
-    "lede": "A virtual water dialogue where participants are not passive receivers of knowledge but active contributors — because water science communication should acknowledge different forms of knowledge and give equal status to everyone."
+    "lede": "A virtual water dialogue where participants are not passive receivers of knowledge but active contributors — because water science communication should acknowledge different forms of knowledge and give equal status to everyone.",
+    "eyebrowSize": 100,
+    "titleSize": 70,
+    "ledeSize": 100,
+    "textAlign": "left",
+    "textPosition": "bottom",
+    "textWidth": 100,
+    "textOffsetX": 0,
+    "textOffsetY": 0
   },
   "blocks": [
     {
-      "type": "prose",
-      "tone": "paper",
-      "label": "01 — 2022-06-30",
+      "type": "banner",
+      "eyebrow": "01 — 2022-06-30",
       "title": "WaterWise: The AIWC blog for ‘Sustainable Water Futures’",
-      "body": [
-        "The Sustainable Development Goal (SDG) 6 and agenda 2030 recognises the role of water in human development. The goal of SGD 6 is to “ensure availability and sustainable management of water and sanitation for all”. The covid 19 pandemic also emphasises the importance of sanitation, hygiene and adequate access to clean water for preventing and containing the virus. Water is essential not only to health, but also to poverty reduction, food security, peace and human rights, ecosystems and education. The multifaceted role of water in our life suggests a multidimensional approach to understand and appreciate the many ways people use, manage and care for water.",
-        "The Australia India Water Centre (AIWC) was launched on November 6, 2020 with the aim to enhance collaborations in ‘sustainable water futures’ between Australia and India. The first of its kind collaborative Centre, the AIWC is led by Western Sydney University in Australia and Indian Institute of Technology Guwahati in India with a total of 24 partners from the two countries.",
-        "The Centre is a network of water professionals from diverse fields with a commitment to carry out transdisciplinary research, education and capacity building in water. The larger goal of AIWC is to contribute towards achieving SDG 6 and interconnected goals by establishing a Australia India Water Academy. The AIWC partners have diverse interest and expertise such as engineering, ecology, social science, law and agriculture, thus making it a truly transdisciplinary group of water professionals to work for sustainable water futures.",
-        "The Centre is engaging with communities, governments and civil society organisations to address local, national and regional water issues. This is done through a series of activities such as training, capacity building, educational courses, webinars and workshops, to Australian and Indian participants, along with a number of outreach activities.",
-        "On the World Environment Day, 5th June 2021, the core members of AIWC decided to initiate a virtual water dialogue platform called “WaterWise”. This dialogue provides platform for outreach to a wide range water professionals for effective communication and networking among water professionals. This means the participants of this Dialogue are not passive receivers of knowledge but can also actively participate in the deliberations. Such water science communication is important for ‘Sustainable Water Futures’ of the two countries as it acknowledges different forms of knowledge, insights and experiences, provides equal status to everyone, and helps us to learn with and from each-other.",
-        "AIWC believes that WaterWise will go beyond transferring factual information, will create space to share and listen to knowledge and experiences that are too often absent in the discussion around water but are important to address the complex and critical water concerns. We strongly feel that such an initiative will help us achieving the water-related goals of the 2030 Agenda.",
-        "We look forward to your support and contributions in making the ‘WaterWise’ initiative a success.",
-        "Thank you!",
-        "1 Professor Anamika Barua, Department of Humanities and Social Sciences, IIT Guwahati, India, Email: abarua@iitg.ac.in",
-        "2 Professor Basant Maheshwari, Western Sydney University, Australia, Email: b.maheshwari@westernsydney.edu.au"
-      ]
+      "lede": ""
     },
     {
-      "type": "prose",
-      "tone": "sand",
-      "label": "02 — 2024-08-17",
+      "type": "split",
+      "left": {
+        "kind": "prose",
+        "paragraphs": [
+          "The Sustainable Development Goal (SDG) 6 and agenda 2030 recognises the role of water in human development. The goal of SGD 6 is to “ensure availability and sustainable management of water and sanitation for all”. The covid 19 pandemic also emphasises the importance of sanitation, hygiene and adequate access to clean water for preventing and containing the virus. Water is essential not only to health, but also to poverty reduction, food security, peace and human rights, ecosystems and education. The multifaceted role of water in our life suggests a multidimensional approach to understand and appreciate the many ways people use, manage and care for water.",
+          "The Australia India Water Centre (AIWC) was launched on November 6, 2020 with the aim to enhance collaborations in ‘sustainable water futures’ between Australia and India. The first of its kind collaborative Centre, the AIWC is led by Western Sydney University in Australia and Indian Institute of Technology Guwahati in India with a total of 24 partners from the two countries.",
+          "The Centre is a network of water professionals from diverse fields with a commitment to carry out transdisciplinary research, education and capacity building in water. The larger goal of AIWC is to contribute towards achieving SDG 6 and interconnected goals by establishing a Australia India Water Academy. The AIWC partners have diverse interest and expertise such as engineering, ecology, social science, law and agriculture, thus making it a truly transdisciplinary group of water professionals to work for sustainable water futures.",
+          "The Centre is engaging with communities, governments and civil society organisations to address local, national and regional water issues. This is done through a series of activities such as training, capacity building, educational courses, webinars and workshops, to Australian and Indian participants, along with a number of outreach activities.",
+          "On the World Environment Day, 5th June 2021, the core members of AIWC decided to initiate a virtual water dialogue platform called “WaterWise”. This dialogue provides platform for outreach to a wide range water professionals for effective communication and networking among water professionals. This means the participants of this Dialogue are not passive receivers of knowledge but can also actively participate in the deliberations. Such water science communication is important for ‘Sustainable Water Futures’ of the two countries as it acknowledges different forms of knowledge, insights and experiences, provides equal status to everyone, and helps us to learn with and from each-other."
+        ]
+      },
+      "right": {
+        "kind": "prose",
+        "paragraphs": [
+          "AIWC believes that WaterWise will go beyond transferring factual information, will create space to share and listen to knowledge and experiences that are too often absent in the discussion around water but are important to address the complex and critical water concerns. We strongly feel that such an initiative will help us achieving the water-related goals of the 2030 Agenda.",
+          "We look forward to your support and contributions in making the ‘WaterWise’ initiative a success.",
+          "Thank you!",
+          "1 Professor Anamika Barua, Department of Humanities and Social Sciences, IIT Guwahati, India, Email: abarua@iitg.ac.in",
+          "2 Professor Basant Maheshwari, Western Sydney University, Australia, Email: b.maheshwari@westernsydney.edu.au"
+        ]
+      }
+    },
+    {
+      "type": "banner",
+      "eyebrow": "02 — 2024-08-17",
       "title": "Dams Safety and Rehabilitation",
-      "body": [
-        "India has about 6000 large dams, the highest number of dams in the world. Many of these large dams are getting old, and their safety is of immense concern to India. The Government of India, with support from the World Bank, has initiated a multi-billion-dollar Dam Rehabilitation Improvement Project’ (DRIP) program to improve dam safety and rehabilitate dams for greater effectiveness. The aim of DRIP is to increase the safety of selected dams in participating States and strengthen dam safety management in India. The DRIP program includes 19 States and 3 Central Agencies in India.",
-        "During February 5-9, Western Sydney University organised a week-long workshop (February 5-9) and field visits for a total of 13 senior professionals from the Federal Water Ministry (Ministry of Jal Shakti), Government of India and the World Bank delegation from India, Singapore and Indonesia. This workshop was part of the technical exchange between Australia and India in India’s DRIP program. Water security is crucial to both countries, and this project is one of many led through the Australia India Water Centre collaboration that is tackling this shared challenge.",
-        "The Australian Water Partnership (the Department of Foreign Affairs and Trade) supported the workshop. It is a significant collaboration between the Water NSW, Australia India Water Centre, the World Bank, India’s Central Water Commission, and other NSW State Government Agencies, including Dam Safety NSW and State Emergency Services.",
-        "The workshop included presentations from Water NSW, Dam Safety NSW, SES and Western Sydney University on risk assessment, dam operation and maintenance, Dam Safety Act, flood disaster management, Gender Equality, Diversity and Social Inclusion (GEDSI) and community engagement. Workshop participants were involved in group work, presentation and panel discussion. The participanst had the opportunity to visit dam sites across NSW, including Warragamba, Manly and Grahamstown Dam in the Hunter region."
-      ]
+      "lede": ""
     },
     {
-      "type": "prose",
-      "tone": "paper",
-      "label": "03 — 2024-08-17",
+      "type": "split",
+      "left": {
+        "kind": "prose",
+        "paragraphs": [
+          "India has about 6000 large dams, the highest number of dams in the world. Many of these large dams are getting old, and their safety is of immense concern to India. The Government of India, with support from the World Bank, has initiated a multi-billion-dollar Dam Rehabilitation Improvement Project’ (DRIP) program to improve dam safety and rehabilitate dams for greater effectiveness. The aim of DRIP is to increase the safety of selected dams in participating States and strengthen dam safety management in India. The DRIP program includes 19 States and 3 Central Agencies in India.",
+          "During February 5-9, Western Sydney University organised a week-long workshop (February 5-9) and field visits for a total of 13 senior professionals from the Federal Water Ministry (Ministry of Jal Shakti), Government of India and the World Bank delegation from India, Singapore and Indonesia. This workshop was part of the technical exchange between Australia and India in India’s DRIP program. Water security is crucial to both countries, and this project is one of many led through the Australia India Water Centre collaboration that is tackling this shared challenge."
+        ]
+      },
+      "right": {
+        "kind": "prose",
+        "paragraphs": [
+          "The Australian Water Partnership (the Department of Foreign Affairs and Trade) supported the workshop. It is a significant collaboration between the Water NSW, Australia India Water Centre, the World Bank, India’s Central Water Commission, and other NSW State Government Agencies, including Dam Safety NSW and State Emergency Services.",
+          "The workshop included presentations from Water NSW, Dam Safety NSW, SES and Western Sydney University on risk assessment, dam operation and maintenance, Dam Safety Act, flood disaster management, Gender Equality, Diversity and Social Inclusion (GEDSI) and community engagement. Workshop participants were involved in group work, presentation and panel discussion. The participanst had the opportunity to visit dam sites across NSW, including Warragamba, Manly and Grahamstown Dam in the Hunter region."
+        ]
+      }
+    },
+    {
+      "type": "banner",
+      "eyebrow": "03 — 2024-08-17",
       "title": "Rejuvenation of the springs in the Himalayan region-Evaluation of options and Strategies",
-      "body": [
-        "Thesis title: Rejuvenation of the springs in the Himalayan region-Evaluation of options and Strategies – Dr. Neeraj Pant",
-        "Principal Supervisor: Prof. Dharma Hagare",
-        "Aim: Rejuvenation of springs in the Himalayan region using scientific and community-centric approaches.",
-        "Springs are an important part of the livelihood in the Himalayan region. My PhD project was instrumental in collecting the background data on the springs in the Kumaun region. The data collection included gender equality, disability, and social inclusion (GEDSI) focus. The study successfully engaged the entire village community in water conservation and use. This resulted in the training of the local community on spring discharge and rejuvenation. The data collected will help the entire community sustain the springs for the years to come, leading to economic prosperity and wellbeing.",
-        "The project work mainly focuses on community-centric solutions for revitalizing dwindling water springs in the Uttarakhand Himalayas, India. The first objective is to incorporate a gender-specific focus, conducting scientific investigations on mechanical and biological interventions for spring rejuvenation. Another objective involves training local communities in groundwater monitoring and water harvesting. Engaging in focus group discussions and interviews with stakeholders, including villagers and organizations, the project targets achieving gender equity (SDG 5) and increasing water availability (SDG 6). By enhancing water access, it aims to address economic, physical, and mental well-being, contributing to reduced inequalities (SDG 10). Through sustainable spring management, the project promotes responsible consumption (SDG 12), climate action (SDG13), ecological diversity (SDG 14), and finally fostering partnerships between countries (SDG17) for sustainable research and development."
-      ]
+      "lede": ""
+    },
+    {
+      "type": "split",
+      "left": {
+        "kind": "prose",
+        "paragraphs": [
+          "Thesis title: Rejuvenation of the springs in the Himalayan region-Evaluation of options and Strategies – Dr. Neeraj Pant",
+          "Principal Supervisor: Prof. Dharma Hagare",
+          "Aim: Rejuvenation of springs in the Himalayan region using scientific and community-centric approaches."
+        ]
+      },
+      "right": {
+        "kind": "prose",
+        "paragraphs": [
+          "Springs are an important part of the livelihood in the Himalayan region. My PhD project was instrumental in collecting the background data on the springs in the Kumaun region. The data collection included gender equality, disability, and social inclusion (GEDSI) focus. The study successfully engaged the entire village community in water conservation and use. This resulted in the training of the local community on spring discharge and rejuvenation. The data collected will help the entire community sustain the springs for the years to come, leading to economic prosperity and wellbeing.",
+          "The project work mainly focuses on community-centric solutions for revitalizing dwindling water springs in the Uttarakhand Himalayas, India. The first objective is to incorporate a gender-specific focus, conducting scientific investigations on mechanical and biological interventions for spring rejuvenation. Another objective involves training local communities in groundwater monitoring and water harvesting. Engaging in focus group discussions and interviews with stakeholders, including villagers and organizations, the project targets achieving gender equity (SDG 5) and increasing water availability (SDG 6). By enhancing water access, it aims to address economic, physical, and mental well-being, contributing to reduced inequalities (SDG 10). Through sustainable spring management, the project promotes responsible consumption (SDG 12), climate action (SDG13), ecological diversity (SDG 14), and finally fostering partnerships between countries (SDG17) for sustainable research and development."
+        ]
+      }
     }
-  ]
+  ],
+  "menuImage": {
+    "image": "/assets/photos/page-waterwise-blog-0.png",
+    "zoom": 100,
+    "positionX": 50,
+    "positionY": 50,
+    "fit": "cover"
+  },
+  "heroImage": {
+    "image": "/assets/photos/page-waterwise-blog-0.png",
+    "zoom": 100,
+    "positionX": 50,
+    "positionY": 45,
+    "fit": "cover"
+  }
 }

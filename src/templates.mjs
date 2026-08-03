@@ -1,852 +1,1053 @@
 /**
- * Every block type the site can render, and the page templates that arrange
- * them. This module is the ONLY place markup is produced — the build and the
- * CMS preview both import it, so a preview cannot drift from the real page.
+ * Page + block renderers.
  *
- * Convention: a renderer takes (document, block, ctx) and returns one node.
- * ctx carries { urlFor, entryUrl, asset, t, people, partners } — everything a
- * block might need to link out or resolve an image.
+ * Every page on the site is rendered from its content/pages/<id>.json by these
+ * functions at build time. The markup they emit is byte-compatible with what
+ * the old hand-authored panels / runtime renderers produced — same classes,
+ * same ids, same attributes — so the existing stylesheet and the migrated
+ * pages' #panel-<id> CSS keep working untouched.
+ *
+ * Translation: any string that was translated under the old system carries its
+ * legacy key in the block's `i18n` map (written by scripts/migrate.mjs); the
+ * renderer re-emits it as data-i18n. Strings without a legacy key get a
+ * generated `page.<slug>.b<n>.<path>` key, which makes them translatable the
+ * moment the translation provider is restored (phase 3) while changing
+ * nothing today.
+ *
+ * Isomorphic rule: take `document`, touch no globals — the same code must run
+ * under linkedom at build time and, if ever needed, in a browser.
  */
 
-/* ── tiny DOM helpers ───────────────────────────────────────────────── */
+/* ---------- generic helpers ---------- */
 
 const el = (document, tag, opts = {}) => {
   const node = document.createElement(tag);
-  if (opts.class) node.setAttribute('class', opts.class);
-  if (opts.text != null) node.textContent = String(opts.text);
-  if (opts.html != null) node.innerHTML = opts.html;
-  for (const [k, v] of Object.entries(opts.attrs || {})) {
-    if (v != null && v !== false) node.setAttribute(k, String(v));
-  }
+  if (opts.class) node.className = opts.class;
+  if (opts.text != null) node.textContent = opts.text;
+  if (opts.key) node.setAttribute('data-i18n', opts.key);
   return node;
 };
 
-/** Newlines in authored copy become real line breaks, not collapsed space. */
+/** Text with \n rendered as <br> (hero title, image labels). */
 const multiline = (document, node, value) => {
-  const parts = String(value ?? '').split('\n');
-  parts.forEach((part, i) => {
-    if (i) node.appendChild(document.createElement('br'));
-    node.appendChild(document.createTextNode(part));
+  node.textContent = '';
+  String(value ?? '').split('\n').forEach((line, i) => {
+    if (i > 0) node.appendChild(document.createElement('br'));
+    node.appendChild(document.createTextNode(line));
   });
   return node;
 };
 
-const clamp = (v, min, max, fallback) => (Number.isFinite(v) ? Math.min(max, Math.max(min, v)) : fallback);
+/* Mirror of layout-model.js (the runtime's MarviLayout) — the maths the CMS
+ * layout controls are defined by. Kept in sync by hand; it is 12 lines. */
+const clamp = (value, min, max, fallback) => {
+  const n = Number(value);
+  return Number.isFinite(n) ? Math.min(max, Math.max(min, n)) : fallback;
+};
+export const photoLayout = (data = {}) => {
+  const zoom = clamp(data.zoom, 50, 200, 100);
+  return {
+    x: clamp(data.positionX, 0, 100, 50),
+    y: clamp(data.positionY, 0, 100, 50),
+    scale: zoom / 100,
+    fit: data.fit && data.fit !== 'auto' ? data.fit : 'cover'
+  };
+};
+export const textLayout = (data = {}) => ({
+  width: clamp(data.textWidth, 30, 100, 100),
+  offsetX: clamp(data.textOffsetX, -30, 30, 0),
+  offsetY: clamp(data.textOffsetY, -30, 30, 0)
+});
 
-/** An <img> for a photo entry, honouring focal point and lazy loading. */
-const photo = (document, entry, { alt = '', lazy = true, className } = {}) => {
-  if (!entry) return null;
-  const src = typeof entry === 'string' ? entry : entry.image;
-  if (!src) return null;
-  const img = el(document, 'img', {
-    class: className,
-    attrs: {
-      src,
-      alt,
-      loading: lazy ? 'lazy' : 'eager',
-      decoding: 'async',
-      ...(entry.width ? { width: entry.width, height: entry.height } : {}),
-    },
-  });
-  const x = clamp(entry.positionX, 0, 100, null);
-  const y = clamp(entry.positionY, 0, 100, null);
-  if (x != null || y != null) img.setAttribute('style', `object-position:${x ?? 50}% ${y ?? 50}%`);
+/** Photo entry ({image, zoom, positionX, positionY, fit, alt}) → <img>. */
+const photo = (document, entry = {}, { alt, lazy = true, className } = {}) => {
+  const img = el(document, 'img', { class: className });
+  if (entry.image) img.src = entry.image;
+  img.alt = alt ?? entry.alt ?? '';
+  if (lazy) img.setAttribute('loading', 'lazy');
+  const layout = photoLayout(entry);
+  if (layout.x !== 50 || layout.y !== 50) img.style.objectPosition = `${layout.x}% ${layout.y}%`;
+  if (layout.scale !== 1) img.style.scale = String(layout.scale);
+  if (entry.fit && entry.fit !== 'auto') img.style.objectFit = layout.fit;
   return img;
 };
 
-/** The datum line: a tick, a label, and a rule running off to the right. */
-const datum = (document, label) => {
-  if (!label) return null;
-  const wrap = el(document, 'div', { class: 'datum' });
-  const text = el(document, 'span', { class: 'datum-label' });
-  // "01 — Research" renders the number in the accent colour.
-  const m = String(label).match(/^(\S+)\s+—\s+(.*)$/);
-  if (m) {
-    text.appendChild(el(document, 'b', { text: m[1] }));
-    text.appendChild(document.createTextNode(' — ' + m[2]));
-  } else {
-    text.textContent = label;
+/** The intro sizing/placement controls, applied to a head root at build time. */
+const applyTextControls = (root, intro = {}) => {
+  const scale = (sel, value) => {
+    const node = root.querySelector(sel);
+    if (node) node.setAttribute('data-cms-text-scale', String(clamp(value, 0, 200, 100)));
+  };
+  scale('.eyebrow', intro.eyebrowSize);
+  scale('h1', intro.titleSize);
+  scale('.lede', intro.ledeSize);
+  if (['left', 'center', 'right'].includes(intro.textAlign)) {
+    root.setAttribute('data-text-align', intro.textAlign);
   }
-  wrap.appendChild(text);
+  if (['top', 'middle', 'bottom'].includes(intro.textPosition)) {
+    root.setAttribute('data-text-position', intro.textPosition);
+  }
+  const layout = textLayout(intro);
+  root.style.setProperty('--cms-text-width', layout.width + '%');
+  root.style.setProperty('--cms-text-offset-x', layout.offsetX + '%');
+  root.style.setProperty('--cms-text-offset-y', layout.offsetY + '%');
+};
+
+/** The page-head cover photo custom properties (mirror of applyHeroLayout). */
+const applyCoverControls = (root, entry = {}) => {
+  if (!entry.image) return;
+  const layout = photoLayout(entry);
+  root.style.setProperty('--cover', `url("${String(entry.image).replaceAll('"', '%22')}")`);
+  root.style.setProperty('--cms-photo-position', `${layout.x}% ${layout.y}%`);
+  root.style.setProperty('--cms-photo-scale', String(layout.scale));
+  root.style.setProperty('--cms-photo-fit', layout.fit);
+};
+
+const ytId = (url) => {
+  const m =
+    String(url || '').match(/[?&]v=([^&]+)/) || String(url || '').match(/youtu\.be\/([^?&]+)/);
+  return m ? m[1] : '';
+};
+
+/* ---------- block renderers ---------- */
+/* Each takes (document, block, ctx) where ctx = { urlFor(pageId), t(path) }.
+ * t(path) resolves the data-i18n key: legacy (block.i18n) or generated. */
+
+const pageLink = (document, ctx, { label, page, primary, key }) => {
+  const a = el(document, 'a', { class: 'button' + (primary ? ' primary' : '') });
+  a.setAttribute('data-open', page);           // i18n slot + old-link compatibility
+  a.setAttribute('href', ctx.urlFor(page));
+  a.textContent = (label || '') + ' ';
+  if (key) a.setAttribute('data-i18n', key);
+  a.appendChild(el(document, 'span', { text: '↗' }));
+  return a;
+};
+
+const proseColumn = (document, col, ctx, side) => {
+  const wrap = el(document, 'div', { class: 'prose' });
+  if (col.logo && col.logo.image) {
+    const logo = el(document, 'img', { class: 'app-logo' });
+    logo.src = col.logo.image;
+    logo.alt = col.logo.alt || '';
+    logo.setAttribute('loading', 'lazy');
+    logo.setAttribute('width', '78');
+    logo.setAttribute('height', '78');
+    wrap.appendChild(logo);
+  }
+  if (col.lead) {
+    wrap.appendChild(el(document, 'p', { class: 'large', text: col.lead, key: ctx.t(`${side}.lead`) }));
+  }
+  (col.paragraphs || []).forEach((text, i) => {
+    wrap.appendChild(el(document, 'p', { text, key: ctx.t(`${side}.paragraphs.${i}`) }));
+  });
+  if (Array.isArray(col.features) && col.features.length) {
+    const list = el(document, 'div', { class: 'feature-list' });
+    col.features.forEach((f, i) => {
+      const item = el(document, 'div', { class: 'feature-item' });
+      item.appendChild(el(document, 'span', { text: f.number || String(i + 1).padStart(2, '0') }));
+      const body = el(document, 'div');
+      body.appendChild(el(document, 'strong', { text: f.title, key: ctx.t(`${side}.features.${i}.title`) }));
+      if (f.text) body.appendChild(el(document, 'small', { text: f.text, key: ctx.t(`${side}.features.${i}.text`) }));
+      item.appendChild(body);
+      list.appendChild(item);
+    });
+    wrap.appendChild(list);
+  }
+  if (Array.isArray(col.actions) && col.actions.length) {
+    const actions = el(document, 'div', { class: 'hero-actions' });
+    col.actions.forEach((a) => actions.appendChild(pageLink(document, ctx, a)));
+    wrap.appendChild(actions);
+  }
   return wrap;
 };
 
-const wrapIn = (document, node, { tight = false } = {}) => {
-  const w = el(document, 'div', { class: tight ? 'wrap-tight' : 'wrap' });
-  w.appendChild(node);
-  return w;
-};
-
-/** A band is one full-width horizontal slab with a tone. */
-const band = (document, block, inner, extraClass = '') => {
-  const tone = block.tone || 'paper';
-  const classes = ['band'];
-  if (block.compact) classes.push('band-tight');
-  if (tone === 'deep') classes.push('is-dark');
-  if (tone === 'ink') classes.push('is-ink');
-  if (tone === 'sand') classes.push('is-sand');
-  if (extraClass) classes.push(extraClass);
-  const section = el(document, 'section', { class: classes.join(' ') });
-  section.appendChild(wrapIn(document, inner, { tight: !!block.tight }));
-  return section;
-};
-
-/** Heading + lede pair used at the top of most blocks. */
-const headOf = (document, block, ctx) => {
-  if (!block.title && !block.lede && !block.label) return null;
-  const head = el(document, 'div', { class: block.lede && block.title ? 'head head-split' : 'head' });
-  const left = el(document, 'div');
-  const d = datum(document, block.label);
-  if (d) left.appendChild(d);
-  if (block.title) {
-    const h = el(document, 'h2', { class: 'display ' + (block.titleSize || 'd-lg') });
-    multiline(document, h, block.title);
-    h.setAttribute('data-i18n', ctx.t('title'));
-    left.appendChild(h);
+const splitColumn = (document, col = {}, ctx, side) => {
+  if (col.kind === 'dataPanel') {
+    const wrap = el(document, 'div', { class: 'image-data-panel reveal' });
+    wrap.appendChild(photo(document, col.photo));
+    const overlay = el(document, 'div', { class: 'image-data-overlay' });
+    overlay.appendChild(el(document, 'strong', { text: col.stat }));
+    overlay.appendChild(el(document, 'span', { text: col.caption, key: ctx.t(`${side}.caption`) }));
+    wrap.appendChild(overlay);
+    return wrap;
   }
-  head.appendChild(left);
-  if (block.lede) {
-    const p = el(document, 'p', { class: 'lede', text: block.lede, attrs: { 'data-i18n': ctx.t('lede') } });
-    head.appendChild(p);
+  if (col.kind === 'image') {
+    const wrap = el(document, 'div', { class: (col.look || 'app-shot') + ' reveal' });
+    wrap.appendChild(photo(document, col.photo));
+    return wrap;
   }
-  return head;
+  return proseColumn(document, col, ctx, side);
 };
-
-const linkAttrs = (href) =>
-  /^https?:/.test(href) ? { href, target: '_blank', rel: 'noopener' } : { href };
-
-const actionRow = (document, actions = [], ctx, className = 'hero-actions') => {
-  if (!actions.length) return null;
-  const row = el(document, 'div', { class: className });
-  actions.forEach((a, i) => {
-    const href = a.page ? ctx.urlFor(a.page) : a.href || '#';
-    const link = el(document, 'a', {
-      class: 'btn ' + (a.primary ? 'btn-primary' : 'btn-ghost'),
-      attrs: { ...linkAttrs(href), ...(a.page ? { 'data-open': a.page } : {}) },
-    });
-    link.appendChild(el(document, 'span', { text: a.label, attrs: { 'data-i18n': ctx.t(`actions.${i}.label`) } }));
-    link.appendChild(el(document, 'span', { class: 'arrow', text: '→' }));
-    row.appendChild(link);
-  });
-  return row;
-};
-
-/** Paragraph run with optional lists, from the `body` array shape. */
-const proseBody = (document, body = [], ctx, keyPrefix = 'body') => {
-  const holder = el(document, 'div', { class: 'prose' });
-  body.forEach((item, i) => {
-    if (typeof item === 'string') {
-      holder.appendChild(el(document, 'p', { text: item, attrs: { 'data-i18n': ctx.t(`${keyPrefix}.${i}`) } }));
-      return;
-    }
-    if (item.kind === 'list' || Array.isArray(item.items)) {
-      const list = el(document, 'ul', { class: 'refs' });
-      (item.items || []).forEach((li, j) => {
-        list.appendChild(el(document, 'li', { text: li, attrs: { 'data-i18n': ctx.t(`${keyPrefix}.${i}.items.${j}`) } }));
-      });
-      holder.appendChild(list);
-      return;
-    }
-    if (item.kind === 'h') {
-      holder.appendChild(el(document, 'h3', {
-        class: 'display d-sm',
-        text: item.text,
-        attrs: { 'data-i18n': ctx.t(`${keyPrefix}.${i}`), style: 'margin:1.5em 0 .55em' },
-      }));
-      return;
-    }
-    holder.appendChild(el(document, 'p', { text: item.text, attrs: { 'data-i18n': ctx.t(`${keyPrefix}.${i}`) } }));
-  });
-  return holder;
-};
-
-/* ── blocks ─────────────────────────────────────────────────────────── */
 
 const BLOCKS = {
-  /** A single large claim. The page's punctuation. */
-  statement(document, block, ctx) {
-    const holder = el(document, 'div', { class: 'statement reveal' });
-    const d = datum(document, block.label);
-    if (d) holder.appendChild(d);
-    const quote = el(document, 'blockquote');
-    multiline(document, quote, block.quote);
-    quote.setAttribute('data-i18n', ctx.t('quote'));
-    holder.appendChild(quote);
-    if (block.cite) {
-      holder.appendChild(el(document, 'cite', { text: block.cite, attrs: { 'data-i18n': ctx.t('cite') } }));
-    }
-    return band(document, block, holder);
+  split(document, block, ctx) {
+    const wrap = el(document, 'div', { class: 'split' });
+    wrap.appendChild(splitColumn(document, block.left, ctx, 'left'));
+    wrap.appendChild(splitColumn(document, block.right, ctx, 'right'));
+    return wrap;
   },
 
-  /** The number strata — scale, stated plainly. */
-  measures(document, block, ctx) {
-    const holder = el(document, 'div');
-    const head = headOf(document, block, ctx);
-    if (head) holder.appendChild(head);
-    const grid = el(document, 'div', { class: 'measures reveal' });
-    (block.items || []).forEach((item, i) => {
-      const cell = el(document, 'div', { class: 'measure' + (item.side ? ' ' + item.side : '') });
-      cell.appendChild(el(document, 'b', { text: item.value }));
-      cell.appendChild(el(document, 'span', { text: item.label, attrs: { 'data-i18n': ctx.t(`items.${i}.label`) } }));
-      grid.appendChild(cell);
-    });
-    holder.appendChild(grid);
-    return band(document, block, holder);
-  },
-
-  /** Heading, lede and running copy. */
-  prose(document, block, ctx) {
-    const holder = el(document, 'div', { class: 'reveal' });
-    const head = headOf(document, block, ctx);
-    if (head) holder.appendChild(head);
-    holder.appendChild(proseBody(document, block.body, ctx));
-    return band(document, block, holder);
-  },
-
-  /** Two columns: a short left rail of copy against a longer right column. */
-  cols(document, block, ctx) {
-    const holder = el(document, 'div', { class: 'reveal' });
-    const head = headOf(document, block, ctx);
-    if (head) holder.appendChild(head);
-    const grid = el(document, 'div', { class: 'cols' + (block.side ? ' cols-side' : '') });
-    (block.columns || []).forEach((col, i) => {
-      const cell = el(document, 'div');
-      if (col.label) cell.appendChild(datum(document, col.label));
-      if (col.title) {
-        const h = el(document, 'h3', { class: 'display d-md', text: col.title, attrs: { 'data-i18n': ctx.t(`columns.${i}.title`), style: 'margin-bottom:.6em' } });
-        cell.appendChild(h);
-      }
-      cell.appendChild(proseBody(document, col.body, ctx, `columns.${i}.body`));
-      grid.appendChild(cell);
-    });
-    holder.appendChild(grid);
-    return band(document, block, holder);
-  },
-
-  /** Generic card grid — numbered, optionally linked. */
   cards(document, block, ctx) {
-    const holder = el(document, 'div');
-    const head = headOf(document, block, ctx);
-    if (head) holder.appendChild(head);
-    const cols = block.columns === 2 ? 'grid-2' : block.columns === 4 ? 'grid-4' : 'grid-3';
-    const grid = el(document, 'div', { class: `grid ${cols} reveal` });
+    const grid = el(document, 'div', { class: 'grid-3' });
     (block.items || []).forEach((item, i) => {
-      const href = item.page ? ctx.urlFor(item.page) : item.href;
-      const card = el(document, href ? 'a' : 'article', {
-        class: 'card',
-        attrs: href ? { ...linkAttrs(href), ...(item.page ? { 'data-open': item.page } : {}) } : {},
-      });
-      card.appendChild(el(document, 'span', { class: 'card-num', text: item.number || String(i + 1).padStart(2, '0') }));
-      card.appendChild(el(document, 'h3', { text: item.title, attrs: { 'data-i18n': ctx.t(`items.${i}.title`) } }));
-      if (item.text) card.appendChild(el(document, 'p', { text: item.text, attrs: { 'data-i18n': ctx.t(`items.${i}.text`) } }));
-      if (href) {
-        const go = el(document, 'span', { class: 'card-go' });
-        go.appendChild(el(document, 'span', { text: item.cta || 'Read more', attrs: { 'data-i18n': ctx.t(`items.${i}.cta`) } }));
-        go.appendChild(el(document, 'span', { class: 'arrow', text: '→' }));
-        card.appendChild(go);
-      }
+      const card = el(document, 'article', { class: 'project-card' });
+      card.appendChild(el(document, 'span', { class: 'card-number', text: item.number || String(i + 1).padStart(2, '0') }));
+      card.appendChild(el(document, 'h3', { text: item.title, key: ctx.t(`items.${i}.title`) }));
+      if (item.text) card.appendChild(el(document, 'p', { text: item.text, key: ctx.t(`items.${i}.text`) }));
       grid.appendChild(card);
     });
-    holder.appendChild(grid);
-    return band(document, block, holder);
+    return grid;
   },
 
-  /** Photo-led programme cards — the four pillars of the centre. */
-  programmes(document, block, ctx) {
-    const holder = el(document, 'div');
-    const head = headOf(document, block, ctx);
-    if (head) holder.appendChild(head);
-    const grid = el(document, 'div', { class: 'grid grid-2 reveal' });
+  imagePair(document, block, ctx) {
+    const wrap = el(document, 'div', {
+      class: block.look === 'screens' ? 'app-screen-strip' : 'editorial-images'
+    });
     (block.items || []).forEach((item, i) => {
-      const href = item.page ? ctx.urlFor(item.page) : item.href;
-      const card = el(document, href ? 'a' : 'article', {
-        class: 'prog',
-        attrs: href ? { ...linkAttrs(href), ...(item.page ? { 'data-open': item.page } : {}) } : {},
+      const figure = el(document, 'figure', {
+        class: block.look === 'screens' ? undefined : 'editorial-image'
       });
-      const img = photo(document, item.photo, { alt: item.alt || '' });
-      if (img) card.appendChild(img);
-      card.appendChild(el(document, 'span', { class: 'card-num', text: item.number || String(i + 1).padStart(2, '0') }));
-      card.appendChild(el(document, 'h3', { text: item.title, attrs: { 'data-i18n': ctx.t(`items.${i}.title`) } }));
-      if (item.text) card.appendChild(el(document, 'p', { text: item.text, attrs: { 'data-i18n': ctx.t(`items.${i}.text`) } }));
-      if (href) {
-        const go = el(document, 'span', { class: 'card-go' });
-        go.appendChild(el(document, 'span', { text: item.cta || 'Explore', attrs: { 'data-i18n': ctx.t(`items.${i}.cta`) } }));
-        go.appendChild(el(document, 'span', { class: 'arrow', text: '→' }));
-        card.appendChild(go);
+      figure.appendChild(photo(document, item.photo));
+      if (item.caption) {
+        figure.appendChild(
+          el(document, 'figcaption', { class: 'image-note', text: item.caption, key: ctx.t(`items.${i}.caption`) })
+        );
       }
+      wrap.appendChild(figure);
+    });
+    return wrap;
+  },
+
+  photoRibbon(document, block) {
+    const wrap = el(document, 'div', { class: 'photo-ribbon' });
+    (block.items || []).forEach((item) => {
+      const figure = el(document, 'figure');
+      figure.appendChild(photo(document, item.photo));
+      wrap.appendChild(figure);
+    });
+    return wrap;
+  },
+
+  banner(document, block, ctx) {
+    const wrap = el(document, 'div', { class: 'dark-block' });
+    if (block.eyebrow) {
+      const eyebrow = el(document, 'p', { class: 'eyebrow', text: block.eyebrow, key: ctx.t('eyebrow') });
+      if (block.accent) eyebrow.style.color = block.accent;
+      wrap.appendChild(eyebrow);
+    }
+    wrap.appendChild(el(document, 'h2', { text: block.title, key: ctx.t('title') }));
+    if (block.lede) wrap.appendChild(el(document, 'p', { class: 'lede', text: block.lede, key: ctx.t('lede') }));
+    return wrap;
+  },
+
+  statement(document, block, ctx) {
+    const wrap = el(document, 'div', { class: 'home-statement' });
+    const grid = el(document, 'div', { class: 'statement-grid' });
+    grid.appendChild(el(document, 'p', { class: 'meta', text: block.label, key: ctx.t('label') }));
+    grid.appendChild(el(document, 'blockquote', { text: block.quote, key: ctx.t('quote') }));
+    wrap.appendChild(grid);
+    const row = el(document, 'div', { class: 'metric-row' });
+    (block.metrics || []).forEach((m, i) => {
+      const metric = el(document, 'div', { class: 'metric' });
+      metric.appendChild(el(document, 'strong', { text: m.value }));
+      metric.appendChild(el(document, 'span', { text: m.label, key: ctx.t(`metrics.${i}.label`) }));
+      row.appendChild(metric);
+    });
+    wrap.appendChild(row);
+    return wrap;
+  },
+
+  storyCards(document, block, ctx) {
+    const section = el(document, 'section', { class: 'home-explore' });
+    section.setAttribute('aria-labelledby', 'explore-title');
+    const head = el(document, 'header', { class: 'explore-head' });
+    const headText = el(document, 'div');
+    headText.appendChild(el(document, 'p', { class: 'eyebrow', text: block.eyebrow, key: ctx.t('eyebrow') }));
+    const h2 = el(document, 'h2', { text: block.title, key: ctx.t('title') });
+    h2.id = 'explore-title';
+    headText.appendChild(h2);
+    head.appendChild(headText);
+    head.appendChild(el(document, 'p', { text: block.lede, key: ctx.t('lede') }));
+    section.appendChild(head);
+    const grid = el(document, 'div', { class: 'story-grid' });
+    (block.items || []).forEach((item, i) => {
+      const card = el(document, 'a', { class: 'story-card' });
+      card.setAttribute('data-open', item.page);
+      card.setAttribute('href', ctx.urlFor(item.page));
+      card.appendChild(photo(document, item.photo));
+      const copy = el(document, 'span', { class: 'story-copy' });
+      copy.appendChild(el(document, 'span', { class: 'meta', text: item.label, key: ctx.t(`items.${i}.label`) }));
+      copy.appendChild(el(document, 'strong', { text: item.title, key: ctx.t(`items.${i}.title`) }));
+      const arrow = el(document, 'i', { text: '↗' });
+      arrow.setAttribute('aria-hidden', 'true');
+      copy.appendChild(arrow);
+      card.appendChild(copy);
       grid.appendChild(card);
     });
-    holder.appendChild(grid);
-    return band(document, block, holder);
+    section.appendChild(grid);
+    return section;
+  },
+
+  steps(document, block, ctx) {
+    const wrap = el(document, 'div', { class: 'process' });
+    (block.items || []).forEach((item, i) => {
+      const step = el(document, 'div', { class: 'process-step' });
+      step.appendChild(el(document, 'h3', { text: item.title, key: ctx.t(`items.${i}.title`) }));
+      if (item.text) step.appendChild(el(document, 'p', { text: item.text, key: ctx.t(`items.${i}.text`) }));
+      wrap.appendChild(step);
+    });
+    return wrap;
+  },
+
+  framedShot(document, block) {
+    const frame = el(document, 'div', { class: 'game-frame' });
+    const dots = el(document, 'div', { class: 'game-dots' });
+    for (let i = 0; i < 3; i++) dots.appendChild(el(document, 'span'));
+    frame.appendChild(dots);
+    frame.appendChild(photo(document, block.photo, { lazy: false }));
+    return frame;
+  },
+
+  mediaStories(document, block) {
+    const frag = el(document, 'div', { class: 'media-stories-wrap' });
+    const bar = el(document, 'div', { class: 'filter-bar' });
+    const n = (block.items || []).length;
+    const count = el(document, 'span', { class: 'filter-label', text: `${n} selected ${n === 1 ? 'story' : 'stories'}` });
+    count.id = 'media-count';
+    bar.appendChild(count);
+    const search = el(document, 'input', { class: 'search' });
+    search.id = 'media-search';
+    search.setAttribute('type', 'search');
+    search.setAttribute('placeholder', 'Search stories or publishers…');
+    search.setAttribute('aria-label', 'Search media stories');
+    bar.appendChild(search);
+    frag.appendChild(bar);
+
+    const grid = el(document, 'div', { class: 'media-grid' });
+    grid.id = 'media-grid';
+    (block.items || []).forEach((item) => {
+      const a = el(document, 'a', { class: 'media-card' });
+      a.href = item.url || '#';
+      a.setAttribute('target', '_blank');
+      a.setAttribute('rel', 'noopener');
+      a.setAttribute(
+        'data-search',
+        [item.meta, item.title, item.description].filter(Boolean).join(' ').toLowerCase()
+      );
+      a.appendChild(el(document, 'span', { class: 'meta', text: item.meta }));
+      a.appendChild(el(document, 'h3', { text: item.title }));
+      if (item.description) a.appendChild(el(document, 'p', { text: item.description }));
+      a.appendChild(el(document, 'span', { class: 'read', text: 'Read story ↗' }));
+      grid.appendChild(a);
+    });
+    frag.appendChild(grid);
+    return frag;
+  },
+
+  filmGrid(document, block) {
+    const grid = el(document, 'div', { class: 'video-grid' });
+    (block.items || []).forEach((item) => {
+      const a = el(document, 'a', { class: 'video-card' });
+      a.href = item.url || '#';
+      a.setAttribute('target', '_blank');
+      a.setAttribute('rel', 'noopener');
+      const wrap = el(document, 'div', { class: 'video-image' });
+      const id = ytId(item.url);
+      const img = el(document, 'img');
+      img.setAttribute('loading', 'lazy');
+      if (id) img.src = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+      img.alt = item.title ? item.title + ' video thumbnail' : '';
+      const play = el(document, 'span', { class: 'play' });
+      play.setAttribute('aria-hidden', 'true');
+      wrap.append(img, play);
+      a.appendChild(wrap);
+      a.appendChild(el(document, 'span', { class: 'meta', text: item.meta }));
+      a.appendChild(el(document, 'h3', { text: item.title }));
+      grid.appendChild(a);
+    });
+    return grid;
+  },
+
+  photoArchive(document, block) {
+    const frag = el(document, 'div', { class: 'photo-archive-wrap' });
+    const items = block.items || [];
+    const tools = el(document, 'div', { class: 'archive-tools' });
+    const count = el(document, 'span', {
+      class: 'filter-label',
+      text: `${items.length} archived ${items.length === 1 ? 'image' : 'images'}`
+    });
+    count.id = 'gallery-count';
+    tools.appendChild(count);
+    const filters = el(document, 'div', { class: 'archive-filters' });
+    filters.id = 'archive-filters';
+    filters.setAttribute('aria-label', 'Filter the image archive');
+    ['All', ...new Set(items.map((i) => i.category).filter(Boolean))].forEach((category) => {
+      const filter = el(document, 'button', { class: 'archive-filter', text: category });
+      filter.setAttribute('type', 'button');
+      filter.setAttribute('aria-pressed', String(category === 'All'));
+      filters.appendChild(filter);
+    });
+    tools.appendChild(filters);
+    frag.appendChild(tools);
+
+    const grid = el(document, 'div', { class: 'gallery-grid' });
+    grid.id = 'gallery-grid';
+    grid.setAttribute('aria-live', 'polite');
+    items.forEach((item, index) => {
+      const button = el(document, 'button', { class: 'gallery-item' });
+      button.setAttribute('type', 'button');
+      button.setAttribute('data-category', item.category || '');
+      button.setAttribute('data-index', String(index));
+      button.setAttribute('data-title', item.title || '');
+      button.setAttribute('aria-label', 'Open ' + (item.title || 'image'));
+      const img = photo(document, item, { alt: item.title || '' });
+      img.setAttribute('decoding', 'async');
+      button.appendChild(img);
+      button.appendChild(el(document, 'span', { text: item.category }));
+      grid.appendChild(button);
+    });
+    frag.appendChild(grid);
+    return frag;
+  },
+
+  publicationList(document, block) {
+    const frag = el(document, 'div', { class: 'publications-wrap' });
+    const items = block.items || [];
+    const tools = el(document, 'div', { class: 'archive-tools' });
+    const count = el(document, 'span', {
+      class: 'filter-label',
+      text: `${items.length} ${items.length === 1 ? 'publication' : 'publications'}`
+    });
+    count.id = 'publication-count';
+    tools.appendChild(count);
+    const filters = el(document, 'div', { class: 'archive-filters' });
+    filters.id = 'publication-filters';
+    filters.setAttribute('aria-label', 'Filter publications by kind');
+    ['All', ...new Set(items.map((i) => i.kind).filter(Boolean))].forEach((kind) => {
+      const filter = el(document, 'button', { class: 'archive-filter', text: kind });
+      filter.setAttribute('type', 'button');
+      filter.setAttribute('aria-pressed', String(kind === 'All'));
+      filters.appendChild(filter);
+    });
+    tools.appendChild(filters);
+    frag.appendChild(tools);
+
+    const grid = el(document, 'div', { class: 'pub-grid' });
+    grid.id = 'publication-grid';
+    items.forEach((item) => {
+      const card = el(document, 'article', { class: 'pub-card' });
+      if (item.kind) card.setAttribute('data-kind', item.kind);
+      card.appendChild(el(document, 'span', { class: 'meta', text: item.meta }));
+      card.appendChild(el(document, 'h3', { text: item.title }));
+      if (item.description) card.appendChild(el(document, 'p', { text: item.description }));
+      const links = el(document, 'span', { class: 'pub-links' });
+      (item.editions || []).forEach((edition) => {
+        if (!edition || !edition.url) return;
+        const link = el(document, 'a', { text: (edition.label || 'Download') + ' ↗' });
+        link.href = edition.url;
+        link.setAttribute('target', '_blank');
+        link.setAttribute('rel', 'noopener');
+        link.setAttribute('aria-label', [item.title, edition.label].filter(Boolean).join(' — '));
+        links.appendChild(link);
+      });
+      if (links.childNodes.length) card.appendChild(links);
+      grid.appendChild(card);
+    });
+    frag.appendChild(grid);
+    return frag;
+  },
+
+  toolList(document, block, ctx) {
+    const grid = el(document, 'div', { class: 'tool-grid' });
+    grid.id = 'tool-grid';
+    (block.items || []).forEach((item) => {
+      const card = el(document, 'article', { class: 'tool-card reveal' });
+      const shot = el(document, 'div', { class: 'tool-shot' });
+      shot.appendChild(photo(document, item.photo || {}, { alt: item.name ? item.name + ' screenshot' : '' }));
+      card.appendChild(shot);
+      const copy = el(document, 'div', { class: 'tool-copy' });
+      copy.appendChild(el(document, 'span', { class: 'meta', text: item.meta }));
+      copy.appendChild(el(document, 'h3', { text: item.name }));
+      if (item.description) copy.appendChild(el(document, 'p', { text: item.description }));
+      // An external URL wins; otherwise link to the target page.
+      const action = el(document, 'a', { class: 'button primary' });
+      action.textContent = (item.linkLabel || 'Open') + ' ';
+      if (item.url) {
+        action.href = item.url;
+        action.setAttribute('target', '_blank');
+        action.setAttribute('rel', 'noopener');
+      } else {
+        action.setAttribute('data-open', item.target || 'home');
+        action.href = ctx.urlFor(item.target || 'home');
+      }
+      action.appendChild(el(document, 'span', { text: '↗' }));
+      copy.appendChild(action);
+      card.appendChild(copy);
+      grid.appendChild(card);
+    });
+    return grid;
+  },
+
+  partnerList(document, block) {
+    const grid = el(document, 'div', { class: 'people-grid' });
+    (block.items || []).forEach((item) => {
+      const card = el(document, 'article', { class: 'people-card' });
+      card.appendChild(el(document, 'span', { class: 'meta', text: item.meta }));
+      const h3 = el(document, 'h3');
+      if (item.url) {
+        const a = el(document, 'a', { text: (item.name || '') + ' ↗' });
+        a.href = item.url;
+        a.setAttribute('target', '_blank');
+        a.setAttribute('rel', 'noopener');
+        h3.appendChild(a);
+      } else {
+        h3.textContent = item.name || '';
+      }
+      card.appendChild(h3);
+      grid.appendChild(card);
+    });
+    return grid;
+  },
+
+  portraitBand(document, block) {
+    const band = el(document, 'div', { class: 'portrait-band' });
+    (block.items || []).forEach((item) => {
+      if (!item || !item.image) return;
+      const card = el(document, item.url ? 'a' : 'article', { class: 'portrait-card' });
+      if (item.url) {
+        card.href = item.url;
+        card.setAttribute('target', '_blank');
+        card.setAttribute('rel', 'noopener');
+      }
+      const details = [item.name, item.title, item.affiliation].filter(Boolean).join(', ');
+      card.setAttribute('aria-label', details + (item.url ? ' — open profile' : ''));
+      card.appendChild(
+        photo(document, item, { alt: item.name ? 'Portrait of ' + item.name : 'MARVI team member portrait' })
+      );
+      const info = el(document, 'span', { class: 'portrait-card-info' });
+      info.appendChild(el(document, 'strong', { text: item.name || 'MARVI team member' }));
+      if (item.title) info.appendChild(el(document, 'span', { text: item.title }));
+      if (item.affiliation) info.appendChild(el(document, 'small', { text: item.affiliation }));
+      card.appendChild(info);
+      band.appendChild(card);
+    });
+    return band;
+  },
+
+  sourceNote(document, block) {
+    const p = el(document, 'p');
+    if (block.style) p.setAttribute('style', block.style);
+    (block.parts || []).forEach((part) => {
+      if (part.link) {
+        const a = el(document, 'a', { text: part.link.label });
+        a.href = part.link.url || '#';
+        if (part.link.download) a.setAttribute('download', '');
+        if (part.link.external) {
+          a.setAttribute('target', '_blank');
+          a.setAttribute('rel', 'noopener');
+        }
+        p.appendChild(a);
+      } else {
+        p.appendChild(document.createTextNode(part.text || ''));
+      }
+    });
+    return p;
+  },
+
+  video(document, block) {
+    return BLOCKS.filmGrid(document, { items: [block] });
+  },
+
+  embed(document, block) {
+    if (!/^https?:\/\/\S+$/i.test(String(block.url || ''))) return null;
+    const wrap = el(document, 'section', { class: 'cms-block cms-block-embed' });
+    const frame = el(document, 'iframe');
+    frame.src = block.url;
+    frame.setAttribute('loading', 'lazy');
+    frame.setAttribute('title', block.title || 'Embedded content');
+    frame.setAttribute('allowfullscreen', '');
+    frame.setAttribute('style', 'width:100%;aspect-ratio:16/9;border:0;border-radius:12px');
+    wrap.appendChild(frame);
+    return wrap;
+  },
+
+  /* --- the CMS "flexible section" types, markup-identical to the old
+   *     renderFlexibleSections so their existing CSS applies --- */
+
+  text(document, block) {
+    const section = el(document, 'section', { class: 'cms-block cms-block-text' });
+    cmsCopy(document, section, block);
+    return section;
+  },
+
+  imageText(document, block) {
+    const section = el(document, 'section', { class: 'cms-block cms-block-imageText' });
+    section.setAttribute('data-photo-side', block.photoSide || 'left');
+    cmsPhoto(document, section, block.photo || {});
+    cmsCopy(document, section, block);
+    return section;
+  },
+
+  gallery(document, block) {
+    const section = el(document, 'section', { class: 'cms-block cms-block-gallery' });
+    if (block.heading) section.appendChild(el(document, 'h2', { text: block.heading }));
+    const gallery = el(document, 'div', { class: 'cms-block-gallery' });
+    (block.photos || []).forEach((entry) => {
+      const figure = el(document, 'figure');
+      figure.appendChild(photo(document, entry, { alt: '' }));
+      gallery.appendChild(figure);
+    });
+    section.appendChild(gallery);
+    return section;
+  },
+
+  callout(document, block) {
+    const section = el(document, 'section', { class: 'cms-block cms-block-callout' });
+    section.setAttribute('data-tone', block.tone || 'blue');
+    if (block.heading) section.appendChild(el(document, 'h2', { text: block.heading }));
+    cmsParagraphs(document, section, block.body);
+    return section;
+  },
+
+  button(document, block) {
+    const section = el(document, 'section', { class: 'cms-block cms-block-button' });
+    if (block.heading) section.appendChild(el(document, 'h2', { text: block.heading }));
+    const link = el(document, 'a', { class: 'button primary', text: (block.label || 'Learn more') + ' ↗' });
+    link.href = block.url || '#';
+    section.appendChild(link);
+    return section;
   },
 
   /**
-   * The researcher directory. Filter chips are rendered as real buttons and
-   * every card is a real link, so the page works with JavaScript disabled —
-   * the chips simply do nothing until app.mjs wires them up.
+   * The whole researcher collection as a portrait band, each tile linking to
+   * that person's own page. MARVI authors its eight people inline in the
+   * block; AIWC has 108 as records, so this reads them from ctx instead —
+   * same markup, same CSS, different source.
    */
-  peopleGrid(document, block, ctx) {
-    const holder = el(document, 'div');
-    const head = headOf(document, block, ctx);
-    if (head) holder.appendChild(head);
-
+  portraitDirectory(document, block, ctx) {
+    const wrap = el(document, 'div');
     const people = ctx.people || [];
-    const groups = new Map();
-    for (const p of people) {
-      if (!p.institute) continue;
-      groups.set(p.institute, (groups.get(p.institute) || 0) + 1);
+
+    if (block.filters !== false) {
+      const bar = el(document, 'div', { class: 'filter-bar' });
+      bar.setAttribute('data-people-filters', '');
+      const chip = (label, value, count, pressed) => {
+        const b = el(document, 'button', { class: 'filter-chip' });
+        b.setAttribute('type', 'button');
+        b.setAttribute('data-filter', value);
+        b.setAttribute('aria-pressed', pressed ? 'true' : 'false');
+        b.appendChild(el(document, 'span', { text: label }));
+        if (count != null) b.appendChild(el(document, 'span', { class: 'filter-n', text: String(count) }));
+        return b;
+      };
+      bar.appendChild(chip('All', 'all', people.length, true));
+      bar.appendChild(chip('Australia', 'country:Australia', people.filter((p) => p.country === 'Australia').length));
+      bar.appendChild(chip('India', 'country:India', people.filter((p) => p.country === 'India').length));
+
+      const field = el(document, 'div', { class: 'filter-field' });
+      const input = el(document, 'input');
+      input.setAttribute('type', 'search');
+      input.setAttribute('placeholder', 'Search name, role or interest');
+      input.setAttribute('aria-label', 'Search researchers');
+      input.setAttribute('data-people-search', '');
+      field.appendChild(input);
+
+      // 27 institutions is too many for chips without the filter bar
+      // outweighing the directory, so institution is a select.
+      const groups = new Map();
+      people.forEach((p) => {
+        if (p.institute) groups.set(p.institute, (groups.get(p.institute) || 0) + 1);
+      });
+      const select = el(document, 'select');
+      select.setAttribute('aria-label', 'Filter by institution');
+      select.setAttribute('data-people-inst', '');
+      const all = el(document, 'option', { text: `All institutions (${groups.size})` });
+      all.value = '';
+      select.appendChild(all);
+      [...groups.entries()]
+        .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+        .forEach(([name, count]) => {
+          const option = el(document, 'option', { text: `${name} (${count})` });
+          option.value = name;
+          select.appendChild(option);
+        });
+      field.appendChild(select);
+      bar.appendChild(field);
+      wrap.appendChild(bar);
+
+      const count = el(document, 'p', {
+        class: 'filter-label meta',
+        text: `Showing all ${people.length} researchers`,
+      });
+      count.setAttribute('data-people-count', '');
+      wrap.appendChild(count);
     }
 
-    // Twenty-seven institutions is too many to show as chips without the
-    // filter bar out-weighing the directory itself, so country stays as
-    // chips (the choice most people make) and institution moves to a select.
-    const bar = el(document, 'div', { class: 'directory-bar', attrs: { 'data-people-filters': '' } });
-
-    const chips = el(document, 'div', { class: 'filters', attrs: { style: 'margin:0' } });
-    const chip = (label, value, count, pressed) => {
-      const b = el(document, 'button', {
-        class: 'chip',
-        attrs: { type: 'button', 'data-filter': value, 'aria-pressed': pressed ? 'true' : 'false' },
-      });
-      b.appendChild(el(document, 'span', { text: label }));
-      if (count != null) b.appendChild(el(document, 'span', { class: 'n', text: count }));
-      return b;
-    };
-    chips.appendChild(chip('All', 'all', people.length, true));
-    chips.appendChild(chip('Australia', 'country:Australia', people.filter((p) => p.country === 'Australia').length));
-    chips.appendChild(chip('India', 'country:India', people.filter((p) => p.country === 'India').length));
-    bar.appendChild(chips);
-
-    const controls = el(document, 'div', { class: 'directory-controls' });
-
-    const search = el(document, 'div', { class: 'field' });
-    search.appendChild(el(document, 'label', { class: 'sr-only', text: 'Search researchers', attrs: { for: 'people-search' } }));
-    search.appendChild(el(document, 'input', {
-      attrs: { id: 'people-search', type: 'search', placeholder: 'Search name, role or interest…', 'data-people-search': '', autocomplete: 'off' },
-    }));
-    controls.appendChild(search);
-
-    const instField = el(document, 'div', { class: 'field' });
-    instField.appendChild(el(document, 'label', { class: 'sr-only', text: 'Filter by institution', attrs: { for: 'people-inst' } }));
-    const select = el(document, 'select', { attrs: { id: 'people-inst', 'data-people-inst': '' } });
-    select.appendChild(el(document, 'option', { text: `All institutions (${groups.size})`, attrs: { value: '' } }));
-    [...groups.entries()]
-      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
-      .forEach(([name, count]) => select.appendChild(el(document, 'option', { text: `${name} (${count})`, attrs: { value: name } })));
-    instField.appendChild(select);
-    controls.appendChild(instField);
-
-    bar.appendChild(controls);
-    holder.appendChild(bar);
-    holder.appendChild(el(document, 'p', { class: 'directory-count', attrs: { 'data-people-count': '' }, text: `Showing all ${people.length} researchers` }));
-
-    const grid = el(document, 'div', { class: 'people-grid', attrs: { 'data-people-grid': '' } });
-    for (const p of people) {
-      const card = el(document, 'a', {
-        class: 'person',
-        attrs: {
-          href: ctx.entryUrl('people', p.slug),
-          'data-country': p.country,
-          'data-inst': p.institute,
-          // One lower-cased haystack so the search is a single substring
-          // test per card rather than four field comparisons.
-          'data-search': [p.name, p.designation, p.institute, p.interests].filter(Boolean).join(' ').toLowerCase(),
-        },
-      });
-      const shot = el(document, 'div', { class: 'person-shot' });
-      const img = photo(document, p.photo, { alt: p.name });
-      if (img) shot.appendChild(img);
-      shot.appendChild(el(document, 'span', { class: 'person-flag ' + (p.country === 'Australia' ? 'au' : 'in') }));
-      card.appendChild(shot);
-      const body = el(document, 'div', { class: 'person-body' });
-      body.appendChild(el(document, 'span', { class: 'person-name', text: p.name }));
-      if (p.designation) body.appendChild(el(document, 'span', { class: 'person-role', text: p.designation }));
-      if (p.institute) body.appendChild(el(document, 'span', { class: 'person-inst', text: p.institute }));
-      card.appendChild(body);
-      grid.appendChild(card);
-    }
-    holder.appendChild(grid);
-
-    const empty = el(document, 'p', {
-      class: 'lede',
-      text: 'No researchers match that filter.',
-      attrs: { 'data-people-empty': '', hidden: '', style: 'margin-top:26px' },
+    const band = el(document, 'div', { class: 'portrait-band' });
+    band.setAttribute('data-people-grid', '');
+    people.forEach((person) => {
+      const card = el(document, 'a', { class: 'portrait-card' });
+      card.href = ctx.entryUrl ? ctx.entryUrl('people', person.slug) : '#';
+      card.setAttribute('data-country', person.country || '');
+      card.setAttribute('data-inst', person.institute || '');
+      card.setAttribute(
+        'data-search',
+        [person.name, person.designation, person.institute, person.interests].filter(Boolean).join(' ').toLowerCase()
+      );
+      card.setAttribute('aria-label', [person.name, person.designation, person.institute].filter(Boolean).join(', '));
+      const img = photo(document, person.photo || {}, { alt: 'Portrait of ' + person.name });
+      if (img) card.appendChild(img);
+      const info = el(document, 'span', { class: 'portrait-card-info' });
+      info.appendChild(el(document, 'strong', { text: person.name }));
+      if (person.designation) info.appendChild(el(document, 'span', { text: person.designation }));
+      if (person.institute) info.appendChild(el(document, 'small', { text: person.institute }));
+      card.appendChild(info);
+      band.appendChild(card);
     });
-    holder.appendChild(empty);
-    return band(document, block, holder);
+    wrap.appendChild(band);
+
+    const empty = el(document, 'p', { class: 'prose', text: 'No researchers match that filter.' });
+    empty.setAttribute('data-people-empty', '');
+    empty.setAttribute('hidden', '');
+    wrap.appendChild(empty);
+    return wrap;
   },
 
-  /** Partner logos as a dense wall — scale at a glance. */
-  logoWall(document, block, ctx) {
-    const holder = el(document, 'div');
-    const head = headOf(document, block, ctx);
-    if (head) holder.appendChild(head);
-    const wall = el(document, 'div', { class: 'logo-wall reveal' });
+  /** The partner collection, in MARVI's people-card grid. */
+  partnerDirectory(document, block, ctx) {
+    const grid = el(document, 'div', { class: 'people-grid' });
     const list = block.country
       ? (ctx.partners || []).filter((p) => p.country === block.country)
       : ctx.partners || [];
-    for (const p of list) {
-      const cell = el(document, 'a', { class: 'logo-cell', attrs: { href: ctx.entryUrl('partners', p.slug), title: p.name } });
-      const img = photo(document, p.logo, { alt: p.name });
-      if (img) cell.appendChild(img);
-      else cell.appendChild(el(document, 'span', { class: 'mono', text: p.short || p.name }));
-      wall.appendChild(cell);
-    }
-    holder.appendChild(wall);
-    return band(document, block, holder);
-  },
-
-  /** Partner list with logo, name and the first line of their description. */
-  partnerRows(document, block, ctx) {
-    const holder = el(document, 'div');
-    const head = headOf(document, block, ctx);
-    if (head) holder.appendChild(head);
-    const list = block.country
-      ? (ctx.partners || []).filter((p) => p.country === block.country)
-      : ctx.partners || [];
-    const rows = el(document, 'div', { class: 'reveal' });
-    for (const p of list) {
-      const row = el(document, 'a', { class: 'partner-row', attrs: { href: ctx.entryUrl('partners', p.slug) } });
-      const logo = el(document, 'div', { class: 'partner-logo' });
-      const img = photo(document, p.logo, { alt: '' });
-      if (img) logo.appendChild(img);
-      row.appendChild(logo);
-      const body = el(document, 'div');
-      body.appendChild(el(document, 'h3', { text: p.name }));
-      if (p.summary) body.appendChild(el(document, 'p', { text: p.summary }));
-      row.appendChild(body);
-      rows.appendChild(row);
-    }
-    holder.appendChild(rows);
-    return band(document, block, holder);
-  },
-
-  /** Dated milestones. */
-  timeline(document, block, ctx) {
-    const holder = el(document, 'div');
-    const head = headOf(document, block, ctx);
-    if (head) holder.appendChild(head);
-    const list = el(document, 'div', { class: 'timeline reveal' });
-    (block.items || []).forEach((item, i) => {
-      const cell = el(document, 'div', { class: 'tl-item' });
-      cell.appendChild(el(document, 'span', { class: 'tl-year', text: item.year }));
-      cell.appendChild(el(document, 'h3', { text: item.title, attrs: { 'data-i18n': ctx.t(`items.${i}.title`) } }));
-      if (item.text) cell.appendChild(el(document, 'p', { text: item.text, attrs: { 'data-i18n': ctx.t(`items.${i}.text`) } }));
-      list.appendChild(cell);
-    });
-    holder.appendChild(list);
-    return band(document, block, holder);
-  },
-
-  /** Numbered reference list — journal articles, conference papers, books. */
-  pubList(document, block, ctx) {
-    const holder = el(document, 'div');
-    const head = headOf(document, block, ctx);
-    if (head) holder.appendChild(head);
-    const list = el(document, 'div', { class: 'pub-list reveal' });
-    (block.items || []).forEach((item, i) => {
-      const row = el(document, 'div', { class: 'pub' });
-      row.appendChild(el(document, 'span', { class: 'pub-n', text: String(i + 1).padStart(3, '0') }));
-      const body = el(document, 'div');
-      const text = typeof item === 'string' ? item : item.text;
-      const href = typeof item === 'object' ? item.href : null;
-      body.appendChild(document.createTextNode(text));
-      if (href) {
-        body.appendChild(document.createTextNode(' '));
-        body.appendChild(el(document, 'a', { text: href.replace(/^https?:\/\//, ''), attrs: linkAttrs(href) }));
-      }
-      row.appendChild(body);
-      list.appendChild(row);
-    });
-    holder.appendChild(list);
-    return band(document, block, holder);
-  },
-
-  /** Full-bleed photograph carrying a heading. A breath between chapters. */
-  frame(document, block, ctx) {
-    const section = el(document, 'section', { class: 'frame' });
-    const img = photo(document, block.photo, { alt: block.alt || '', lazy: false });
-    if (img) section.appendChild(img);
-    const inner = el(document, 'div');
-    const d = datum(document, block.label);
-    if (d) {
-      d.setAttribute('style', 'color:rgba(255,255,255,.72)');
-      inner.appendChild(d);
-    }
-    if (block.title) {
-      const h = el(document, 'h2', { class: 'display ' + (block.titleSize || 'd-lg'), attrs: { 'data-i18n': ctx.t('title') } });
-      multiline(document, h, block.title);
-      inner.appendChild(h);
-    }
-    if (block.lede) {
-      inner.appendChild(el(document, 'p', {
-        class: 'lede',
-        text: block.lede,
-        attrs: { 'data-i18n': ctx.t('lede'), style: 'margin-top:18px;color:rgba(255,255,255,.82)' },
-      }));
-    }
-    const actions = actionRow(document, block.actions, ctx);
-    if (actions) inner.appendChild(actions);
-    section.appendChild(wrapIn(document, inner));
-    return section;
-  },
-
-  /** A strip of square photographs. */
-  ribbon(document, block, ctx) {
-    const strip = el(document, 'div', { class: 'ribbon' });
-    (block.items || []).forEach((item) => {
-      const fig = el(document, 'div', { class: 'shot' });
-      const img = photo(document, item, { alt: item.alt || '' });
-      if (img) fig.appendChild(img);
-      strip.appendChild(fig);
-    });
-    const section = el(document, 'section', { class: 'band band-tight' + (block.tone === 'deep' ? ' is-dark' : '') });
-    section.appendChild(strip);
-    return section;
-  },
-
-  /** Two captioned photographs side by side. */
-  shotPair(document, block, ctx) {
-    const holder = el(document, 'div');
-    const head = headOf(document, block, ctx);
-    if (head) holder.appendChild(head);
-    const pair = el(document, 'div', { class: 'shot-pair reveal' });
-    (block.items || []).forEach((item, i) => {
-      const fig = el(document, 'figure');
-      const shot = el(document, 'div', { class: 'shot ' + (item.ratio || 'ratio-wide') });
-      const img = photo(document, item, { alt: item.alt || '' });
-      if (img) shot.appendChild(img);
-      fig.appendChild(shot);
-      if (item.caption) {
-        fig.appendChild(el(document, 'figcaption', { text: item.caption, attrs: { 'data-i18n': ctx.t(`items.${i}.caption`) } }));
-      }
-      pair.appendChild(fig);
-    });
-    holder.appendChild(pair);
-    return band(document, block, holder);
-  },
-
-  /** A call to act, in a coloured slab. */
-  callout(document, block, ctx) {
-    const box = el(document, 'div', { class: 'callout reveal' + (block.accent ? ' tone-' + block.accent : '') });
-    const d = datum(document, block.label);
-    if (d) box.appendChild(d);
-    if (block.title) box.appendChild(el(document, 'h3', { text: block.title, attrs: { 'data-i18n': ctx.t('title') } }));
-    if (block.text) box.appendChild(el(document, 'p', { text: block.text, attrs: { 'data-i18n': ctx.t('text') } }));
-    const actions = actionRow(document, block.actions, ctx, 'callout-actions');
-    if (actions) box.appendChild(actions);
-    return band(document, block, box);
-  },
-
-  /** Australia / India contact panels. */
-  contactCards(document, block, ctx) {
-    const holder = el(document, 'div');
-    const head = headOf(document, block, ctx);
-    if (head) holder.appendChild(head);
-    const grid = el(document, 'div', { class: 'grid grid-2 reveal' });
-    (block.items || []).forEach((group, gi) => {
-      const card = el(document, 'div', { class: 'contact-card ' + (group.country === 'Australia' ? 'au' : 'in') });
-      card.appendChild(el(document, 'span', { class: 'flagline' }));
-      card.appendChild(el(document, 'h3', { text: group.country }));
-      if (group.address) {
-        card.appendChild(el(document, 'p', {
-          class: 'person-role',
-          text: group.address,
-          attrs: { style: 'margin-top:8px' },
-        }));
-      }
-      (group.people || []).forEach((person, pi) => {
-        const line = el(document, 'div', { class: 'person-line' });
-        line.appendChild(el(document, 'b', { text: person.name }));
-        if (person.role) {
-          line.appendChild(el(document, 'span', { text: person.role, attrs: { 'data-i18n': ctx.t(`items.${gi}.people.${pi}.role`) } }));
-        }
-        if (person.email) {
-          line.appendChild(el(document, 'a', { text: person.email, attrs: { href: 'mailto:' + person.email } }));
-        }
-        card.appendChild(line);
-      });
+    list.forEach((partner) => {
+      const card = el(document, 'a', { class: 'people-card' });
+      card.href = ctx.entryUrl ? ctx.entryUrl('partners', partner.slug) : '#';
+      card.appendChild(el(document, 'span', { class: 'meta', text: partner.country }));
+      card.appendChild(el(document, 'h3', { text: partner.name }));
+      if (partner.summary) card.appendChild(el(document, 'p', { text: partner.summary }));
       grid.appendChild(card);
     });
-    holder.appendChild(grid);
-    return band(document, block, holder);
+    return grid;
   },
 
-  /** A list of outbound links — videos, flyers, registration forms. */
-  linkList(document, block, ctx) {
-    const holder = el(document, 'div');
-    const head = headOf(document, block, ctx);
-    if (head) holder.appendChild(head);
-    const list = el(document, 'div', { class: 'reveal' });
-    (block.items || []).forEach((item, i) => {
-      const row = el(document, 'a', { class: 'partner-row', attrs: linkAttrs(item.href) });
-      row.setAttribute('style', 'grid-template-columns:52px minmax(0,1fr)');
-      row.appendChild(el(document, 'span', { class: 'pub-n', text: String(i + 1).padStart(2, '0') }));
-      const body = el(document, 'div');
-      body.appendChild(el(document, 'h3', { text: item.title, attrs: { 'data-i18n': ctx.t(`items.${i}.title`) } }));
-      if (item.text) body.appendChild(el(document, 'p', { text: item.text, attrs: { 'data-i18n': ctx.t(`items.${i}.text`) } }));
-      row.appendChild(body);
-      list.appendChild(row);
-    });
-    holder.appendChild(list);
-    return band(document, block, holder);
-  },
+};
+
+const cmsParagraphs = (document, root, value) => {
+  String(value || '').split(/\n\s*\n/).filter(Boolean).forEach((paragraph) => {
+    root.appendChild(el(document, 'p', { text: paragraph.trim() }));
+  });
+};
+const cmsCopy = (document, section, block) => {
+  const copy = el(document, 'div', { class: 'cms-block-copy' });
+  copy.setAttribute('data-align', block.align || 'left');
+  if (block.eyebrow) copy.appendChild(el(document, 'p', { class: 'eyebrow', text: block.eyebrow }));
+  if (block.heading) copy.appendChild(el(document, 'h2', { text: block.heading }));
+  cmsParagraphs(document, copy, block.body);
+  section.appendChild(copy);
+};
+const cmsPhoto = (document, section, entry) => {
+  const frame = el(document, 'div', { class: 'cms-block-photo' });
+  frame.appendChild(photo(document, entry, { alt: '' }));
+  section.appendChild(frame);
 };
 
 export const BLOCK_TYPES = Object.keys(BLOCKS);
 
-/* ── page templates ─────────────────────────────────────────────────── */
+/* The "flexible section" types render appended after the section body inside
+ * a .cms-sections wrapper — that is where their CSS expects them. */
+const FLEX_TYPES = new Set(['text', 'imageText', 'gallery', 'callout', 'button', 'embed']);
 
-/** The hero, used only by the home page. */
-const homeHero = (document, page, ctx) => {
-  const hero = el(document, 'header', { class: 'hero' });
-  const art = photo(document, page.heroImage, { alt: page.heroAlt || '', lazy: false });
-  if (art) {
-    const holder = el(document, 'div', { class: 'hero-art' });
-    holder.appendChild(art);
-    hero.appendChild(holder);
-    hero.appendChild(el(document, 'div', { class: 'hero-veil' }));
-  }
+/* ---------- page renderers ---------- */
 
-  // Two flow fields meeting on a shared datum — the whole thesis, in SVG.
-  // Australian streams arrive from above, Indian from below; they converge on
-  // one line across the middle and leave together. Each is drawn twice: a
-  // steady line, and a `pulse` copy that carries a travelling highlight.
-  const auPath = (i) =>
-    `M-40 ${118 + i * 40}C240 ${118 + i * 40} 320 ${332 + i * 7} 600 ${348 + i * 3.5}` +
-    `S980 ${366 + i * 7} 1240 ${366 + i * 7}`;
-  const inPath = (i) =>
-    `M-40 ${628 - i * 40}C240 ${628 - i * 40} 320 ${372 - i * 7} 600 ${356 - i * 3.5}` +
-    `S980 ${338 - i * 7} 1240 ${338 - i * 7}`;
-
-  const streams = [0, 1, 2, 3, 4, 5];
-  hero.appendChild(el(document, 'div', {
-    class: 'confluence',
-    attrs: { 'aria-hidden': 'true' },
-    html:
-      '<svg viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" width="100%" height="100%">' +
-      streams.map((i) => `<path class="flow-au" d="${auPath(i)}" opacity="${(0.34 - i * 0.04).toFixed(2)}"/>`).join('') +
-      streams.map((i) => `<path class="flow-in" d="${inPath(i)}" opacity="${(0.34 - i * 0.04).toFixed(2)}"/>`).join('') +
-      streams.slice(0, 4).map((i) =>
-        `<path class="flow-au pulse" d="${auPath(i)}" opacity="${(0.6 - i * 0.1).toFixed(2)}" style="animation-delay:${(i * 1.7).toFixed(1)}s"/>`
-      ).join('') +
-      streams.slice(0, 4).map((i) =>
-        `<path class="flow-in pulse" d="${inPath(i)}" opacity="${(0.6 - i * 0.1).toFixed(2)}" style="animation-delay:${(i * 1.7 + 0.9).toFixed(1)}s"/>`
-      ).join('') +
-      '</svg>',
+const standardHead = (document, page, { index, total }) => {
+  const head = el(document, 'header', { class: 'page-head' });
+  head.appendChild(el(document, 'span', {
+    class: 'section-index',
+    text: String(index).padStart(2, '0') + ' / ' + String(total).padStart(2, '0')
   }));
-
   const inner = el(document, 'div');
   const intro = page.intro || {};
-  if (intro.eyebrow) {
-    inner.appendChild(el(document, 'p', { class: 'eyebrow hero-eyebrow', text: intro.eyebrow, attrs: { 'data-i18n': 'home.eyebrow' } }));
-  }
-  const h1 = el(document, 'h1', { class: 'display d-xl', attrs: { 'data-i18n': 'home.title' } });
-  multiline(document, h1, intro.title || '');
-  inner.appendChild(h1);
-  if (intro.lede) {
-    inner.appendChild(el(document, 'p', { class: 'lede', text: intro.lede, attrs: { 'data-i18n': 'home.lede' } }));
-  }
-  const actions = actionRow(document, page.actions, ctx);
-  if (actions) inner.appendChild(actions);
-  hero.appendChild(wrapIn(document, inner));
-  return hero;
-};
-
-/** The masthead for every page that is not the home page. */
-const standardHead = (document, page, ctx) => {
-  const head = el(document, 'header', { class: 'page-head' + (page.heroImage?.image ? ' has-art' : '') });
-  const art = photo(document, page.heroImage, { alt: '', lazy: false });
-  if (art) head.appendChild(art);
-  const inner = el(document, 'div');
-  const intro = page.intro || {};
-  const index = el(document, 'p', { class: 'eyebrow index' });
-  index.appendChild(el(document, 'span', { text: intro.eyebrow || page.menuName, attrs: { 'data-i18n': `${page.slug}.eyebrow` } }));
-  inner.appendChild(index);
-  const h1 = el(document, 'h1', { class: 'display d-lg', attrs: { 'data-i18n': `${page.slug}.title` } });
-  multiline(document, h1, intro.title || page.menuName);
-  inner.appendChild(h1);
-  if (intro.lede) {
-    inner.appendChild(el(document, 'p', { class: 'lede', text: intro.lede, attrs: { 'data-i18n': `${page.slug}.lede` } }));
-  }
-  const actions = actionRow(document, page.actions, ctx);
-  if (actions) inner.appendChild(actions);
-  head.appendChild(wrapIn(document, inner));
+  if (intro.eyebrow != null) inner.appendChild(el(document, 'p', { class: 'eyebrow', text: intro.eyebrow }));
+  inner.appendChild(el(document, 'h1', { text: intro.title || page.menuName }));
+  if (intro.lede != null) inner.appendChild(el(document, 'p', { class: 'lede', text: intro.lede }));
+  head.appendChild(inner);
+  applyTextControls(head, intro);
+  applyCoverControls(head, page.heroImage);
   return head;
 };
 
-/** Render one page (its head plus every block) into a <section>. */
+const homeHero = (document, page, ctx) => {
+  const hero = page.hero || {};
+  const intro = page.intro || {};
+  const t = (path) => hero.i18n?.[path];
+
+  const wrap = el(document, 'div', { class: 'home-hero' });
+  const copy = el(document, 'div', { class: 'hero-copy' });
+  const inner = el(document, 'div', { class: 'hero-copy-inner' });
+  inner.appendChild(el(document, 'p', { class: 'eyebrow', text: intro.eyebrow }));
+  inner.appendChild(multiline(document, el(document, 'h1'), intro.title));
+  inner.appendChild(el(document, 'p', { class: 'lede', text: intro.lede }));
+  const actions = el(document, 'div', { class: 'hero-actions' });
+  (hero.actions || []).forEach((a) => actions.appendChild(pageLink(document, ctx, a)));
+  inner.appendChild(actions);
+  copy.appendChild(inner);
+  applyTextControls(copy, intro);
+  wrap.appendChild(copy);
+
+  const stage = el(document, 'div', { class: 'hero-image-stage' });
+  if (hero.stageAlt) stage.setAttribute('aria-label', hero.stageAlt);
+  stage.appendChild(photo(document, page.heroImage || {}, { alt: hero.imageAlt || '', lazy: false, className: 'hero-image-main' }));
+  if (hero.label) {
+    stage.appendChild(multiline(document, el(document, 'div', { class: 'hero-image-label', key: t('label') }), hero.label));
+  }
+  const index = el(document, 'div', { class: 'hero-image-index', text: '↓' });
+  index.setAttribute('aria-hidden', 'true');
+  stage.appendChild(index);
+  if (hero.caption) {
+    stage.appendChild(multiline(document, el(document, 'div', { class: 'hero-image-caption', key: t('caption') }), hero.caption));
+  }
+  wrap.appendChild(stage);
+  return wrap;
+};
+
+/**
+ * Render one page into a <section class="panel"> element.
+ * ctx: { index, total, urlFor(pageId) }
+ */
 export function renderPage(document, page, ctx) {
-  const section = el(document, 'section', {
-    class: 'panel',
-    attrs: { id: 'panel-' + page.slug, 'data-panel': page.slug },
+  const section = el(document, 'section', { class: 'panel' });
+  section.id = 'panel-' + page.slug;
+  section.setAttribute('data-panel', page.slug);
+  section.setAttribute('role', 'tabpanel');
+  section.setAttribute('tabindex', '0');
+
+  // Collection data and entryUrl are forwarded so the directory blocks can
+  // reach the researcher and partner records; everything else is MARVI's
+  // original per-block context.
+  const blockCtx = (block, i) => ({
+    urlFor: ctx.urlFor,
+    entryUrl: ctx.entryUrl,
+    people: ctx.people,
+    partners: ctx.partners,
+    t: (path) => block.i18n?.[path] || `page.${page.slug}.b${i}.${path}`
   });
 
-  section.appendChild(page.template === 'home' ? homeHero(document, page, ctx) : standardHead(document, page, ctx));
-
+  const core = [];
+  const flex = [];
   (page.blocks || []).forEach((block, i) => {
-    const render = BLOCKS[block.type];
+    const render = BLOCKS[block?.type];
     if (!render) return;
-    const scoped = {
-      ...ctx,
-      t: (key) => (block.i18n && block.i18n[key]) || `${page.slug}.b${i}.${key}`,
-    };
-    section.appendChild(render(document, block, scoped));
+    const node = render(document, block, blockCtx(block, i));
+    if (!node) return;
+    (FLEX_TYPES.has(block.type) ? flex : core).push(node);
   });
 
+  if (page.template === 'home') {
+    section.appendChild(homeHero(document, page, ctx));
+    core.forEach((n) => section.appendChild(n));
+    if (flex.length) section.appendChild(flexWrap(document, flex));
+    return section;
+  }
+
+  const wrap = el(document, 'div', { class: 'content-wrap' });
+  wrap.appendChild(standardHead(document, page, ctx));
+  const body = el(document, 'div', { class: 'section-body' });
+  core.forEach((n) => body.appendChild(n));
+  wrap.appendChild(body);
+  if (flex.length) wrap.appendChild(flexWrap(document, flex));
+  section.appendChild(wrap);
   return section;
 }
 
-/* ── collection detail pages ────────────────────────────────────────── */
+const flexWrap = (document, nodes) => {
+  const wrap = el(document, 'div', { class: 'cms-sections' });
+  nodes.forEach((n) => wrap.appendChild(n));
+  return wrap;
+};
 
-/** One researcher: portrait, contact rail, biography, projects, publications. */
-export function renderPerson(document, person, ctx) {
-  const section = el(document, 'section', {
-    class: 'panel',
-    attrs: { id: 'panel-person', 'data-panel': 'people/' + person.slug },
+/* ---------- collection detail pages ---------- */
+
+/**
+ * AIWC has content MARVI does not: 108 researchers and 33 partner
+ * institutions, each with enough substance to deserve its own address.
+ * These render at /people/<slug>/ and /partners/<slug>/ using the same
+ * classes as the authored pages, so they inherit the stylesheet rather than
+ * introducing a second visual language.
+ */
+
+const backLink = (document, label, href) => {
+  const p = el(document, 'p', { class: 'eyebrow' });
+  const a = el(document, 'a', { text: '← ' + label });
+  a.href = href;
+  p.appendChild(a);
+  return p;
+};
+
+/** A labelled fact list — institution, qualification, contact, profiles. */
+const factList = (document, rows) => {
+  const dl = el(document, 'dl', { class: 'fact-list' });
+  rows.filter(([, value]) => value).forEach(([label, value, href]) => {
+    const wrap = el(document, 'div');
+    wrap.appendChild(el(document, 'dt', { class: 'meta', text: label }));
+    const dd = el(document, 'dd');
+    if (href) {
+      const a = el(document, 'a', { text: value });
+      a.href = href;
+      if (/^https?:/.test(href)) {
+        a.setAttribute('target', '_blank');
+        a.setAttribute('rel', 'noopener');
+      }
+      dd.appendChild(a);
+    } else {
+      dd.textContent = value;
+    }
+    wrap.appendChild(dd);
+    dl.appendChild(wrap);
   });
+  return dl;
+};
+
+const trim = (url, max = 44) =>
+  url.replace(/^https?:\/\/(www\.)?/, '').slice(0, max) + (url.length > max + 12 ? '…' : '');
+
+/** One researcher. */
+export function renderPerson(document, person, ctx) {
+  const section = el(document, 'section', { class: 'panel' });
+  section.id = 'panel-person';
+  section.setAttribute('data-panel', 'people/' + person.slug);
+
+  const wrap = el(document, 'div', { class: 'content-wrap' });
 
   const head = el(document, 'header', { class: 'page-head' });
   const inner = el(document, 'div');
-  const back = el(document, 'p', { class: 'eyebrow index' });
-  back.appendChild(el(document, 'a', { text: '← ' + (person.country === 'Australia' ? 'Our people in Australia' : 'Our people in India'), attrs: { href: ctx.urlFor('people') } }));
-  inner.appendChild(back);
-  inner.appendChild(el(document, 'h1', { class: 'display d-lg', text: person.name }));
-  if (person.designation) {
-    inner.appendChild(el(document, 'p', { class: 'lede', text: [person.designation, person.institute].filter(Boolean).join(' · ') }));
-  }
-  head.appendChild(wrapIn(document, inner));
-  section.appendChild(head);
+  inner.appendChild(backLink(
+    document,
+    person.country === 'Australia' ? 'Our people in Australia' : 'Our people in India',
+    ctx.urlFor('people')
+  ));
+  inner.appendChild(el(document, 'h1', { text: person.name }));
+  const sub = [person.designation, person.institute].filter(Boolean).join(' · ');
+  if (sub) inner.appendChild(el(document, 'p', { class: 'lede', text: sub }));
+  head.appendChild(inner);
+  wrap.appendChild(head);
 
-  const body = el(document, 'div', { class: 'band' });
-  const grid = el(document, 'div', { class: 'profile' });
+  const body = el(document, 'div', { class: 'section-body' });
+  const grid = el(document, 'div', { class: 'split profile-split' });
 
-  /* left rail: portrait + facts */
-  const aside = el(document, 'div');
-  const shot = el(document, 'div', { class: 'profile-shot' });
-  const img = photo(document, person.photo, { alt: person.name, lazy: false });
+  /* left: portrait + facts */
+  const aside = el(document, 'div', { class: 'split-col' });
+  const shot = el(document, 'figure', { class: 'profile-portrait' });
+  const img = photo(document, person.photo || {}, { alt: 'Portrait of ' + person.name, lazy: false });
   if (img) shot.appendChild(img);
   aside.appendChild(shot);
-
-  const facts = el(document, 'dl', { class: 'profile-meta' });
-  const fact = (label, value, href) => {
-    if (!value) return;
-    const row = el(document, 'div');
-    row.appendChild(el(document, 'dt', { text: label }));
-    const dd = el(document, 'dd');
-    if (href) dd.appendChild(el(document, 'a', { text: value, attrs: linkAttrs(href) }));
-    else dd.textContent = value;
-    row.appendChild(dd);
-    facts.appendChild(row);
-  };
-  fact('Institution', person.institute);
-  fact('Country', person.country);
-  fact('Qualification', person.qualification);
-  fact('Email', person.email, person.email ? 'mailto:' + person.email : null);
-  fact('Staff page', person.homepage ? person.homepage.replace(/^https?:\/\//, '').slice(0, 46) + (person.homepage.length > 54 ? '…' : '') : null, person.homepage);
-  (person.profiles || []).forEach((url) => {
-    const kind = /scholar/.test(url) ? 'Google Scholar' : /orcid/.test(url) ? 'ORCID' : /researchgate/.test(url) ? 'ResearchGate' : 'Research profile';
-    fact(kind, url.replace(/^https?:\/\/(www\.)?/, '').slice(0, 40) + (url.length > 48 ? '…' : ''), url);
-  });
-  aside.appendChild(facts);
+  aside.appendChild(factList(document, [
+    ['Institution', person.institute],
+    ['Country', person.country],
+    ['Qualification', person.qualification],
+    ['Email', person.email, person.email ? 'mailto:' + person.email : null],
+    ['Staff page', person.homepage ? trim(person.homepage) : null, person.homepage],
+    ...(person.profiles || []).map((url) => [
+      /scholar/.test(url) ? 'Google Scholar' : /orcid/.test(url) ? 'ORCID'
+        : /researchgate/.test(url) ? 'ResearchGate' : 'Research profile',
+      trim(url),
+      url,
+    ]),
+  ]));
   grid.appendChild(aside);
 
-  /* right column: interests, bio, then each authored section */
-  const main = el(document, 'div');
+  /* right: interests, biography, then each authored section */
+  const main = el(document, 'div', { class: 'split-col' });
+  const prose = el(document, 'div', { class: 'prose' });
   if (person.interests) {
-    main.appendChild(datum(document, 'Areas of interest'));
-    main.appendChild(el(document, 'p', { class: 'lede', text: person.interests, attrs: { style: 'margin-bottom:2.2em' } }));
+    prose.appendChild(el(document, 'h2', { text: 'Areas of interest' }));
+    prose.appendChild(el(document, 'p', { class: 'large', text: person.interests }));
   }
   if (person.bio?.length) {
-    main.appendChild(datum(document, 'Biography'));
-    const prose = el(document, 'div', { class: 'prose', attrs: { style: 'margin-bottom:2.2em' } });
+    prose.appendChild(el(document, 'h2', { text: 'Biography' }));
     person.bio.forEach((p) => prose.appendChild(el(document, 'p', { text: p })));
-    main.appendChild(prose);
   }
+  main.appendChild(prose);
+
   (person.sections || []).forEach((sec) => {
-    main.appendChild(datum(document, sec.title));
-    const list = el(document, 'ul', { class: 'refs', attrs: { style: 'margin-bottom:2.2em' } });
-    sec.items.forEach((item) => list.appendChild(el(document, 'li', { text: item })));
+    const list = el(document, 'div', { class: 'pub-list' });
+    list.appendChild(el(document, 'h2', { text: sec.title }));
+    sec.items.forEach((item) => {
+      const card = el(document, 'article', { class: 'pub-card' });
+      card.appendChild(el(document, 'p', { text: item }));
+      list.appendChild(card);
+    });
     main.appendChild(list);
   });
   grid.appendChild(main);
 
-  body.appendChild(wrapIn(document, grid));
-  section.appendChild(body);
+  body.appendChild(grid);
+  wrap.appendChild(body);
+  section.appendChild(wrap);
   return section;
 }
 
-/** One partner institution: logo, description, projects. */
+/** One partner institution, with the researchers based there. */
 export function renderPartner(document, partner, ctx) {
-  const section = el(document, 'section', {
-    class: 'panel',
-    attrs: { id: 'panel-partner', 'data-panel': 'partners/' + partner.slug },
-  });
+  const section = el(document, 'section', { class: 'panel' });
+  section.id = 'panel-partner';
+  section.setAttribute('data-panel', 'partners/' + partner.slug);
+
+  const wrap = el(document, 'div', { class: 'content-wrap' });
 
   const head = el(document, 'header', { class: 'page-head' });
   const inner = el(document, 'div');
-  const back = el(document, 'p', { class: 'eyebrow index' });
-  back.appendChild(el(document, 'a', { text: '← All partners', attrs: { href: ctx.urlFor('partners') } }));
-  inner.appendChild(back);
-  inner.appendChild(el(document, 'h1', { class: 'display d-lg', text: partner.name }));
+  inner.appendChild(backLink(document, 'All partners', ctx.urlFor('partners')));
+  inner.appendChild(el(document, 'h1', { text: partner.name }));
   inner.appendChild(el(document, 'p', { class: 'lede', text: partner.country + ' · Partner institution' }));
-  head.appendChild(wrapIn(document, inner));
-  section.appendChild(head);
+  head.appendChild(inner);
+  wrap.appendChild(head);
 
-  const body = el(document, 'div', { class: 'band' });
-  const grid = el(document, 'div', { class: 'profile' });
+  const body = el(document, 'div', { class: 'section-body' });
 
-  const aside = el(document, 'div');
-  const logo = el(document, 'div', { class: 'partner-logo', attrs: { style: 'aspect-ratio:3/2;padding:20px' } });
-  const img = photo(document, partner.logo, { alt: partner.name, lazy: false });
+  const top = el(document, 'div', { class: 'split' });
+  const aside = el(document, 'div', { class: 'split-col' });
+  const logo = el(document, 'figure', { class: 'partner-logo' });
+  const img = photo(document, partner.logo || {}, { alt: partner.name, lazy: false });
   if (img) logo.appendChild(img);
   aside.appendChild(logo);
+  top.appendChild(aside);
 
-  const people = (ctx.people || []).filter((p) => p.institute === partner.name);
-  if (people.length) {
-    const facts = el(document, 'dl', { class: 'profile-meta' });
-    const row = el(document, 'div');
-    row.appendChild(el(document, 'dt', { text: 'Researchers' }));
-    const dd = el(document, 'dd');
-    dd.appendChild(el(document, 'a', { text: `${people.length} at this institution →`, attrs: { href: ctx.urlFor('people') + '#' + partner.slug } }));
-    row.appendChild(dd);
-    facts.appendChild(row);
-    aside.appendChild(facts);
-  }
-  grid.appendChild(aside);
-
-  const main = el(document, 'div');
-  if (partner.body?.length) {
-    const prose = el(document, 'div', { class: 'prose', attrs: { style: 'margin-bottom:2.2em' } });
-    partner.body.forEach((p) => prose.appendChild(el(document, 'p', { text: p })));
-    main.appendChild(prose);
-  }
+  const main = el(document, 'div', { class: 'split-col' });
+  const prose = el(document, 'div', { class: 'prose' });
+  (partner.body || []).forEach((p) => prose.appendChild(el(document, 'p', { text: p })));
+  main.appendChild(prose);
   (partner.sections || []).forEach((sec) => {
-    main.appendChild(datum(document, sec.title));
-    const list = el(document, 'ul', { class: 'refs', attrs: { style: 'margin-bottom:2.2em' } });
-    sec.items.forEach((item) => list.appendChild(el(document, 'li', { text: item })));
+    const list = el(document, 'div', { class: 'pub-list' });
+    list.appendChild(el(document, 'h2', { text: sec.title }));
+    sec.items.forEach((item) => {
+      const card = el(document, 'article', { class: 'pub-card' });
+      card.appendChild(el(document, 'p', { text: item }));
+      list.appendChild(card);
+    });
     main.appendChild(list);
   });
-  if (people.length) {
-    main.appendChild(datum(document, 'People at ' + partner.name));
-    const wall = el(document, 'div', { class: 'people-grid' });
-    for (const p of people) {
-      const card = el(document, 'a', { class: 'person', attrs: { href: ctx.entryUrl('people', p.slug) } });
-      const shot = el(document, 'div', { class: 'person-shot' });
-      const pi = photo(document, p.photo, { alt: p.name });
-      if (pi) shot.appendChild(pi);
-      card.appendChild(shot);
-      const pb = el(document, 'div', { class: 'person-body' });
-      pb.appendChild(el(document, 'span', { class: 'person-name', text: p.name }));
-      if (p.designation) pb.appendChild(el(document, 'span', { class: 'person-role', text: p.designation }));
-      card.appendChild(pb);
-      wall.appendChild(card);
-    }
-    main.appendChild(wall);
-  }
-  grid.appendChild(main);
+  top.appendChild(main);
+  body.appendChild(top);
 
-  body.appendChild(wrapIn(document, grid));
-  section.appendChild(body);
+  const here = (ctx.people || []).filter((p) => p.institute === partner.instituteName);
+  if (here.length) {
+    body.appendChild(el(document, 'h2', { text: 'Researchers at ' + partner.name }));
+    const band = el(document, 'div', { class: 'portrait-band' });
+    here.forEach((person) => {
+      const card = el(document, 'a', { class: 'portrait-card' });
+      card.href = ctx.entryUrl('people', person.slug);
+      const pi = photo(document, person.photo || {}, { alt: 'Portrait of ' + person.name });
+      if (pi) card.appendChild(pi);
+      const info = el(document, 'span', { class: 'portrait-card-info' });
+      info.appendChild(el(document, 'strong', { text: person.name }));
+      if (person.designation) info.appendChild(el(document, 'span', { text: person.designation }));
+      card.appendChild(info);
+      band.appendChild(card);
+    });
+    body.appendChild(band);
+  }
+
+  wrap.appendChild(body);
+  section.appendChild(wrap);
   return section;
 }

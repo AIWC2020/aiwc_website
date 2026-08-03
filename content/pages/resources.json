@@ -7,50 +7,87 @@
   "intro": {
     "eyebrow": "Resources",
     "title": "Dams for Life",
-    "lede": "Managing their safety and risks for sustainable water futures — a seminar series on dam safety and rehabilitation in India, and what Australia’s experience can contribute."
+    "lede": "Managing their safety and risks for sustainable water futures — a seminar series on dam safety and rehabilitation in India, and what Australia’s experience can contribute.",
+    "eyebrowSize": 100,
+    "titleSize": 70,
+    "ledeSize": 100,
+    "textAlign": "left",
+    "textPosition": "bottom",
+    "textWidth": 100,
+    "textOffsetX": 0,
+    "textOffsetY": 0
   },
   "blocks": [
     {
-      "type": "prose",
-      "tone": "paper",
-      "label": "Background",
-      "body": [
-        "Dams have been a crucial component of India’s water resource management and development for centuries. They serve multiple purposes, including irrigation, hydroelectric power generation, flood control, and water storage. However,as these dams age and the population grows, the need to ensure their safety and rehabilitation becomes increasingly paramount. Australia can share valuable lessons for India’s dam safety and rehabilitation efforts due to its experience in managing dams and mitigating associated risks, particularly in implementing Comprehensive Dam Safety Legislation, Risk Assessment and Monitoring, Emergency Preparedness and Response, Asset Management and Maintenance and Public Awareness and Communication.",
-        "India’s vast network of dams faces a dual challenge: ensuring their structural integrity to prevent catastrophic failures and addressing the evolving demands of water resource management. This necessitates comprehensive efforts in dam safety and rehabilitation, both to protect lives and property and to optimise the dams’ contributions to the nation’s socio-economic development.",
-        "This seminar sets the stage for a deeper exploration of the challenges, initiatives, and strategies related to dam safety and rehabilitation in India. It is a critical subject that intertwines engineering, environmental, social, and policy considerations, impacting the country’s sustainable development and the well-being of its citizens."
-      ]
+      "type": "banner",
+      "eyebrow": "Background",
+      "title": "",
+      "lede": ""
     },
     {
-      "type": "linkList",
-      "tone": "sand",
-      "label": "Webinar series",
+      "type": "split",
+      "left": {
+        "kind": "prose",
+        "paragraphs": [
+          "Dams have been a crucial component of India’s water resource management and development for centuries. They serve multiple purposes, including irrigation, hydroelectric power generation, flood control, and water storage. However,as these dams age and the population grows, the need to ensure their safety and rehabilitation becomes increasingly paramount. Australia can share valuable lessons for India’s dam safety and rehabilitation efforts due to its experience in managing dams and mitigating associated risks, particularly in implementing Comprehensive Dam Safety Legislation, Risk Assessment and Monitoring, Emergency Preparedness and Response, Asset Management and Maintenance and Public Awareness and Communication.",
+          "India’s vast network of dams faces a dual challenge: ensuring their structural integrity to prevent catastrophic failures and addressing the evolving demands of water resource management. This necessitates comprehensive efforts in dam safety and rehabilitation, both to protect lives and property and to optimise the dams’ contributions to the nation’s socio-economic development."
+        ]
+      },
+      "right": {
+        "kind": "prose",
+        "paragraphs": [
+          "This seminar sets the stage for a deeper exploration of the challenges, initiatives, and strategies related to dam safety and rehabilitation in India. It is a critical subject that intertwines engineering, environmental, social, and policy considerations, impacting the country’s sustainable development and the well-being of its citizens."
+        ]
+      }
+    },
+    {
+      "type": "banner",
+      "eyebrow": "Webinar series",
       "title": "Recorded sessions",
+      "lede": ""
+    },
+    {
+      "type": "toolList",
       "items": [
         {
-          "title": "Webinar 1: Operating and Managing Dams",
-          "text": "Introduction by Professor Basant Maheshwari and Dr Joop Stoutjesdijk, with Mr Manoj Kumar, Mr Madhava and WaterNSW.",
-          "href": "https://www.youtube.com/@australiaindiawatercentre-9628"
+          "name": "Webinar 1: Operating and Managing Dams",
+          "description": "Introduction by Professor Basant Maheshwari and Dr Joop Stoutjesdijk, with Mr Manoj Kumar, Mr Madhava and WaterNSW.",
+          "url": "https://www.youtube.com/@australiaindiawatercentre-9628",
+          "linkLabel": "Open",
+          "target": "_blank"
         },
         {
-          "title": "Webinar 2: Managing Flood Risks, Gender Equality, Diversity and Social Inclusion (GEDSI)",
-          "text": "Introduction by the World Bank and Professor Basant Maheshwari (WSU), with the Chief Inspector of NSW State Emergency Service, Dr Suzette Mitchell, Dr Rani and Ms Sani.",
-          "href": "https://www.youtube.com/@australiaindiawatercentre-9628"
+          "name": "Webinar 2: Managing Flood Risks, Gender Equality, Diversity and Social Inclusion (GEDSI)",
+          "description": "Introduction by the World Bank and Professor Basant Maheshwari (WSU), with the Chief Inspector of NSW State Emergency Service, Dr Suzette Mitchell, Dr Rani and Ms Sani.",
+          "url": "https://www.youtube.com/@australiaindiawatercentre-9628",
+          "linkLabel": "Open",
+          "target": "_blank"
         }
       ]
     },
     {
       "type": "callout",
-      "tone": "paper",
-      "accent": "ochre",
-      "title": "Every session is on the AIWC channel.",
-      "text": "Recordings of the webinar series, WATER TALKS and the technical exchange workshops.",
-      "actions": [
-        {
-          "label": "Subscribe on YouTube",
-          "href": "https://www.youtube.com/@australiaindiawatercentre-9628",
-          "primary": true
-        }
-      ]
+      "heading": "Every session is on the AIWC channel.",
+      "body": "Recordings of the webinar series, WATER TALKS and the technical exchange workshops."
+    },
+    {
+      "type": "button",
+      "label": "Subscribe on YouTube",
+      "url": "https://www.youtube.com/@australiaindiawatercentre-9628"
     }
-  ]
+  ],
+  "menuImage": {
+    "image": "/assets/photos/page-aiwc5-conference-5.jpg",
+    "zoom": 100,
+    "positionX": 50,
+    "positionY": 50,
+    "fit": "cover"
+  },
+  "heroImage": {
+    "image": "/assets/photos/page-aiwc5-conference-5.jpg",
+    "zoom": 100,
+    "positionX": 50,
+    "positionY": 45,
+    "fit": "cover"
+  }
 }

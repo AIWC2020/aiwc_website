@@ -36,12 +36,19 @@ const pageById = new Map(PAGES.map((p) => [p.slug, p]));
 const href = (lang, page) => urlFor(lang, page, PAGES, BASE);
 const entryHref = (lang, kind, slug) => urlForEntry(lang, kind, slug, BASE);
 
-const ctxFor = (lang) => ({
+/**
+ * MARVI's renderers expect { index, total, urlFor } and build their own
+ * per-block `t`. AIWC's two collection blocks additionally need the people
+ * and partner records and a way to link to their pages, so the context is
+ * MARVI's plus those three.
+ */
+const ctxFor = (lang, extra = {}) => ({
   people,
   partners,
   urlFor: (id) => href(lang, pageById.get(id) || PAGES[0]),
   entryUrl: (kind, slug) => entryHref(lang, kind, slug),
   t: (key) => key,
+  ...extra,
 });
 
 /* ── chrome ─────────────────────────────────────────────────────────── */
@@ -53,16 +60,20 @@ const ctxFor = (lang) => ({
 function composeDocument(lang, activeSlug, panel, { langBase = '' } = {}) {
   const { document } = parseHTML(template);
 
+  // index.html carries the authored panels it was migrated from. They are
+  // historical: every panel is rendered from content/ instead, so they are
+  // stripped here. Leaving them in was how MARVI's own copy briefly appeared
+  // on every AIWC page.
+  document.querySelectorAll('[data-panel]').forEach((n) => n.remove());
+
   // Only external scripts are stripped — behaviour ships as /assets/app.mjs.
-  // Inline chrome scripts (the .js class flag) must survive, or the reveal
-  // animation would leave the page blank.
   document.querySelectorAll('script[src]').forEach((n) => n.remove());
 
   /* rail navigation, from the registry */
   for (const nav of document.querySelectorAll('.side-nav')) {
     nav.textContent = '';
-    // Only top-level pages are numbered, so the sequence reads 01…11 with
-    // children marked by a tick rather than eating numbers from the run.
+    // MARVI's rail markup exactly: thumbnail, number, name, arrow. The
+    // stylesheet targets these class names, so they are not negotiable.
     let top = 0;
     navTree(PAGES).forEach(({ page, depth }) => {
       const link = document.createElement('a');
@@ -70,13 +81,27 @@ function composeDocument(lang, activeSlug, panel, { langBase = '' } = {}) {
       link.setAttribute('href', href(lang, page));
       link.setAttribute('data-tab', page.slug);
       if (page.slug === activeSlug) link.setAttribute('aria-current', 'page');
-      const num = document.createElement('span');
-      num.className = 'nav-num';
-      num.textContent = depth ? '—' : String(++top).padStart(2, '0');
+
+      const thumb = document.createElement('img');
+      thumb.className = 'nav-thumb';
+      thumb.setAttribute('alt', '');
+      thumb.setAttribute('aria-hidden', 'true');
+      const menuImage = page.menuImage || page.heroImage;
+      if (menuImage?.image) thumb.setAttribute('src', menuImage.image);
+
+      const number = document.createElement('span');
+      number.className = 'nav-number';
+      number.textContent = depth ? '—' : String(++top).padStart(2, '0');
+
       const name = document.createElement('span');
       name.className = 'nav-name';
       name.textContent = page.menuName;
-      link.append(num, name);
+
+      const arrow = document.createElement('span');
+      arrow.className = 'nav-arrow';
+      arrow.textContent = '↗';
+
+      link.append(thumb, number, name, arrow);
       nav.appendChild(link);
     });
   }
@@ -141,6 +166,20 @@ const rebase = (document) => {
   document.querySelectorAll('[src]').forEach((n) => fix(n, 'src'));
   document.querySelectorAll('link[href]').forEach((n) => fix(n, 'href'));
   document.querySelectorAll('a[href]').forEach((n) => fix(n, 'href'));
+
+  // The cover photo is set as an inline custom property by the renderer, so
+  // it is a url() inside a style attribute rather than an src — the loop
+  // above never sees it, and it 404s on a project page.
+  const rebaseCss = (css) =>
+    css.replace(/url\(\s*(['"]?)(\/[^'")]+)\1\s*\)/g, (whole, q, path) =>
+      path.startsWith(BASE + '/') ? whole : `url(${q}${BASE}${path}${q})`);
+  document.querySelectorAll('[style]').forEach((n) => {
+    const value = n.getAttribute('style');
+    if (value && value.includes('url(')) n.setAttribute('style', rebaseCss(value));
+  });
+  document.querySelectorAll('style').forEach((n) => {
+    if (n.textContent.includes('url(')) n.textContent = rebaseCss(n.textContent);
+  });
 };
 
 /* ── head metadata ──────────────────────────────────────────────────── */
@@ -208,8 +247,12 @@ for (const lang of LANGS) {
   const ctx = ctxFor(lang);
 
   /* pages */
-  for (const page of PAGES) {
-    const panel = renderPage(parseHTML('<div></div>').document, page, ctx);
+  for (const [i, page] of PAGES.entries()) {
+    const panel = renderPage(
+      parseHTML('<div></div>').document,
+      page,
+      ctxFor(lang, { index: i + 1, total: PAGES.length })
+    );
     const isHome = page.slug === PAGES[0].slug;
     const rel = href(lang, page);
     const doc = composeDocument(lang, page.slug, panel, { langBase: isHome ? '' : page.slug + '/' });
@@ -228,7 +271,10 @@ for (const lang of LANGS) {
 
     if (isHome && lang === 'en') {
       // 404 needs the same chrome; GitHub Pages serves it from the root.
-      const notFound = composeDocument(lang, null, renderPage(parseHTML('<div></div>').document, page, ctx));
+      const notFound = composeDocument(
+        lang, null,
+        renderPage(parseHTML('<div></div>').document, page, ctxFor(lang, { index: 1, total: PAGES.length }))
+      );
       applyHead(notFound, { lang, title: `Page not found — ${SITE.name}`, description: SITE.description, canonical: SITE_URL + rel });
       rebase(notFound);
       write('404.html', '<!DOCTYPE html>\n' + notFound.documentElement.outerHTML);
