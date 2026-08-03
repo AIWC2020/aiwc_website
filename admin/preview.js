@@ -44,7 +44,12 @@ CMS.registerPreviewStyle(
   .cms-preview-root { display: block; }
   .cms-preview-root main { margin-left: 0; }
   .cms-preview-root .panel { min-height: 0; }
-  .cms-preview-root .hero { min-height: 60vh; }
+  .cms-preview-root .home-hero { min-height: 60svh; }
+  .cms-preview-root .panel:not(#panel-home) .page-head {
+    min-height: 38svh; padding: 90px max(4vw, 32px) 48px;
+  }
+  .cms-preview-root .content-wrap { width: min(920px, calc(100% - 40px)); }
+  .cms-preview-root .motion-item { opacity: 1 !important; transform: none !important; }
   .cms-preview-root .wrap,
   .cms-preview-root .wrap-tight { width: min(1000px, calc(100% - 44px)); }
   /* Reveals never fire without the site's IntersectionObserver. */
@@ -77,16 +82,35 @@ const resolveAssets = (getAsset, value, fieldName) => {
   );
 };
 
+const rebaseImages = (node) => {
+  if (Array.isArray(node)) return node.map(rebaseImages);
+  if (node && typeof node === 'object') {
+    return Object.fromEntries(Object.entries(node).map(([k, v]) => [
+      k,
+      k === 'image' && typeof v === 'string' && v.startsWith('/') && !v.startsWith(`${BASE}/`)
+        ? BASE + v
+        : rebaseImages(v),
+    ]));
+  }
+  return node;
+};
+
 const toData = (entry, getAsset) => {
   const raw = entry.getIn(['data']);
   const data = raw && typeof raw.toJS === 'function' ? raw.toJS() : raw || {};
-  return resolveAssets(getAsset, data);
+  return rebaseImages(resolveAssets(getAsset, data));
 };
 
-/** Everything a renderer asks of its context. Links are inert in a preview. */
+/**
+ * Everything a renderer asks of its context. MARVI's renderPage wants
+ * index/total for the section counter; the two AIWC directory blocks want
+ * the collections and a way to link to their pages. Links are inert here.
+ */
 const previewCtx = {
   people: PEOPLE,
   partners: PARTNERS,
+  index: 1,
+  total: Math.max(1, (collections?.pages || []).length),
   urlFor: () => '#',
   entryUrl: () => '#',
   t: (key) => key,
