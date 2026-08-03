@@ -11,6 +11,6 @@
   "cms": {
     "repo": "AIWC2020/aiwc_website",
     "branch": "main",
-    "authUrl": "https://sveltia-cms-auth.marvi-groundwater.workers.dev"
+    "authUrl": null
   }
 }

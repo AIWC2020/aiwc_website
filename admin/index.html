@@ -7,7 +7,10 @@
     <title>AIWC — Content admin</title>
   </head>
   <body>
-    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <!-- Sveltia CMS. Deliberately NOT type="module": the bundle is a classic
+         script, and marking it as a module stops it exposing window.CMS / window.h,
+         which preview.js needs. -->
+    <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
     <!-- Live preview: renders entries with the site's own renderer
          (/assets/templates.mjs), so it cannot drift from the real page. -->
     <script type="module" src="preview.js"></script>
