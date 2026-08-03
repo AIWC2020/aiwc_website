@@ -28,8 +28,8 @@ if (!existsSync(OUT)) {
 }
 
 /* every built document */
-// admin/ is the CMS shell, not a site page — it has no chrome to check.
-const SKIP_DIRS = new Set(['admin', 'assets', 'content']);
+// admin/ and editor/ are editing tools, not site pages — no chrome to check.
+const SKIP_DIRS = new Set(['admin', 'editor', 'assets', 'content']);
 const docs = [];
 const walk = (dir) => {
   for (const entry of readdirSync(dir)) {

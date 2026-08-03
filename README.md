@@ -53,6 +53,23 @@ reorder; each block type shows only its own fields.
 CMS editor, or vice versa — an un-editable block would be silently dropped the
 first time someone saved that page.
 
+### Two ways to edit
+
+**`/editor/` — no sign-in at all.** A form-based editor with a live preview,
+which needs no token, no OAuth and no third-party service. It reads the
+published JSON, builds a form from the data's own shape, previews the entry
+with `src/templates.mjs` — the site's real renderer — and then hands the JSON
+to GitHub's own editor to commit. GitHub does the authentication, because you
+are already signed in there.
+
+Its only limits: it cannot upload images (point `image` fields at a path
+already in `assets/`), and saving is copy-paste rather than one click.
+
+**`/admin/` — Sveltia CMS.** Image upload, direct commits, entry creation and
+deletion. Needs a token, set up below.
+
+Both edit the same files, so you can use whichever suits the task.
+
 ### Signing in
 
 `admin/config.yml` is a **template**. The build fills in `repo`, `branch`,
