@@ -26,17 +26,503 @@
     },
     {
       "type": "partnerDirectory",
-      "country": "Australia"
+      "items": [
+        {
+          "slug": "australia-india-institute",
+          "name": "Australia India Institute",
+          "country": "Australia",
+          "instituteName": "Australia India Insitute",
+          "logo": {
+            "image": "/assets/photos/page-home-1.jpg"
+          },
+          "summary": "",
+          "body": [],
+          "sections": [],
+          "source": null
+        },
+        {
+          "slug": "deakin-university",
+          "name": "Deakin University",
+          "country": "Australia",
+          "instituteName": "Deakin University",
+          "logo": {
+            "image": "/assets/logos/deakin-university.jpg"
+          },
+          "summary": "Deakin is a leading Australian university with over 60,000 students and a global research ranking in the top 1 per cent (ShanghaiRanking’s ARWU). Deakin was the first Australian university…",
+          "body": [
+            "Deakin is a leading Australian university with over 60,000 students and a global research ranking in the top 1 per cent (ShanghaiRanking’s ARWU). Deakin was the first Australian university to establish an office in India, where the TERI Deakin Nanobiotechnology Centre and The Energy and Resources Institute combine strengths to address water quality issues.",
+            "Deakin has extensive capacity in impact-driven research and teaching with an emphasis on water security in urban, regional and rural systems. Its expertise includes irrigation; hydrology; groundwater; water modelling; water treatment; climate adaptation; blue-green infrastructure, land management and planning; sensing and training technologies; water policy; and social sciences."
+          ],
+          "sections": [],
+          "source": "https://aiwc.org.au/deakin-university/"
+        },
+        {
+          "slug": "department-for-environment-and-water-south-australia",
+          "name": "Department for Environment and Water, South Australia",
+          "country": "Australia",
+          "instituteName": "Department for Environment and Water, South Australia",
+          "logo": {
+            "image": "/assets/photos/page-home-6.jpg"
+          },
+          "summary": "",
+          "body": [],
+          "sections": [
+            {
+              "title": "Brief profile your University/Institute in the context AIWC",
+              "items": [
+                "The Department for Environment and Water aims to help South Australians conserve, sustain and prosper, to deliver a thriving state built on sound stewardship of our environment and water. The department does this by being:",
+                "A facilitator of community involvement in and taking responsibility for the environment.",
+                "A steward of the state’s natural resources to enable sustainable development.",
+                "The custodian of public parks, gardens, heritage places and Crown lands for public benefit and enjoyment, and for their intrinsic value.",
+                "An authority on the state’s environment and natural resources to help governments, businesses and individuals make good long-term decisions.",
+                "In this context, the department plays a lead regulatory function with regard to water access, use and sustainable management. This includes responsibility for the implementation of the Murray-Darling Basin Plan in South Australia.",
+                "The Department for Environment and Water has an extensive international water engagement program which aims to establish linkages with other countries to enable South Australian water expertise to be applied to resolve global water challenges. India has been a priority area of focus of this program for the last seven years. The Australia India Water Centre will be a core partner for this work as it expands in a post COVID-19 environment."
+              ]
+            }
+          ],
+          "source": "https://aiwc.org.au/department-for-environment-and-water-government-of-south-australia/"
+        },
+        {
+          "slug": "flinders-university",
+          "name": "Flinders University",
+          "country": "Australia",
+          "instituteName": "Flinders University",
+          "logo": {
+            "image": "/assets/logos/flinders-university.jpg"
+          },
+          "summary": "Flinders University’s bold mission of changing lives and changing the world makes it a leading international university in South Australia with a record of excellence and innovation in…",
+          "body": [
+            "Flinders University’s bold mission of changing lives and changing the world makes it a leading international university in South Australia with a record of excellence and innovation in teaching. It provides undergraduate and postgraduate educational programs in hydrology, groundwater and water resources management. It headquarters the National Centre for Groundwater Research and Training (NCGRT, http://groundwater.com.au/).",
+            "The NCGRT undertakes in collaboration with many university and industry partners research in all aspects of groundwater and leads the training of the next generation of hydrogeologists and groundwater specialists. Flinders is ranked 17th in Shanghai’s 2021 Global Ranking of Academic Subjects for Water Resources."
+          ],
+          "sections": [
+            {
+              "title": "Projects",
+              "items": [
+                "Support to the development of a Groundwater Profile for Lao PDR and a Sustainable Groundwater Management Plan for the Sekong Basin. Australia-Mekong Water Facility, Australian Water Partnership, 2020-2022.",
+                "https://waterpartnership.org.au/sustainable-groundwater-management-for-the-sekong-basin/",
+                "Exploring opportunities to expand groundwater use for livelihood enhancement and climate change adaptation in Laos. Australian Centre for International Agricultural Research in collaboration with International Water Management Institute, 2019-2020.",
+                "https://www.aciar.gov.au/project/wac-2018-167"
+              ]
+            }
+          ],
+          "source": "https://aiwc.org.au/flinders-university/"
+        },
+        {
+          "slug": "griffith-university",
+          "name": "Griffith University",
+          "country": "Australia",
+          "instituteName": "Griffith University",
+          "logo": {
+            "image": "/assets/logos/griffith-university.jpg"
+          },
+          "summary": "",
+          "body": [
+            "Details will be updated soon."
+          ],
+          "sections": [],
+          "source": "https://aiwc.org.au/griffith-university/"
+        },
+        {
+          "slug": "queensland-university-of-technology",
+          "name": "QUT Queensland University of Technology",
+          "country": "Australia",
+          "instituteName": "QUT Queensland University of Technology",
+          "logo": {
+            "image": "/assets/logos/queensland-university-of-technology.jpg"
+          },
+          "summary": "Queensland University of Technology (QUT) is a highly successful Australian university with an applied emphasis on education and research. QUT is internationally recognised for its focus on…",
+          "body": [
+            "Queensland University of Technology (QUT) is a highly successful Australian university with an applied emphasis on education and research. QUT is internationally recognised for its focus on ‘real-world’, education, engagement and applied research with a strong emphasis on industry and community linkages. As a leading university of technology, QUT aims to strengthen its distinctive national and international reputation by combining academic strength and practical engagement with the world of the professions, industry, government, and the broader community, and the translation of research outcomes to practical application for finding solutions to problems affecting society and industry."
+          ],
+          "sections": [
+            {
+              "title": "Projects",
+              "items": [
+                "Influence of water-sediment interactions and land use on the mobility and bioavailability of heavy metals in urban waterways",
+                "Towards resilience – identification of the characteristics required for an urban water supply business"
+              ]
+            }
+          ],
+          "source": "https://aiwc.org.au/queensland-university-of-technology/"
+        },
+        {
+          "slug": "university-of-melbourne",
+          "name": "University of Melbourne",
+          "country": "Australia",
+          "instituteName": "University of Melbourne",
+          "logo": {
+            "image": "/assets/photos/page-home-7.jpg"
+          },
+          "summary": "Established in 1853, the University of Melbourne is a public-spirited institution that makes distinctive contributions to society in research, learning and teaching and engagement. It’s…",
+          "body": [
+            "Established in 1853, the University of Melbourne is a public-spirited institution that makes distinctive contributions to society in research, learning and teaching and engagement. It’s consistently ranked among the leading universities in the world, with international rankings of world universities placing it as number 1 in Australia and number 32 in the world (Times Higher Education World University Rankings 2017-2018)."
+          ],
+          "sections": [
+            {
+              "title": "Projects relevant to AIWC",
+              "items": [
+                "International research project under Scheme for Promotion of Academic and Research Collaboration (SPARC) titled “Recharge Process of Springs and its Management to mitigate anthropogenic and climate change impact for water Security: A case study in part of Kumaun Lesser Himalaya, India” along with Banaras Hindu University, Varanasi in collaboration with Dr Dharma Hagare, Foreign PI and Prof Basant Maheshwari, of Western Sydney University, Australia http://westernsydney.edu.au Dr Meenakshi Arora and Prof Andrew Western of University of Melbourne, http://www.ie.unimelb.edu.au/ as international partners sanctioned by Ministry of Human Resources and Development (MHRD), renamed as Ministry of Education (MOE) Govt. of India. Ref No. SPARC/2018-19/53/SL/IN Date:28-03-2019 with project code P-69 as Indian Principal Investigator institute worth INR 75 Lakhs for 2 years i.e. 2019-21 (extended in view of COVID-19).(https://sparc.iitkgp.ac.in/) https://sparc.iitkgp.ac.in/detailpage.php?id=69",
+                "Another International research project titled “Securing Water for Agricultural and Food Sustainability: Developing Transdisciplinary Approach to Groundwater Management” along with Indian Institute of Technology, Kharagpur, West Bengal (Indian PI Institute) www.iitkgp.ac.in and Sardar Vallabhbhai National Institute of Technology (SVNIT), Surat, Gujarat, www.svnit.ac.in along with International partners Western Sydney University, Australia; http://westernsydney.edu.au (Foreign PI Institute) Queensland University of Technology, Australia; www.qut.edu.au Wisconsin University, USA of www.wisc.edu sanctioned by Ministry of Human Resources and Development, renamed as Ministry of Education (MOE) Govt. of India. 2 years i.e. 2019-21(extended in view of COVID-19) Project Code.P1285. https://sparc.iitkgp.ac.in/detailpage.php?id=1285",
+                "Global Initiative of Academic Networking (GIAN) , MHRD, Govt. of India MHRD, Government Of India of College Of Technology, Pantnagar sponsored programme on “Water futures of urban and rural landscape” Inter National Expert as Professor Basant Maheshwari, Western Sydney University, Hawkesbury Campus, Penrith, NSW 2751, Australia during February 09-13, 2018. [https://sites.google.com/site/2018gian/] https://gian.iitkgp.ac.in/"
+              ]
+            }
+          ],
+          "source": "https://aiwc.org.au/the-university-of-melbourne/"
+        },
+        {
+          "slug": "university-of-new-south-wales",
+          "name": "University of New South Wales",
+          "country": "Australia",
+          "instituteName": "University of New South Wales",
+          "logo": {
+            "image": "/assets/photos/page-home-8.jpg"
+          },
+          "summary": "The UNSW Global Water Institute (UNSW-GWI) is a world leader in water research, innovation and problem solving. The Institute is a truly multi-disciplinary venture. Drawing on water…",
+          "body": [
+            "The UNSW Global Water Institute (UNSW-GWI) is a world leader in water research, innovation and problem solving. The Institute is a truly multi-disciplinary venture. Drawing on water expertise from seven faculties and 13 specialist centres across the University we have created the Nation’s most advanced water knowledge hub. Clean water is essential for all life on our planet, but global water issues have never been so prominent, and the demand for solutions never so high. Our research activities span an incredible variety of water-related fields but our researchers have one thing in common: they are driven by the urgent need to protect this essential resource in perpetuity."
+          ],
+          "sections": [],
+          "source": "https://aiwc.org.au/unsw-global-water-institute/"
+        },
+        {
+          "slug": "university-of-western-australia",
+          "name": "University of Western Australia",
+          "country": "Australia",
+          "instituteName": "University of Western Australia",
+          "logo": {
+            "image": "/assets/photos/page-home-9.jpg"
+          },
+          "summary": "UWA has a very significant effort in research on different aspects of water and there is an estimated >170 staff and postgraduate students involved. There is internationally significant…",
+          "body": [
+            "UWA has a very significant effort in research on different aspects of water and there is an estimated >170 staff and postgraduate students involved. There is internationally significant research capabilities in the fields of water and the environment, water and food and social and economic aspects of water management.",
+            "An analysis of funding sources for research on water at UWA over the last three years revealed a strong spread of support for R&D across the fundamental to applied research continuum, with the Australian Research Council, the CRC Water Sensitive Cities, GRDC and DAFF dominating. There are existing collaborations with the WA Department of Water and WA Water Corporation.",
+            "Mapping of UWA capability against the future global and Australian issues in water management revealed that the University is currently positioned to contribute in some major areas."
+          ],
+          "sections": [],
+          "source": "https://aiwc.org.au/the-university-of-western-australia/"
+        },
+        {
+          "slug": "university-of-wollongong",
+          "name": "University of Wollongong",
+          "country": "Australia",
+          "instituteName": "University of Wollongong",
+          "logo": {
+            "image": "/assets/logos/university-of-wollongong.jpg"
+          },
+          "summary": "",
+          "body": [],
+          "sections": [],
+          "source": "https://aiwc.org.au/university-of-wollongong/"
+        },
+        {
+          "slug": "western-sydney-university",
+          "name": "Western Sydney University",
+          "country": "Australia",
+          "instituteName": "Western Sydney University",
+          "logo": {
+            "image": "/assets/logos/western-sydney-university.jpg"
+          },
+          "summary": "Western Sydney University is a multi-campus university in the Greater Western region of Sydney. It has over 40,000 students and is in world’s top 300 universities in Times Higher Education…",
+          "body": [
+            "Western Sydney University is a multi-campus university in the Greater Western region of Sydney. It has over 40,000 students and is in world’s top 300 universities in Times Higher Education ranking. The water research at the University is driven by impact with a focus on sustaining diverse urban, agricultural and natural systems. The University has significant capacity in teaching, research and capacity building in the area of surface and groundwater management, irrigation, stormwater, water quality, river health, cultural behaviour regarding water and water policy and governance."
+          ],
+          "sections": [],
+          "source": "https://aiwc.org.au/western-sydney-university/"
+        },
+        {
+          "slug": "banaras-hindu-university",
+          "name": "Banaras Hindu University",
+          "country": "India",
+          "instituteName": "Banaras Hindu University",
+          "logo": {
+            "image": "/assets/photos/page-home-25.webp"
+          },
+          "summary": "",
+          "body": [],
+          "sections": [],
+          "source": null
+        },
+        {
+          "slug": "centre-for-water-and-sanitation",
+          "name": "Centre for Water and Sanitation (CWS)",
+          "country": "India",
+          "instituteName": "Centre for Water and Sanitation (CWS)",
+          "logo": {
+            "image": "/assets/photos/page-home-31.jpg"
+          },
+          "summary": "",
+          "body": [],
+          "sections": [],
+          "source": null
+        },
+        {
+          "slug": "g-b-pant-university-of-agriculture-and-technology",
+          "name": "G. B. Pant University of Agriculture & Technology, Pantnagar",
+          "country": "India",
+          "instituteName": "G. B. University of Agriculture & Technology, Pantnagar, India",
+          "logo": {
+            "image": "/assets/photos/page-home-26.webp"
+          },
+          "summary": "",
+          "body": [],
+          "sections": [],
+          "source": null
+        },
+        {
+          "slug": "indian-council-of-agricultural-research",
+          "name": "Indian Council of Agricultural Research (ICAR)",
+          "country": "India",
+          "instituteName": "Indian Council of Agricultural Research (ICAR)",
+          "logo": {
+            "image": "/assets/photos/page-home-32.jpg"
+          },
+          "summary": "",
+          "body": [],
+          "sections": [],
+          "source": null
+        },
+        {
+          "slug": "indian-institute-of-information-technology-dharwad",
+          "name": "Indian Institute of Information Technology Dharwad",
+          "country": "India",
+          "instituteName": "Indian Institute of Information Technology Dharwad",
+          "logo": {
+            "image": "/assets/photos/page-home-23.webp"
+          },
+          "summary": "",
+          "body": [],
+          "sections": [],
+          "source": null
+        },
+        {
+          "slug": "indian-institute-of-science-bangalore",
+          "name": "Indian Institute of Science, Bangalore",
+          "country": "India",
+          "instituteName": "Indian Institute of Science, Bangalore, India",
+          "logo": {
+            "image": "/assets/photos/page-home-24.webp"
+          },
+          "summary": "",
+          "body": [],
+          "sections": [],
+          "source": null
+        },
+        {
+          "slug": "indian-institute-of-technology-bhu-varanasi",
+          "name": "Indian Institute of Technology (BHU) Varanasi",
+          "country": "India",
+          "instituteName": "Indian Institute of Technology (BHU) Varanasi",
+          "logo": {
+            "image": "/assets/photos/page-home-33.jpg"
+          },
+          "summary": "",
+          "body": [],
+          "sections": [],
+          "source": null
+        },
+        {
+          "slug": "indian-institute-of-technology-guwahati",
+          "name": "Indian Institute of Technology Guwahati",
+          "country": "India",
+          "instituteName": "Indian Institute of Technology Guwahati",
+          "logo": {
+            "image": "/assets/photos/page-home-19.webp"
+          },
+          "summary": "",
+          "body": [],
+          "sections": [],
+          "source": null
+        },
+        {
+          "slug": "indian-institute-of-technology-kharagpur",
+          "name": "Indian Institute of Technology Kharagpur",
+          "country": "India",
+          "instituteName": "Indian Institute of Technology Kharagpur",
+          "logo": {
+            "image": "/assets/photos/page-home-21.webp"
+          },
+          "summary": "",
+          "body": [],
+          "sections": [],
+          "source": null
+        },
+        {
+          "slug": "indian-institute-of-technology-madras",
+          "name": "Indian Institute of Technology Madras",
+          "country": "India",
+          "instituteName": "Indian Institute of Technology Madras",
+          "logo": {
+            "image": "/assets/photos/page-home-28.jpg"
+          },
+          "summary": "",
+          "body": [],
+          "sections": [],
+          "source": null
+        },
+        {
+          "slug": "indian-institute-of-technology-roorkee",
+          "name": "Indian Institute of Technology Roorkee",
+          "country": "India",
+          "instituteName": "Indian Institute of Technology Roorkee, India",
+          "logo": {
+            "image": "/assets/photos/page-home-22.webp"
+          },
+          "summary": "",
+          "body": [],
+          "sections": [],
+          "source": null
+        },
+        {
+          "slug": "institute-of-land-and-disaster-management",
+          "name": "Institute of Land and Disaster Management",
+          "country": "India",
+          "instituteName": "Institute of Land and Disaster Management",
+          "logo": {
+            "image": "/assets/photos/page-home-29.jpg"
+          },
+          "summary": "",
+          "body": [],
+          "sections": [],
+          "source": null
+        },
+        {
+          "slug": "institute-of-rural-management-anand",
+          "name": "Institute of Rural Management Anand",
+          "country": "India",
+          "instituteName": "Institute of Rural Management Anand",
+          "logo": {
+            "image": "/assets/photos/page-home-20.webp"
+          },
+          "summary": "",
+          "body": [],
+          "sections": [],
+          "source": null
+        },
+        {
+          "slug": "jawaharlal-nehru-technological-university-hyderabad",
+          "name": "Jawaharlal Nehru Technological University, Hyderabad",
+          "country": "India",
+          "instituteName": "Jawaharlal Nehru Technological University, Hyderabad",
+          "logo": {
+            "image": "/assets/photos/page-home-17.webp"
+          },
+          "summary": "",
+          "body": [],
+          "sections": [],
+          "source": null
+        },
+        {
+          "slug": "jss-science-and-technology-university-mysuru",
+          "name": "JSS Science and Technology University, Mysuru",
+          "country": "India",
+          "instituteName": "JSS Science and Technology University, Mysuru",
+          "logo": {
+            "image": "/assets/photos/page-home-18.webp"
+          },
+          "summary": "",
+          "body": [],
+          "sections": [],
+          "source": null
+        },
+        {
+          "slug": "maharana-pratap-university-of-agriculture-and-technology",
+          "name": "Maharana Pratap University of Agriculture and Technology, Udaipur",
+          "country": "India",
+          "instituteName": "Maharana Pratap University of Agriculture and Technology, Udaipur, Rajasthan, India",
+          "logo": {
+            "image": "/assets/photos/page-home-15.webp"
+          },
+          "summary": "",
+          "body": [],
+          "sections": [],
+          "source": null
+        },
+        {
+          "slug": "national-institute-of-hydrology",
+          "name": "National Institute of Hydrology, Roorkee",
+          "country": "India",
+          "instituteName": "National Institute of Hydrology",
+          "logo": {
+            "image": "/assets/photos/page-home-16.webp"
+          },
+          "summary": "",
+          "body": [],
+          "sections": [],
+          "source": null
+        },
+        {
+          "slug": "national-institute-of-technology-karnataka",
+          "name": "National Institute of Technology Karnataka",
+          "country": "India",
+          "instituteName": "National Institute of Technology Karnataka",
+          "logo": {
+            "image": "/assets/photos/page-home-13.webp"
+          },
+          "summary": "",
+          "body": [],
+          "sections": [],
+          "source": null
+        },
+        {
+          "slug": "public-health-engineering-department",
+          "name": "Public Health Engineering Department (PHED)",
+          "country": "India",
+          "instituteName": "Public Health Engineering Department (PHED)",
+          "logo": {
+            "image": "/assets/photos/page-home-30.jpg"
+          },
+          "summary": "",
+          "body": [],
+          "sections": [],
+          "source": null
+        },
+        {
+          "slug": "sardar-vallabhbhai-national-institute-of-technology",
+          "name": "Sardar Vallabhbhai National Institute of Technology, Surat",
+          "country": "India",
+          "instituteName": "Sardar Vallabhbhai National Institute of Technology",
+          "logo": {
+            "image": "/assets/photos/page-home-14.webp"
+          },
+          "summary": "",
+          "body": [],
+          "sections": [],
+          "source": null
+        },
+        {
+          "slug": "university-of-agricultural-sciences-bangalore",
+          "name": "University of Agricultural Sciences, Bangalore",
+          "country": "India",
+          "instituteName": "University of Agricultural Sciences, Bangalore",
+          "logo": {
+            "image": "/assets/photos/page-home-12.webp"
+          },
+          "summary": "",
+          "body": [],
+          "sections": [],
+          "source": null
+        },
+        {
+          "slug": "water-resources-department-maharashtra",
+          "name": "Water Resources Department, Maharashtra",
+          "country": "India",
+          "instituteName": "Water Resources Department, Maharashtra",
+          "logo": {
+            "image": "/assets/photos/page-home-27.jpg"
+          },
+          "summary": "",
+          "body": [],
+          "sections": [],
+          "source": null
+        }
+      ]
     },
     {
       "type": "banner",
       "eyebrow": "02 — India",
       "title": "Partners in India",
       "lede": ""
-    },
-    {
-      "type": "partnerDirectory",
-      "country": "India"
     },
     {
       "type": "callout",

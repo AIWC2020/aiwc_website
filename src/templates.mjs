@@ -626,7 +626,8 @@ const BLOCKS = {
    */
   portraitDirectory(document, block, ctx) {
     const wrap = el(document, 'div');
-    const people = ctx.people || [];
+    // The researchers live in this block, so the page holds everything on it.
+    const people = block.items || ctx.people || [];
 
     if (block.filters !== false) {
       const bar = el(document, 'div', { class: 'filter-bar' });
@@ -716,9 +717,8 @@ const BLOCKS = {
   /** The partner collection, in MARVI's people-card grid. */
   partnerDirectory(document, block, ctx) {
     const grid = el(document, 'div', { class: 'people-grid' });
-    const list = block.country
-      ? (ctx.partners || []).filter((p) => p.country === block.country)
-      : ctx.partners || [];
+    const all = block.items || ctx.partners || [];
+    const list = block.country ? all.filter((p) => p.country === block.country) : all;
     list.forEach((partner) => {
       const card = el(document, 'a', { class: 'people-card' });
       card.href = ctx.entryUrl ? ctx.entryUrl('partners', partner.slug) : '#';

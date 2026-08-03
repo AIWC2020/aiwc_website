@@ -320,7 +320,7 @@ for (const lang of LANGS) {
 
 /* ── static passthrough ─────────────────────────────────────────────── */
 
-for (const dir of ['assets', 'content', 'admin', 'editor']) {
+for (const dir of ['assets', 'content', 'admin']) {
   if (existsSync(join(ROOT, dir))) cpSync(join(ROOT, dir), join(OUT, dir), { recursive: true });
 }
 
@@ -416,10 +416,10 @@ write(
   })
 );
 
-// The no-server editor at /editor/ fetches these at runtime; without them
-// it loads but every entry comes back 404.
-for (const needed of ['content/pages', 'content/people', 'content/partners', 'assets/collections.json', 'assets/shapes.json']) {
-  if (!existsSync(join(OUT, needed))) throw new Error(`${needed} was not published — /editor/ depends on it`);
+// The CMS preview fetches these at runtime; without them it loads but every
+// entry renders empty.
+for (const needed of ['content/pages', 'assets/collections.json', 'assets/shapes.json']) {
+  if (!existsSync(join(OUT, needed))) throw new Error(`${needed} was not published — the CMS preview depends on it`);
 }
 
 if (existsSync(join(ROOT, 'CNAME'))) cpSync(join(ROOT, 'CNAME'), join(OUT, 'CNAME'));

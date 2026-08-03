@@ -58,30 +58,22 @@ reorder; each block type shows only its own fields.
 CMS editor, or vice versa — an un-editable block would be silently dropped the
 first time someone saved that page.
 
-### Two ways to edit
+### Editing
 
-**`/editor/` — forms, live preview, and two ways to save.** It reads the
-published JSON, builds a form from the data's own shape, and previews the
-entry with `src/templates.mjs` — the site's real renderer, so the preview *is*
-the page.
+The CMS at `/admin/` has **one collection: Pages**. Everything shown on a page
+is edited inside that page — including the 108 researchers (in the Researchers
+block on *Our people*) and the 33 partner institutions (in *Our partners*).
 
-- **Publish →** commits straight to GitHub. Needs a token, entered once and
-  kept in that browser's local storage. Add or remove it with **Token…**.
-- **Save manually…** needs no token at all: copy the JSON, open the file on
-  GitHub, paste, commit. GitHub does the authentication because you are
-  already signed in there.
+They each still get their own address. `loadCollections()` in
+`src/registry.mjs` reads them back out of the pages, keyed on the block type
+rather than the page slug, and the build generates `/people/<slug>/` and
+`/partners/<slug>/` from them. So the storage shape follows the site rather
+than the other way round.
 
-Publishing reads the file's blob sha when the entry loads and sends it with
-the write, so if someone else changed the file first the publish is refused
-rather than silently overwriting them.
-
-Its remaining limit: no image upload — point `image` fields at a path already
-in `assets/`.
-
-**`/admin/` — Sveltia CMS.** Image upload, direct commits, entry creation and
-deletion. Needs a token, set up below.
-
-Both edit the same files, so you can use whichever suits the task.
+The trade-off, stated plainly: `content/pages/people.json` is 436 KB, and the
+CMS rewrites the whole file on every save. Two people editing different
+researchers at the same time will conflict. That was a deliberate choice —
+one place per page beats a smaller diff.
 
 ### Signing in
 
