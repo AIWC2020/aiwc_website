@@ -1,0 +1,43 @@
+{
+  "slug": "ashantha-goonetilleke",
+  "name": "Ashantha Goonetilleke",
+  "sortName": "Ashantha Goonetilleke",
+  "designation": "Professor",
+  "institute": "QUT Queensland University of Technology",
+  "instituteSlug": "qut-queensland-university-of-technology",
+  "country": "Australia",
+  "qualification": "PhD, Queensland University of Technology",
+  "interests": "Protecting and restoring water quality, Water pollution and treatment, Stormwater/wastewater recycling and water conservation and efficiency, Integrated Water Resources Management (IWRM), Resilience of water infrastructure, water security and adaptation to climate change",
+  "email": "a.goonetilleke@qut.edu.au",
+  "homepage": "https://staff.qut.edu.au/staff/a.goonetilleke",
+  "profiles": [],
+  "photo": {
+    "image": "/assets/people/ashantha-goonetilleke.webp",
+    "positionX": 50,
+    "positionY": 22
+  },
+  "bio": [
+    "Ashantha Goonetilleke is a Professor in Water/Environmental Engineering at Queensland University of Technology, Australia. He has achieved significant success in producing research outcomes of relevance to industry and the community and translation for practical application. His achievements have been recognised by the University and the profession with numerous awards. For five years, he was the Director for Infrastructure Research, Faculty of Built Environment and Engineering, QUT. For ten years he served as the advisor on sustainability to Brisbane Airport Corporation and held the Professorial Chair in Airport Innovation providing advice on a range of sustainability initiatives, related policy development and R & D activities."
+  ],
+  "sections": [
+    {
+      "title": "Research Project",
+      "items": [
+        "Community-focused smart technologies to enhance flood resilience in high risk areas; Funding: Logan City Council, Dept. of Industry, Innovation and Science",
+        "Sanitation infrastructure for the future; Funding: Australia Indonesia Infrastructure Research Awards",
+        "Urban water cycle as the basis for creating a research agenda for sustainable development; Funding: Australian Technology Network of Universities (ATN) and São Paulo Research Foundation (FAPESP)"
+      ]
+    },
+    {
+      "title": "Key Publications/Reports",
+      "items": [
+        "Wijesiri, B., Liu, A. and Goonetilleke, A., 2020, Impact of global warming on urban stormwater quality: From the perspective of an alternative water resource, Journal of Cleaner Production, Vol. 262, Article 121330, https://doi.org/10.1016/j.jclepro.2020.121330",
+        "Bonotto, D. M., Wijesiri, B. and Goonetilleke, A., 2019, Nitrate-dependent Uranium mobilisation in groundwater, Science of the Total Environment, Vol. 693, Article 133655, https://doi.org/10.1016/j.scitotenv.2019.133655.",
+        "Booysen, M. J., Wijesiri, B., Ripunda, C. and Goonetilleke, A., Fees and governance: Towards sustainability in water resources management at schools in post-apartheid South Africa, Sustainable Cities and Society, Vol. 51, Article 101694, https://doi.org/10.1016/j.scs.2019.101694",
+        "Bonotto, D. M., Wijesiri, B., Vergotti, M., da Silveira, E. G. and Goonetilleke, A., 2018, Assessing mercury pollution in Amazon River tributaries using a Bayesian Network approach, Ecotoxicology and Environmental Safety, Vol. 166, pp. 354-358.",
+        "Deilami, K., Hayes, J. F., McGree, J. and Goonetilleke, A., 2017, Application of landscape epidemiology to assess potential public health risk due to poor sanitation, Journal of Environmental Management, Vol. 192, pp. 124-133"
+      ]
+    }
+  ],
+  "source": "https://aiwc.org.au/ashantha-goonetilleke/"
+}

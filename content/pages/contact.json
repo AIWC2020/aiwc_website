@@ -1,0 +1,76 @@
+{
+  "menuName": "Contact",
+  "slug": "contact",
+  "order": 15,
+  "published": true,
+  "template": "standard",
+  "intro": {
+    "eyebrow": "Contact",
+    "title": "Get in touch.",
+    "lede": "The Centre is co-led from Western Sydney University in Australia and IIT Guwahati in India."
+  },
+  "blocks": [
+    {
+      "type": "contactCards",
+      "tone": "paper",
+      "items": [
+        {
+          "country": "Australia",
+          "address": "Western Sydney University, Locked Bag 1797, Penrith NSW 2751",
+          "people": [
+            {
+              "name": "Distinguished Professor Basant Maheshwari",
+              "role": "Director — AIWC, Western Sydney University",
+              "email": "b.maheshwari@westernsydney.edu.au"
+            },
+            {
+              "name": "A/Professor Dharma Hagare",
+              "role": "AIWC Country Co-ordinator, Australia",
+              "email": "D.Hagare@westernsydney.edu.au"
+            },
+            {
+              "name": "Centre Manager",
+              "role": "AIWC — Western Sydney University",
+              "email": "aiwc@westernsydney.edu.au"
+            }
+          ]
+        },
+        {
+          "country": "India",
+          "address": "Indian Institute of Technology Guwahati, Guwahati 781039",
+          "people": [
+            {
+              "name": "Professor Parmeswar Iyer",
+              "role": "Co-Director — AIWC; Director, IIT Guwahati",
+              "email": "director@iitg.ac.in"
+            },
+            {
+              "name": "Prof. Subashisa Datta",
+              "role": "AIWC Country Co-ordinator, India",
+              "email": "subashisa@iitg.ac.in"
+            },
+            {
+              "name": "Prof. Suresh Kartha",
+              "role": "Head, Centre for Sustainable Water Research",
+              "email": "hocswr@iitg.ac.in"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "callout",
+      "tone": "paper",
+      "accent": "sand",
+      "title": "Follow the work.",
+      "text": "Webinars, symposium sessions and the WATER TALKS series are published on the Centre’s YouTube channel.",
+      "actions": [
+        {
+          "label": "AIWC on YouTube",
+          "href": "https://www.youtube.com/@australiaindiawatercentre-9628",
+          "primary": true
+        }
+      ]
+    }
+  ]
+}

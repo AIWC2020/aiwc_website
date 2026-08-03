@@ -1,0 +1,47 @@
+{
+  "slug": "arumugam-sathasivan",
+  "name": "Arumugam Sathasivan",
+  "sortName": "Arumugam Sathasivan",
+  "designation": "Professor",
+  "institute": "Western Sydney University",
+  "instituteSlug": "western-sydney-university",
+  "country": "Australia",
+  "qualification": "PhD, University of Tokyo",
+  "interests": "Biological and physico-chemical water and wastewater treatment technologies. Research focuses on development of tools/treatment to stabilise disinfectant (both chlorine and chloramine) and control bacterial regrowth in recycled and drinking water distribution system while reducing disinfection by-products. Bio-corrosion/odour control in sewer pipes. Wastewater resource recovery and urban water cycle including emerging pollutants of concern.",
+  "email": "s.sathasivan@westernsydney.edu.au",
+  "homepage": "https://www.westernsydney.edu.au/staff_profiles/uws_profiles/professor_sathaa_sathasivan",
+  "profiles": [
+    "https://scholar.google.com.au/citations?user=gZeRwJYAAAAJ&hl=en",
+    "https://www.researchgate.net/profile/Arumugam_Sathasivan"
+  ],
+  "photo": {
+    "image": "/assets/people/arumugam-sathasivan.webp",
+    "positionX": 50,
+    "positionY": 22
+  },
+  "bio": [
+    "(Sathaa) Arumugam Sathasivan is a professor in water quality and sustainable engineering and has over 30 years’ teaching, research, outreach and industry experience. His research has been selected by Australian Research Council in 2019 as having the high impact in terms of application within industry. His current research is on water resources and wastewater treatment, modelling and management. He is passionate about understanding fundamentals and at the same time developing tools and technologies for practitioners. He is interested in the social, economic, cultural, policy and institutional aspects of water management, especially in providing clean water and sanitation to wider population. He has more than 150 publications to his name, including over 80 articles in peer-reviewed, international journals and led several major externally funded research projects with international partners."
+  ],
+  "sections": [
+    {
+      "title": "Research Project",
+      "items": [
+        "Smart management of disinfectant residuals in chloraminated water supply system; Funding Australian Research Council, Sydney Water Corporation, Urban Utilities, Seqwater; Unity Water and Logan City Council",
+        "Cost-effective corrosion control by catalysing the reaction between sulphide and oxygen; Funding Central Coast Council",
+        "Strategic plan for infrastructure needs of the Southeast Queensland utilities through modelling of water treatment and water supply system; Funding Southeast Queensland Utilities Consortium."
+      ]
+    },
+    {
+      "title": "Key Publications/Reports",
+      "items": [
+        "Sathasivan, A, S. Korotta-Gamage, A Rahman (2020) Uncertainties in water supplies due to changing climate and extreme weather events, in Sustainable Water: Water Resource Planning and Management; Edited by Gude, Gadhamshetty and Kandiah, Nova, https://novapublishers.com/shop/sustainable-water-resources-management-and-challenges/ Bal Krishna, KC, A Sathasivan, A Listowski, (2020) Influence of treatment processes and disinfectants on bacterial community compositions and opportunistic pathogens in a full-scale recycled water distribution system, Journal of Cleaner Production, 123034, https://doi.org/10.1016/j.jclepro.2020.123034. Kuruppu, U., A Rahman, A. Sathasivan (2019) Enhanced denitrification by design modifications to the standard permeable pavement structure, Journal of Cleaner Production, https://doi.org/10.1016/j.jclepro.2019.117721 Korotta-Gamage, S and A. Sathasivan, (2017) A review: Potential and challenges of biologically activated carbon to remove natural organic matter in drinking water purification process, Chemosphere, 167, pp 120-138, https://doi.org/10.1016/j.chemosphere.2016.09.097 Sathasivan, A, G. Kastl, S. Korotta-Gamage, V. Gunasekera, Trihalomethane species model for drinking water supply systems, Water Research, 2020, 116189, https://doi.org/10.1016/j.watres.2020.116189.",
+        "Sathasivan, A, S. Korotta-Gamage, A Rahman (2020) Uncertainties in water supplies due to changing climate and extreme weather events, in Sustainable Water: Water Resource Planning and Management; Edited by Gude, Gadhamshetty and Kandiah, Nova, https://novapublishers.com/shop/sustainable-water-resources-management-and-challenges/",
+        "Bal Krishna, KC, A Sathasivan, A Listowski, (2020) Influence of treatment processes and disinfectants on bacterial community compositions and opportunistic pathogens in a full-scale recycled water distribution system, Journal of Cleaner Production, 123034, https://doi.org/10.1016/j.jclepro.2020.123034.",
+        "Kuruppu, U., A Rahman, A. Sathasivan (2019) Enhanced denitrification by design modifications to the standard permeable pavement structure, Journal of Cleaner Production, https://doi.org/10.1016/j.jclepro.2019.117721",
+        "Korotta-Gamage, S and A. Sathasivan, (2017) A review: Potential and challenges of biologically activated carbon to remove natural organic matter in drinking water purification process, Chemosphere, 167, pp 120-138, https://doi.org/10.1016/j.chemosphere.2016.09.097",
+        "Sathasivan, A, G. Kastl, S. Korotta-Gamage, V. Gunasekera, Trihalomethane species model for drinking water supply systems, Water Research, 2020, 116189, https://doi.org/10.1016/j.watres.2020.116189."
+      ]
+    }
+  ],
+  "source": "https://aiwc.org.au/arumugam-sathasivan/"
+}

@@ -1,0 +1,45 @@
+{
+  "slug": "ananthakumar-m-a",
+  "name": "Ananthakumar M A",
+  "sortName": "Ananthakumar M A",
+  "designation": "Assistant Professor",
+  "institute": "University of Agricultural Sciences, Bangalore",
+  "instituteSlug": "university-of-agricultural-sciences-bangalore",
+  "country": "India",
+  "qualification": "PhD, University of Agricultural Sciences, Bangalore",
+  "interests": "Precise water and nutrient management; Land Resource Inventory using RS& GIS platform, soil health restoration and its management.",
+  "email": "ananthu2004@yahoo.com",
+  "homepage": null,
+  "profiles": [
+    "https://scholar.google.com/citations?user=_xMpqtAAAAAJ"
+  ],
+  "photo": {
+    "image": "/assets/people/ananthakumar-m-a.webp",
+    "positionX": 50,
+    "positionY": 22
+  },
+  "bio": [
+    "Dr. Anathakumar is working in diverse fields of agriculture for 15 years’ with emphasis on soil and water management. Soil health, precision farming practices involving drip fertigation under irrigated ecosystem, sensor based irrigation, judicious and conjunctive use of ground water, problematic soil management and contingent crop planning for command areas are the major thrust areas of his research. The major projects focussed on Land resources Inventory, Establishment of Digital Library Resources and Portal and Decision Support System for the efficient use of Land Resources of Karnataka funded by World Bank and Strengthening of Water Technology Centre."
+  ],
+  "sections": [
+    {
+      "title": "Research Project",
+      "items": [
+        "Land resources Inventory, Establishment of Digital Library Resources and Portal and Decision Support System for the efficient use of Land Resources of Karnataka Funded through World Bank",
+        "Designing efficient cropping system through simulation modeling for Cauvery command area under changing climate funded through NICRA, ICAR. New Delhi",
+        "Zero Budget Natural Farming ; Funding: GoK"
+      ]
+    },
+    {
+      "title": "Key Publications/Reports",
+      "items": [
+        "Sagar, R, Kadalli, G. G., Ananthakumar, M. A., Jayaramaiah, R. and Asha, N. N., 2020, “Nutrient status of soil as influenced by micronutrients fortified humic substance”, Journal of Pharmacognosy and Phytochemistry, 9(1):1006-1009",
+        "Ananthakumar, M.A.,Manohara, B.A. Kadalli, G.G. And Prakash, S.S., 2019, “Effect of different sources of calcium on amelioration of soil acidity and its influence on availability of nutrients, International Journal of Chemical Studies, 7(2):1301-1305",
+        "Agnes Imoya P.O., Prasanna K.T., Ananthakumar.M.A and HabimanaSylvestre. 2018 “Soil Nutrient Status and Microbial Communities as influenced by Bio-Fuel Trees Plantation” Journal of Environment and Ecology 36 (4A): 1213-1220.",
+        "Ananthakumar,M.A and Sudhir, K, 2012, Influence of season, shade trees and rainfall on soil chemical properties and microbial activities of Coffee growing areas of Karnataka. Journal of Soil Biology and Ecology, 32(1&2): 21-28",
+        "Ananthakumar,M.A., Channal, H.T. and Sudhir, K, 2013, Impact of biomethanated distillery effluent on soil chemical and biological properties. Journal of Soil Biology and Ecology, 33(1&2): 142-148"
+      ]
+    }
+  ],
+  "source": "https://aiwc.org.au/ananthakumar-m-a/"
+}

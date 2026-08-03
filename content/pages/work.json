@@ -1,0 +1,68 @@
+{
+  "menuName": "Our work",
+  "slug": "work",
+  "order": 3,
+  "published": true,
+  "template": "standard",
+  "intro": {
+    "eyebrow": "Our work",
+    "title": "Research, education,\ntraining, outreach.",
+    "lede": "AIWC’s key activities are structured into four distinct areas, each led by two or more programme leaders drawn from partner institutions in both countries."
+  },
+  "blocks": [
+    {
+      "type": "programmes",
+      "tone": "paper",
+      "items": [
+        {
+          "number": "01",
+          "title": "Research",
+          "text": "Transdisciplinary projects on groundwater management, spring recharge, coastal reservoirs and water security, run jointly across Australian and Indian institutions.",
+          "page": "research",
+          "photo": {
+            "image": "/assets/photos/page-our-work-0.jpg",
+            "positionX": 50,
+            "positionY": 50
+          },
+          "cta": "Research"
+        },
+        {
+          "number": "02",
+          "title": "Education",
+          "text": "A Master’s program specialising in Sustainable Water Futures — transdisciplinary approaches, policy and governance, agriculture and catchment management.",
+          "page": "education",
+          "photo": {
+            "image": "/assets/photos/page-our-work-1.jpg",
+            "positionX": 50,
+            "positionY": 50
+          },
+          "cta": "Education"
+        },
+        {
+          "number": "03",
+          "title": "Training & capacity building",
+          "text": "Five programmes: MARVI, Young Water Professionals, DRIP II, dam safety and risk management, and village groundwater cooperatives.",
+          "page": "training",
+          "photo": {
+            "image": "/assets/photos/page-our-work-2.jpg",
+            "positionX": 50,
+            "positionY": 50
+          },
+          "cta": "Training"
+        },
+        {
+          "number": "04",
+          "title": "Outreach",
+          "text": "The Australia India Technical Exchange Program workshop series, webinars and public dialogue with policy-makers and practitioners.",
+          "page": "outreach",
+          "photo": {
+            "image": "/assets/photos/page-our-work-3.jpg",
+            "positionX": 50,
+            "positionY": 50
+          },
+          "cta": "Outreach"
+        }
+      ]
+    }
+  ]
+}

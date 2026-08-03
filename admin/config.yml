@@ -1,250 +1,395 @@
+# {{GENERATED}}
+#
+# repo, branch, base_url and public_folder below are filled in by
+# scripts/build.mjs from the `cms` and `base` fields in content/site.json.
+# Edit them THERE, not here — this file is the template, and the deployed
+# copy at /admin/config.yml is the generated one.
 backend:
   name: github
-  repo: marvi-groundwater/marvi
-  branch: main
-  base_url: https://sveltia-cms-auth.marvi-groundwater.workers.dev
+  repo: "{{REPO}}"
+  branch: "{{BRANCH}}"
+  base_url: "{{AUTH_URL}}"
 
 local_backend: true
 
-media_folder: "assets/marvi-originals"
-public_folder: "/assets/marvi-originals"
+media_folder: "assets/photos"
+# Must carry the site's base path, or images an editor uploads are written
+# with a path that 404s once the base changes.
+public_folder: "{{BASE}}/assets/photos"
+
+# ---------------------------------------------------------------------------
+# Three collections, mirroring content/:
+#
+#   Pages     — the navigable pages. A page is a header (title, intro, hero)
+#               plus content BLOCKS you can add and drag to reorder. Each
+#               block type shows only its own fields.
+#   People    — one file per researcher. These render at /people/<slug>/ and
+#               populate the directory on the Our people page.
+#   Partners  — one file per institution, rendering at /partners/<slug>/.
+#
+# `order` controls the left-hand menu; lower numbers sit higher. Setting a
+# page's `parent` to another page's address nests it underneath in the menu.
+# ---------------------------------------------------------------------------
 
 collections:
-  - name: "homepage"
-    label: "Homepage"
-    files:
-      - file: "content/homepage.json"
-        label: "Homepage Hero"
-        name: "homepage"
-        fields:
-          - { label: "Hero Image", name: "heroImage", widget: "image", hint: "The large photo beside the headline. Click to choose from the library or upload a new one." }
-          - label: "Hero Image — Focus"
-            name: "heroImageFocus"
-            widget: "select"
-            default: "auto"
-            hint: "Which part of the photo to keep when it is cropped to fit."
-            options: &focusOptions
-              - { label: "Auto (recommended)", value: "auto" }
-              - { label: "Center", value: "center center" }
-              - { label: "Top", value: "center top" }
-              - { label: "Bottom", value: "center bottom" }
-              - { label: "Left", value: "left center" }
-              - { label: "Right", value: "right center" }
-          - label: "Hero Image — Fit"
-            name: "heroImageFit"
-            widget: "select"
-            default: "auto"
-            hint: "Fill crops to the slot; Show whole never crops."
-            options: &fitOptions
-              - { label: "Auto (recommended)", value: "auto" }
-              - { label: "Fill (crop to slot)", value: "cover" }
-              - { label: "Show whole photo", value: "contain" }
-          - { label: "Eyebrow", name: "eyebrow", widget: "string" }
-          - { label: "Hero Title", name: "heroTitle", widget: "text", hint: "Line break = where the headline wraps to a second line" }
-          - { label: "Hero Body", name: "heroBody", widget: "text" }
-          - { label: "Primary Button Label", name: "primaryButtonLabel", widget: "string" }
-          - { label: "Secondary Button Label", name: "secondaryButtonLabel", widget: "string" }
+  - name: "pages"
+    label: "Pages"
+    label_singular: "page"
+    folder: "content/pages"
+    extension: "json"
+    format: "json"
+    create: true
+    identifier_field: "menuName"
+    slug: "{{fields.slug}}"
+    summary: "{{fields.order}} · {{fields.menuName}}"
+    sortable_fields: ["order", "menuName"]
+    fields:
+      - { label: "Menu name", name: "menuName", widget: "string", hint: "Shown in the site's left-hand menu." }
+      - { label: "Page address", name: "slug", widget: "string", pattern: ['^[a-z0-9-]+$', "Lower-case letters, numbers and hyphens only"], hint: "The web address, e.g. research → /research/. Changing it breaks existing links." }
+      - { label: "Menu order", name: "order", widget: "number", value_type: "int", min: 1, default: 99, hint: "Lower numbers appear higher in the menu." }
+      - { label: "Nest under", name: "parent", widget: "string", required: false, hint: "Optional. Another page's address, e.g. work — this page then appears indented beneath it." }
+      - { label: "Show on the site", name: "published", widget: "boolean", default: true, required: false }
+      - { label: "Layout", name: "template", widget: "select", default: "standard", options: ["standard", "home"], hint: "‘home’ is the full-height opening page. Everything else is ‘standard’." }
 
-  - name: "sections"
-    label: "Section intros"
-    files:
-      - file: "content/sections.json"
-        label: "All section intros"
+      - label: "Title & introduction"
+        name: "intro"
+        widget: "object"
+        collapsed: false
+        fields:
+          - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false, hint: "Small label above the title." }
+          - { label: "Title", name: "title", widget: "text", hint: "A line break is where the title wraps to a new line." }
+          - { label: "Introduction", name: "lede", widget: "text", required: false, hint: "One or two sentences. Also the page's Google description and its preview when shared." }
+
+      - label: "Header photo"
+        name: "heroImage"
+        widget: "object"
+        collapsed: true
+        required: false
+        fields: &photoFields
+          - { label: "Image", name: "image", widget: "image", required: false }
+          - { label: "Horizontal focus (%)", name: "positionX", widget: "number", value_type: "int", min: 0, max: 100, default: 50, required: false }
+          - { label: "Vertical focus (%)", name: "positionY", widget: "number", value_type: "int", min: 0, max: 100, default: 50, required: false }
+
+      - label: "Header buttons"
+        name: "actions"
+        widget: "list"
+        required: false
+        collapsed: true
+        fields: &actionFields
+          - { label: "Label", name: "label", widget: "string" }
+          - { label: "Go to page", name: "page", widget: "string", required: false, hint: "A page address, e.g. contact. Leave blank to use a web link instead." }
+          - { label: "Web link", name: "href", widget: "string", required: false }
+          - { label: "Emphasised", name: "primary", widget: "boolean", default: false, required: false }
+
+      - label: "Content blocks"
+        name: "blocks"
+        widget: "list"
+        types:
+          - label: "Statement"
+            name: "statement"
+            summary: "Statement — {{fields.quote}}"
+            fields:
+              - &tone { label: "Background", name: "tone", widget: "select", default: "paper", required: false, options: ["paper", "sand", "deep", "ink"] }
+              - &blockLabel { label: "Section label", name: "label", widget: "string", required: false, hint: "e.g. ‘01 — Research’. Shown small above the heading." }
+              - { label: "Statement", name: "quote", widget: "text" }
+              - { label: "Attribution / expansion", name: "cite", widget: "text", required: false }
+              - &i18n { label: "Translation keys", name: "i18n", widget: "hidden", required: false }
+
+          - label: "Numbers"
+            name: "measures"
+            summary: "Numbers — {{fields.title}}"
+            fields:
+              - *tone
+              - *blockLabel
+              - &blockTitle { label: "Heading", name: "title", widget: "text", required: false }
+              - &blockLede { label: "Introduction", name: "lede", widget: "text", required: false }
+              - label: "Numbers"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Value", name: "value", widget: "string", hint: "e.g. 108, or 10,000+" }
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "Colour", name: "side", widget: "select", required: false, options: [{ label: "Neutral", value: "" }, { label: "Australia (ochre)", value: "au" }, { label: "India (indigo)", value: "in" }] }
+              - *i18n
+
+          - label: "Text"
+            name: "prose"
+            summary: "Text — {{fields.title}}"
+            fields:
+              - *tone
+              - *blockLabel
+              - *blockTitle
+              - *blockLede
+              - { label: "Paragraphs", name: "body", widget: "list", field: { label: "Paragraph", name: "text", widget: "text" } }
+              - *i18n
+
+          - label: "Two columns"
+            name: "cols"
+            summary: "Two columns — {{fields.title}}"
+            fields:
+              - *tone
+              - *blockLabel
+              - *blockTitle
+              - *blockLede
+              - { label: "Narrow first column", name: "side", widget: "boolean", default: false, required: false }
+              - label: "Columns"
+                name: "columns"
+                widget: "list"
+                max: 2
+                fields:
+                  - { label: "Column label", name: "label", widget: "string", required: false }
+                  - { label: "Column heading", name: "title", widget: "string", required: false }
+                  - { label: "Paragraphs", name: "body", widget: "list", field: { label: "Paragraph", name: "text", widget: "text" } }
+              - *i18n
+
+          - label: "Cards"
+            name: "cards"
+            summary: "Cards — {{fields.title}}"
+            fields:
+              - *tone
+              - *blockLabel
+              - *blockTitle
+              - *blockLede
+              - { label: "Columns", name: "columns", widget: "number", value_type: "int", min: 2, max: 4, default: 3, required: false }
+              - label: "Cards"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Number", name: "number", widget: "string", required: false }
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "Text", name: "text", widget: "text", required: false }
+                  - { label: "Go to page", name: "page", widget: "string", required: false }
+                  - { label: "Web link", name: "href", widget: "string", required: false }
+                  - { label: "Link label", name: "cta", widget: "string", required: false }
+              - *i18n
+
+          - label: "Programme cards (with photos)"
+            name: "programmes"
+            summary: "Programmes — {{fields.title}}"
+            fields:
+              - *tone
+              - *blockLabel
+              - *blockTitle
+              - *blockLede
+              - label: "Programmes"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Number", name: "number", widget: "string", required: false }
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "Text", name: "text", widget: "text", required: false }
+                  - { label: "Go to page", name: "page", widget: "string", required: false }
+                  - { label: "Link label", name: "cta", widget: "string", required: false }
+                  - { label: "Photo", name: "photo", widget: "object", fields: *photoFields }
+                  - { label: "Photo description", name: "alt", widget: "string", required: false }
+              - *i18n
+
+          - label: "Researcher directory"
+            name: "peopleGrid"
+            summary: "Researcher directory (all people)"
+            fields:
+              - *tone
+              - *blockLabel
+              - *blockTitle
+              - *blockLede
+
+          - label: "Partner logo wall"
+            name: "logoWall"
+            summary: "Logo wall — {{fields.country}}"
+            fields:
+              - *tone
+              - *blockLabel
+              - *blockTitle
+              - *blockLede
+              - { label: "Country", name: "country", widget: "select", required: false, options: [{ label: "Both", value: "" }, "Australia", "India"] }
+
+          - label: "Partner list"
+            name: "partnerRows"
+            summary: "Partner list — {{fields.country}}"
+            fields:
+              - *tone
+              - *blockLabel
+              - *blockTitle
+              - *blockLede
+              - { label: "Country", name: "country", widget: "select", required: false, options: [{ label: "Both", value: "" }, "Australia", "India"] }
+
+          - label: "Timeline"
+            name: "timeline"
+            summary: "Timeline — {{fields.title}}"
+            fields:
+              - *tone
+              - *blockLabel
+              - *blockTitle
+              - *blockLede
+              - label: "Milestones"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Year", name: "year", widget: "string" }
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "Text", name: "text", widget: "text", required: false }
+              - *i18n
+
+          - label: "Reference list"
+            name: "pubList"
+            summary: "References — {{fields.title}}"
+            fields:
+              - *tone
+              - *blockLabel
+              - *blockTitle
+              - label: "References"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Reference", name: "text", widget: "text" }
+                  - { label: "Link", name: "href", widget: "string", required: false }
+
+          - label: "Link list"
+            name: "linkList"
+            summary: "Links — {{fields.title}}"
+            fields:
+              - *tone
+              - *blockLabel
+              - *blockTitle
+              - label: "Links"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "Text", name: "text", widget: "text", required: false }
+                  - { label: "Web link", name: "href", widget: "string" }
+              - *i18n
+
+          - label: "Full-width photo"
+            name: "frame"
+            summary: "Photo banner — {{fields.title}}"
+            fields:
+              - *blockLabel
+              - *blockTitle
+              - *blockLede
+              - { label: "Photo", name: "photo", widget: "object", fields: *photoFields }
+              - { label: "Photo description", name: "alt", widget: "string", required: false }
+              - { label: "Buttons", name: "actions", widget: "list", required: false, fields: *actionFields }
+              - *i18n
+
+          - label: "Two photos"
+            name: "shotPair"
+            summary: "Two photos — {{fields.title}}"
+            fields:
+              - *tone
+              - *blockLabel
+              - *blockTitle
+              - label: "Photos"
+                name: "items"
+                widget: "list"
+                max: 3
+                fields:
+                  - { label: "Image", name: "image", widget: "image" }
+                  - { label: "Caption", name: "caption", widget: "string", required: false }
+                  - { label: "Shape", name: "ratio", widget: "select", default: "ratio-wide", required: false, options: [{ label: "Wide", value: "ratio-wide" }, { label: "Square", value: "ratio-sq" }, { label: "Tall", value: "ratio-tall" }] }
+              - *i18n
+
+          - label: "Photo strip"
+            name: "ribbon"
+            summary: "Photo strip"
+            fields:
+              - *tone
+              - { label: "Photos", name: "items", widget: "list", field: { label: "Image", name: "image", widget: "image" } }
+
+          - label: "Call to action"
+            name: "callout"
+            summary: "Call to action — {{fields.title}}"
+            fields:
+              - *tone
+              - *blockLabel
+              - *blockTitle
+              - { label: "Text", name: "text", widget: "text", required: false }
+              - { label: "Colour", name: "accent", widget: "select", required: false, options: [{ label: "Deep water", value: "" }, { label: "Sand", value: "sand" }, { label: "Ochre", value: "ochre" }] }
+              - { label: "Buttons", name: "actions", widget: "list", required: false, fields: *actionFields }
+              - *i18n
+
+          - label: "Contact panels"
+            name: "contactCards"
+            summary: "Contact panels"
+            fields:
+              - *tone
+              - *blockLabel
+              - *blockTitle
+              - label: "Panels"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Country", name: "country", widget: "select", options: ["Australia", "India"] }
+                  - { label: "Address", name: "address", widget: "text", required: false }
+                  - label: "People"
+                    name: "people"
+                    widget: "list"
+                    fields:
+                      - { label: "Name", name: "name", widget: "string" }
+                      - { label: "Role", name: "role", widget: "string", required: false }
+                      - { label: "Email", name: "email", widget: "string", required: false }
+              - *i18n
+
+  - name: "people"
+    label: "Researchers"
+    label_singular: "researcher"
+    folder: "content/people"
+    extension: "json"
+    format: "json"
+    create: true
+    identifier_field: "name"
+    slug: "{{fields.slug}}"
+    summary: "{{fields.name}} — {{fields.institute}}"
+    sortable_fields: ["sortName", "institute", "country"]
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Page address", name: "slug", widget: "string", pattern: ['^[a-z0-9-]+$', "Lower-case letters, numbers and hyphens only"] }
+      - { label: "Sort as", name: "sortName", widget: "string", required: false, hint: "Surname first if the directory should sort differently to the displayed name." }
+      - { label: "Role", name: "designation", widget: "string", required: false }
+      - { label: "Institution", name: "institute", widget: "string", hint: "Must match the institution name used by the other researchers there, or the filter will list it separately." }
+      - { label: "Institution key", name: "instituteSlug", widget: "hidden", required: false }
+      - { label: "Country", name: "country", widget: "select", options: ["Australia", "India"] }
+      - { label: "Highest qualification", name: "qualification", widget: "string", required: false }
+      - { label: "Areas of interest", name: "interests", widget: "text", required: false }
+      - { label: "Email", name: "email", widget: "string", required: false }
+      - { label: "Staff page", name: "homepage", widget: "string", required: false }
+      - { label: "Research profiles", name: "profiles", widget: "list", required: false, field: { label: "URL", name: "url", widget: "string" } }
+      - { label: "Portrait", name: "photo", widget: "object", required: false, fields: *photoFields }
+      - { label: "Biography", name: "bio", widget: "list", required: false, field: { label: "Paragraph", name: "text", widget: "text" } }
+      - label: "Sections"
         name: "sections"
+        widget: "list"
+        required: false
+        hint: "e.g. Research Projects, Key Publications."
         fields:
-          - label: "The approach"
-            name: "approach"
-            widget: "object"
-            collapsed: true
-            fields:
-              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
-              - { label: "Headline", name: "title", widget: "string" }
-              - { label: "Intro line", name: "lede", widget: "text" }
-          - label: "Bhujal Jankaars"
-            name: "bjs"
-            widget: "object"
-            collapsed: true
-            fields:
-              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
-              - { label: "Headline", name: "title", widget: "string" }
-              - { label: "Intro line", name: "lede", widget: "text" }
-          - label: "Groundwater"
-            name: "groundwater"
-            widget: "object"
-            collapsed: true
-            fields:
-              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
-              - { label: "Headline", name: "title", widget: "string" }
-              - { label: "Intro line", name: "lede", widget: "text" }
-          - label: "MyWell app"
-            name: "mywell"
-            widget: "object"
-            collapsed: true
-            fields:
-              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
-              - { label: "Headline", name: "title", widget: "string" }
-              - { label: "Intro line", name: "lede", widget: "text" }
-          - label: "In the media"
-            name: "media"
-            widget: "object"
-            collapsed: true
-            fields:
-              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
-              - { label: "Headline", name: "title", widget: "string" }
-              - { label: "Intro line", name: "lede", widget: "text" }
-          - label: "Films"
-            name: "films"
-            widget: "object"
-            collapsed: true
-            fields:
-              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
-              - { label: "Headline", name: "title", widget: "string" }
-              - { label: "Intro line", name: "lede", widget: "text" }
-          - label: "Groundwater game"
-            name: "game"
-            widget: "object"
-            collapsed: true
-            fields:
-              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
-              - { label: "Headline", name: "title", widget: "string" }
-              - { label: "Intro line", name: "lede", widget: "text" }
-          - label: "People & partners"
-            name: "people"
-            widget: "object"
-            collapsed: true
-            fields:
-              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
-              - { label: "Headline", name: "title", widget: "string" }
-              - { label: "Intro line", name: "lede", widget: "text" }
-          - label: "Image archive"
-            name: "archive"
-            widget: "object"
-            collapsed: true
-            fields:
-              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
-              - { label: "Headline", name: "title", widget: "string" }
-              - { label: "Intro line", name: "lede", widget: "text" }
-
-  - name: "media"
-    label: "Media stories"
-    files:
-      - file: "content/media.json"
-        label: "Media stories list"
-        name: "media"
-        fields:
-          - label: "Stories"
-            name: "items"
-            widget: "list"
-            summary: "{{fields.title}}"
-            fields:
-              - { label: "Label (source · date)", name: "meta", widget: "string", hint: "e.g. ACIAR · 17 Sep 2024" }
-              - { label: "Title", name: "title", widget: "string" }
-              - { label: "Description", name: "description", widget: "text" }
-              - { label: "Link URL", name: "url", widget: "string" }
-
-  - name: "films"
-    label: "Films"
-    files:
-      - file: "content/films.json"
-        label: "Films list"
-        name: "films"
-        fields:
-          - label: "Videos"
-            name: "items"
-            widget: "list"
-            summary: "{{fields.title}}"
-            fields:
-              - { label: "Label (category · source)", name: "meta", widget: "string", hint: "e.g. Documentary · Deutsche Welle" }
-              - { label: "Title", name: "title", widget: "string" }
-              - { label: "YouTube URL", name: "url", widget: "string", hint: "Paste the full YouTube link — the thumbnail is generated automatically" }
+          - { label: "Heading", name: "title", widget: "string" }
+          - { label: "Entries", name: "items", widget: "list", field: { label: "Entry", name: "text", widget: "text" } }
+      - { label: "Original page", name: "source", widget: "hidden", required: false }
 
   - name: "partners"
-    label: "People & partners"
-    files:
-      - file: "content/partners.json"
-        label: "Partners list"
-        name: "partners"
+    label: "Partner institutions"
+    label_singular: "partner"
+    folder: "content/partners"
+    extension: "json"
+    format: "json"
+    create: true
+    identifier_field: "name"
+    slug: "{{fields.slug}}"
+    summary: "{{fields.country}} · {{fields.name}}"
+    sortable_fields: ["name", "country"]
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Page address", name: "slug", widget: "string", pattern: ['^[a-z0-9-]+$', "Lower-case letters, numbers and hyphens only"] }
+      - { label: "Country", name: "country", widget: "select", options: ["Australia", "India"] }
+      - { label: "Institution name used by researchers", name: "instituteName", widget: "string", required: false, hint: "Links this partner to the researchers listed under that institution." }
+      - { label: "Logo", name: "logo", widget: "object", fields: [{ label: "Image", name: "image", widget: "image" }] }
+      - { label: "One-line summary", name: "summary", widget: "text", required: false }
+      - { label: "Description", name: "body", widget: "list", required: false, field: { label: "Paragraph", name: "text", widget: "text" } }
+      - label: "Sections"
+        name: "sections"
+        widget: "list"
+        required: false
         fields:
-          - label: "Partners"
-            name: "items"
-            widget: "list"
-            summary: "{{fields.name}}"
-            fields:
-              - { label: "Label (place · role)", name: "meta", widget: "string", hint: "e.g. Australia · Lead partner" }
-              - { label: "Name", name: "name", widget: "string" }
-              - { label: "Link URL (optional)", name: "url", widget: "string", required: false }
-
-  - name: "images"
-    label: "Section images"
-    files:
-      - file: "content/images.json"
-        label: "All section images"
-        name: "images"
-        fields:
-          - label: "Home · Story card 1 (The method)"
-            name: "homeStoryApproach"
-            widget: "object"
-            collapsed: true
-            fields: &photoFields
-              - { label: "Photo", name: "image", widget: "image" }
-              - { label: "Focus", name: "focus", widget: "select", default: "auto", options: *focusOptions }
-              - { label: "Fit", name: "fit", widget: "select", default: "auto", options: *fitOptions }
-          - { label: "Home · Story card 2 (The people)", name: "homeStoryBjs", widget: "object", collapsed: true, fields: *photoFields }
-          - { label: "Home · Story card 3 (The platform)", name: "homeStoryMywell", widget: "object", collapsed: true, fields: *photoFields }
-          - { label: "Approach · Editorial photo 1", name: "approachEditorial1", widget: "object", collapsed: true, fields: *photoFields }
-          - { label: "Approach · Editorial photo 2", name: "approachEditorial2", widget: "object", collapsed: true, fields: *photoFields }
-          - { label: "Approach · Data panel photo", name: "approachDataPanel", widget: "object", collapsed: true, fields: *photoFields }
-          - { label: "Groundwater · Ribbon photo 1", name: "groundwaterRibbon1", widget: "object", collapsed: true, fields: *photoFields }
-          - { label: "Groundwater · Ribbon photo 2", name: "groundwaterRibbon2", widget: "object", collapsed: true, fields: *photoFields }
-          - { label: "Groundwater · Ribbon photo 3", name: "groundwaterRibbon3", widget: "object", collapsed: true, fields: *photoFields }
-          - { label: "MyWell · Main screenshot", name: "mywellMain", widget: "object", collapsed: true, fields: *photoFields }
-          - { label: "MyWell · Strip screenshot 1", name: "mywellStrip1", widget: "object", collapsed: true, fields: *photoFields }
-          - { label: "MyWell · Strip screenshot 2", name: "mywellStrip2", widget: "object", collapsed: true, fields: *photoFields }
-          - { label: "Game · Screenshot", name: "game", widget: "object", collapsed: true, fields: *photoFields }
-
-  - name: "menu"
-    label: "Menu photos"
-    files:
-      - file: "content/menu.json"
-        label: "Menu card photos"
-        name: "menu"
-        fields:
-          - { label: "01 · Overview", name: "home", widget: "object", collapsed: true, fields: *photoFields }
-          - { label: "02 · The approach", name: "approach", widget: "object", collapsed: true, fields: *photoFields }
-          - { label: "03 · Bhujal Jankaars", name: "bjs", widget: "object", collapsed: true, fields: *photoFields }
-          - { label: "04 · Groundwater", name: "groundwater", widget: "object", collapsed: true, fields: *photoFields }
-          - { label: "05 · MyWell app", name: "mywell", widget: "object", collapsed: true, fields: *photoFields }
-          - { label: "06 · In the media", name: "media", widget: "object", collapsed: true, fields: *photoFields }
-          - { label: "07 · Films", name: "films", widget: "object", collapsed: true, fields: *photoFields }
-          - { label: "08 · Groundwater game", name: "game", widget: "object", collapsed: true, fields: *photoFields }
-          - { label: "09 · People & partners", name: "people", widget: "object", collapsed: true, fields: *photoFields }
-          - { label: "10 · Image archive", name: "archive", widget: "object", collapsed: true, fields: *photoFields }
-
-  - name: "portraits"
-    label: "People portraits"
-    files:
-      - file: "content/portraits.json"
-        label: "Portrait band"
-        name: "portraits"
-        fields:
-          - label: "Portraits"
-            name: "items"
-            widget: "list"
-            fields: *photoFields
-
-  - name: "gallery"
-    label: "Image archive"
-    files:
-      - file: "content/gallery.json"
-        label: "Archive gallery"
-        name: "gallery"
-        fields:
-          - label: "Images"
-            name: "items"
-            widget: "list"
-            summary: "{{fields.title}}"
-            fields:
-              - { label: "Photo", name: "image", widget: "image" }
-              - { label: "Category", name: "category", widget: "string", hint: "Groups the image under a filter tab, e.g. Overview" }
-              - { label: "Title", name: "title", widget: "string" }
-              - { label: "Source URL (optional)", name: "source", widget: "string", required: false }
+          - { label: "Heading", name: "title", widget: "string" }
+          - { label: "Entries", name: "items", widget: "list", field: { label: "Entry", name: "text", widget: "text" } }
+      - { label: "Original page", name: "source", widget: "hidden", required: false }

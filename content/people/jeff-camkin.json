@@ -1,0 +1,45 @@
+{
+  "slug": "jeff-camkin",
+  "name": "Jeff Camkin",
+  "sortName": "Jeff Camkin",
+  "designation": "Adjunct Professor/Consultant",
+  "institute": "University of Western Australia",
+  "instituteSlug": "university-of-western-australia",
+  "country": "Australia",
+  "qualification": "Graduate Diploma (Natural Resources Law), Wollongong University",
+  "interests": "Water education, water policy, water governance, stakeholder engagement",
+  "email": "Jeff.Camkin@uwa.edu.au",
+  "homepage": "https://research-repository.uwa.edu.au/en/",
+  "profiles": [
+    "https://www.researchgate.net/profile/Jeff-Camkin"
+  ],
+  "photo": {
+    "image": "/assets/people/jeff-camkin.jpg",
+    "positionX": 50,
+    "positionY": 22
+  },
+  "bio": [
+    "An enthusiastic water specialist, Jeff Camkin has 30 years’ experience in water, fisheries and agriculture governance, policy development, resource allocation, stakeholder engagement, research and education. Jeff is currently Adjunct Professor at the University of Western Australia, Senior fellow with Institute for Study and Development Worldwide, Honorary Lecturer at the University of Algarve (Portugal) and Technical University of Darmstadt (Germany), and a global consultant. Previous roles include CSIRO Sustainability Specialist and Leader of the Australian Research Centre for Water in Society; Irrigation System Harmonisation Leader with the CRC for Irrigation Futures; and Water Allocation Manager and policy advisor to ministers for water resources, environment, fisheries and agriculture and the Western Australian Premier. Jeff has observed, advised, consulted, or managed water issues in Australia, Asia, Africa, North and South America and Europe, and is founding Editor-in-Chief of World Water Policy Journal – a platform to support the world’s emerging water leaders and thinkers."
+  ],
+  "sections": [
+    {
+      "title": "Research Project",
+      "items": [
+        "(present – 2021) Project Leader for ‘Local and National Mapping on Implementation Strategy and Mechanism to Enable Open Science for Accelerating SDGs in Asia and the Pacific, and subsequently to design and deliver a program of workshops for Open Science capacity building in Asia Pacific for UNESCO Jakarta.",
+        "(2020 – 2013) Co-designer and co-coordinator of the Module “Water, Food Security and Agricultural Landscapes” for the International Master Course in Integrated Water Management, delivered at the UWA on behalf of the International Water Centre (IWC), Australia",
+        "(2014 – 2013) Leader and co-designer of the Australia Pakistan Agricultural Scholarships Short Course on Irrigation and Water Resource Management delivered at UWA, in southwest Western Australia and in the Murray-Darling Basin funded by Australian Aid."
+      ]
+    },
+    {
+      "title": "Key Publications/Reports",
+      "items": [
+        "Camkin J, Neto S, Bhattarai B, Ojha H, Khan S, Sugiura A, Lin J, Nurritasari FA and Karanja JM (2022) Open Science for Accelerating the Sustainable Development Goals: Status and Prospects in Asia and the Pacific. Front. Polit. Sci. 4:878761. doi: 10.3389/fpos.2022.878761",
+        "Neto, S. and Camkin, J. (2022). Transparency, regional diversity, and capacity building: cornerstones for trust and engagement in good water governance. Water International Volume 47, 2022 – Issue 2: Measuring the Impacts of Water Governance. DOI: 10.1080/02508060.2022.2037850.",
+        "Neto, S., Camkin, J., Fenemor, A., Tan, P-L., Baptista, J.M., Ribeiro, M., Shulze, R., Stuart-Hill, S., Spray, C. and Rahmah, E. 2018. “OECD Principles on Water Governance in practice: an assessment of existing frameworks in Europe, Asia-Pacific, Africa and South America,” Water International, Taylor & Francis Journals, vol. 43(1), pages 60-89, January.",
+        "Camkin, J. 2017. Synthesis Report and Recommendations for Strengthening Collaboration between Asian and African Category-2 Water Centres and Chairs for Upscaling Water Security to Meet Local, Regional and Global Challenge. UNESCO. Published by UNESCO and available online at https://unesdoc.unesco.org/ark:/48223/pf0000266215.",
+        "Huntjens, P., Lebel, L., Pahl-Wostl, C., Camkin, J., Schulze, R., and Kranz, N. 2012. Institutional Design Propositions for the Governance of Adaptation to Climate Change in the Water Sector. Global Environmental Change, Volume 22, Issue 1, February 2012, pp. 67-81"
+      ]
+    }
+  ],
+  "source": "https://aiwc.org.au/jeff-camkin/"
+}

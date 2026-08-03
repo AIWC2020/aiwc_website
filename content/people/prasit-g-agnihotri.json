@@ -1,0 +1,43 @@
+{
+  "slug": "prasit-g-agnihotri",
+  "name": "Prasit G. Agnihotri",
+  "sortName": "Prasit G. Agnihotri",
+  "designation": "Professor",
+  "institute": "Sardar Vallabhbhai National Institute of Technology",
+  "instituteSlug": "sardar-vallabhbhai-national-institute-of-technology",
+  "country": "India",
+  "qualification": "Ph. D., Sardar Vallabhbhai National Institute of Technology, Surat, India",
+  "interests": "Areas of interest are water resources engineering, geospatial technologies including GIS, GPS and Remote Sensing. His Research area is Flood Mitigation and Management under Geospatial Platform, Hydrology and Irrigation Water Management using applications of Geospatial Technologies.",
+  "email": "pga@ced.svnit.ac.in",
+  "homepage": "https://sites.google.com/view/p-g-agnihotri/home",
+  "profiles": [
+    "https://www.researchgate.net/profile/Prasit_Agnihotri"
+  ],
+  "photo": {
+    "image": "/assets/people/prasit-g-agnihotri.webp",
+    "positionX": 50,
+    "positionY": 22
+  },
+  "bio": [
+    "Prasit Agnihotri has total experience of about 28 years. He has acted as Dean (Faculty Welfare), Associate Dean (Faculty Welfare), Central Public Information Officer and Professor In-charge Training and Placement Cell of the Institute. He has published about 45 research papers in peer-reviewed journals and conferences of repute. He has completed 01 research projects and 10 consultancy projects. He has guided 1 Ph. D. research Scholar and is supervising 8 Ph.D. research Scholars at present. He is member of 5 technical societies. He has delivered 15 expert lectures. He has visited countries like UK, Canada and Thailand for presenting papers in international conferences."
+  ],
+  "sections": [
+    {
+      "title": "Research Project",
+      "items": [
+        "Development of Urban Storm Water Management Model and Transportation Planning; Funding Space Application Centre, ISRO, Ahmedabad, India"
+      ]
+    },
+    {
+      "title": "Key Publications/Reports",
+      "items": [
+        "Waghwala, R. K., Agnihotri, P. G. (2019). Flood risk assessment and resilience strategies for flood risk management: A case study of Surat City. International Journal of Disaster Risk Reduction, 40, 101155.https://doi.org/10.1016/ j.ijdrr.2019.101155.",
+        "Pathan, A. I., Agnihotri, P. G. (2019). A combined approach for 1-D hydrodynamic flood modeling by using Arc-GIS, Hec-Georas, Hec-Ras Interface-a case study on Purna River of Navsari City, Gujarat. IJRTE, 8(1), 1410-1417.",
+        "Rupal Waghwala, P G Agnihotri (2019). Assessing the Impact Index of Urbanization on Urban Flood Risk International Journal of Recent Technology and Engineering- IJRTE.",
+        "Waghwala, R. K., Agnihotri, P. G. (2019). Impact assessment of urbanization on flood risk and integrated flood management approach: a case study of Surat city and its surrounding region. ISH Journal of Hydraulic Engineering, 1-11.",
+        "Azaz I. Pathan, P G Agnihotri (2020). 2-D Unsteady Flow Modelling and Inundation Mapping for Lower Region of Purna Basin Using HEC-RAS. Nature Environment and Pollution Technology: An International Quarterly Scientific Journal: p-ISSN: 0972-6268 e-ISSN: 2395-3454, Volume 19, issue-1."
+      ]
+    }
+  ],
+  "source": "https://aiwc.org.au/prasit-g-agnihotri/"
+}

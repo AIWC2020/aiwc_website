@@ -1,0 +1,84 @@
+{
+  "menuName": "Research",
+  "slug": "research",
+  "order": 4,
+  "parent": "work",
+  "published": true,
+  "template": "standard",
+  "intro": {
+    "eyebrow": "Our work · Research",
+    "title": "Research activities",
+    "lede": "Joint projects run across Australian and Indian institutions, several of them funded under India’s Scheme for Promotion of Academic and Research Collaboration (SPARC)."
+  },
+  "blocks": [
+    {
+      "type": "pubList",
+      "tone": "paper",
+      "label": "Current and recent projects",
+      "items": [
+        {
+          "text": "Securing Water for Agricultural and Food Sustainability: Developing Transdisciplinary Approach to Groundwater Management.",
+          "href": "https://sparc.iitkgp.ac.in/detailpage.php?id=1285"
+        },
+        {
+          "text": "Recharge Process of Springs and Its Management to mitigate anthropogenic and climate change impact for water Security: A case study in part of Kumaun Lesser Himalaya, India.",
+          "href": "https://sparc.iitkgp.ac.in/detailpage.php?id=69"
+        },
+        {
+          "text": "Coastal reservoirs as a sustainable strategy for Water Security.",
+          "href": "https://sparc.iitkgp.ac.in/detailpage.php?id=330"
+        },
+        {
+          "text": "Integrated Urban Water Management for Enhanced Water Security.",
+          "href": "https://sparc.iitkgp.ac.in/detailpage.php?id=593"
+        },
+        {
+          "text": "Managing Aquifer Recharge and Sustaining Groundwater Use through Village-level Intervention. www.marvi.org.in"
+        }
+      ]
+    },
+    {
+      "type": "cards",
+      "tone": "sand",
+      "label": "Where research sits",
+      "title": "Research is one of four programmes.",
+      "columns": 3,
+      "items": [
+        {
+          "number": "02",
+          "title": "Education",
+          "text": "The Master’s specialisation in Sustainable Water Futures.",
+          "page": "education",
+          "cta": "Education"
+        },
+        {
+          "number": "03",
+          "title": "Training",
+          "text": "MARVI, YWP, DRIP II, dam safety and village groundwater cooperatives.",
+          "page": "training",
+          "cta": "Training"
+        },
+        {
+          "number": "04",
+          "title": "Outreach",
+          "text": "Technical exchange workshops and public dialogue.",
+          "page": "outreach",
+          "cta": "Outreach"
+        }
+      ]
+    },
+    {
+      "type": "callout",
+      "tone": "paper",
+      "title": "Looking for a research collaborator?",
+      "text": "One hundred and eight researchers across 27 institutions, with their areas of interest, current projects and key publications on record.",
+      "actions": [
+        {
+          "label": "Search the directory",
+          "page": "people",
+          "primary": true
+        }
+      ]
+    }
+  ]
+}

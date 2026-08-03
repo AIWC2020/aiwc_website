@@ -1,0 +1,306 @@
+{
+  "menuName": "Publications",
+  "slug": "publications",
+  "order": 10,
+  "published": true,
+  "template": "standard",
+  "intro": {
+    "eyebrow": "Publications",
+    "title": "What the partnership\nhas published.",
+    "lede": "Journal articles, conference papers and book chapters from AIWC partners across both countries."
+  },
+  "blocks": [
+    {
+      "type": "pubList",
+      "tone": "paper",
+      "label": "01 — Journal articles",
+      "title": "Journal articles",
+      "items": [
+        {
+          "text": "T Vijaya Lakshmi,” Geospatial data and web based tools for managing irrigation infrastructure expansion projects” World Water Policy. 2023;1–16,03 August 2023, DOI: 10.1002/wwp2.12130"
+        },
+        {
+          "text": "T Vijaya Lakshmi, “Transdisciplinary approach for planning the expansion of irrigation infrastructure at a regional scale.” World Water Policy.20 July 2023,",
+          "href": "https://doi.org/10.1002/wwp2.12120"
+        },
+        {
+          "text": "Pavan Kumar Kamaraju T Vijaya Lakshmi, “Spatio-temporal Changes in the Grass Land Cover of Manas Himanshu Kikani <himanshu@aalekhan.com>National Park”, Volume 149, Issue 3, March 2023 Indian Forester"
+        },
+        {
+          "text": "Issac, AM, Harshitha, MS, Lakshmi, TV, Hagare, D, Maheshwari, B, Reynolds, JK, Rao, L, Tuppad, P, Prasad, S, Ynag, S, & Sivakumar, M 2023, ‘Geospatial data and web based tools for managing irrigation infrastructure expansion projects’, World Water Policy, pp. 1–16,",
+          "href": "https://doi.org/10.1002/wwp2.12130"
+        },
+        {
+          "text": "Deepthi, BP, Pushpa Tuppad and Lokesh, KS 2023, ‘Sensitivity Analysis and Multi-Site Calibration of KRS Catchment using SWAT’, International Journal of Scientific Research in Engineering and Management, Vol. 07(04), DOI: 10.55041/IJSREM18992."
+        },
+        {
+          "text": "Maheshwari, B, Atkins, D, Hagare, D, Spencer, R, Dillon, P, Jain, S, Rollason, R, Reynolds, J, Dollin, J, Batelaan, O, Packham, R, Patel, JB, Purkait, MK, Bhaduri, A, Mailapalli, D, Ashok, A and Prasad, J 2023, Mentoring in the young water professionals’ training program: Lessons for effective capacity development. World Water Policy 9(3): 334-348.",
+          "href": "https://doi.org/10.1002/wwp2.12129"
+        },
+        {
+          "text": "Maheshwari, B, Hagare, D, Spencer, R, Dollin, J, Reynolds, J, Atkins, D, Packham, R, Batelaan, O, Sitharam, TG, Lan, Y-C, Arora, M, Kashyap, R, Kartha, S, Sathasivan, A and Dutta, S 2023, Training young water professionals in leadership and transdisciplinary competencies for sustainable water management in India. World Water Policy 9(3): 300-314.",
+          "href": "https://doi.org/10.1002/wwp2.12114"
+        },
+        {
+          "text": "Mallya, Deepak; Abdikheibari, Sara; Dumee, Ludovic; Muthukumaran, Shobha; Lei, Weiwei; Baskaran, Bas (2023). Removal of natural organic matter from surface water sources by nanofiltration and surface engineering membranes for fouling mitigation – A review. Chemosphere",
+          "href": "https://hdl.handle.net/10779/DRO/DU:22199071.v1"
+        },
+        {
+          "text": "Nguyen, TTN; Dong-Sin, S; Chua, Lloyd; Nguyen, LH; Ha, LH; Ngo, AT; et al. (2023). Revealing riverbed morphological evolution in river system with complexity: The Vietnam Mekong River case study. Journal of Hydrology vol. 617.",
+          "href": "https://hdl.handle.net/10779/DRO/DU:21951221.v1"
+        },
+        {
+          "text": "Chaudhary, S; Chua, Lloyd; Kansal, A (2023). The uncertainty in stormwater quality modeling for temperate and tropical catchments. Journal of Hydrology. Vol. 617",
+          "href": "https://hdl.handle.net/10779/DRO/DU:22097543.v1"
+        },
+        {
+          "text": "Irvine, KN; Chua, Lloyd; Ashrafi, M; Loc, HH; Ha, LS (2023). Drivers of Model Uncertainty for Urban Runoff in a Tropical Climate: The Effect of Rainfall Variability and Subcatchment Parameterization. Journal of Water Management Modeling. Vol. 31 pp 1-12",
+          "href": "https://hdl.handle.net/10779/DRO/DU:22597240.v1"
+        },
+        {
+          "text": "Likitswat, Fa; Dejnirattisai, Supanut; Sahavacharin, Alisa; Irvine, Kim N; Chua, Lloyd (2023). Designing Ecological Floating Wetlands to Optimize Ecosystem Services for Urban Resilience in Tropical Climates: A Review. Future Cities and Environment. Vol. 9 pp 1-12",
+          "href": "https://hdl.handle.net/10779/DRO/DU:22406293.v1"
+        },
+        {
+          "text": "Semasinghe, C; Jatrana, Santosh; King, TJ (2023). Exploring the associations between the perception of water scarcity and support for alternative potable water sources. PLoS ONE. vol. 18 pp. 1-14",
+          "href": "https://hdl.handle.net/10779/DRO/DU:22558042.v1"
+        },
+        {
+          "text": "Barzegar, M; Blanks, S; Gharehdash, Saba; Timms, Wendy (2023). Development of IOT-based low-cost MEMS pressure sensor for groundwater level monitoring. Measurement Science and Technology. Vol. 34",
+          "href": "https://hdl.handle.net/10779/DRO/DU:23939400.v1"
+        },
+        {
+          "text": "Fan X, B.J. Henley T. J. Peterson and M. Arora, Groundwater sensitivity to climate variations in Australia. Water Resources Research, In Press 2023."
+        },
+        {
+          "text": "Arora M, Western A, Burns M J, Yong CF and Fletcher TD. Do stormwater infiltration basins really provide cleaner baseflows The influence of stormwater infiltration on downslope groundwater chemistry. Environmental Geochemistry and Health, In Press, 2023."
+        },
+        {
+          "text": "Cervantes-Servin A, Arora M, Peterson TH and Pettigrove V, Seasonal estimation of groundwater vulnerability, Nature Scientific Report, 2023."
+        },
+        {
+          "text": "Arora M et al, Training Young Water Professionals in Leadership and Transdisciplinary Competencies for Sustainable Water Management in India, World Water Policy Journal (Wiley publisher), 2023."
+        },
+        {
+          "text": "Arora M, Minh Hoang Nguyena, Ishitha Chopra, Priyaga Fernando, Matthew James Burns, Timothy D Fletcher, ‘Flood mitigation performance of permeable pavements in an urbanised catchment in Melbourne, Australia (Elizabeth street catchment): Case Study,’ Journal of Water, MDPI, 2023."
+        },
+        {
+          "text": "Lakhanpal G, Black JR, Casas-Mulet R, Arora M, Stewardson M. Micro-CT scanning approaches to quantify, parameterise and visualise bioturbation activity in clogged streambeds: a proof of concept, River Research and Applications, 2023."
+        },
+        {
+          "text": "K.R.L. Saranya T Vijaya Lakshmi C. Sudhakar Reddy, “Analyzing the trends in annual forest loss hotspots in the regional landscape of Eastern Ghats, India,” Remote Sensing Applications: Society and Environment 26,100731. April 2022",
+          "href": "https://doi.org/10.1016/j.rsase.2022.100731"
+        },
+        {
+          "text": "Pavan Kumar Kamaraju T Vijaya Lakshmi, “Changes in Vegetation Health of the Tropical Rainforest of Assam due to Climate Change and Anthropogenic Intervention”, Indian Forester, July 2022 Volume 148, issue 8, August 2022"
+        },
+        {
+          "text": "Md Abdul Moid T Vijaya Lakshmi, SWAT Model Calibration and Uncertainty Analysis for Stream flow Prediction in the Manair River Basin, Telangana, India, Journal of Indian Water Work Associations, 4,292-298,Oct-2022, https://www.iwwa.info/journal-archives?vol-id=MTg3 IWWA"
+        },
+        {
+          "text": "Deepthi, BP, Pushpa Tuppad and Lokesh, KS 2022, ‘Impact analysis of landuse/landcover change on hydrologic regime of Upper Cauvery basin’, Tianjin Daxue Xuebao (Ziran Kexue yu Gongcheng Jishu Ban)/ Journal of Tianjin University Science and Technology, Vol. 55(06), pp 36-49, DOI: 10.17605/OSF.IO/Y6F82"
+        },
+        {
+          "text": "Fildes, SG, Bruce, D, Clark, IF, Raimondo, T, Keane, and Batelaan, O 2022, Integrating spatially explicit sensitivity and uncertainty analysis in a multi-criteria decision analysis-based groundwater potential zone model. Journal of Hydrology 610: 127837.",
+          "href": "https://doi.org/10.1016/j.jhydrol.2022.127837"
+        },
+        {
+          "text": "Abdikheibari, S; Baskaran, Bas; Guijt, Rosanne; Lei, Weiwei; Dumée, L F (2022). Cross-linked boron nitride-piperazine amide thin film nanocomposite membranes for rejection and concentration of per- and poly-fluoroalkyl substances (PFAS). Environmental Quality Management",
+          "href": "https://hdl.handle.net/10536/DRO/DU:30161681"
+        },
+        {
+          "text": "Mallya, D S; Yang, Guoliang; Lei, Weiwei; Muthukumaran, S; Baskaran, Bas (2022). Functionalized MoS2 nanosheets enabled nanofiltration membrane with enhanced permeance and fouling resistance. Environmental Technology and Innovation Vol.27..",
+          "href": "https://hdl.handle.net/10779/DRO/DU:20583288.v1"
+        },
+        {
+          "text": "Shirdashtzadeh, Maryam; Chua, Lloyd; Brau, Lambert (2022). Microbial Communities and Nitrogen Transformation in Constructed Wetlands Treating Stormwater Runoff. Frontiers in Water. Vol. 3 pp 1-20",
+          "href": "https://hdl.handle.net/10536/DRO/DU:30164708"
+        },
+        {
+          "text": "Shagun, Shagun; Ashrafi, M; Chua, Lloyd; Irvine, KN; Yang, P (2022). Spatiotemporal Modeling of the Wind Field over an Urban Lake Subject to Wind Sheltering. Deakin University. Journal contribution. https://hdl.handle.net/10779/DRO/DU:21606204.v1; Kansal, Arun (2022)."
+        },
+        {
+          "text": "Shagun, Shagun; Chua, Lloyd; Kansal, Arun (2022). Event mean concentration and first flush from residential catchments in different climate zones. Deakin University. Journal contribution.",
+          "href": "https://hdl.handle.net/10536/DRO/DU:30168863"
+        },
+        {
+          "text": "Yang, P; Chua, Lloyd; Irvine, K N; Nguyen, M T; Low, E W (2022). Impacts of a floating photovoltaic system on temperature and water quality in a shallow tropical reservoir. Limonolgy.",
+          "href": "https://hdl.handle.net/10779/DRO/DU:20582736.v1"
+        },
+        {
+          "text": "Ashrafi, M; Chua, Lloyd; Irvine, KN; Yang, P (2022). Spatiotemporal Modeling of the Wind Field over an Urban Lake Subject to Wind Sheltering. Journal of Applied Meteorology and Climatology. Vol. 61 p. 489-501.",
+          "href": "https://hdl.handle.net/10779/DRO/DU:21606204.v1"
+        },
+        {
+          "text": "Nguyen, TTN; Shih, DS; Chua, Lloyd; Kieu, HN; Ha, LH; Nguyen, LH; et al. (2022). Identifying Flow Eddy Currents in the River System as the Riverbank Scouring Cause: A Case Study of the Mekong River. Water (Switzerland). Vol. 14 pp. 2418-2418.",
+          "href": "https://hdl.handle.net/10779/DRO/DU:22030040.v1"
+        },
+        {
+          "text": "Irvine, KN; Chua, Lloyd; Hua’an, Z; Qi, LE; Xuan, LY (2022). Nature-based solutions to manage particle-bound metals in urban stormwater runoff: current design practices and knowledge gaps. Journal of Soils and Sediments.",
+          "href": "https://hdl.handle.net/10779/DRO/DU:22091678.v1"
+        },
+        {
+          "text": "Kurukulasuriya, Devmi; Howcroft, Bill; Moon, Ellen; Meredith, K; Timms, Wendy (2022). Selecting Environmental Water Tracers to Understand Groundwater around Mines: Opportunities and Limitations. MAdhikari, Sirjana; Timms, Wendy; Mahmud, MAP (2022)."
+        },
+        {
+          "text": "Adhikari, Sirjana; Timms, Wendy; Mahmud, MAP (2022). Optimising water holding capacity and hydrophobicity of biochar for soil amendment – A review. Science of the Total Environment. vol.851.",
+          "href": "https://hdl.handle.net/10536/DRO/DU:30163259"
+        },
+        {
+          "text": "Rau, GC; McMillan, TC; Andersen, MS; Timms, Wendy (2022). In situ estimation of subsurface hydro-geomechanical properties using the groundwater response to semi-diurnal Earth and atmospheric tides. Hydrology and Earth System Sciences. Vol. 26. pp. 4301-4321",
+          "href": "https://hdl.handle.net/10779/DRO/DU:22091402.v1"
+        },
+        {
+          "text": "Rau, GC; McMillan, TC; Andersen, MS; Timms, Wendy (2022). In situ estimation of subsurface hydro-geomechanical properties using the groundwater response to semi-diurnal Earth and atmospheric tides. Hydrology and Earth System Sciences. Vol. 26. Pp. 4301-4321",
+          "href": "https://hdl.handle.net/10779/DRO/DU:22091402.v1"
+        },
+        {
+          "text": "Chowdhury, Faysal; Gong, Jinzhe; Rau, Gabriel C; Timms, Wendy A (2022). Multifactor analysis of specific storage estimates and implications for transient groundwater modeling. Hydrogeology Journal.",
+          "href": "https://hdl.handle.net/10779/DRO/DU:21249444.v1"
+        },
+        {
+          "text": "Wang, Y; Almutairi, ALZ; Bedrikovetsky, P; Timms, Wendy; Privat, KL; Bhattacharyya, SK; et al. (2022). In-situ fines migration and grains redistribution induced by mineral reactions – Implications for clogging during water injection in carbonate aquifers. Journal of Hydrology. Vol. 614. Pp. 128533-128533.",
+          "href": "https://hdl.handle.net/10779/DRO/DU:22091492.v1"
+        },
+        {
+          "text": "Raeesi R, Xue Y, Disfani MM, Arora M. Hydrological and Water Quality Performance of Waste Tire Permeable Pavements: Field Monitoring and Numerical Analysis. Journal of Environmental Management, 2022."
+        },
+        {
+          "text": "Snigdha M, Arora M, Wu W and Tiwari M. An IUWM incorporated model to improve water supply reliability in intermittent and no service areas, Resources, Conservation and Recycling, 2022, 181, 106248."
+        },
+        {
+          "text": "Poozan A, Western A, Burns M and Arora M. Modelling the interaction between vegetation and infiltrated stormwater, Journal of Hydrology, 2022, 607, 127527."
+        },
+        {
+          "text": "K.R.L. Saranya T Vijaya Lakshmi C. Sudhakar Reddy “Predicting the potential sites of Chromolaenaodorata and Lantana camara in forest landscape of Eastern Ghats using habitat suitability models”, Ecological Informatics, 66,2021,101455, December 2021,",
+          "href": "https://doi.org/10.1016/j.ecoinf.2021.101455"
+        },
+        {
+          "text": "SJ Prasad; TM Balakrishnan Nair T Vijaya Lakshmi “Oil spill trajectory prediction assessment using multi model ocean currents-case study of MT Dawn Oil spill 2017”, International Oil Spill Conference Proceedings (2021) 2021 (1): 684276.",
+          "href": "https://doi.org/10.7901/2169-3358-2021.1.684276"
+        },
+        {
+          "text": "Abhilash Maryada, T Vijaya Lakshmi “Analyzing Seasonal Variation of Soil Properties and Interpolating in GIS Environment for a Cluster of Five Villages of Telangana State, India”., Research Journal of Chemistry and Environment, December 2021"
+        },
+        {
+          "text": "Renukumar, KS, Pushpa Tuppad, Anjaneyappa 2021, ‘Enhancing Non-Revenue Water Reduction by Incorporating Service Level Benchmarks and Best Practices’, Journal of IWWA, Vol. 3 (4), pp. 279-286."
+        },
+        {
+          "text": "Mallya, Deepak; Dumee, Ludovic F; Muthukumaran, Shobha; Lei, Weiwei; Baskaran, Bas (2021). 2D nanosheet enabled thin film nanocomposite membranes for freshwater production – a review. Materials advances.",
+          "href": "https://hdl.handle.net/10536/DRO/DU:30152081"
+        },
+        {
+          "text": "Hermawan, A A; Teh, K L; Talei, A; Chua, Lloyd (2021). Accumulation of heavy metals in stormwater biofiltration systems augmented with zeolite and fly ash. Journal of Environmental Management. Vol. 297",
+          "href": "https://hdl.handle.net/10536/DRO/DU:30154243"
+        },
+        {
+          "text": "Chaudhary, S; Chua, Lloyd; Kansal, A (2021). Modeling washoff in temperate and tropical urban catchments. Journal of Hydrology. Vol. 603 Part B pp. 1-11",
+          "href": "https://hdl.handle.net/10536/DRO/DU:30156367"
+        },
+        {
+          "text": "Irvine, K N; Ho, H L; Chua, Lloyd (2021). Dynamics of runoff quality associated with an urban park and WSUD treatment train in a tropical climate. Environmental Technology (United Kingdom)",
+          "href": "https://hdl.handle.net/10536/DRO/DU:30156340"
+        },
+        {
+          "text": "Dharmasena, Thivanka; Chua, Lloyd; Barron, N; Zhang, Hongkui (2021). Performance assessment of a constructed wetland using a numerical modelling approach. Ecological Engineering. Vol 173 pp.1-10",
+          "href": "https://hdl.handle.net/10536/DRO/DU:30157071"
+        },
+        {
+          "text": "Wang, J; Chua, Lloyd; Shanahan, P (2021). Modeling and designing for nitrogen removal in bioretention basins.Environmental Modelling and Software. Vol 146. Pp. 1-16",
+          "href": "https://hdl.handle.net/10536/DRO/DU:30157537"
+        },
+        {
+          "text": "Western A, Arora M, Burns M J, Bonneau J, Thom JK, Yong CF, James RB, Poelsma PJ and Fletcher TD. Drinking from stormwater: infiltration basins benefit downstream tree water use, Environmental Research Letters, 2021, 16, 104014."
+        },
+        {
+          "text": "Behroozi A, Arora M, Fletcher T, Westerrn A and Costelloe J. Understanding the impact of soil clay mineralogy on the adsorption behaviour of Zinc, International Journal of Environmental Research, 2021, 15,3,559-569."
+        },
+        {
+          "text": "Mondal A, Arora M, Mumford K and Dubey B. Porous media transport of iron nanoparticles for site remediation application: A review of lab scale column study, transport modelling and field-scale application. Journal of Hazardous Materials, 2021, 403, 123443."
+        },
+        {
+          "text": "Shrivastava S, Michael Stewardson M and Arora M. Sediment Reworking in Streambeds with Fine Sediment deposits and Its Influence on Hyporheic Flow Regime. Submitted to Water Resources Research, 57, 2021."
+        },
+        {
+          "text": "Shrivastava S, Michael Stewardson M and Arora M. Influence of Bioturbation on Hyporheic Exchange in Streams: Conceptual Model and Insights From Laboratory Experiments, Water Resources Research, 2021, 57, 2."
+        },
+        {
+          "text": "Md Abdul Moid,T Vijaya Lakshmi, P Kesava Abhilash “Estimation of Surface Runoff in an Ungauged Basin Using SCS-CN Method, A Case Study of Manair River Basin in Telangana, India”, Applied Ecology and Environmental Sciences Aug 2020"
+        },
+        {
+          "text": "Abhilash Maryada, T Vijaya Lakshmi “Geospatial technology for mapping and analysis of social and infrastructural facilities at village level: a case study of Chinnapendyala village”, Modeling Earth Systems and Environment April 2020"
+        },
+        {
+          "text": "Vu, HM, Shanafield, M, Nhat, TT, Partington, D and Batelaan, O, 2020, Mapping catchment-scale unmonitored groundwater abstractions: Approaches based on soft data. Journal of Hydrology: Regional Studies 30: 100695.",
+          "href": "https://doi.org/10.1016/j.ejrh.2020.100695"
+        },
+        {
+          "text": "Esfahani, RA, Batelaan, O, Hutson, JL and Fallowfield, HJ 2020, Role of biofilm on virus inactivation in limestone aquifers: implications for managed aquifer recharge. Journal of Environmental Health Science and Engineering 18(1): 21-34.",
+          "href": "https://doi.org/10.1007/s40201-019-00431-5"
+        },
+        {
+          "text": "Esfahani, RA, Batelaan, O, Hutson, JL and Fallowfield, HJ 2020, Combined physical, chemical and biological clogging of managed aquifer recharge and the effect of biofilm on virus transport behavior: A column study. Journal of Water Process Engineering 33: 101115.",
+          "href": "https://doi.org/10.1016/j.jwpe.2019.101115"
+        },
+        {
+          "text": "Shrivastava S, Michael Stewardson M and Arora M, Distribution of clay-sized sediments in streambeds and influence of fine sediment clogging on hyporheic exchange, Hydrological Processes, 2020, 34, 26, 5674-5685."
+        },
+        {
+          "text": "Shrivastava S, Michael Stewardson M and Arora M. Understanding streambeds as complex systems: Review of multiple interacting environmental processes influencing streambeds permeability, Aquatic Sciences, 2020, 82, 67."
+        },
+        {
+          "text": "Behroozi A, Arora M, Fletcher T, Westerrn A. Sorption and transport behavior of zinc in the soil; Implications for stormwater management, Geoderma, 2020, 367, 114243."
+        },
+        {
+          "text": "Wu W, Maier H, Dandy G, Arora M and Castelletti A. The changing nature of the water–energy nexus in urban water supply systems: a critical review of changes and responses, Journal of Water and Climate Change, 2020, 11,4,1095-1122."
+        },
+        {
+          "text": "Arora M, Nair S, Malano H and George B. A Combined Simulation-Optimisation Modelling Framework for Assessing the Energy Use of Urban Water Systems, Journal of Environmental Management, 2020, 274, 111166."
+        },
+        {
+          "text": "Zhao S, Liu Y, Liang S, Smith K, Jia N and Arora M. Effects of urban forms on energy consumption of water supply in China, Journal of Cleaner Production, 2020, 253, 119960."
+        },
+        {
+          "text": "Wang, X, Tuppad, P, Williams, JR 2015, ‘Combining landscape segmentation and agroecosystem simulation model’, pp. 221-243. In GIS Applications in Agriculture, Volume Four: Conservation Planning, eds. T.G. Mueller, and G.F. Sassenrath, Chapter 13. Taylor and Frances Group, Boca Raton, FL."
+        }
+      ]
+    },
+    {
+      "type": "pubList",
+      "tone": "sand",
+      "label": "02 — Conference papers",
+      "title": "Conference papers",
+      "items": [
+        {
+          "text": "Renukumar, KS, Pushpa Tuppad, and Anjaneyappa. ‘Economic sustainability of Non-Revenue Water Reduction Program: A Case study in Bengaluru, India’, Presented in International e-Conference on Water Source Sustainability, Organized by Indian Water Resources Society (IWRS) and Department of Water Resources Development & Management, held on June 18-20, 2021."
+        },
+        {
+          "text": "Deepthi, BP, Pushpa Tuppad and Lokesh, KS 2021, ‘Evaluating the Impacts of Landuse/Landcover changes on Hydrologic components of Harangi and Hemavathi Watersheds using SWAT model’, Presented in International e-Conference on Water Source Sustainability, Organized by Indian Water Resources Society (IWRS) and Department of Water Resources Development & Management, held on June 18-20, 2021."
+        },
+        {
+          "text": "Supritha, HS, Pushpa Tuppad 2021, ‘Prediction of flood prone areas downstream of Supa Dam using simulation model and GIS’, Presented in the International online e-Conference on Ecosystem Restoration for Resilience and Sustainability: Living with Nature, organized by Indian Institute of Technology, Indore and National Institute of Disaster Management Ministry of Home Affairs, Govt. of India, held from 5th to 7th June 2021."
+        },
+        {
+          "text": "Deepthi, BP, Pushpa Tuppad, Lokesh, KS 2021, ‘Estimation of Hydrologic Simulation of upstream of KRS reservoir using SWAT model’, International Conference on Contemporary and Sustainable Infrastructure (ICCSI-2021), organized by Dept. of Civil Engineering, S J B Institute of Technology, Bengaluru in association with Technical Institute for Engineers (TIE), Bengaluru on 21st and 22nd May 2021."
+        },
+        {
+          "text": "Deepthi, BP, Pushpa Tuppad, Lokesh, KS 2020, ‘Hydrologic simulation of Upper Cauvery basin’, Second International conference on Advanced Material and Technology (ICMAT-20), organized by JSSSTU, Mysuru – 006, 16th to 18th January 2020."
+        },
+        {
+          "text": "Srilakshmi, TN, and Pushpa Tuppad. 2020, ‘Drought index computation using Standardized Precipitation Index (SPI) for Karnataka’, Second International conference on Advanced Material and Technology (ICMAT-20), organized by JSSSTU, Mysuru – 006, 16th to 18th January 2020"
+        }
+      ]
+    },
+    {
+      "type": "pubList",
+      "tone": "paper",
+      "label": "03 — Books & chapters",
+      "title": "Books and chapters",
+      "items": [
+        {
+          "text": "Wang, X, Tuppad, P, Williams, JR 2015, ‘Combining landscape segmentation and agroecosystem simulation model’, pp. 221-243. In GIS Applications in Agriculture, Volume Four: Conservation Planning, eds. T.G. Mueller, and G.F. Sassenrath, Chapter 13. Taylor and Frances Group, Boca Raton, FL."
+        }
+      ]
+    }
+  ]
+}

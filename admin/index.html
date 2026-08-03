@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>MARVI — Content Admin (local demo)</title>
+    <meta name="robots" content="noindex" />
+    <title>AIWC — Content admin</title>
   </head>
   <body>
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <!-- Live preview: renders entries with the site's own renderer
+         (/assets/templates.mjs), so it cannot drift from the real page. -->
+    <script type="module" src="preview.js"></script>
   </body>
 </html>

@@ -1,0 +1,41 @@
+{
+  "menuName": "Our partners",
+  "slug": "partners",
+  "order": 9,
+  "published": true,
+  "template": "standard",
+  "intro": {
+    "eyebrow": "Our partners",
+    "title": "Thirty-three institutions,\ntwo countries.",
+    "lede": "Universities, national research institutes, government departments and water businesses — the consortium that established the Centre and sustains it."
+  },
+  "blocks": [
+    {
+      "type": "partnerRows",
+      "tone": "paper",
+      "country": "Australia",
+      "label": "01 — Australia",
+      "title": "Partners in Australia"
+    },
+    {
+      "type": "partnerRows",
+      "tone": "sand",
+      "country": "India",
+      "label": "02 — India",
+      "title": "Partners in India"
+    },
+    {
+      "type": "callout",
+      "tone": "paper",
+      "title": "Become a partner institution.",
+      "text": "AIWC is built on equal partnership between Australia and India, with support for all partners for their growth and benefits. If your institution works on water, we would like to talk.",
+      "actions": [
+        {
+          "label": "Contact the Centre",
+          "page": "contact",
+          "primary": true
+        }
+      ]
+    }
+  ]
+}

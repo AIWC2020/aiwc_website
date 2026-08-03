@@ -1,0 +1,45 @@
+{
+  "slug": "ashish-sharma",
+  "name": "Ashish Sharma",
+  "sortName": "Ashish Sharma",
+  "designation": "Professor",
+  "institute": "University of New South Wales",
+  "instituteSlug": "university-of-new-south-wales",
+  "country": "Australia",
+  "qualification": "PhD, Utah State University",
+  "interests": "Climate Change adaptation, Water Resources Planning and Management, Streamflow Forecasting, Stochastic Hydrology, Radar and Satellite Remote Sensing, and any water resources problem that involves uncertainty or a statistical element in devising an elegant solution",
+  "email": "a.sharma@unsw.edu.au",
+  "homepage": "http://www.hydrology.unsw.edu.au/",
+  "profiles": [
+    "https://scholar.google.com.au/citations?hl=en&user=C_9ndbcAAAAJ&view_op=list_works"
+  ],
+  "photo": {
+    "image": "/assets/people/ashish-sharma.webp",
+    "positionX": 50,
+    "positionY": 22
+  },
+  "bio": [
+    "Ashish is a Professor of Civil and Environmental Engineering at the University of New South Wales, Sydney, Australia. He is an engineering hydrologist interested in problems involving hydrological uncertainty. Much of his research has focussed on the impact of climate change and variability on hydrological practice, along with applications related to remote sensing, formulating stochastic approaches, developing hydrological models, and the two big hydrology bread-and-butter problems – design flood estimation + water resources management."
+  ],
+  "sections": [
+    {
+      "title": "Research Project",
+      "items": [
+        "A decadal to inter-decadal streamflow prediction system; Funding: Australian Research Council, Linkage Projects",
+        "A Fourier approach to address low-frequency variability bias in hydrology.; Funding: Australian Research Council, Discovery Projects",
+        "What will the future be? Projecting environmental change in a warming world for semi-arid landscapes; Funding: Australia India Strategic Research Fund"
+      ]
+    },
+    {
+      "title": "Key Publications/Reports",
+      "items": [
+        "Assessment of Climate Change Impacts on Reservoir Storage Reliability, Resilience, and Vulnerability Using a Multivariate Frequency Bias Correction Approach, 2020, H Nguyen, R Mehrotra, A Sharma, Water Resources Research 56 (2), e2019WR026022",
+        "Effectiveness of CMIP5 decadal experiments for interannual rainfall prediction over Australia, 2019, D Choudhury, R Mehrotra, A Sharma, A Sen Gupta, B Sivakumar, Water Resources Research 55 (8), 7400-7418",
+        "If precipitation extremes are increasing, why aren’t floods?, 2018, A Sharma, C Wasko, DP Lettenmaier, Water Resources Research 54 (11), 8545-8551",
+        "A multivariate quantile-matching bias correction approach with auto-and cross-dependence across multiple time scales: implications for downscaling, 2016, R Mehrotra, A Sharma, Journal of Climate 29 (10), 3519-3539",
+        "Steeper temporal distribution of rain intensity at higher temperatures within Australian storms, 2015, C Wasko, A Sharma, Nature Geoscience 8 (7), 527-529"
+      ]
+    }
+  ],
+  "source": "https://aiwc.org.au/ashish-sharma/"
+}

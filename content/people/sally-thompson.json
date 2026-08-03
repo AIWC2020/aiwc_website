@@ -1,0 +1,43 @@
+{
+  "slug": "sally-thompson",
+  "name": "Sally Thompson",
+  "sortName": "Sally Thompson",
+  "designation": "Associate Professor",
+  "institute": "University of Western Australia",
+  "instituteSlug": "university-of-western-australia",
+  "country": "Australia",
+  "qualification": "PhD, Duke University",
+  "interests": "Ecohydrology, surface water hydrology",
+  "email": "sally.thompson@uwa.edu.au",
+  "homepage": null,
+  "profiles": [],
+  "photo": {
+    "image": "/assets/people/sally-thompson.jpg",
+    "positionX": 50,
+    "positionY": 22
+  },
+  "bio": [
+    "Sally received her undergraduate degrees (in Environmental Chemistry and Environmental Engineering) from the University of Western Australia. She worked as an engineering consultant for several years, before starting her PhD with the support of a General Sir John Monash Award at Duke University in 2006. Upon graduating in 2010, Sally worked as a postdoctoral scholar at Princeton and Purdue Universities. She was appointed Assistant Professor of Surface Hydrology at the University of California, Berkeley, in 2012, and promoted to Associate Professor with tenure in 2017, at which time she was also appointed the inaugural Claire and Hsieh-Wen Shen Distinguished Research Chair. Sally began work at the University of Western Australia in 2019. Sally is also the recipient of the US National Science Foundation CAREER award, the American Geophysical Union Early Career Award in Hydrology, and the European Geophysical Union Jim Dooge Award for “best paper” in Hydrology and Earth System Science."
+  ],
+  "sections": [
+    {
+      "title": "Research Project",
+      "items": [
+        "Why is the flow in the Arkavathy River Declining?",
+        "Does deforestation drive non-local temperature increases?",
+        "Merging ecohydrology and ecophysiology to better understand drought responses"
+      ]
+    },
+    {
+      "title": "Key Publications/Reports",
+      "items": [
+        "Penny, G., Srinivasan, V., Apoorva, R., Jeremiah, K., Peschel, J., Young, S. & Thompson, S., 15 Apr 2020, A process-based approach to attribution of historical streamflow decline in a data-scarce and human-dominated watershed, Hydrological Processes. 34, 8, p. 1981-1995",
+        "Feng, X., Ackerly, D. D., Dawson, T. E., Manzoni, S., Skelton, R. P., Vico, G. & Thompson, S. E., Nov 2018, The ecohydrological context of drought and classification of plant responses, Ecology Letters. 21, 11, p. 1723-1736 14 p.",
+        "Mclaughlin, B. C., Ackerly, D. D., Klos, P. Z., Natali, J., Dawson, T. E. . & Thompson, S. E.Hydrologic refugia, plants, and climate change, Aug 2017, Global Change Biology. 23, 8, p. 2941-2961 21 p.",
+        "Boisrame, G., Thompson, S., Collins, B. & Stephens, S., Managed Wildfire Effects on Forest Resilience and Water in the Sierra Nevada, Jun 2017, Ecosystems. 20, 4, p. 717-732 16 p.",
+        "Srinivasan, V., Thompson, S., Madhyastha, K., Penny, G., Jeremiah, K. & Lele, S., Why is the Arkavathy River drying? A multiple-hypothesis approach in a data-scarce region, 2015, Hydrology and Earth System Sciences. 19, 4, p. 1905-1917 13 p."
+      ]
+    }
+  ],
+  "source": "https://aiwc.org.au/sally-thompson/"
+}

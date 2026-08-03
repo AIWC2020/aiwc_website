@@ -1,0 +1,45 @@
+{
+  "slug": "ian-a-wright",
+  "name": "Ian A. Wright",
+  "sortName": "Ian A. Wright",
+  "designation": "Senior Lecturer",
+  "institute": "Western Sydney University",
+  "instituteSlug": "western-sydney-university",
+  "country": "Australia",
+  "qualification": "PhD, Western Sydney University",
+  "interests": "Interests include freshwater ecology, water chemistry and water pollution (science and management). Impact of urban development and mining on streams and rivers. An enthusiastic advocate for community engagement activities in water science and management projects.",
+  "email": "i.wright@westernsydney.edu.au",
+  "homepage": "https://www.westernsydney.edu.au/staff_profiles/uws_profiles/doctor_ian_wright",
+  "profiles": [
+    "https://scholar.google.com.au/citations?user=K6VVXQIAAAAJ&hl=en"
+  ],
+  "photo": {
+    "image": "/assets/people/ian-a-wright.webp",
+    "positionX": 50,
+    "positionY": 22
+  },
+  "bio": [
+    "Ian Wright is a senior lecturer in water, environment and management and has over 25 years’ teaching, research and water industry experience. His current research has a focus on: urban water; river health; impacts from mining; water policy and regulation; and environmental sustainability. He is an advocate for scientific evidence-based management of water resources and engaging communities, governments and other stakeholders to address water issues. He has more than 75 peer-reviewed publications and several expert witness and many industry reports."
+  ],
+  "sections": [
+    {
+      "title": "Research Project",
+      "items": [
+        "1) Coal mines and water pollution. This research was financed by several small funding sources. It has examined the water pollution and ecological impact of coal mine waste discharges and subsidence channel fracturing.",
+        "2) Urban water research. This research has investigated the impact of urban development of different intensities on urban water chemistry, aquatic ecosystems and riparian soils and vegetation. This research has been funded by several local Government bodies.",
+        "3) The impact of concrete materials on the geochemistry and ecology of urban waters. This research began with a Ku-ring-gai Council and Western Sydney University joint funding partnership."
+      ]
+    },
+    {
+      "title": "Key Publications/Reports",
+      "items": [
+        "Caroll R, Reynolds JK, IA Wright (2020) Geochemical signature of urbanisation in Blue Mountains Upland Swamps. Science of the Total Environment.",
+        "Grella C, Renshaw A, Wright IA (2018) Invasive weeds in urban riparian zones: the influence of catchment imperviousness and soil chemistry across an urbanization gradient. Urban Ecosystems",
+        "Wright, I.A. and Belmer, N (2018) Increased water pollution after closure of Australia’s longest operating underground coal mine: A 13-month study of mine drainage, water chemistry and river ecology. Water, Air, & Soil Pollution.",
+        "Davies, P.J. and Wright, I.A. (2014) A review of policy, legal, land use and social change in the management of urban water resources in Sydney, Australia: a brief reflection of challenges and lessons from the last 200 years. Land Use Policy.",
+        "Wright, I.A., Davies, P.J., Jonasson, O. J., and Findlay, S.J. (2011) A new type of water pollution: concrete drainage infrastructure and geochemical contamination of urban waters. Marine and Freshwater Research. 62: 1-7."
+      ]
+    }
+  ],
+  "source": "https://aiwc.org.au/ian-a-wright/"
+}

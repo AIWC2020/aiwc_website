@@ -1,0 +1,45 @@
+{
+  "slug": "prasanna-egodawatta",
+  "name": "Prasanna Egodawatta",
+  "sortName": "Prasanna Egodawatta",
+  "designation": "Senior Lecturer",
+  "institute": "QUT Queensland University of Technology",
+  "instituteSlug": "qut-queensland-university-of-technology",
+  "country": "Australia",
+  "qualification": "PhD, Queensland University of Technology",
+  "interests": "Urban water pollution; toxic and emerging pollutants; water sensitive urban design; water treatment and reuse; urban hydrology; water system modelling.",
+  "email": "numberp.egodawatta@qut.edu.au",
+  "homepage": "https://staff.qut.edu.au/staff/p.egodawatta",
+  "profiles": [
+    "https://www.researchgate.net/profile/Prasanna_Egodawatta"
+  ],
+  "photo": {
+    "image": "/assets/people/prasanna-egodawatta.webp",
+    "positionX": 50,
+    "positionY": 22
+  },
+  "bio": [
+    "Dr Prasanna Egodawatta, is a senior lecturer in the School of Civil and Environmental Engineering. He has over fifteen years of experience in both industry and academia. The main foci of Dr Egodawatta’s research is in urban water pollution, toxic and emerging pollutants, water sensitive urban design, water treatment and reuse, and advanced modelling techniques. He has published over 130 articles in the fields of water and environmental engineering. He has co-supervised over 20 doctoral and masters research to completion and developed extensity collaboration network with industry and academic partners."
+  ],
+  "sections": [
+    {
+      "title": "Research Project",
+      "items": [
+        "Community-focused smart technologies to enhance flood resilience in high risk areas; Funding: Department of Industry, Innovation and Science (DIIS) and Logan City Council.",
+        "Review of Performance of Holcim Jellyfish filter in Mackay / South East Queensland conditions; Funding: Holcim (Australia) Pty Limited (Humes).",
+        "Adaptation of water sensitive urban design (WSUD) to climate change, changing transport patterns and urban form; Funding: Australian Research council, Gold Coast City Council and Department of Transport and Main Roads, Queensland."
+      ]
+    },
+    {
+      "title": "Key Publications/Reports",
+      "items": [
+        "Gbeddy, Gustav Kudjoe Seyram, Goonetilleke, Ashantha, Ayoko, Godwin, & Egodawatta, Prasanna (2020) Transformation and degradation of polycyclic aromatic hydrocarbons (PAHs) in urban road surfaces: Influential factors, implications and recommendations. Environmental Pollution, 257, Article number: 113510 1-16.",
+        "Ma, Yukun, Deilami, Kaveh, Egodawatta, Prasanna, Liu, An, McGree, James, & Goonetilleke, Ashantha (2019) Creating a hierarchy of hazard control for urban stormwater management. Environmental Pollution, 255(Part 1), Article number: 113217 1-12.",
+        "Pathirana, Chaamila Dinusha Kumari, Ziyath, Abdul, Jinadasa, Shameen, Egodawatta, Prasanna, Sarina, Sarina, & Goonetilleke, Ashantha (2019) Quantifying the influence of surface physico-chemical properties of biosorbents on heavy metal adsorption. Chemosphere, 234, pp. 488-495.",
+        "Pathiraja, G., Egodawatta, P., Ayoko, G.A., Goonetilleke, A., and Te’o, V.S.J (2019) Solubilization and degradation of polychlorinated biphenyls (PCBs) by naturally occurring facultative anaerobic bacteria. Science of the Total Environment, 651, pp. 2197-2207.",
+        "Amarasinghe, P., Liu, A., Egodawatta, P., Barnes, P., McGree, J. and Goonetilleke, A. (2017) Modelling Resilience of a Water Supply System under Climate Change and Population Growth Impacts. Water Resources Management, 31(9), pp. 2885-2898."
+      ]
+    }
+  ],
+  "source": "https://aiwc.org.au/prasanna-egodawatta/"
+}

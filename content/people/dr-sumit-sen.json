@@ -1,0 +1,46 @@
+{
+  "slug": "dr-sumit-sen",
+  "name": "Dr. Sumit Sen",
+  "sortName": "Sumit Sen",
+  "designation": "Professor",
+  "institute": "Indian Institute of Technology Roorkee, India",
+  "instituteSlug": "indian-institute-of-technology-roorkee-india",
+  "country": "India",
+  "qualification": "PhD Civil Engineering, Auburn University (AU), USA",
+  "interests": "Experimental hydrology, water resources management, watershed management, monitoring and modeling; rainfall-runoff modeling.",
+  "email": "sumit.sen@hy.iitr.ac.in",
+  "homepage": "https://www.iitr.ac.in/~HY/Sumit_Sen",
+  "profiles": [
+    "https://orcid.org/0000-0003-2293-2119",
+    "https://www.researchgate.net/profile/Sumit-Sen-3"
+  ],
+  "photo": {
+    "image": "/assets/people/dr-sumit-sen.jpg",
+    "positionX": 50,
+    "positionY": 22
+  },
+  "bio": [
+    "Currently, I am working as a Professor in the Department of Hydrology at IIT Roorkee. I am also leading the Centre of Excellence in Disaster Mitigation and Management, IITR as the Head. My research and teaching interests are in experimental hydrology, water resources management, watershed management, monitoring and modeling; rainfall-runoff modeling. I have extensive experience in instrumenting experimental watersheds to understand the hydrogeological, ecological and fluvial processes and their impacts on ecosystems. Furthermore, I am experienced in conducting hydrological modeling studies to understand climate variability/change impacts on water resources and flow regimes."
+  ],
+  "sections": [
+    {
+      "title": "Research Project",
+      "items": [
+        "Probabilistic floods and sediment transport forecasting in the Himalayas during the extreme events (DST, Indo-Italy Bilateral Project) (Ongoing)",
+        "Monitoring and Assessment of Mountain Ecosystem and Services in North-West Himalaya: Monitoring and Modelling of Hydro-Glaciological Processes in Glaciated and Non-glaciated Watershed (IIRS, ISRO) (Ongoing)",
+        "Spring Rejuvenation for Water Security in Mizoram: A Pilot Student for the Selected Villages of the Mengpui Basin (IWRD, Mizoram Govt.) (Ongoing)"
+      ]
+    },
+    {
+      "title": "Key Publications/Reports",
+      "items": [
+        "Shah, S., Sen, S*., Sahoo, D. State of Indian Northwestern Himalayan Lakes under Human and Climate Impacts: A Review, Ecological Indicators, 160, 111858, 2024.",
+        "Dass, B., Daniel, D., Saxena, N., Sharma, A., Sen, D., Sen, S*. Informing watershed management in data-scarce Indian Himalayas. Water Security Journal 19, 100138, 2023.",
+        "Meena, R.K., Sen, S.*, Nanda, A., Dass, B., Mishra, A. A contribution to rainfall simulator design–a concept of moving storm automation. Hydrology and Earth System Sciences 26 (16), 4379-4390. 2022",
+        "Dass, B., Sen, S*., Bamola, V., Sharma, A., & Sen, D. Assessment of spring flows in Indian Himalayan micro-watersheds–A hydro-geological approach. Journal of Hydrology, 598, 126354.2021. 2021.",
+        "Nanda, A., Sen, S*, McNamara, J.P. How spatiotemporal variation of soil moisture can explain hydrological connectivity of infiltration-excess dominated hillslope: Observations from Lesser Himalayan Landscape, Journal of Hydrology, 579, 124146, 2019."
+      ]
+    }
+  ],
+  "source": "https://aiwc.org.au/dr-sumit-sen/"
+}

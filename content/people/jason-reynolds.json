@@ -1,0 +1,44 @@
+{
+  "slug": "jason-reynolds",
+  "name": "Jason Reynolds",
+  "sortName": "Jason Reynolds",
+  "designation": "Dr",
+  "institute": "Western Sydney University",
+  "instituteSlug": "western-sydney-university",
+  "country": "Australia",
+  "qualification": "PhD, University of New South Wales",
+  "interests": "Surface and groundwater geochemistry and modelling with a focus on soil-water interactions, agriculture and landscape repair in the Anthropocene.",
+  "email": "j.reynolds@westernsydney.edu.au",
+  "homepage": "https://www.westernsydney.edu.au/staff_profiles/uws_profiles/doctor_jason_reynolds",
+  "profiles": [
+    "https://scholar.google.com/citations?user=0qC2pQUAAAAJ&hl=en"
+  ],
+  "photo": {
+    "image": "/assets/people/jason-reynolds.webp",
+    "positionX": 50,
+    "positionY": 22
+  },
+  "bio": [
+    "Jason Reynolds is a senior lecturer in soil and water interactions with over 15 years’ teaching, research and outreach experience. His current research is focused on: geochemical modelling; groundwater monitoring; recycled water re-use; interactions between soil and water; emerging contaminants in the Anthropocene; capacity building and agricultural enterprise; and the water and soil nexus within the sustainable development goals. He is focused on understanding the social and indigenous aspects of water and land management. He has more than 60 publications to his name, including over 40 articles in peer-reviewed, international journals and leads several international programs focused on research and engagement."
+  ],
+  "sections": [
+    {
+      "title": "Research Project",
+      "items": [
+        "Recycled water and soil interactions: supporting a cool green city through regenerative agriculture, high quality recreational areas, and a healthy blue green grid; Funding: Sydney Water",
+        "Reactive oxygen species in acidified waterways: a new paradigm; Funding: New South Wales Environmental Trust"
+      ]
+    },
+    {
+      "title": "Key Publications/Reports",
+      "items": [
+        "Fanna, D.J., Lima, L.M.P., Wei, G., Li, F., Reynolds, J.K. 2020 A colorimetric chemosensor for quantification of exchangeable Cu2+ in soil, Chemosphere, 238(12),46-64.",
+        "Paciuszkiewicz, K.; Ryan, M.; Wright, I.A.; Reynolds, J.K. 2019. Variations in Illicit Compound Discharged from Treated Wastewater. Water, 11, 1071.",
+        "Åström, M.E., Nystrand, M., Gustafsson, J.P., Österholm, P., Nordmyr, L., Reynolds, J.K., Peltola, P., 2010, Lanthanoid behaviour in an acidic landscape, Geochimica et Cosmochimica Acta, 74(3), 829-845.",
+        "Åström, M.E., Yu, C., Peltola, P., Reynolds, J.K., Österholm, P., Nystrand, M.I., Augustsson, A., Virtasalo, J.J., Nordmyr, L., Ojala, A., 2018. Sources, transport and sinks of beryllium in a coastal landscape affected by acidic soils, Geochimica et Cosmochimica Acta, 232, 288-302.",
+        "Leverett, P., Reynolds, J.K, Roper, A., & Williams, P. 2012. Tripuhyite and schafarzikite: Two of the ultimate sinks for antimony in the natural environment. Mineralogical Magazine, 76(4), 891-902."
+      ]
+    }
+  ],
+  "source": "https://aiwc.org.au/jason-reynolds/"
+}

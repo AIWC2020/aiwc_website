@@ -1,0 +1,45 @@
+{
+  "slug": "jay-prakash-verma",
+  "name": "Jay Prakash Verma",
+  "sortName": "Jay Prakash Verma",
+  "designation": "Assistant Professor",
+  "institute": "Banaras Hindu University",
+  "instituteSlug": "banaras-hindu-university",
+  "country": "India",
+  "qualification": "Ph.D. (BHU)",
+  "interests": "Microbial remediation (Pesticides) of water, soil conservation Environmental sustainability, climate resilient sustainable agricultural productivity",
+  "email": "Verma_bhu@yahoo.co.in",
+  "homepage": "http://www.bhu.ac.in/iesd",
+  "profiles": [
+    "https://scholar.google.com.au/citations?user=9cDAZiMAAAAJ&hl=en&oi=ao"
+  ],
+  "photo": {
+    "image": "/assets/people/jay-prakash-verma.webp",
+    "positionX": 50,
+    "positionY": 22
+  },
+  "bio": [
+    "He is working as Senior Assistant Professor in Institute of Environment and Sustainable Development, BHU, India since Feb, 2011. He worked as Visiting fellow at HIE, Western Sydney University, Australia since 1 Dec, 2017 to 31 July, 2018. He has 10-year teaching and research experiences in microbial remediation (Pesticides) of water and soil conservation, environmental sustainability, sustainable agriculture. He has published more than 80 articles in peer reviewed journal. He has run 8 research projects. He has visited Spain, Paris and Shanghai and Australia. He is serving as editorial board member in many journals. He is expert member of Project Evaluator in Czech Republic and Republic of Chile."
+  ],
+  "sections": [
+    {
+      "title": "Research Project",
+      "items": [
+        "The project entitled “Studies of agriculturally important microorganism to develop effective microbial consortium for degradation of pesticides” funded by SERB, DST, India, completed as PI, (Total Cost Rs: 11.50 lakh), 2013-2015.",
+        "The project entitled “Impact and Vulnerability of Agriculture in Different Agro-Climatic Regions of Uttar Pradesh to Climate Variability and Changes: a Pilot Study using Simulation Models” funded by DST, India, completed as CO-PI, (Total Cost Rs.: 31.556 Lakh) 2013-2016.",
+        "The project entitled “Popularization of Biofertilizer and Biopesticide for Enhancing the rice and wheat production of SC-ST farmers of Jaunpur and Azamgarh district U.P.” production funded by DBT, India, completed as PI, (Total Cost Rs: 24.95 Lakh)-2016-2019."
+      ]
+    },
+    {
+      "title": "Key Publications/Reports",
+      "items": [
+        "Verma, J.P., Jaiswal, D.K., Krishna, R., Prakash, S. Yadav, J. and Singh, V. (2018). Characterization and screening of thermophilic Bacillus strains for developing plant growth promoting consortium from hot spring of Leh and Ladakh region of India. Frontier in Microbiology, 9: 1293.",
+        "Verma, J.P., Jaiswal, D.K., Maurya, P.K. (2016). Screening of bacterial strains for developing effective pesticide tolerant plant growth promoting microbial consortia from rhizosphere soils of vegetable fields of Eastern Uttar Pradesh, India. Energy Ecology and Environment, 1(6), 408–418.",
+        "Verma, J.P., Jaiswal, D.K., Sagar, R. (2014). Pesticide Relevance and their Microbial Degradation: a-state-of-art. Reviews in Environmental Science and Bio/Technology, 13:429-466. ISSN: 1569-1705.",
+        "Verma, J.P. and Jaiswal, D.K. (2016). Book Review: Advances in Biodegradation and Bioremediation of Industrial Waste. Front. Microbiol. 6:1-2.",
+        "Abhilash, P.C., Dubey, R.K., Tripathi, V., Srivastava, P., Verma, J.P., Singh H.B. (2013). Remediation and management of POPs-contaminated soils in a warming climate: challenges and perspectives. Environmental Science and Pollution Research, 20:5879–5885."
+      ]
+    }
+  ],
+  "source": "https://aiwc.org.au/jay-prakash-verma/"
+}

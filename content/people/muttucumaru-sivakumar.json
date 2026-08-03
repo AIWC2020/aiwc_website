@@ -1,0 +1,43 @@
+{
+  "slug": "muttucumaru-sivakumar",
+  "name": "Muttucumaru Sivakumar",
+  "sortName": "Muttucumaru Sivakumar",
+  "designation": "Assoc. Professor",
+  "institute": "University of Wollongong",
+  "instituteSlug": "university-of-wollongong",
+  "country": "Australia",
+  "qualification": "PhD, University of Newcastle, Australia",
+  "interests": "Water quality monitoring and modelling of engineering systems; development of sustainable water and wastewater treatment technologies; prediction of pollutant export from urban catchments; environmental hydraulics; water resources engineering including development of coastal reservoirs",
+  "email": "siva@uow.edu.au",
+  "homepage": "https://scholars.uow.edu.au/display/siva_m_sivakumar",
+  "profiles": [],
+  "photo": {
+    "image": "/assets/people/muttucumaru-sivakumar.jpg",
+    "positionX": 50,
+    "positionY": 22
+  },
+  "bio": [
+    "Prof Sivakumar is a Civil and Environmental Engineer, an Associate Professor and Academic Program Director of Environmental Engineering at the University of Wollongong (UOW), Australia. He has over 30 years of experience in research and teaching in Australian and overseas Universities. He has published over 200 technical papers including over 75 peer journal papers/book chapters that are relevant to water environmental engineering. Over 25 PhDs have completed under his supervision. As the founder of the Environmental engineering program at the University of Wollongong, Dr Sivakumar has been instrumental in bringing research and teaching activities in this area."
+  ],
+  "sections": [
+    {
+      "title": "Research Project",
+      "items": [
+        "Coastal reservoirs as a sustainable strategy for water security. Funding: SPARC, Govt of India. PI M Sivakumar",
+        "The state-of-the-art third-generation nanopore sequencing platform to support environmental biotechnology and health research, Funding, UOW, CI M Sivakumar",
+        "Hybrid membrane distillation processes. Funding: UOW. PI M Sivakumar"
+      ]
+    },
+    {
+      "title": "Key Publications/Reports",
+      "items": [
+        "Zhang, Y., Sivakumar, M., Yang, S., Enever, K., and Ramezanianpour, M. (2018) “Application of solar energy in water treatment processes: A review”, Desalination, 2018 428, 116-145.",
+        "Ramezanianpour, M. and Sivakumar, M. (2017) “Heat and mass transfer simulation and experimental evaluation of solar powered vacuum membrane distillation system”, Desalination and Water Treatment, 59 P. 31-47.",
+        "Fyfe, J., Hagare, D. and Sivakumar, M. (2016), ‘Dairy shed effluent treatment and recycling: Effluent characteristics and performance’, Journal of Environmental Management, 180, pp 133 – 146.",
+        "Ramezanianpour, M. and Sivakumar, M. (2014) “An analytical flux decline model for membrane distillation.” Desalination. 345, P. 1-12.",
+        "Tadkaew N, Sivakumar M, Khan SJ, McDonald JA, Nghiem LD. (2010), “Effect of mixed liquor pH on the removal of trace organic contaminants in a membrane bioreactor”. Bioresource Technology. Mar; 101(5):1494-500."
+      ]
+    }
+  ],
+  "source": "https://aiwc.org.au/muttucumaru-sivakumar/"
+}

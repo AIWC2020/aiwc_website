@@ -1,0 +1,43 @@
+{
+  "slug": "ravi-saxena",
+  "name": "Ravi Saxena",
+  "sortName": "Ravi Saxena",
+  "designation": "Associate Professor",
+  "institute": "G. B. University of Agriculture & Technology, Pantnagar, India",
+  "instituteSlug": "g-b-university-of-agriculture-technology-pantnagar-india",
+  "country": "India",
+  "qualification": "Ph.D, G.B.P.U.A & T Pantnagar",
+  "interests": "Renewable Energy, Power Quality, Real Time Monitoring of Electrical System",
+  "email": "saxenaravieed@gmail.com",
+  "homepage": "https://222.gbpuat.ac.in/colleges/COT/D3/ravi",
+  "profiles": [
+    "https://scholar.google.com/citations?user=caWx-OAAAAAJ&hl=en"
+  ],
+  "photo": {
+    "image": "/assets/people/ravi-saxena.webp",
+    "positionX": 50,
+    "positionY": 22
+  },
+  "bio": [
+    "Ravi Saxena is working as Associate Professor in the Department of Electrical Engg of College of Technology, Pantnagar. He is having National /International professional experience level over 9 years at and teaching experience of more than 15 years. He developed a technology for monitoring of distribution transformer and solar PV system using Internet of Things (IoT) for which Indian patent application has been filed and under process for approval. His current research focus is on developing technologies for real time monitoring of data in IoT environment. Also his focus is on application of solar PV system for use in agriculture irrigation and farm machinery process. Presently involved as Co-PI in SPARC Project funded by MHRD, India Titled “Securing Water for Agricultural and Food Sustainability: Developing Transdisciplinary Approach to Groundwater Management”. He is a member of international professional society IEEE, USA and national professional society IEI of India."
+  ],
+  "sections": [
+    {
+      "title": "Research Project",
+      "items": [
+        "SPARC Project funded by MHRD, India Titled “Securing Water for Agricultural and Food Sustainability: Developing Trans-disciplinary Approach to Groundwater Management”"
+      ]
+    },
+    {
+      "title": "Key Publications/Reports",
+      "items": [
+        "“Experimental Investigations on the Performance of PV Modules with /without Module Cooling” Sandhya Prajapati, Eugene Fernandez and Ravi Saxena, International Conference on Interdisciplinary Research for Sustainable Development (IRSD-2017), NITTTR Chandigarh, 6-7 November 2017,",
+        "“Sheet Metal Thickness Measurement Using Capacitive Transducer in LabVIEW” International Journal of Scientific & Engineering Research, Rahul Kshetri , Ravi Saxena , Ajay , G.B. Pant University of Ag. & Tech Pantnagar-263145 , Volume 7, Issue 12, December-2016 ISSN 2229-5518 IJSER 2016,",
+        "“Performance Analysis Of Different PV Array Configurations Under Partial Shading” Page(s): 1 – 5 Authors: Ravi Saxena, Uday Singh Rawat published in International Journal of Advancements in Electronics and Electrical Engineering year 2016, volume 5 , Issue: 1",
+        "“Real Time Monitoring and Performance Analysis of PV Module in LabVIEW Environment” Narendra Singh Chauhan , Abhishek Kumar Gupta , Ravi Saxena National Conference on Recent Advances in Electrical Engineering (RAEE-15) organized by M.M.M. University of Technology, Gorakhpur from APRIL 25-26, 2015",
+        "“Real time I-V and P-V curve tracer using LabVIEW,” 2016 A. K. Gupta, N. S. Chauhan and R. Saxena, International Conference on Innovation and Challenges in Cyber Security (ICICCS-INBUSH), Noida, 2016, pp. 265-269."
+      ]
+    }
+  ],
+  "source": "https://aiwc.org.au/ravi-saxena/"
+}

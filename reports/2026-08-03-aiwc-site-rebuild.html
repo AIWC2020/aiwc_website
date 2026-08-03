@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AIWC site rebuild — 3 August 2026</title>
+<style>
+  :root{
+    --ink:#101a20; --body:#33424a; --muted:#66757d; --line:#d9d2c6;
+    --paper:#fbf9f5; --card:#ffffff; --sand:#f2ece1;
+    --ochre:#b1521f; --indigo:#2f3f92; --teal:#25726a; --gold:#a9801f; --red:#a33131;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --ink:#eef2f3; --body:#c3ced4; --muted:#8b9aa2; --line:#2b3940;
+      --paper:#0d1519; --card:#141f25; --sand:#18242a;
+      --ochre:#e59a6a; --indigo:#93a0e0; --teal:#63b8ac; --gold:#dcb556; --red:#e08b8b;
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--body);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-text-size-adjust:100%}
+  .wrap{max-width:940px;margin:0 auto;padding:0 20px}
+  h1,h2,h3,h4{color:var(--ink);line-height:1.2;margin:0}
+  h1{font-size:clamp(1.9rem,4.6vw,2.9rem);letter-spacing:-.02em}
+  h2{font-size:clamp(1.35rem,2.8vw,1.85rem);letter-spacing:-.015em;margin:0 0 .5em}
+  h3{font-size:1.08rem;margin:1.8em 0 .5em}
+  h4{font-size:.95rem;margin:1.3em 0 .4em}
+  p{margin:0 0 1em;max-width:74ch}
+  a{color:var(--teal)}
+  code,.mono{font-family:var(--mono);font-size:.88em}
+  ul,ol{max-width:74ch;padding-left:1.25em;margin:0 0 1em}
+  li{margin:.32em 0}
+  hr{border:0;border-top:1px solid var(--line);margin:0}
+
+  header.top{background:var(--ink);color:#fbf9f5;padding:44px 0 38px}
+  @media (prefers-color-scheme:dark){header.top{background:#060c0f}}
+  header.top h1{color:#fbf9f5}
+  header.top .kicker{font:600 .7rem/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;
+    color:#8fb5ae;margin-bottom:14px}
+  header.top p{color:#c6ccce;margin:.9em 0 0;max-width:66ch}
+
+  section{padding:38px 0;border-top:1px solid var(--line)}
+  .sec-no{font:600 .68rem/1 var(--mono);letter-spacing:.15em;text-transform:uppercase;
+    color:var(--muted);display:block;margin-bottom:.8em}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:18px 20px;margin:0 0 14px}
+  .grid{display:grid;gap:14px}
+  @media(min-width:720px){.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}}
+
+  .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 16px;
+    border:1px solid var(--line);border-radius:8px;background:var(--card)}
+  table{border-collapse:collapse;width:100%;min-width:560px;font-size:.9rem}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font:600 .7rem/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+    background:var(--sand);white-space:nowrap}
+  tr:last-child td{border-bottom:0}
+  td.num{font-family:var(--mono);white-space:nowrap}
+
+  .tag{display:inline-block;font:600 .64rem/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;
+    padding:4px 8px;border-radius:100px;border:1px solid currentColor}
+  .t-kill{color:var(--red)}.t-keep{color:var(--teal)}.t-open{color:var(--gold)}
+
+  .kpi{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;
+    overflow:hidden;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin:0 0 18px}
+  .kpi div{background:var(--card);padding:15px 16px}
+  .kpi b{display:block;font-size:1.6rem;line-height:1.1;color:var(--ink);font-variant-numeric:tabular-nums}
+  .kpi span{display:block;margin-top:5px;font-size:.78rem;color:var(--muted)}
+
+  blockquote{margin:0 0 1em;padding:12px 16px;border-left:3px solid var(--teal);
+    background:var(--sand);border-radius:0 6px 6px 0}
+  blockquote p{margin:0}
+
+  .note{border-left:3px solid var(--gold);background:var(--sand);padding:12px 16px;border-radius:0 6px 6px 0;margin:0 0 16px}
+  .note strong{color:var(--ink)}
+
+  figure{margin:0 0 18px}
+  figcaption{font-size:.8rem;color:var(--muted);margin-top:8px}
+  svg{max-width:100%;height:auto;display:block}
+  .svg-wrap{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px;overflow-x:auto}
+
+  .math{background:var(--sand);border:1px solid var(--line);border-radius:6px;padding:10px 14px;
+    font-family:var(--mono);font-size:.86rem;overflow-x:auto;margin:0 0 .8em;color:var(--ink)}
+  .lens{border:1px solid var(--line);border-radius:8px;padding:18px 20px;background:var(--card);margin:0 0 16px}
+  .lens h4{margin-top:0}
+
+  footer{padding:30px 0 60px;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line)}
+
+  @media print{
+    body{background:#fff;color:#000;font-size:11pt}
+    header.top{background:#fff;color:#000;padding:0 0 12pt}
+    header.top h1,header.top p,header.top .kicker{color:#000}
+    section{padding:14pt 0;break-inside:avoid}
+    .card,.kpi div,.svg-wrap,.lens{background:#fff}
+    a{color:#000;text-decoration:underline}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="kicker">Work summary · 3 August 2026</div>
+    <h1>Rebuilding aiwc.org.au as a static, editable, story-shaped site</h1>
+    <p>Moving the Australia India Water Centre from a WordPress/Elementor site — mirrored once into a Next.js app — onto the same architecture the MARVI site runs on, with a new art direction aimed at institutions and researchers.</p>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section><div class="wrap">
+  <span class="sec-no">01 — The problem</span>
+  <h2>What was actually wrong</h2>
+
+  <figure>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 880 250" role="img" aria-label="Before and after: the old site's flat menu of pages versus the new site's ordered argument">
+        <style>
+          .lbl{font:600 10px ui-monospace,monospace;letter-spacing:.09em;text-transform:uppercase}
+          .txt{font:12px -apple-system,system-ui,sans-serif}
+          .box{fill:none;stroke-width:1.2}
+        </style>
+        <text x="0" y="14" class="lbl" fill="#a33131">Before — a menu</text>
+        <g stroke="#a33131" fill="none">
+          <rect class="box" x="0" y="26" width="118" height="30" rx="4" stroke="#a33131"/>
+          <rect class="box" x="0" y="62" width="118" height="30" rx="4" stroke="#a33131"/>
+          <rect class="box" x="0" y="98" width="118" height="30" rx="4" stroke="#a33131"/>
+          <rect class="box" x="0" y="134" width="118" height="30" rx="4" stroke="#a33131"/>
+          <rect class="box" x="0" y="170" width="118" height="30" rx="4" stroke="#a33131"/>
+          <rect class="box" x="0" y="206" width="118" height="30" rx="4" stroke="#a33131"/>
+        </g>
+        <text x="12" y="45" class="txt" fill="currentColor">About</text>
+        <text x="12" y="81" class="txt" fill="currentColor">Partners</text>
+        <text x="12" y="117" class="txt" fill="currentColor">People</text>
+        <text x="12" y="153" class="txt" fill="currentColor">Our work</text>
+        <text x="12" y="189" class="txt" fill="currentColor">News</text>
+        <text x="12" y="225" class="txt" fill="currentColor">Publications</text>
+        <text x="140" y="128" class="txt" fill="#66757d">visitor must</text>
+        <text x="140" y="144" class="txt" fill="#66757d">assemble the case</text>
+
+        <path d="M255 130 h40" stroke="#66757d" stroke-width="1.2" marker-end="url(#ar)"/>
+        <defs><marker id="ar" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+          <path d="M0 0 L7 3.5 L0 7 z" fill="#66757d"/></marker></defs>
+
+        <text x="320" y="14" class="lbl" fill="#25726a">After — an argument</text>
+        <g fill="none" stroke="#25726a" stroke-width="1.2">
+          <rect x="320" y="26" width="120" height="26" rx="4"/>
+          <rect x="320" y="60" width="120" height="26" rx="4"/>
+          <rect x="320" y="94" width="120" height="26" rx="4"/>
+          <rect x="320" y="128" width="120" height="26" rx="4"/>
+          <rect x="320" y="162" width="120" height="26" rx="4"/>
+          <rect x="320" y="196" width="120" height="26" rx="4"/>
+        </g>
+        <g stroke="#25726a" stroke-width="1" fill="none">
+          <path d="M380 52 v8"/><path d="M380 86 v8"/><path d="M380 120 v8"/>
+          <path d="M380 154 v8"/><path d="M380 188 v8"/>
+        </g>
+        <text x="331" y="43" class="txt" fill="currentColor">Shared problem</text>
+        <text x="331" y="77" class="txt" fill="currentColor">Shared premise</text>
+        <text x="331" y="111" class="txt" fill="currentColor">Evidence of scale</text>
+        <text x="331" y="145" class="txt" fill="currentColor">Four programmes</text>
+        <text x="331" y="179" class="txt" fill="currentColor">The people</text>
+        <text x="331" y="213" class="txt" fill="currentColor">The invitation</text>
+
+        <text x="470" y="14" class="lbl" fill="#2f3f92">And the people became reachable</text>
+        <text x="470" y="42" class="txt" fill="currentColor">Before: 108 names, unlinked text</text>
+        <text x="470" y="62" class="txt" fill="currentColor">After: 108 pages, each with</text>
+        <text x="470" y="80" class="txt" fill="currentColor">interests · projects · publications</text>
+        <text x="470" y="98" class="txt" fill="currentColor">filterable by country + institution</text>
+        <g fill="none" stroke="#2f3f92" stroke-width="1.1">
+          <rect x="470" y="118" width="34" height="34" rx="3"/><rect x="512" y="118" width="34" height="34" rx="3"/>
+          <rect x="554" y="118" width="34" height="34" rx="3"/><rect x="596" y="118" width="34" height="34" rx="3"/>
+          <rect x="638" y="118" width="34" height="34" rx="3"/><rect x="680" y="118" width="34" height="34" rx="3"/>
+          <rect x="470" y="160" width="34" height="34" rx="3"/><rect x="512" y="160" width="34" height="34" rx="3"/>
+          <rect x="554" y="160" width="34" height="34" rx="3"/><rect x="596" y="160" width="34" height="34" rx="3"/>
+          <rect x="638" y="160" width="34" height="34" rx="3"/><rect x="680" y="160" width="34" height="34" rx="3"/>
+        </g>
+        <text x="726" y="180" class="txt" fill="#66757d">×108</text>
+      </svg>
+    </div>
+    <figcaption>The structural change. The page inventory barely moved; the order and the addressability did.</figcaption>
+  </figure>
+
+  <h3>The symptom</h3>
+  <p>aiwc.org.au is a WordPress/Elementor site. It holds genuinely strong material — a five-year bilateral partnership, 33 institutions, 108 researchers, a groundwater programme that has reached more than 10,000 villages — but presents it as a menu. A visiting research director has to open six pages and infer the case themselves.</p>
+  <p>The <code>marvi-groundwater/aiwc</code> repository already held one attempt at fixing this: a Next.js app plus a 55 MB <code>docs/</code> folder containing a page-for-page static scrape of the WordPress site. GitHub Pages was configured but had never successfully built (<code class="mono">status: null</code>).</p>
+
+  <h3>The underlying cause</h3>
+  <p>Two distinct things, and it is worth separating them because only one is a "bug":</p>
+  <ul>
+    <li><strong>Editorially</strong> — the site's information architecture mirrored its org chart, not a reader's question. Nothing was broken; it just never made an argument.</li>
+    <li><strong>Structurally</strong> — the previous attempt mirrored the <em>output</em> of WordPress rather than extracting the <em>content</em>. A scraped <code>docs/</code> tree cannot be edited by AIWC staff, cannot be restructured, and re-scraping is the only way to update it.</li>
+  </ul>
+  <div class="note"><strong>Stated honestly:</strong> the Pages build failure was never diagnosed. It stopped mattering once the workflow was replaced wholesale, so the original cause is unproven. If it was an infrastructure problem rather than a workflow problem, it could recur — the first deploy from <code>main</code> is the test.</div>
+</div></section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section><div class="wrap">
+  <span class="sec-no">02 — The solution</span>
+  <h2>What now happens differently</h2>
+
+  <div class="kpi">
+    <div><b>156</b><span>static documents built from JSON</span></div>
+    <div><b>108</b><span>researchers with their own URL</span></div>
+    <div><b>33</b><span>partner institutions, each a page</span></div>
+    <div><b>15 M</b><span>built site, down from 55 M scrape</span></div>
+  </div>
+
+  <p>Content lives as JSON — one file per page, per researcher, per partner. A ~310-line Node build renders it to static HTML through a single renderer module, which the Decap CMS at <code>/admin/</code> also imports, so an editor's preview cannot drift from the published page.</p>
+
+  <div class="scroll"><table>
+    <thead><tr><th>Concern</th><th>Before</th><th>After</th></tr></thead>
+    <tbody>
+      <tr><td>Source of truth</td><td>WordPress database, mirrored to <code>docs/</code></td><td><code>content/*.json</code> in the repo</td></tr>
+      <tr><td>Who can edit</td><td>Whoever has WordPress access; the mirror, nobody</td><td>Anyone with repo access, via <code>/admin/</code></td></tr>
+      <tr><td>Researcher pages</td><td>None — names in an unlinked list</td><td>108 pages, indexed and filterable</td></tr>
+      <tr><td>Rendering paths</td><td>Elementor, plus a Next.js re-render</td><td>One — <code>src/templates.mjs</code></td></tr>
+      <tr><td>Pre-merge checks</td><td>None</td><td>Links, images, metadata, CMS coverage, directory behaviour</td></tr>
+      <tr><td>Multi-language</td><td>None</td><td>Machinery present, English-only shipped</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>The narrative, concretely</h3>
+  <p>The home page runs: <em>“Two countries. One water problem.”</em> → the premise, in AIWC's own words (<em>“Water management is not just a technical challenge”</em>) → the numbers → the four programmes → the researchers → the five-year timeline → the partner wall → an invitation tied to the specific 2030 priorities partners set at AIWC@5. Every sentence of substance is lifted unchanged from aiwc.org.au; what is new is the sequence.</p>
+</div></section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section><div class="wrap">
+  <span class="sec-no">03 — How it was done</span>
+  <h2>The real path, including what was eliminated</h2>
+
+  <figure>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 880 210" role="img" aria-label="Timeline of the work with two dead ends marked">
+        <style>.tl{font:11px -apple-system,system-ui,sans-serif}.tll{font:600 9.5px ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase}</style>
+        <line x1="10" y1="60" x2="870" y2="60" stroke="#d9d2c6" stroke-width="1.5"/>
+        <g fill="#25726a">
+          <circle cx="60" cy="60" r="6"/><circle cx="215" cy="60" r="6"/><circle cx="370" cy="60" r="6"/>
+          <circle cx="525" cy="60" r="6"/><circle cx="680" cy="60" r="6"/><circle cx="820" cy="60" r="6"/>
+        </g>
+        <g class="tll" fill="#66757d">
+          <text x="34" y="40">Scrape?</text><text x="188" y="40">Extract</text><text x="344" y="40">Normalise</text>
+          <text x="498" y="40">Design</text><text x="655" y="40">Build</text><text x="792" y="40">Verify</text>
+        </g>
+        <g class="tl" fill="currentColor">
+          <text x="18" y="84">rejected —</text><text x="18" y="98">used REST API</text>
+          <text x="172" y="84">22 pages,</text><text x="172" y="98">140 posts</text>
+          <text x="328" y="84">108 people,</text><text x="328" y="98">33 partners</text>
+          <text x="482" y="84">chrome +</text><text x="482" y="98">17 block types</text>
+          <text x="638" y="84">156 docs,</text><text x="638" y="98">/aiwc base</text>
+          <text x="780" y="84">3161 links,</text><text x="780" y="98">453 images</text>
+        </g>
+        <g>
+          <rect x="150" y="130" width="290" height="58" rx="6" fill="none" stroke="#a33131" stroke-width="1.2"/>
+          <text x="162" y="150" class="tll" fill="#a33131">Dead end 1 — rowspan tables</text>
+          <text x="162" y="168" class="tl" fill="currentColor">label→value row walk lost 90 of 108 emails</text>
+        </g>
+        <g>
+          <rect x="470" y="130" width="320" height="58" rx="6" fill="none" stroke="#a33131" stroke-width="1.2"/>
+          <text x="482" y="150" class="tll" fill="#a33131">Dead end 2 — direct-children walk</text>
+          <text x="482" y="168" class="tl" fill="currentColor">Elementor nesting silently emptied one article</text>
+        </g>
+      </svg>
+    </div>
+    <figcaption>Six steps, two silent-data-loss bugs. Both were found by counting, not by looking.</figcaption>
+  </figure>
+
+  <h3>Hypotheses tested and eliminated</h3>
+
+  <h4>“Scrape the rendered HTML” — rejected before starting</h4>
+  <p>The previous attempt did this. WordPress exposes a REST API at <code>/wp-json/wp/v2/</code>; it returned all 22 pages, 140 posts, 46 categories and 246 media records as structured data. Scraping would have inherited Elementor's div soup as the permanent content model.</p>
+
+  <h4>“Person profiles are a label/value table” — half true, and the half that was false cost 90 emails</h4>
+  <p>The profiles <em>are</em> tables, so a row-by-row <code>label → value</code> walk looked right and produced plausible output. But the contact row uses <code>rowspan="3"</code>, which means the email and phone rows have only <em>one</em> <code>&lt;td&gt;</code> and no label of their own. The walk skipped them.</p>
+  <blockquote><p>This produced <strong>no error</strong>. It produced 108 complete-looking profiles with 18 emails. It was only caught because the normaliser prints <code class="mono">missing email: 90/108</code> — a completeness count, not an assertion.</p></blockquote>
+  <p>The fix is two passes over the same table: structured rows for labelled fields, then a sweep for anything identifiable by <em>shape</em> — <code>mailto:</code>, <code>orcid.org</code>, a phone-like digit run. Result: 105 of 108.</p>
+
+  <h4>“Read direct children for paragraphs” — worked for 21 of 22 articles</h4>
+  <p>Elementor nests content arbitrarily deep. One article (WATER TALKS 2025, 6,244 characters) put every paragraph four containers down and came back <em>completely empty</em>. Again no error — the News page just rendered 190 words instead of 570. Caught by diffing parsed character counts against the raw text extraction, per article.</p>
+
+  <h4>“The scroll-reveal animation is a nice touch” — nearly shipped a blank site</h4>
+  <p><code>.reveal { opacity: 0 }</code> with JS adding <code>.in</code> means that if <code>app.mjs</code> fails to load, <em>every section below the hero is invisible</em>. Now gated on a <code>.js</code> class set by an inline script before first paint; without scripting the content is simply visible. This also forced a build change — the build stripped <em>all</em> <code>&lt;script&gt;</code> tags and had to be narrowed to <code>script[src]</code>.</p>
+
+  <h4>“Verify by screenshot” — abandoned mid-task</h4>
+  <p>The browser tool returned stale frames after programmatic scrolls: the DOM reported correct dark backgrounds and revealed content while the screenshot showed blank cream. Roughly an hour went into fighting this before switching to loading the <em>built</em> HTML into linkedom and driving the real controls. That test now runs in CI in about 200 ms. Screenshots were kept only for genuine art-direction judgement, on fresh page loads.</p>
+</div></section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section><div class="wrap">
+  <span class="sec-no">04 — Alternatives</span>
+  <h2>What else was on the table</h2>
+
+  <div class="scroll"><table>
+    <thead><tr><th>Option</th><th>Verdict</th><th>Reasoning</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Keep the Next.js app</strong></td>
+        <td><span class="tag t-kill">Rejected</span></td>
+        <td>The brief was explicitly to replicate MARVI's approach. Beyond that, it added a framework, a build toolchain and a <code>docs/</code> mirror to a site that is 156 static documents with no interactivity beyond one filter.</td>
+      </tr>
+      <tr>
+        <td><strong>Restyle WordPress in place</strong></td>
+        <td><span class="tag t-kill">Rejected</span></td>
+        <td>Lowest disruption and keeps AIWC's existing editing habits. Rejected because it cannot deliver the ask — Elementor's structure <em>is</em> the constraint on restructuring, and it does not move the site to GitHub Pages.</td>
+      </tr>
+      <tr>
+        <td><strong>Reuse MARVI's <code>index.html</code> and CSS</strong></td>
+        <td><span class="tag t-kill">Rejected</span></td>
+        <td>Fastest route to a working site. Rejected because "design firm style" and "a clone of the sister site" are incompatible. MARVI's <em>engine</em> transferred; its warm-paper/teal/copper art direction did not.</td>
+      </tr>
+      <tr>
+        <td><strong>One long people page, profiles inline</strong></td>
+        <td><span class="tag t-kill">Rejected</span></td>
+        <td>Simpler build, no extra routes. Rejected at ~324 KB of HTML on one page — and it forfeits the main prize: a researcher's name becoming a citable URL.</td>
+      </tr>
+      <tr>
+        <td><strong>Ship 13 languages like MARVI</strong></td>
+        <td><span class="tag t-open">Deferred</span></td>
+        <td>The machinery is in the build and works. Not enabled because no translations exist yet; a language switcher that returns English is worse than none. MARVI needs 13 languages to reach Indian villages — AIWC's audience is institutions, where English is the working language.</td>
+      </tr>
+      <tr>
+        <td><strong>Configurable base path</strong></td>
+        <td><span class="tag t-keep">Adopted</span></td>
+        <td>Required: no <code>CNAME</code> means a project page at <code>/aiwc/</code>. Adding a <code>CNAME</code> later flips the whole site to root URLs with no other change.</td>
+      </tr>
+    </tbody>
+  </table></div>
+
+  <div class="note"><strong>The rejected option that may still be right long-term:</strong> keeping WordPress. AIWC staff already know it, and Decap CMS requires a GitHub account and a working OAuth broker. If nobody at the Centre logs into <code>/admin/</code> within a few months, this rebuild will have traded an editable site for a beautiful frozen one — and that would be a worse outcome than the site I replaced. The mitigation is cheap and it is in "what's next": watch whether the first content edit comes through the CMS or through a request to me.</div>
+</div></section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section><div class="wrap">
+  <span class="sec-no">05 — The result</span>
+  <h2>Measured</h2>
+
+  <div class="scroll"><table>
+    <thead><tr><th>Measure</th><th class="num">Before</th><th class="num">After</th></tr></thead>
+    <tbody>
+      <tr><td>Repository, tracked files</td><td class="num">972</td><td class="num">386</td></tr>
+      <tr><td>Built site on disk</td><td class="num">55 MB (<code>docs/</code>)</td><td class="num">15 MB</td></tr>
+      <tr><td>Documents published</td><td class="num">~900 (mirror)</td><td class="num">156</td></tr>
+      <tr><td>Researcher pages</td><td class="num">0</td><td class="num">108</td></tr>
+      <tr><td>Partner pages</td><td class="num">0</td><td class="num">33</td></tr>
+      <tr><td>Home page HTML</td><td class="num">—</td><td class="num">71.8 KB</td></tr>
+      <tr><td>Directory page HTML (108 cards)</td><td class="num">—</td><td class="num">138.6 KB</td></tr>
+      <tr><td>CSS (whole design system)</td><td class="num">—</td><td class="num">40.1 KB</td></tr>
+      <tr><td>JavaScript shipped</td><td class="num">Next.js runtime</td><td class="num">5.2 KB</td></tr>
+      <tr><td>Internal links checked</td><td class="num">0</td><td class="num">3,161 — 0 dead</td></tr>
+      <tr><td>Images checked</td><td class="num">0</td><td class="num">453 — 0 missing, 0 without alt</td></tr>
+      <tr><td>Assets downloaded from aiwc.org.au</td><td class="num">—</td><td class="num">207 — 0 failures</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Data recovered from the source site</h3>
+  <div class="scroll"><table>
+    <thead><tr><th>Field</th><th class="num">Coverage</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td>Portraits</td><td class="num">108 / 108</td><td>Two researchers share one image upstream</td></tr>
+      <tr><td>Institution</td><td class="num">108 / 108</td><td>27 distinct institutions employ researchers</td></tr>
+      <tr><td>Designation</td><td class="num">107 / 108</td><td></td></tr>
+      <tr><td>Email</td><td class="num">105 / 108</td><td>Was 18 / 108 before the rowspan fix</td></tr>
+      <tr><td>Areas of interest</td><td class="num">105 / 108</td><td></td></tr>
+      <tr><td>Staff page / research profile</td><td class="num">77 / 108 each</td><td>Blank upstream for the rest</td></tr>
+      <tr><td>Biography or sections</td><td class="num">106 / 108</td><td>Two blank upstream; <code>verify</code> warns each run</td></tr>
+      <tr><td>Publications</td><td class="num">77</td><td>70 journal, 6 conference, 1 book chapter</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Checks now running in CI</h3>
+  <p><code>verify.mjs</code> — every internal link resolves to a built file; every image exists and has an <code>alt</code>; exactly one <code>&lt;h1&gt;</code> per page; title, description and canonical present; no band renders empty; every page referenced by a button or card exists; and every block type the renderer can draw has a CMS editor <em>and vice versa</em>. <code>test-directory.mjs</code> loads the built directory page into a DOM, imports the real <code>app.mjs</code>, and drives the real controls — 15 assertions, all passing.</p>
+</div></section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section><div class="wrap">
+  <span class="sec-no">06 — What is next</span>
+  <h2>Split by who is blocked</h2>
+
+  <div class="grid g2">
+    <div class="card">
+      <h3 style="margin-top:0">I can do these alone</h3>
+      <ul>
+        <li>Mirror the two symposium PDFs into <code>assets/</code> so they survive aiwc.org.au going away.</li>
+        <li>Generate <code>srcset</code> variants and inline-blur placeholders for the 108 portraits — the directory page currently ships 108 full-size images.</li>
+        <li>Add per-researcher <code>schema.org/Person</code> JSON-LD so profiles surface properly in scholarly search.</li>
+        <li>Add an <code>og:image</code> card generator so shared links show a rendered card rather than a low-resolution photo.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">These need you</h3>
+      <ul>
+        <li><strong>Review and merge <a href="https://github.com/marvi-groundwater/aiwc/pull/1">PR #1</a>.</strong> It deletes the Next.js app and the <code>docs/</code> mirror — worth a look before it lands. Merging deploys to <code>marvi-groundwater.github.io/aiwc/</code>.</li>
+        <li><strong>Authorise the <code>aiwc</code> repo</strong> in the Sveltia OAuth worker, or <code>/admin/</code> will not log in.</li>
+        <li><strong>Decide on a domain.</strong> Adding a <code>CNAME</code> switches the site to root URLs automatically. Without one it stays at <code>/aiwc/</code>.</li>
+        <li><strong>Photography.</strong> This is the single biggest remaining constraint — see below.</li>
+        <li><strong>Confirm the numbers</strong> on the home page: 33 institutions, 108 researchers, 10,000+ villages, five years. All are AIWC's own figures, but they are now stated prominently and should be ones the Centre is happy to stand behind.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note"><strong>On photography.</strong> The best images on aiwc.org.au are eight conference photos at 1280×720; the four programme images are 500×300. That is why the home hero is typographic over an SVG rather than a full-bleed photograph, and why the programme cards sit under a deep scrim. This is a design decision made <em>around</em> a constraint, and it holds up — but good photography of fieldwork, training cohorts and the village groundwater work would lift the site further than any further code.</div>
+</div></section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section><div class="wrap">
+  <span class="sec-no">07 — The mathematical lens</span>
+  <h2>The same event, read as structure</h2>
+  <p>Everything above stands on its own. This layer re-reads the same work as mathematics — not to decorate it, but to name what was actually present.</p>
+
+  <figure>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 880 240" role="img" aria-label="Structure map: a content set, a lossy extraction map, and a rendering map">
+        <style>.m{font:11.5px -apple-system,system-ui,sans-serif}.ml{font:600 10px ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase}</style>
+        <ellipse cx="115" cy="105" rx="98" ry="66" fill="none" stroke="#2f3f92" stroke-width="1.3"/>
+        <text x="115" y="24" class="ml" fill="#2f3f92" text-anchor="middle">W — source</text>
+        <text x="115" y="98" class="m" fill="currentColor" text-anchor="middle">22 pages, 140 posts</text>
+        <text x="115" y="116" class="m" fill="currentColor" text-anchor="middle">246 media records</text>
+
+        <ellipse cx="440" cy="105" rx="98" ry="66" fill="none" stroke="#25726a" stroke-width="1.3"/>
+        <text x="440" y="24" class="ml" fill="#25726a" text-anchor="middle">C — content</text>
+        <text x="440" y="98" class="m" fill="currentColor" text-anchor="middle">15 pages · 108 people</text>
+        <text x="440" y="116" class="m" fill="currentColor" text-anchor="middle">33 partners (JSON)</text>
+
+        <ellipse cx="765" cy="105" rx="98" ry="66" fill="none" stroke="#b1521f" stroke-width="1.3"/>
+        <text x="765" y="24" class="ml" fill="#b1521f" text-anchor="middle">S — site</text>
+        <text x="765" y="98" class="m" fill="currentColor" text-anchor="middle">156 documents</text>
+        <text x="765" y="116" class="m" fill="currentColor" text-anchor="middle">3161 links, 453 images</text>
+
+        <path d="M215 105 h122" stroke="#66757d" stroke-width="1.4" marker-end="url(#a2)"/>
+        <path d="M540 105 h122" stroke="#66757d" stroke-width="1.4" marker-end="url(#a2)"/>
+        <defs><marker id="a2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+          <path d="M0 0 L8 4 L0 8 z" fill="#66757d"/></marker></defs>
+        <text x="276" y="96" class="ml" fill="#a33131" text-anchor="middle">e — lossy</text>
+        <text x="276" y="126" class="m" fill="#66757d" text-anchor="middle">not injective</text>
+        <text x="601" y="96" class="ml" fill="#25726a" text-anchor="middle">r — total</text>
+        <text x="601" y="126" class="m" fill="#66757d" text-anchor="middle">deterministic</text>
+
+        <path d="M215 175 C 330 215, 550 215, 662 150" stroke="#a33131" stroke-width="1.2" fill="none" stroke-dasharray="5 4"/>
+        <text x="440" y="216" class="m" fill="#a33131" text-anchor="middle">the old approach: W → S directly, with no C to edit</text>
+      </svg>
+    </div>
+    <figcaption>Three sets and two maps. The whole project is the claim that factoring <em>W → S</em> through <em>C</em> is worth the cost.</figcaption>
+  </figure>
+
+  <h3>Formulation A — a lossy map, and the cost of not being able to invert it</h3>
+  <p>Let <em>W</em> be the source content, <em>C</em> the extracted JSON, <em>S</em> the built site. The pipeline is a composition:</p>
+  <div class="math">S = r(e(W)),  where e: W → C  (extraction)  and  r: C → S  (rendering)</div>
+  <p><em>r</em> is total and deterministic — every element of <em>C</em> renders, and rebuilding from the same <em>C</em> gives byte-identical <em>S</em>. That is why the CMS preview cannot drift: preview and publish are the same <em>r</em>.</p>
+  <p><em>e</em> is the dangerous one, because it is <strong>not injective and silently so</strong>. Distinct source documents mapped to the same impoverished record. The two bugs are exactly two collapses:</p>
+  <div class="math">rowspan bug:  e(profile_with_email) = e(profile_without_email)   — 90 of 108 collapsed
+nesting bug:  e(nested_article)      = e(empty_article)         —  1 of  22 collapsed</div>
+  <p>What makes this interesting rather than trivial: <em>you cannot detect a non-injective map by examining its output.</em> Both outputs were well-formed. Detection required a second, independent map <em>e′</em> (the plain-text extractor) and comparing a cheap invariant — character count — across both:</p>
+  <div class="math">flag article a  ⟺  |e(a)| &lt; ½·|e′(a)|   and  |e′(a)| &gt; 500</div>
+  <p>This caught exactly one article: 0 characters against 6,244. The email bug used the same idea with a different invariant, <em>counting non-null fields</em> rather than comparing two maps. <strong>Interpretation:</strong> the assurance came not from checking correctness but from checking <em>agreement between two independent derivations</em>, which is a much weaker and much cheaper thing to arrange.</p>
+
+  <h3>Formulation B — the site as a directed graph, and verification as reachability</h3>
+  <p>Let <em>G = (V, E)</em> where <em>V</em> is the 156 built documents and <em>E</em> the 3,161 internal links. <code>verify.mjs</code> asserts closure — no edge leaves the vertex set:</p>
+  <div class="math">∀ (u,v) ∈ E : v ∈ V          (0 violations)</div>
+  <p>Reading the two designs as graphs makes the people decision precise. In the rejected inline design, all 108 profiles live on one vertex, so <em>d</em>(home, any researcher) = 2 but the researcher is <strong>not addressable</strong> — no vertex denotes them, so nothing external can cite them. In the built design, each researcher is a vertex: <em>d</em> = 2 still, and now |V| grows by 108 while the citable set grows from 15 to 156. The cost of the extra vertices is 141 files; the gain is that an external citation can point at a person.</p>
+  <p>The rail navigation makes <em>G</em> have diameter ≤ 3 from any page — every page links every other top-level page, so the graph is nearly complete on the 15 nav vertices, with profile vertices hanging at distance 1 from their directory.</p>
+
+  <h3>What each formulation assumes, and hides</h3>
+  <div class="grid g2">
+    <div class="lens">
+      <h4>A — the map view</h4>
+      <p><strong>Reveals:</strong> that silent data loss is a statement about injectivity, and that the defence is redundant derivation rather than inspection.</p>
+      <p><strong>Assumes:</strong> that "content" is a set with a meaningful equality — which is false at the edges. Is a reordered paragraph list the same content? A is silent on the editorial restructuring, which is the part a reader would call the actual work.</p>
+    </div>
+    <div class="lens">
+      <h4>B — the graph view</h4>
+      <p><strong>Reveals:</strong> that addressability is a property of the vertex set, not the edge set, and that this is exactly what the old site lacked.</p>
+      <p><strong>Assumes:</strong> links are homogeneous and unweighted. It cannot see that the home page's ordering carries an argument — to B, a rearranged home page is the same graph.</p>
+    </div>
+  </div>
+  <p>Neither sees the thing the brief actually asked for. The narrative ordering is a <em>total order on a sequence of assertions chosen to be persuasive</em> — closer to rhetoric than to either structure. That both formulations are blind to it is itself the honest finding: the mathematics here describes the plumbing well and the editorial judgement not at all.</p>
+
+  <h3>One claim, left open</h3>
+  <div class="card" style="border-left:3px solid var(--gold)">
+    <p style="margin:0"><strong>For the practice folder.</strong> The nesting bug was caught by a two-map agreement test with threshold ½. Formalise: let <em>e</em>, <em>e′</em> be two extractors, and suppose <em>e</em> collapses a document to a strictly smaller record with probability <em>p</em>, independently per document, while <em>e′</em> does so with probability <em>q</em>, and that their failures are independent. A threshold test flags document <em>a</em> when |<em>e</em>(a)| &lt; θ·|<em>e′</em>(a)|.</p>
+    <p style="margin:.7em 0 0"><strong>Question:</strong> for <em>n</em> documents, what is the probability that at least one collapse goes undetected, as a function of θ, <em>p</em>, <em>q</em>, and the distribution of document sizes? Then: is there a θ minimising expected total error (missed collapses plus false alarms), and does it depend on the size distribution — or, as the ½ here quietly assumes, not at all?</p>
+    <p style="margin:.7em 0 0;color:var(--muted)"><strong>Real numbers to anchor it:</strong> of 22 articles, 12 exceed the 500-character floor the test applies. Exactly one collapsed — 0 characters against 6,244, a ratio of 0.000. The other 11 had |<em>e</em>|/|<em>e′</em>| ratios of 0.905, 0.977, 0.980, 0.991, 0.992, 0.993, 0.996, 0.997, 0.997, 0.998, 0.998. Zero false alarms at θ = ½, and θ anywhere in (0.01, 0.90) would have worked <em>on this sample</em>. The question is whether that enormous gap is a property of the failure mode — container nesting fails all-or-nothing, never partially — or luck. If it is structural, θ barely matters and the test is far more robust than it looks; if the 0.905 is near a real tail, it matters a great deal.</p>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <p style="margin:0">Australia India Water Centre site rebuild · 3 August 2026 · <a href="https://github.com/marvi-groundwater/aiwc/pull/1">PR #1</a> · built from <code>content/</code> by <code>scripts/build.mjs</code></p>
+</div></footer>
+
+</body>
+</html>

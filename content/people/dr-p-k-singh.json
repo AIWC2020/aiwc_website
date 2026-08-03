@@ -1,0 +1,45 @@
+{
+  "slug": "dr-p-k-singh",
+  "name": "Dr. P.K. Singh",
+  "sortName": "P.K. Singh",
+  "designation": "Professor",
+  "institute": "Maharana Pratap University of Agriculture and Technology, Udaipur, Rajasthan, India",
+  "instituteSlug": "maharana-pratap-university-of-agriculture-and-technology-udaipur-rajasthan-india",
+  "country": "India",
+  "qualification": "PhD, MPUAT, Udaipur, India",
+  "interests": "Water resources management, surface and groundwater hydrology, Rainwater harvesting and watershed management with focus on community involvement and livelihood.",
+  "email": "pksingh35@yahoo.com",
+  "homepage": "https://www.ctae.ac.in/singlePage.php?id=75&type=DP",
+  "profiles": [
+    "https://scholar.google.com/citations?user=ugT0zaIAAAAJ&hl=en"
+  ],
+  "photo": {
+    "image": "/assets/people/dr-p-k-singh.jpg",
+    "positionX": 50,
+    "positionY": 22
+  },
+  "bio": [
+    "Dr. P.K. Singh is working as Professor in Soil and Water Conservation Engineering Department and has over 32 years ‘of teaching, research and extension experience in the field of soil and water conservation, watershed management ,ground water engineering. He has written 9 books, 10 book chapters and published 90 research papers in national and International journals. He received three national awards from Indian Society of Agricultural Engineers and also recipient of University Best Teacher Award in the year 2003 and 2019.He is deeply involved in policy and institutional aspect of water management and also have close liaison with community, NGOs and government agencies working in water sector."
+  ],
+  "sections": [
+    {
+      "title": "Research Project",
+      "items": [
+        "All India Coordinated Research Project on Irrigation Water Management, Funding: Indian Council of Agricultural Research, New Delhi",
+        "Improved Village Scale Groundwater Recharge and Management for Agriculture and Livelihood Development in India; Funding: Australian Centre for International Agricultural Research",
+        "National Initiative on Climate Resilient Agriculture Project , Funding: Indian Council of Agricultural Research, New Delhi"
+      ]
+    },
+    {
+      "title": "Key Publications/Reports",
+      "items": [
+        "Singh, P.K., Kumar, V., Purohit, R.C., Kothari, M. and Dashora, P.K. (2008), Application of Principal Component Analysis in Grouping Geomorphic Parameters for Hydrologic Modeling, Journal of Water Resources Management, Springer Netherlands, ISSN : 0920-4741 (Print) 1573-1650 (Online), June 2008.",
+        "Machiwal, Deepesh, and Singh,P.K.(2015). Comparing GIS-based multi-criteria decision-making and Boolean logic modelling approaches for delineating groundwater recharge zones . Arabian Journal of Geosciences. 8, no. 12 : 10675-10691.",
+        "Sujata Dhable, P.K. Singh, and R.S. Singh (2014) Morphometric analysis of chanavada micro-watershed using remote sensing and GIS, Journal of Soil and Water Conservation 13(1):10-15",
+        "Singh,P.K. (2010) Rainwater Harvesting-Low Cost Indigenous and Innovative Technologies, McMillan India Ltd and UNESCO.",
+        "Singh, P.K. (2000) Watershed Management(Design and Practices), e-media publications, Udaipur"
+      ]
+    }
+  ],
+  "source": "https://aiwc.org.au/dr-p-k-singh/"
+}

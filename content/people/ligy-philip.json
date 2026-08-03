@@ -1,0 +1,44 @@
+{
+  "slug": "ligy-philip",
+  "name": "Ligy Philip",
+  "sortName": "Ligy Philip",
+  "designation": "Professor",
+  "institute": "Indian Institute of Technology Madras",
+  "instituteSlug": "indian-institute-of-technology-madras",
+  "country": "India",
+  "qualification": "PhD IIT Kanpur; Environmental Engineering, Civil Engineering",
+  "interests": "Water treatment and Rural Water Supply; Domestic and Industrial wastewater treatment with emphasis on wastewater reuse and recycling; Bioremediation of contaminated soils, air and water with heavy metals, pesticides and other hazardous organic compound",
+  "email": "numberligy@iitm.ac.in",
+  "homepage": "http://profligyphilip.com/",
+  "profiles": [
+    "https://scholar.google.com.au/citations?hl=en&user=sDQxkIAAAAAJ"
+  ],
+  "photo": {
+    "image": "/assets/people/ligy-philip.webp",
+    "positionX": 50,
+    "positionY": 22
+  },
+  "bio": [
+    "Dr. Ligy Philip is a Professor at the Dept. of Civil Engineering, Environmental and Water Resources Division, Indian Institute of Technology Madras (IITM), India.Prof. Ligy Philip is Institute Chair Professor in Department of Civil Engineering, IIT Madras. She is a Fellow of National Academy of Engineers (FNAE) and Fellow of Royal Society of Chemistry (FRSC). For more than two decades, Prof. Ligy Philip has been contributing significantly to advancing the knowledge in the area of Environmental Engineering, and for the betterment of society through field and industry oriented projects. She has conducted high quality research on treatment of industrial effluents from highly polluting industries, bioremediation of contaminated soils and groundwater, novel processes for drinking water treatment, and sustainable management of waste. Technologies developed by her have been successfully utilized by several industries and NGOs. She has provided consulting services to a large number of industries in the area of pollution monitoring and control."
+  ],
+  "sections": [
+    {
+      "title": "Research Project",
+      "items": [
+        "SUTRAM for EASY WATER – Water Technology Research and Innovation Centre for Sustainable Treatment, Reuse and Management for Efficient, Affordable and Synergistic solutions for water.",
+        "Water and Sustainability – Circular economy, Water supply systems Sustainability Advanced treatment technologies, Emerging contaminants Nutrient recovery, Sensors for monitoring water quality and quantity Hydrologic models."
+      ]
+    },
+    {
+      "title": "Key Publications/Reports",
+      "items": [
+        "Ravichandran M.K,and Ligy Philip (2022) “Fate of carbamazepine and its effect on physiological characteristics of wetland plant species in the hydroponic system” Science of the Total Environment, Volume 846, Article Number: 157337",
+        "Ravichandran M.K,and Ligy Philip (2022) “Assessment of the contribution of various constructed wetland components for the removal of pharmaceutically active compounds” Journal of Environmental Chemical Engineering, Volume 10, Issue – 3, Article Number: 107835, DOI: 10.1016/j.jece.2022.107835",
+        "Ravichandran M.K, Yoganathan.S and Ligy Philip (2021) “Removal and risk assessment of pharmaceuticals and personal care products in a decentralized greywater treatment system serving an Indian rural community” Journal of Environmental Chemical Engineering, Volume 9, Issue – 6, Article Number: 106832",
+        "Krithika, D, Sharon, H, Reddy, K.S and Ligy Philip, (2021) “Performance evaluation of solar thermal systems as an alternative for human waste treatment” Sustainable Energy 4 Technologies and Assessments, Volume 47, Article Number: 101393",
+        "A.R.Thomas, P.A.Arulraj,Martin Kranert and Ligy Philip (2020) “Investigation on greenhouse gas emissions and compost dynamics during in-vessel co-composting of septage and mixed organic wastes”, International Journal of Environmental Science and Technology, Volume (17) Pages 1675 – 1690"
+      ]
+    }
+  ],
+  "source": "https://aiwc.org.au/ligy-philip/"
+}

@@ -1,0 +1,44 @@
+{
+  "slug": "prof-t-g-sitharam",
+  "name": "Prof. T. G. Sitharam",
+  "sortName": "T. G. Sitharam",
+  "designation": "Director, IIT Guwahati, and Professor, Department of Civil Engineering, Indian Institute of Science, Bangalore 560012",
+  "institute": "Indian Institute of Technology Guwahati",
+  "instituteSlug": "indian-institute-of-technology-guwahati",
+  "country": "India",
+  "qualification": "PhD (Waterloo, Canada)",
+  "interests": "Geotechnical Engineering / Coastal reservoirs / Underground dams",
+  "email": "director@iitg.ac.in",
+  "homepage": "http://www.iitg.ac.in/crt/sudip_mitra/",
+  "profiles": [
+    "https://scholar.google.co.in/citations?user=OKug7KsAAAAJ&hl=en"
+  ],
+  "photo": {
+    "image": "/assets/people/prof-t-g-sitharam.webp",
+    "positionX": 50,
+    "positionY": 22
+  },
+  "bio": [
+    "Prof. Dr. T. G. Sitharam has taken over as the Director, Indian Institute of Technology, Guwahati, Assam on July 01, 2019 and also holding additional position Chairman, BOG of IITG. He was a Senior Professor, Department of Civil Engineering, Indian Institute of Science, Bangalore, India (he is on deputation from IISc from July 01, 2019). He was formerly a Chair professor in the area of Energy and Mechanical Sciences at Indian Institute of Science (IISc), a premier research and education Institute in India. He was former founder Chairman of a Centre for Infrastructure, Sustainable Transport and Urban Planning (CiSTUP) at IISc, Bengaluru. Presently, he is the Honorary Professorial Fellow at University of Wollongong, Wollongong, Australia from 2019 to 2022 and Distinguished professor at Hankou University International Innovation Centre, China. Presently, He is the Chairman, Research Council, CSIR-Central Building Research Institute (CBRI), Roorkee. He is the Chairman, Executive Council of Visvesvaraya Industrial & Technological Museum Bangalore India. He is Governing Council member of National Council for Science Museums (NCSM), Govt of India and EC member of AICTE, Govt of India, New Delhi. He is the founder President of International Association for Coastal Reservoir Research (IACRR), registered in NSW, Australia. He has delivered talks on Sustainability of water resources management, underground drains and coastal reservoirs. He is the Chairman of the International Scientific Committee of the First IACRR Congress on Coastal Reservoirs and sustainable water management. He is the President, Indian Society for Earthquake Technology (ISET), Roorkee. He is presently the Chairman, AICTE South western zonal committee, Regional office at Bengaluru. Formerly, he was a visiting professor at Dalhousie University, Canada; Yamaguchi University, Japan; Indian School of Mines (IIT-ISM), Dhanbad; and William Mong fellow at University of Hongkong, Hongkong. He was the vice president of Indian Society for Earthquake Technology (ISET) and Vice President of Indian Society of Earthquake Science (ISES)."
+  ],
+  "sections": [
+    {
+      "title": "Research Project",
+      "items": [
+        "T G SITHARAM –co PI (2019) “Impounding of River flood waters along Dakshina Kannada Coast: A sustainable strategy for water resource development” in Water Resources, Co-PI, IMPRINT II, SERB, 1 crore 11 lakhs (3 years).",
+        "T.G. Sitharam et al., (2017) Feasibility study on coastal reservoir concept to impound Netravati river flood waters – A sustainable strategy for water resource development for Mangaluru and Bengaluru – A report submitted to BWSSB, Bengaluru (Rs 50 lakhs)."
+      ]
+    },
+    {
+      "title": "Key Publications/Reports",
+      "items": [
+        "T G Sitharam et al., (2020) Sustainable Water Resource Development Using Coastal Reservoirs, 1st Edition, ISBN:9780128180020, Butterworth-Heinemann, 3rd August 2020, Elsevier Book.",
+        "T G Sitharam (2018) Sea dike construction challenges in coastal waters for storage of river flood waters: a sustainable strategy for water resource development using coastal reservoirs, Advances in Sustainable Urbanization 3 (1), 1-6.",
+        "S Kolathayar, TG Sitharam, R Ramkrishnan, RS Rao (2017) Feasibility of creating a fresh water reservoir in the Arabian Sea impounding the flood waters of Netravathi River, Advances in Sustainable Urbanization 2 (2), 38-42.",
+        "CR Parthasarathy, TG Sitharam, S Kolathayar (2019) Geotechnical considerations for the concept of coastal reservoir at Mangaluru to impound the flood waters of Netravati River, Marine Georesources & Geotechnology 37 (2), 236-244.",
+        "S Kolathayar, TG Sitharam, S Yang (2019) Coastal reservoir strategy to enhance India’s freshwater storage by impounding river flood waters: a detailed overview, Water Science and Technology: Water Supply 19 (3), 703-717."
+      ]
+    }
+  ],
+  "source": "https://aiwc.org.au/prof-t-g-sitharam/"
+}

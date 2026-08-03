@@ -1,0 +1,18 @@
+{
+  "menuName": "Our people",
+  "slug": "people",
+  "order": 8,
+  "published": true,
+  "template": "standard",
+  "intro": {
+    "eyebrow": "Our people",
+    "title": "One hundred and eight\nwater researchers.",
+    "lede": "Engineering, ecology, social science, law and agriculture — filter by country or institution, and open any profile for areas of interest, current projects and key publications."
+  },
+  "blocks": [
+    {
+      "type": "peopleGrid",
+      "tone": "paper"
+    }
+  ]
+}
