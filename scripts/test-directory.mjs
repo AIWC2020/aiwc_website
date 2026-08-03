@@ -28,9 +28,18 @@ window.IntersectionObserver = class {
   observe(node) { node.classList.add('in'); }
   unobserve() {}
 };
+// MARVI's app.mjs reads computed font sizes to apply the per-block text
+// scale. linkedom has no layout engine, so a stub is enough: the directory
+// behaviour under test does not depend on the number.
+const getComputedStyle = () => ({ fontSize: '16px' });
+window.getComputedStyle = getComputedStyle;
+
 Object.assign(globalThis, {
   window,
   document,
+  getComputedStyle,
+  requestAnimationFrame: (fn) => fn(),
+  ResizeObserver: class { observe() {} unobserve() {} disconnect() {} },
   location: { hash: '', pathname: '/people/', href: '' },
   history: { replaceState() {} },
   matchMedia: window.matchMedia,
