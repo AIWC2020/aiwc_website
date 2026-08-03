@@ -19,8 +19,9 @@ const BASE = new URL('.', import.meta.url).pathname.replace(/\/admin\/$/, '');
 
 const { renderPage, renderPerson, renderPartner } = await import(`${BASE}/assets/templates.mjs`);
 
-// peopleGrid, logoWall and partnerRows render from a whole collection, which
-// the CMS never hands to a preview. The build publishes a trimmed index.
+// Researchers and partners now live inside the block being edited, so the
+// preview gets them for free. The published index is still read as a
+// fallback for a page that references them from elsewhere.
 const collections = await fetch(`${BASE}/assets/collections.json`)
   .then((r) => (r.ok ? r.json() : null))
   .catch(() => null);

@@ -17,7 +17,13 @@ media_folder: "assets/photos"
 public_folder: "{{BASE}}/assets/photos"
 
 # ---------------------------------------------------------------------------
-# Three collections, mirroring content/:
+# One collection: Pages. Everything shown on a page is edited in that page,
+# including the 108 researchers (inside the Researchers block on Our people)
+# and the 33 partner institutions (inside Partner institutions on Our
+# partners). Each still gets its own address — /people/<slug>/ and
+# /partners/<slug>/ — generated from those lists at build time.
+#
+# Was three collections, mirroring content/:
 #
 #   Pages     — the navigable pages. A page is a header (title, intro, hero)
 #               plus content BLOCKS you can add and drag to reorder. Each
@@ -407,17 +413,71 @@ collections:
                   - { label: "Focus X (%)", name: "positionX", widget: "number", default: 50, value_type: "int", min: 0, max: 100, step: 1, required: false }
                   - { label: "Focus Y (%)", name: "positionY", widget: "number", default: 50, value_type: "int", min: 0, max: 100, step: 1, required: false }
                   - { label: "Fit", name: "fit", widget: "select", default: "auto", required: false, options: ["auto", "cover", "contain"] }
-          - label: "Researcher directory"
+          - label: "Researchers"
             name: "portraitDirectory"
-            summary: "All researchers, filterable"
+            summary: "Researchers ({{fields.items.length}})"
             fields:
-              - { label: "Show the country + search filters", name: "filters", widget: "boolean", default: true, required: false, hint: "Every researcher in content/people is listed automatically; there is nothing to enter here." }
+              - { label: "Show the country + search filters", name: "filters", widget: "boolean", default: true, required: false }
+              - label: "Researchers"
+                name: "items"
+                widget: "list"
+                collapsed: true
+                summary: "{{fields.name}} — {{fields.institute}}"
+                fields:
+                  - { label: "Name", name: "name", widget: "string" }
+                  - { label: "Page address", name: "slug", widget: "string", pattern: ['^[a-z0-9-]+$', "Lower-case letters, numbers and hyphens only"], hint: "Their page lives at /people/<address>/. Changing it breaks existing links." }
+                  - { label: "Sort as", name: "sortName", widget: "string", required: false, hint: "Surname first, if the list should sort differently to the displayed name." }
+                  - { label: "Role", name: "designation", widget: "string", required: false }
+                  - { label: "Institution", name: "institute", widget: "string", hint: "Must match the wording other researchers there use, or the filter lists it twice." }
+                  - { label: "Country", name: "country", widget: "select", options: ["Australia", "India"] }
+                  - { label: "Highest qualification", name: "qualification", widget: "string", required: false }
+                  - { label: "Areas of interest", name: "interests", widget: "text", required: false }
+                  - { label: "Email", name: "email", widget: "string", required: false }
+                  - { label: "Staff page", name: "homepage", widget: "string", required: false }
+                  - { label: "Research profiles", name: "profiles", widget: "list", required: false, field: { label: "URL", name: "url", widget: "string" } }
+                  - { label: "Portrait", name: "photo", widget: "object", required: false, fields: *photoFields }
+                  - { label: "Biography", name: "bio", widget: "list", required: false, field: { label: "Paragraph", name: "text", widget: "text" } }
+                  - label: "Sections"
+                    name: "sections"
+                    widget: "list"
+                    required: false
+                    collapsed: true
+                    summary: "{{fields.title}}"
+                    hint: "e.g. Research Projects, Key Publications."
+                    fields:
+                      - { label: "Heading", name: "title", widget: "string" }
+                      - { label: "Entries", name: "items", widget: "list", field: { label: "Entry", name: "text", widget: "text" } }
+                  - { label: "Institution key", name: "instituteSlug", widget: "hidden", required: false }
+                  - { label: "Original page", name: "source", widget: "hidden", required: false }
 
-          - label: "Partner directory"
+          - label: "Partner institutions"
             name: "partnerDirectory"
-            summary: "Partner institutions — {{fields.country}}"
+            summary: "Partner institutions ({{fields.items.length}})"
             fields:
-              - { label: "Country", name: "country", widget: "select", required: false, options: [{ label: "Both", value: "" }, "Australia", "India"], hint: "Every partner in content/partners is listed automatically." }
+              - { label: "Country", name: "country", widget: "select", required: false, options: [{ label: "All", value: "" }, "Australia", "India"], hint: "Leave as All to list every partner." }
+              - label: "Partner institutions"
+                name: "items"
+                widget: "list"
+                collapsed: true
+                summary: "{{fields.country}} · {{fields.name}}"
+                fields:
+                  - { label: "Name", name: "name", widget: "string" }
+                  - { label: "Page address", name: "slug", widget: "string", pattern: ['^[a-z0-9-]+$', "Lower-case letters, numbers and hyphens only"], hint: "Their page lives at /partners/<address>/." }
+                  - { label: "Country", name: "country", widget: "select", options: ["Australia", "India"] }
+                  - { label: "Institution name used by researchers", name: "instituteName", widget: "string", required: false, hint: "Links this partner to the researchers listed under that institution." }
+                  - { label: "Logo", name: "logo", widget: "object", fields: [{ label: "Image", name: "image", widget: "image" }] }
+                  - { label: "One-line summary", name: "summary", widget: "text", required: false }
+                  - { label: "Description", name: "body", widget: "list", required: false, field: { label: "Paragraph", name: "text", widget: "text" } }
+                  - label: "Sections"
+                    name: "sections"
+                    widget: "list"
+                    required: false
+                    collapsed: true
+                    summary: "{{fields.title}}"
+                    fields:
+                      - { label: "Heading", name: "title", widget: "string" }
+                      - { label: "Entries", name: "items", widget: "list", field: { label: "Entry", name: "text", widget: "text" } }
+                  - { label: "Original page", name: "source", widget: "hidden", required: false }
 
           - label: "Source note"
             name: "sourceNote"
@@ -432,66 +492,3 @@ collections:
                   - { label: "Link", name: "link", widget: "object", collapsed: true, required: false, fields: [{ label: "Label", name: "label", widget: "string", required: false }, { label: "URL", name: "url", widget: "string", required: false }, { label: "Downloads a file", name: "download", widget: "boolean", default: false, required: false }, { label: "Opens in a new tab", name: "external", widget: "boolean", default: false, required: false }] }
               - { label: "style", name: "style", widget: "hidden", required: false }
 
-  - name: "people"
-    label: "Researchers"
-    label_singular: "researcher"
-    folder: "content/people"
-    extension: "json"
-    format: "json"
-    create: true
-    identifier_field: "name"
-    slug: "{{fields.slug}}"
-    summary: "{{fields.name}} — {{fields.institute}}"
-    sortable_fields: ["sortName", "institute", "country"]
-    fields:
-      - { label: "Name", name: "name", widget: "string" }
-      - { label: "Page address", name: "slug", widget: "string", pattern: ['^[a-z0-9-]+$', "Lower-case letters, numbers and hyphens only"] }
-      - { label: "Sort as", name: "sortName", widget: "string", required: false, hint: "Surname first if the directory should sort differently to the displayed name." }
-      - { label: "Role", name: "designation", widget: "string", required: false }
-      - { label: "Institution", name: "institute", widget: "string", hint: "Must match the institution name used by the other researchers there, or the filter will list it separately." }
-      - { label: "Institution key", name: "instituteSlug", widget: "hidden", required: false }
-      - { label: "Country", name: "country", widget: "select", options: ["Australia", "India"] }
-      - { label: "Highest qualification", name: "qualification", widget: "string", required: false }
-      - { label: "Areas of interest", name: "interests", widget: "text", required: false }
-      - { label: "Email", name: "email", widget: "string", required: false }
-      - { label: "Staff page", name: "homepage", widget: "string", required: false }
-      - { label: "Research profiles", name: "profiles", widget: "list", required: false, field: { label: "URL", name: "url", widget: "string" } }
-      - { label: "Portrait", name: "photo", widget: "object", required: false, fields: *photoFields }
-      - { label: "Biography", name: "bio", widget: "list", required: false, field: { label: "Paragraph", name: "text", widget: "text" } }
-      - label: "Sections"
-        name: "sections"
-        widget: "list"
-        required: false
-        hint: "e.g. Research Projects, Key Publications."
-        fields:
-          - { label: "Heading", name: "title", widget: "string" }
-          - { label: "Entries", name: "items", widget: "list", field: { label: "Entry", name: "text", widget: "text" } }
-      - { label: "Original page", name: "source", widget: "hidden", required: false }
-
-  - name: "partners"
-    label: "Partner institutions"
-    label_singular: "partner"
-    folder: "content/partners"
-    extension: "json"
-    format: "json"
-    create: true
-    identifier_field: "name"
-    slug: "{{fields.slug}}"
-    summary: "{{fields.country}} · {{fields.name}}"
-    sortable_fields: ["name", "country"]
-    fields:
-      - { label: "Name", name: "name", widget: "string" }
-      - { label: "Page address", name: "slug", widget: "string", pattern: ['^[a-z0-9-]+$', "Lower-case letters, numbers and hyphens only"] }
-      - { label: "Country", name: "country", widget: "select", options: ["Australia", "India"] }
-      - { label: "Institution name used by researchers", name: "instituteName", widget: "string", required: false, hint: "Links this partner to the researchers listed under that institution." }
-      - { label: "Logo", name: "logo", widget: "object", fields: [{ label: "Image", name: "image", widget: "image" }] }
-      - { label: "One-line summary", name: "summary", widget: "text", required: false }
-      - { label: "Description", name: "body", widget: "list", required: false, field: { label: "Paragraph", name: "text", widget: "text" } }
-      - label: "Sections"
-        name: "sections"
-        widget: "list"
-        required: false
-        fields:
-          - { label: "Heading", name: "title", widget: "string" }
-          - { label: "Entries", name: "items", widget: "list", field: { label: "Entry", name: "text", widget: "text" } }
-      - { label: "Original page", name: "source", widget: "hidden", required: false }

@@ -57,16 +57,27 @@ export function buildRegistry(root) {
   return pages;
 }
 
+/**
+ * Researchers and partners live inside the pages that display them, so a page
+ * file is everything on that page and the CMS needs one collection. They are
+ * read back out here so the build can still give each of them its own URL.
+ *
+ * Keyed off the block type rather than the page slug, so renaming or moving
+ * the page does not break the detail pages.
+ */
 export function loadCollections(root) {
-  const people = readJSONDir(join(root, 'content/people'))
-    .map((p) => ({ ...p, slug: p.slug || p.id }))
-    .sort((a, b) => (a.sortName || a.name).localeCompare(b.sortName || b.name));
+  const pages = buildRegistry(root);
+  const itemsOf = (blockType) =>
+    pages
+      .flatMap((page) => page.blocks || [])
+      .filter((block) => block.type === blockType)
+      .flatMap((block) => block.items || [])
+      .filter((entry) => entry && entry.slug);
 
-  const partners = readJSONDir(join(root, 'content/partners'))
-    .map((p) => ({ ...p, slug: p.slug || p.id }))
-    .sort((a, b) => (a.country || '').localeCompare(b.country || '') || a.name.localeCompare(b.name));
-
-  return { people, partners };
+  return {
+    people: itemsOf('portraitDirectory'),
+    partners: itemsOf('partnerDirectory'),
+  };
 }
 
 /**

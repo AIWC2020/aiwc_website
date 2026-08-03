@@ -29,7 +29,7 @@ if (!existsSync(OUT)) {
 
 /* every built document */
 // admin/ and editor/ are editing tools, not site pages — no chrome to check.
-const SKIP_DIRS = new Set(['admin', 'editor', 'assets', 'content']);
+const SKIP_DIRS = new Set(['admin', 'assets', 'content']);
 const docs = [];
 const walk = (dir) => {
   for (const entry of readdirSync(dir)) {
@@ -133,7 +133,7 @@ for (const p of partners) {
 }
 
 /* internal write-ups must never reach the published site */
-for (const dir of ['reports', 'scripts', 'src']) {
+for (const dir of ['reports', 'scripts', 'src', 'editor']) {
   if (existsSync(join(OUT, dir))) fail('build', `${dir}/ was copied into _site — it must not ship`);
 }
 
