@@ -84,8 +84,10 @@
     <select id="file" aria-label="Choose what to edit"><option>Loading…</option></select>
   </label>
   <span class="grow"></span>
+  <button class="btn" id="token" title="Manage the access token used for publishing">Token…</button>
   <button class="btn" id="reset" disabled>Revert</button>
-  <button class="btn go" id="save" disabled>Save changes →</button>
+  <button class="btn" id="save" disabled>Save manually…</button>
+  <button class="btn go" id="publish" disabled>Publish →</button>
 </header>
 
 <p class="status" id="status">Pick a page, researcher or partner to edit.</p>
@@ -95,12 +97,35 @@
   <div class="pane preview"><iframe id="preview" title="Live preview"></iframe></div>
 </main>
 
-<dialog id="saveDlg">
-  <div class="dlg-head"><h2>Save to GitHub</h2></div>
+<dialog id="tokenDlg">
+  <div class="dlg-head"><h2>Access token</h2></div>
   <div class="dlg-body">
+    <p style="margin:0 0 12px">Publishing writes straight to GitHub, which needs a token with
+      permission to change this repository. It is stored only in this browser and is never sent anywhere but
+      <code>api.github.com</code>.</p>
+    <ol>
+      <li>Open <a id="mkToken" target="_blank" rel="noopener">the pre-configured token page</a> — name, repository access and <b>Contents: Read and write</b> are already filled in.</li>
+      <li>Set <b>Expiration</b>, then <b>Generate token</b> and copy it.</li>
+      <li>Paste it below.</li>
+    </ol>
+    <label><span>Token</span><input type="password" id="tokenInput" autocomplete="off" spellcheck="false" placeholder="github_pat_…"></label>
+    <p id="tokenState" style="margin:8px 0 0;font:.8rem/1.5 var(--mono);color:var(--muted)"></p>
+  </div>
+  <div class="dlg-foot">
+    <button class="btn" id="tokenClear">Forget token</button>
+    <button class="btn" id="tokenClose">Close</button>
+    <button class="btn go" id="tokenSave">Save token</button>
+  </div>
+</dialog>
+
+<dialog id="saveDlg">
+  <div class="dlg-head"><h2>Save manually</h2></div>
+  <div class="dlg-body">
+    <p style="margin:0 0 12px">For when you would rather not hold a token — GitHub does the
+      authentication because you are already signed in there.</p>
     <ol>
       <li><b>Copy</b> the JSON below (the button does it).</li>
-      <li><b>Open the file on GitHub</b> — the second button. You are already signed in there, so nothing else to log into.</li>
+      <li><b>Open the file on GitHub</b> — the second button.</li>
       <li>Select everything in GitHub's editor (<kbd>Ctrl/Cmd</kbd>+<kbd>A</kbd>), paste, then <b>Commit changes</b>.</li>
     </ol>
     <p style="margin:0 0 8px;color:var(--muted);font-size:.88rem">The site rebuilds automatically — your change is live in about 40 seconds. If the JSON is ever malformed the build fails and the live site keeps serving the last good version.</p>
@@ -153,6 +178,14 @@ select.innerHTML = '<option value="">Choose what to edit…</option>' +
 let current = null;   // { kind, slug, label }
 let original = null;  // pristine JSON text, for Revert
 let data = null;      // the object being edited
+let sha = null;       // the file's current blob sha, for conflict detection
+
+const OWNER_REPO = 'AIWC2020/aiwc_website';
+const API = `https://api.github.com/repos/${OWNER_REPO}/contents`;
+const TOKEN_KEY = 'aiwc-editor-token';
+
+const getToken = () => localStorage.getItem(TOKEN_KEY) || '';
+const pathFor = (f) => `content/${f.kind}/${f.slug}.json`;
 
 const ctx = {
   people: collections.people,
@@ -348,6 +381,10 @@ function touched() {
   draw();
   $('save').disabled = !dirty();
   $('reset').disabled = !dirty();
+  $('publish').disabled = !dirty();
+  $('publish').title = getToken()
+    ? 'Commit this change to GitHub'
+    : 'Needs an access token — click Token…';
   say(dirty()
     ? `<b>Unsaved changes</b> — ${current.label}. Nothing is written until you save through GitHub.`
     : `${current.label} — no changes yet.`);
@@ -371,9 +408,124 @@ async function load(index) {
   if (!res.ok) { say(`<b>Could not load</b> ${current.kind}/${current.slug}.json (${res.status}).`); return; }
   original = await res.text();
   data = JSON.parse(original);
-  $('ghLink').href = `${GH}/edit/main/content/${current.kind}/${current.slug}.json`;
+  $('ghLink').href = `${GH}/edit/main/${pathFor(current)}`;
+
+  // The blob sha is public on a public repo, so this needs no token. It is
+  // what lets a publish fail loudly if someone else changed the file first,
+  // rather than silently overwriting them.
+  sha = null;
+  try {
+    const meta = await fetch(`${API}/${pathFor(current)}?ref=main`, { cache: 'no-store' });
+    if (meta.ok) sha = (await meta.json()).sha;
+  } catch { /* offline; publish will report it */ }
+
   rebuild();
 }
+
+/* ── publishing straight to GitHub ──────────────────────────────────── */
+
+/** btoa() is byte-oriented; content is UTF-8, so encode before encoding. */
+const toBase64 = (text) => {
+  const bytes = new TextEncoder().encode(text);
+  let binary = '';
+  for (const b of bytes) binary += String.fromCharCode(b);
+  return btoa(binary);
+};
+
+async function publish() {
+  const token = getToken();
+  if (!token) { openToken('Publishing needs a token. Add one to continue.'); return; }
+
+  const body = JSON.stringify(data, null, 2) + '\n';
+  const btn = $('publish');
+  btn.disabled = true;
+  say(`Publishing ${current.label}…`);
+
+  let res;
+  try {
+    res = await fetch(`${API}/${pathFor(current)}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/vnd.github+json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        message: `Update ${current.label} via the site editor`,
+        content: toBase64(body),
+        branch: 'main',
+        ...(sha ? { sha } : {}),
+      }),
+    });
+  } catch (err) {
+    btn.disabled = false;
+    say(`<b>Could not reach GitHub</b> — ${err.message}. Nothing was published.`);
+    return;
+  }
+
+  if (res.status === 401) {
+    btn.disabled = false;
+    openToken('That token was rejected. It may have expired or been revoked.');
+    return;
+  }
+  if (res.status === 403 || res.status === 404) {
+    btn.disabled = false;
+    openToken('That token cannot write to this repository. Check it grants Contents: Read and write on ' + OWNER_REPO + '.');
+    return;
+  }
+  if (res.status === 409 || res.status === 422) {
+    btn.disabled = false;
+    say('<b>Someone else changed this file</b> since you opened it. Reload the entry, redo your edit, then publish again — publishing now would overwrite their work.');
+    return;
+  }
+  if (!res.ok) {
+    btn.disabled = false;
+    const detail = await res.text().catch(() => '');
+    say(`<b>Publish failed</b> (${res.status}). ${detail.slice(0, 160)}`);
+    return;
+  }
+
+  const out = await res.json();
+  sha = out.content?.sha || null;
+  original = body;                       // this is now the saved state
+  $('save').disabled = true;
+  $('reset').disabled = true;
+  say(
+    `<b>Published.</b> <a href="${out.commit.html_url}" target="_blank" rel="noopener">View the commit ↗</a> — ` +
+    `the site rebuilds automatically, live in about 40 seconds. ` +
+    `<a href="${GH}/actions" target="_blank" rel="noopener">Build status ↗</a>`
+  );
+}
+
+/* ── token handling ─────────────────────────────────────────────────── */
+
+function openToken(note = '') {
+  $('mkToken').href = 'https://github.com/settings/personal-access-tokens/new?name=AIWC+editor&contents=write';
+  $('tokenInput').value = '';
+  $('tokenState').textContent = note || (getToken()
+    ? 'A token is saved in this browser.'
+    : 'No token saved — publishing is unavailable until you add one.');
+  $('tokenDlg').showModal();
+}
+
+$('token').onclick = () => openToken();
+$('tokenClose').onclick = () => $('tokenDlg').close();
+$('tokenSave').onclick = () => {
+  const value = $('tokenInput').value.trim();
+  if (!value) { $('tokenState').textContent = 'Paste a token first.'; return; }
+  localStorage.setItem(TOKEN_KEY, value);
+  $('tokenInput').value = '';
+  $('tokenDlg').close();
+  touched();
+  say('Token saved in this browser. Publishing is available.');
+};
+$('tokenClear').onclick = () => {
+  localStorage.removeItem(TOKEN_KEY);
+  $('tokenState').textContent = 'Token removed from this browser.';
+  touched();
+};
+
+$('publish').onclick = publish;
 
 select.onchange = () => load(select.value);
 
