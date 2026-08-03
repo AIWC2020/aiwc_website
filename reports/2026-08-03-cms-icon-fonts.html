@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The CMS that looked like it had no photo upload — 3 August 2026</title>
+<style>
+  :root {
+    --bg: #fbfaf8; --panel: #ffffff; --ink: #16191d; --dim: #5b636e;
+    --line: #e2e0dc; --accent: #1f5f8b; --good: #16694a;
+    --bad: #a3341f; --warn: #8a6212; --code-bg: #f2f0ec;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14171a; --panel: #1b1f23; --ink: #e8e6e3; --dim: #9aa3ad;
+      --line: #2c3238; --accent: #6fb3e0; --good: #57c79a; --bad: #e08a72;
+      --warn: #d6b45e; --code-bg: #23282d;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0 1rem 5rem; background: var(--bg); color: var(--ink);
+    font: 16px/1.65 ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    overflow-x: hidden;
+  }
+  .wrap { max-width: 60rem; margin: 0 auto; }
+  header { padding: 3rem 0 1.5rem; border-bottom: 2px solid var(--ink); margin-bottom: 2.5rem; }
+  h1 { font-size: clamp(1.6rem, 4.5vw, 2.5rem); line-height: 1.15; margin: 0 0 .6rem; letter-spacing: -.02em; }
+  .sub { color: var(--dim); font-size: .95rem; }
+  .sub code { background: var(--code-bg); padding: .1rem .35rem; border-radius: 3px; }
+  h2 {
+    font-size: clamp(1.15rem, 2.6vw, 1.5rem); margin: 3rem 0 1rem; letter-spacing: -.01em;
+    padding-top: 1.2rem; border-top: 1px solid var(--line);
+  }
+  h2 .n { color: var(--accent); font-variant-numeric: tabular-nums; margin-right: .5rem; }
+  h3 { font-size: 1.02rem; margin: 1.8rem 0 .6rem; }
+  p { margin: .8rem 0; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .88em;
+         background: var(--code-bg); padding: .1rem .35rem; border-radius: 3px; }
+  pre { background: var(--code-bg); padding: .9rem 1rem; border-radius: 6px; overflow-x: auto;
+        border: 1px solid var(--line); font-size: .84rem; line-height: 1.5; }
+  pre code { background: none; padding: 0; }
+  .scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 1rem 0;
+            border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
+  table { border-collapse: collapse; width: 100%; min-width: 34rem; font-size: .9rem; }
+  th, td { text-align: left; padding: .6rem .8rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-weight: 650; background: var(--code-bg); white-space: nowrap; }
+  tr:last-child td { border-bottom: none; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 1.1rem 1.2rem; margin: 1rem 0; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+  .tag { display: inline-block; font-size: .72rem; font-weight: 650; letter-spacing: .04em;
+         text-transform: uppercase; padding: .15rem .5rem; border-radius: 999px; }
+  .t-dead { background: rgba(163,52,31,.14); color: var(--bad); }
+  .t-live { background: rgba(22,105,74,.15); color: var(--good); }
+  .t-warn { background: rgba(138,98,18,.16); color: var(--warn); }
+  .good { color: var(--good); font-weight: 650; }
+  .bad { color: var(--bad); font-weight: 650; }
+  .dim { color: var(--dim); }
+  figure { margin: 1.4rem 0; }
+  figcaption { font-size: .84rem; color: var(--dim); margin-top: .5rem; }
+  svg { max-width: 100%; height: auto; display: block; }
+  .demo { display: flex; gap: 1.2rem; flex-wrap: wrap; margin: 1rem 0; }
+  .demo > div { flex: 1 1 14rem; border: 1px solid var(--line); border-radius: 8px;
+                padding: 1rem; background: var(--panel); text-align: center; }
+  .demo .big { font-size: 1.7rem; font-weight: 600; margin: .5rem 0; }
+  .ol { counter-reset: step; list-style: none; padding: 0; }
+  .ol li { position: relative; padding: .9rem 0 .9rem 3rem; border-bottom: 1px solid var(--line); }
+  .ol li:last-child { border-bottom: none; }
+  .ol li::before {
+    counter-increment: step; content: counter(step);
+    position: absolute; left: 0; top: .95rem; width: 1.9rem; height: 1.9rem;
+    background: var(--accent); color: #fff; border-radius: 50%;
+    display: grid; place-items: center; font-size: .82rem; font-weight: 700;
+  }
+  .ol li.dead::before { background: var(--bad); content: "✕"; }
+  .formula { background: var(--code-bg); border-left: 3px solid var(--accent); padding: .8rem 1rem;
+             margin: 1rem 0; border-radius: 0 6px 6px 0; font-family: ui-monospace, Menlo, monospace;
+             font-size: .87rem; overflow-x: auto; }
+  .claim { border: 2px solid var(--accent); border-radius: 8px; padding: 1.2rem; margin: 1.5rem 0;
+           background: var(--panel); }
+  .claim h3 { margin-top: 0; color: var(--accent); }
+  @media print {
+    :root { --bg:#fff; --panel:#fff; --ink:#000; --dim:#444; --line:#bbb; --code-bg:#f4f4f4; }
+    body { font-size: 11pt; } h2 { page-break-after: avoid; } .card, table, figure { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>The CMS that looked like it had no photo upload</h1>
+  <p class="sub">
+    3 August 2026 · <code>AIWC2020/aiwc_website</code> · fix shipped as <code>908124e</code><br />
+    Symptom reported: <em>“why cms has no upload photos like decap?”</em>
+  </p>
+</header>
+
+<h2><span class="n">1</span>What was the problem</h2>
+
+<p>
+  The Sveltia CMS at <code>/aiwc_website/admin/</code> appeared to be missing image upload
+  entirely. Compared against Decap — which shows a text-labelled <strong>Media</strong> button —
+  there was nothing recognisable to click.
+</p>
+
+<p>
+  The upload button was there the whole time. It was <em>painting its own name</em>.
+</p>
+
+<div class="demo">
+  <div>
+    <span class="tag t-dead">before</span>
+    <div class="big" style="font-family: ui-monospace, Menlo, monospace;">photo</div>
+    <div class="dim" style="font-size:.85rem">55&nbsp;px wide — the literal word</div>
+  </div>
+  <div>
+    <span class="tag t-live">after</span>
+    <div class="big">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="1.6" style="display:inline-block;vertical-align:middle">
+        <rect x="3" y="3" width="18" height="18" rx="2" />
+        <circle cx="8.5" cy="8.5" r="1.6" />
+        <path d="M21 15l-5-5L5 21" />
+      </svg>
+    </div>
+    <div class="dim" style="font-size:.85rem">24&nbsp;px wide — one glyph</div>
+  </div>
+</div>
+
+<h3>The actual cause, proven</h3>
+
+<p>
+  Material Symbols is a <strong>ligature font</strong>. The CMS's icon markup genuinely reads
+  <code>&lt;span class="material-symbols-outlined"&gt;photo&lt;/span&gt;</code>, and the font's
+  <code>'liga'</code> feature is what substitutes a picture for the letters. The admin page's
+  Content-Security-Policy allows <code>font-src 'self' data:</code> only, so the three fonts the
+  CMS fetches from <code>cdn.jsdelivr.net</code> were all blocked — and every icon fell back to
+  rendering its own name as text.
+</p>
+
+<figure>
+<svg viewBox="0 0 700 200" role="img" aria-label="Request flow showing the CSP blocking the font fetch">
+  <style>
+    .bx { fill: var(--panel); stroke: var(--line); stroke-width: 1.5; }
+    .lbl { font: 12px ui-sans-serif, sans-serif; fill: var(--ink); }
+    .sm { font: 10.5px ui-monospace, monospace; fill: var(--dim); }
+    .ar { stroke: var(--dim); stroke-width: 1.5; fill: none; marker-end: url(#a); }
+    .blocked { stroke: var(--bad); stroke-width: 2; }
+  </style>
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+    <path d="M0 0 L10 5 L0 10 z" fill="var(--dim)" /></marker></defs>
+
+  <rect class="bx" x="8" y="30" width="150" height="56" rx="6" />
+  <text class="lbl" x="20" y="53">CMS bundle</text>
+  <text class="sm" x="20" y="71">@font-face → jsdelivr</text>
+
+  <rect class="bx" x="215" y="30" width="140" height="56" rx="6" />
+  <text class="lbl" x="227" y="53">CSP filter</text>
+  <text class="sm" x="227" y="71">font-src 'self'</text>
+
+  <rect class="bx" x="410" y="8" width="140" height="46" rx="6" />
+  <text class="lbl" x="422" y="27">jsdelivr CDN</text>
+  <text class="sm" x="422" y="43">3 fonts</text>
+
+  <rect class="bx" x="410" y="76" width="140" height="46" rx="6" />
+  <text class="lbl" x="422" y="95">assets/cms/</text>
+  <text class="sm" x="422" y="111">same 3 fonts</text>
+
+  <rect class="bx" x="590" y="30" width="100" height="56" rx="6" />
+  <text class="lbl" x="601" y="53">icon glyph</text>
+  <text class="sm" x="601" y="71">or the word</text>
+
+  <line class="ar" x1="160" y1="58" x2="212" y2="58" />
+  <line class="ar blocked" x1="357" y1="50" x2="405" y2="32" marker-end="" />
+  <line x1="368" y1="46" x2="382" y2="30" class="blocked" />
+  <line x1="368" y1="30" x2="382" y2="46" class="blocked" />
+  <text class="sm" x="352" y="20" fill="var(--bad)">blocked</text>
+  <line class="ar" x1="357" y1="70" x2="405" y2="95" />
+  <text class="sm" x="350" y="122" fill="var(--good)">allowed — 'self'</text>
+  <line class="ar" x1="553" y1="99" x2="586" y2="70" />
+
+  <text class="sm" x="8" y="165">The fix changes only which box the font comes from. The policy is untouched.</text>
+</svg>
+<figcaption>The CSP was never wrong — the fonts were simply on the wrong side of it.</figcaption>
+</figure>
+
+<p>
+  The policy's own comment in <code>admin/index.html</code> had anticipated this and priced it
+  wrongly: it said blocking the third-party calls <em>“costs fallback fonts and no banner, nothing
+  more.”</em> For the two text fonts that was true. For the icon font it cost the discoverability
+  of the media library.
+</p>
+
+<h2><span class="n">2</span>What is the solution</h2>
+
+<p>
+  All three fonts are now served from the repository, so they satisfy <code>font-src 'self'</code>
+  and the policy stays exactly as strict as it was.
+</p>
+
+<div class="scroll">
+<table>
+  <thead><tr><th>File</th><th>Role</th><th>Size</th></tr></thead>
+  <tbody>
+    <tr><td><code>assets/cms/material-symbols-outlined-vf-5.3.1-…woff2</code></td><td>Icon ligatures — the one that mattered</td><td>748,260 B</td></tr>
+    <tr><td><code>assets/cms/source-sans-3-vf-5.3.0-…woff2</code></td><td>Interface text</td><td>28,740 B</td></tr>
+    <tr><td><code>assets/cms/noto-mono-5.3.0-…woff2</code></td><td>Monospace fields</td><td>59,316 B</td></tr>
+    <tr><td><code>admin/fonts.css</code></td><td>Re-declares the three faces with local <code>src</code></td><td>2,580 B</td></tr>
+    <tr><td><code>admin/index.html</code></td><td>Links the stylesheet; corrects the stale CSP comment</td><td>—</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p>
+  The <code>@font-face</code> descriptors — <code>font-weight</code>, <code>unicode-range</code>,
+  <code>font-display</code>, <code>size-adjust: 110%</code> — are copied verbatim from the bundle,
+  with only <code>src</code> changed. Rendering is therefore identical to the upstream CDN build
+  rather than merely similar. Paths are relative, so they survive the base path changing from
+  <code>/aiwc_website</code> to a domain root if a <code>CNAME</code> is ever added.
+</p>
+
+<h2><span class="n">3</span>How I did it — including what was wrong</h2>
+
+<p>
+  Four hypotheses were tested and eliminated. Three of them were mine, and two of those were
+  confidently wrong, which is the useful part of this record.
+</p>
+
+<ol class="ol">
+  <li class="dead">
+    <strong>“The chatroom is in this repo.”</strong> <span class="tag t-dead">eliminated</span><br />
+    The session began in the MARVI repo hunting a missing “chatroom”. Nothing matched in the
+    tree or in history. <em>Wrong repository entirely.</em>
+  </li>
+  <li class="dead">
+    <strong>“The chatroom was the chat-guided editing flow.”</strong> <span class="tag t-dead">eliminated</span><br />
+    Found a real <code>AGENTS.md</code> + issue-form setup on <code>marvi-groundwater/aiwc</code>,
+    removed by a rebuild. Presented it confidently. The user corrected me: wrong site. The real
+    site was <code>aiwc2020.github.io/aiwc_website/</code>, where the thing that had actually
+    vanished was <code>/editor/</code> — added 14:52 and deleted 19:26 <em>the same day</em>.
+  </li>
+  <li class="dead">
+    <strong>“The CMS has no upload configured.”</strong> <span class="tag t-dead">eliminated</span><br />
+    Disproved by evidence, not opinion: the deployed <code>config.yml</code> declares
+    <strong>5</strong> image widgets, <code>media_folder</code> points at
+    <code>assets/photos</code>, and that folder already holds <strong>90</strong> images.
+  </li>
+  <li>
+    <strong>“The icon font is blocked.”</strong> <span class="tag t-live">confirmed</span><br />
+    <code>document.fonts</code> reported <code>Material Symbols Outlined: error</code> and
+    <code>Source Sans 3: error</code>. The console was <em>completely empty</em> — font failures
+    are a FontFaceSet state change, not a logged exception. The DOM's
+    <code>aria-label="Assets"</code> proved the button existed while the pixels said otherwise.
+  </li>
+  <li class="dead">
+    <strong>“A stylesheet in &lt;head&gt; will lose to the bundle's rules.”</strong> <span class="tag t-dead">eliminated by measurement</span><br />
+    I expected to have to patch the vendored bundle, reasoning that the bundle injects its
+    <code>@font-face</code> rules at mount — therefore last — and that the last matching rule wins.
+    <strong>Measured instead of assumed, and it was false.</strong> A face that fails to load is
+    skipped in favour of one that loaded. The simple <code>&lt;link&gt;</code> works.
+  </li>
+</ol>
+
+<div class="card">
+  <span class="tag t-warn">trap</span>
+  <p style="margin-bottom:0">
+    <strong>Two APIs lie about this fix.</strong> <code>document.fonts.check()</code> still returns
+    <code>false</code> and <code>document.fonts.load()</code> still rejects with a network error,
+    because both inspect <em>every</em> matching face — including the broken CDN ones, which remain
+    declared. Neither is evidence of a problem. The only trustworthy signal was measuring the
+    rendered width: <span class="bad">55&nbsp;px</span> (word) versus <span class="good">24&nbsp;px</span> (glyph).
+  </p>
+</div>
+
+<p>
+  One self-inflicted detour worth recording: extracting files with <code>$B:AGENTS.md</code> in zsh
+  silently produced a <strong>0-byte</strong> file, because <code>:A</code> is zsh's absolute-path
+  expansion modifier. The shell redirect created the output file before <code>git</code> failed, so
+  the file listing looked correct — only the size column gave it away.
+</p>
+
+<h2><span class="n">4</span>Why this beats the alternatives</h2>
+
+<div class="scroll">
+<table>
+  <thead><tr><th>Option</th><th>Verdict</th><th>Reasoning</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>Vendor the fonts, re-declare locally</strong></td>
+      <td class="good">chosen</td>
+      <td>Policy untouched. Vendored bundle untouched, so the documented upgrade path — drop in a new file, change one line — still works. Descriptors copied verbatim, so rendering is identical.</td>
+    </tr>
+    <tr>
+      <td>Patch the vendored bundle's URLs</td>
+      <td class="bad">rejected</td>
+      <td>Certain to work, but silently breaks the upgrade path: every future version bump would need re-patching, and nothing in the repo would say so.</td>
+    </tr>
+    <tr>
+      <td>Add <code>cdn.jsdelivr.net</code> to <code>font-src</code></td>
+      <td class="bad">rejected</td>
+      <td>One line, but reopens a third-party dependency on a page that deliberately has none. The admin page holds a GitHub token in <code>localStorage</code>, and both published Sveltia advisories are stored XSS — the strictness is load-bearing.</td>
+    </tr>
+    <tr>
+      <td>Inject <code>@font-face</code> after mount via script</td>
+      <td class="bad">rejected</td>
+      <td>Was the planned fallback if ordering mattered. Measurement showed it doesn't, so this only adds a race condition.</td>
+    </tr>
+    <tr>
+      <td>Subset the icon font to the glyphs used</td>
+      <td class="t-warn"><strong>better long-term</strong></td>
+      <td><em>Not done, and it is the honest improvement.</em> 748 KB carries the whole Latin range for perhaps 20 icons; a subset would be a few KB. It needs a build step and a glyph inventory, and the CMS's icon set is chosen at runtime — so doing it safely means enumerating icons from the bundle, not guessing.</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2><span class="n">5</span>The result</h2>
+
+<div class="scroll">
+<table>
+  <thead><tr><th>Measure</th><th>Before</th><th>After</th></tr></thead>
+  <tbody>
+    <tr><td>Rendered width of <code>.material-symbols-outlined</code> reading “photo”</td><td class="bad">55 px (the word)</td><td class="good">24 px (one glyph)</td></tr>
+    <tr><td>Fonts in <code>loaded</code> state on the admin screen</td><td class="bad">0</td><td class="good">2 <span class="dim">(Noto Mono unused on that view)</span></td></tr>
+    <tr><td>Assets / media-upload button</td><td class="bad">read “photo”</td><td class="good">picture icon</td></tr>
+    <tr><td>Pages collection label</td><td class="bad">read “bookmark_manager”</td><td class="good">folder icon</td></tr>
+    <tr><td>CSP directives changed</td><td colspan="2" class="good">none — byte-identical policy</td></tr>
+    <tr><td>Payload added to the admin page</td><td colspan="2">836,316 B across 3 fonts <span class="dim">(bundle alone is 2,435,472 B)</span></td></tr>
+    <tr><td><code>npm run check</code></td><td colspan="2" class="good">157 documents, 2,837 links, 2,732 images, 108 profiles, 33 partners, 15 directory assertions — all pass</td></tr>
+    <tr><td>Deploy</td><td colspan="2" class="good">success in 31 s (run 30806368122)</td></tr>
+    <tr><td>Verified on production</td><td colspan="2" class="good">yes — 24 px glyph measured at <code>aiwc2020.github.io</code></td></tr>
+  </tbody>
+</table>
+</div>
+
+<p class="dim" style="font-size:.9rem">
+  Every number above was measured, not estimated. The one figure I cannot give is how long the CMS
+  had looked broken: the CSP landed in <code>7c22ced</code>, but nothing recorded when anyone first
+  tried to upload an image.
+</p>
+
+<h2><span class="n">6</span>What is next</h2>
+
+<div class="grid2">
+  <div class="card">
+    <h3 style="margin-top:0">You can do alone</h3>
+    <ul style="margin:0; padding-left:1.1rem">
+      <li>Open the CMS and use the <strong>picture icon</strong> in the bar — that is the media library.</li>
+      <li>Decide whether <code>/editor/</code> should come back. It is recovered at
+        <code>scratchpad/aiwc-editor-deleted.html</code> and restorable from
+        <code>c2246b1^</code> in one command.</li>
+      <li>Sign-in note: the OAuth broker was deliberately dropped in <code>3c690e8</code>, so the
+        route is <strong>Sign In Using Access Token</strong>. The README still claims “via the org's
+        OAuth broker” and is stale on that point.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">Waiting on me</h3>
+    <ul style="margin:0; padding-left:1.1rem">
+      <li><strong>Subset the icon font</strong> — 748 KB → a few KB. Blocked on enumerating the icon
+        names the bundle actually uses.</li>
+      <li><strong>The public site scrolls sideways</strong> — <code>scrollWidth</code> 805 vs
+        <code>clientWidth</code> 785 at an 800 px viewport. Unfixed, separate from this change.</li>
+      <li><strong>Restore <code>/editor/</code></strong> if you want it — one file, one command.</li>
+      <li><strong>Dead guard entry</strong> — <code>verify.mjs</code> still lists <code>editor</code>
+        among directories that must not ship. Harmless, now meaningless.</li>
+    </ul>
+  </div>
+</div>
+
+<h2><span class="n">7</span>The mathematical lens</h2>
+
+<p>
+  The structure genuinely present here is small but real: a <strong>diagnosis</strong> (choosing among
+  candidate causes under uncertainty) followed by a <strong>selection rule</strong> (which of several
+  competing declarations a browser actually obeys). Those are different kinds of object, and reading
+  the event through each reveals a different half of what happened.
+</p>
+
+<figure>
+<svg viewBox="0 0 700 250" role="img" aria-label="Structure map: hypothesis space narrowing, then a choice function over font faces">
+  <style>
+    .h { fill: var(--panel); stroke: var(--line); stroke-width: 1.4; }
+    .hx { fill: var(--panel); stroke: var(--bad); stroke-width: 1.4; stroke-dasharray: 4 3; }
+    .hl { fill: var(--panel); stroke: var(--good); stroke-width: 2; }
+    .tl { font: 11px ui-sans-serif, sans-serif; fill: var(--ink); }
+    .td { font: 10px ui-monospace, monospace; fill: var(--dim); }
+    .hd { font: 12px ui-sans-serif, sans-serif; font-weight: 650; fill: var(--accent); }
+  </style>
+  <text class="hd" x="8" y="18">A · hypothesis space, narrowed by evidence</text>
+  <rect class="hx" x="8"   y="30" width="120" height="34" rx="5" /><text class="tl" x="18" y="51">wrong repo</text>
+  <rect class="hx" x="140" y="30" width="120" height="34" rx="5" /><text class="tl" x="150" y="51">wrong site</text>
+  <rect class="hx" x="272" y="30" width="120" height="34" rx="5" /><text class="tl" x="282" y="51">not configured</text>
+  <rect class="hl" x="404" y="30" width="130" height="34" rx="5" /><text class="tl" x="414" y="51">font blocked</text>
+  <text class="td" x="548" y="51">|H| : 4 → 1</text>
+
+  <text class="hd" x="8" y="104">B · faces declared for one family, and what gets chosen</text>
+  <rect class="hl" x="8"   y="116" width="180" height="38" rx="5" />
+  <text class="tl" x="18" y="132">local face</text><text class="td" x="18" y="147">declared 1st · loaded</text>
+  <rect class="hx" x="200" y="116" width="180" height="38" rx="5" />
+  <text class="tl" x="210" y="132">CDN face</text><text class="td" x="210" y="147">declared 2nd · error</text>
+
+  <text class="td" x="400" y="132">predicted: max(F)      → CDN → fails</text>
+  <text class="td" x="400" y="150" fill="var(--good)">observed:  max(F ∩ L) → local → glyph</text>
+
+  <line x1="8" y1="180" x2="690" y2="180" stroke="var(--line)" stroke-width="1" />
+  <text class="td" x="8" y="200">The whole error sat in one set operation: whether the "loaded" filter is applied</text>
+  <text class="td" x="8" y="216">before taking the maximum under declaration order, or after.</text>
+</svg>
+<figcaption>Two structures, one event. A governs where to look; B governs what the machine does.</figcaption>
+</figure>
+
+<h3>Formulation A — elimination over a hypothesis space</h3>
+
+<p>
+  Treat the diagnosis as a hypothesis set <em>H</em> with observations that zero out members.
+  Real counts from this session: <em>|H|</em> = 4 candidate explanations for “no upload button”,
+  reduced to 1 by three observations.
+</p>
+
+<div class="formula">
+H = { wrong-repo, wrong-site, not-configured, font-blocked }<br />
+e₁ : config declares 5 image widgets       ⟹ P(not-configured) = 0<br />
+e₂ : assets/photos contains 90 files       ⟹ reinforces ¬not-configured<br />
+e₃ : aria-label "Assets" exists in the DOM ⟹ button exists ⟹ rendering fault<br />
+e₄ : document.fonts → 2 faces in state "error"
+</div>
+
+<p>
+  <strong>What it reveals:</strong> the informative observations were the ones capable of
+  <em>eliminating</em>, not confirming. <code>e₃</code> did the most work — a single DOM attribute
+  separated “feature absent” from “feature invisible”, collapsing the space in one step.
+  <strong>What it assumes:</strong> that the hypotheses are mutually exclusive and that I enumerated
+  the right ones. Both failed early — my first two hypotheses were not in the true space at all,
+  which is why the user's correction, not any evidence I gathered, was what advanced the diagnosis.
+</p>
+
+<h3>Formulation B — a choice function over a partially ordered set of faces</h3>
+
+<p>
+  Let <em>F</em> be the <code>@font-face</code> rules matching one family, <em>≺</em> the declaration
+  order (a total order here), and <em>L ⊆ F</em> the subset that loaded successfully. In this event
+  <em>|F|</em> = 2 per family across 3 families, so 6 faces, with <em>|L|</em> = 2.
+</p>
+
+<div class="formula">
+predicted rule:  σ(F) = max<sub>≺</sub>(F)        → CDN face → load error → fallback to system text<br />
+observed rule:   σ(F) = max<sub>≺</sub>(F ∩ L)    → local face → ligature glyph<br /><br />
+consequence:  the two rules disagree exactly when max<sub>≺</sub>(F) ∉ L
+</div>
+
+<p>
+  <strong>What it reveals:</strong> my entire plan to patch the vendored bundle rested on assuming
+  the first rule. The distinction is one intersection, and it decided whether the fix was three new
+  files or a modified third-party dependency. <strong>What it assumes:</strong> that ≺ is total and
+  that “matching” is a clean predicate — neither is quite true once <code>unicode-range</code>
+  partitions the codepoint space, which is precisely where the claim below bites.
+</p>
+
+<h3>What each is for</h3>
+
+<p>
+  A is about <em>search</em> — it prices information and tells you which probe to run next; it says
+  nothing about what the browser will do. B is about <em>semantics</em> — it predicts behaviour
+  exactly, and it is where my reasoning actually broke. Notably, A cannot catch a B-type error:
+  I could have run the elimination perfectly and still shipped the wrong fix, because the faulty
+  belief was about the selection rule, not the cause. The measurement — 24 px against 55 px — is
+  what tested B, and it was two lines of code.
+</p>
+
+<div class="claim">
+  <h3>For the practice folder</h3>
+  <p style="margin-bottom:0">
+    Let <em>F</em> be a set of <code>@font-face</code> declarations for one family, ordered by
+    declaration under <em>≺</em>, each carrying a <code>unicode-range</code> subset
+    <em>U<sub>f</sub></em> ⊆ 𝒰, and let <em>L</em> ⊆ <em>F</em> be those that load. Define the
+    per-codepoint choice <em>σ(c) = max<sub>≺</sub>{ f ∈ F ∩ L : c ∈ U<sub>f</sub> }</em>.
+    <br /><br />
+    <strong>Claim to settle:</strong> <em>σ is monotone under augmentation</em> — adding any face
+    <em>g</em> with <em>g ∈ L</em> never makes the rendered result for any codepoint fall further
+    down the family fallback chain than it was before.
+    <br /><br />
+    State precisely the conditions on <em>U<sub>g</sub></em> and on <em>g</em>'s weight/style
+    descriptors under which this holds, and either prove it or construct a counterexample in which
+    adding a face that <em>does</em> load makes some codepoint render <em>worse</em>. The
+    <code>size-adjust: 110%</code> on Source Sans 3 is a hint that “worse” may need defining as
+    something finer than “falls back”.
+  </p>
+</div>
+
+<p class="dim" style="font-size:.87rem; margin-top:2rem">
+  Related: <a href="2026-08-03-aiwc-site-rebuild.html" style="color:var(--accent)">the site rebuild
+  write-up</a>, which introduced the CSP this report corrects the comment on.
+</p>
+
+</div>
+</body>
+</html>
