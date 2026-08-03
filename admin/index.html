@@ -11,9 +11,19 @@
          the only host it may talk to is GitHub's API.
 
          It also removes the CMS's optional third-party calls — a version
-         check on unpkg, two fonts from jsdelivr, a status banner from
+         check on unpkg, three fonts from jsdelivr, a status banner from
          githubstatus. All are wrapped in try/catch upstream, so blocking
-         them costs fallback fonts and no banner, nothing more. -->
+         the version check and the banner costs nothing.
+
+         The fonts were NOT free, which this comment previously got wrong.
+         Material Symbols is a ligature font: the CMS's icon markup really
+         does read <span>photo</span>, and the font is what turns it into a
+         glyph. Blocked, every icon painted its own name — the Assets button
+         that opens media upload read "photo", Contents read "article", and
+         the Pages collection read "bookmark_manager". The CMS looked like it
+         had no image upload at all. The three fonts are now served from this
+         repository (see fonts.css), so the policy stays this strict and the
+         icons still render. -->
     <meta http-equiv="Content-Security-Policy" content="
       default-src 'self';
       connect-src 'self' https://api.github.com;
@@ -27,6 +37,9 @@
       form-action 'none';
       object-src 'none'">
     <title>AIWC — Content admin</title>
+    <!-- The CMS's own fonts, re-pointed at local copies so they survive the
+         policy above. Relative, so it follows the site's base path. -->
+    <link rel="stylesheet" href="fonts.css" />
   </head>
   <body>
     <!-- Sveltia CMS, vendored into this repository rather than loaded from a

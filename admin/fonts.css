@@ -1,0 +1,67 @@
+/* Sveltia CMS's three fonts, served from this repository.
+ *
+ * The CMS ships @font-face rules pointing at cdn.jsdelivr.net. The admin
+ * page's Content-Security-Policy allows font-src 'self' data: only, so all
+ * three were blocked and the CMS fell back to system fonts.
+ *
+ * For the two text fonts that only cost typography. For Material Symbols it
+ * cost the interface: the CMS renders icons as LIGATURES — the markup really
+ * does say <span>photo</span>, and the font turns it into a glyph. With the
+ * font blocked, every icon painted its own name instead, so the Assets
+ * (media upload) button read "photo", Contents read "article", and the Pages
+ * collection read "bookmark_manager".
+ *
+ * Descriptors below are copied verbatim from the bundle — same weights,
+ * unicode-range, font-display and size-adjust — with only the src swapped to
+ * a local path, so rendering is identical to the upstream CDN build.
+ *
+ * Load order does not matter here, which is worth recording because it is
+ * counter-intuitive. The bundle injects its own @font-face rules when the
+ * app mounts, so the CDN rules always land AFTER this stylesheet, and the
+ * usual "last matching @font-face wins" reading predicts they take
+ * precedence and fail. They do not: a face that fails to load is skipped,
+ * and the browser falls back to another face of the same family that did
+ * load. Verified on the built site with both rule sets present and the CDN
+ * ones in the error state — <span class="material-symbols-outlined">photo
+ * </span> measures 24px (one glyph) rather than 55px (the word).
+ *
+ * Note that document.fonts.check() still reports false and
+ * document.fonts.load() still rejects, because both inspect every matching
+ * face including the broken CDN ones. Neither is evidence of a problem;
+ * measure the rendered width instead.
+ *
+ * Paths are relative to this stylesheet (admin/), so they resolve correctly
+ * whatever base path the site is served under.
+ */
+
+/* https://fontsource.org/fonts/source-sans-3/cdn */
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200 900;
+  src: url(../assets/cms/source-sans-3-vf-5.3.0-latin-wght-normal.woff2) format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  size-adjust: 110%;
+}
+
+/* https://fontsource.org/fonts/noto-mono/cdn */
+@font-face {
+  font-family: 'Noto Mono';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url(../assets/cms/noto-mono-5.3.0-latin-400-normal.woff2) format('woff2');
+}
+
+/* https://fontsource.org/fonts/material-symbols-outlined/cdn */
+@font-face {
+  font-family: 'Material Symbols Outlined';
+  font-style: normal;
+  font-display: block;
+  font-weight: 400;
+  src: url(../assets/cms/material-symbols-outlined-vf-5.3.1-latin-wght-normal.woff2) format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
