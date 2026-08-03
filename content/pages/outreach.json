@@ -8,51 +8,81 @@
   "intro": {
     "eyebrow": "Our work · Outreach",
     "title": "Carrying the work\nbeyond the Centre.",
-    "lede": "Workshops, webinars and technical exchange that put researchers, policy-makers and practitioners from both countries in the same room."
+    "lede": "Workshops, webinars and technical exchange that put researchers, policy-makers and practitioners from both countries in the same room.",
+    "eyebrowSize": 100,
+    "titleSize": 70,
+    "ledeSize": 100,
+    "textAlign": "left",
+    "textPosition": "bottom",
+    "textWidth": 100,
+    "textOffsetX": 0,
+    "textOffsetY": 0
   },
   "blocks": [
     {
-      "type": "prose",
-      "tone": "paper",
-      "label": "Australia India Technical Exchange Program",
+      "type": "banner",
+      "eyebrow": "Australia India Technical Exchange Program",
       "title": "Water and Food Security workshop series",
-      "body": [
-        "The Australia India Water Centre and the Australia India Institute have partnered to deliver these 4 workshops to exchange knowledge and experiences in water resources management between the two countries, and to provide opportunities for networking and collaboration between water researchers and professionals in the longer-term.",
-        "05 May 2022 – Workshop 1: Groundwater sustainability – Watch the video",
-        "12 May 2022 – Workshop 2: Soil and water management for food security – Watch the video",
-        "19 May 2022 – Workshop 3: Wastewater reuse management and sustainability – Watch the video",
-        "07 June 2022 – Workshop 4: Water informatics for sustainable water futures – Watch the video",
-        "These workshops are part of the activities of the Joint Working Group convened under the MOU between the two countries and led by the Australian Government Department of Agriculture, Water and Environment (DAWE) and the Central Water Commission and National Hydrology Project, Ministry of Jal Shakti, Government of India. In addition to DAWE, the Australian Government Department of Education, Skills and Training is also generously supporting these workshops."
-      ]
+      "lede": ""
     },
     {
-      "type": "cards",
-      "tone": "sand",
-      "label": "Also part of outreach",
-      "columns": 3,
+      "type": "split",
+      "left": {
+        "kind": "prose",
+        "paragraphs": [
+          "The Australia India Water Centre and the Australia India Institute have partnered to deliver these 4 workshops to exchange knowledge and experiences in water resources management between the two countries, and to provide opportunities for networking and collaboration between water researchers and professionals in the longer-term.",
+          "05 May 2022 – Workshop 1: Groundwater sustainability – Watch the video",
+          "12 May 2022 – Workshop 2: Soil and water management for food security – Watch the video"
+        ]
+      },
+      "right": {
+        "kind": "prose",
+        "paragraphs": [
+          "19 May 2022 – Workshop 3: Wastewater reuse management and sustainability – Watch the video",
+          "07 June 2022 – Workshop 4: Water informatics for sustainable water futures – Watch the video",
+          "These workshops are part of the activities of the Joint Working Group convened under the MOU between the two countries and led by the Australian Government Department of Agriculture, Water and Environment (DAWE) and the Central Water Commission and National Hydrology Project, Ministry of Jal Shakti, Government of India. In addition to DAWE, the Australian Government Department of Education, Skills and Training is also generously supporting these workshops."
+        ]
+      }
+    },
+    {
+      "type": "storyCards",
+      "eyebrow": "Also part of outreach",
+      "title": "",
+      "lede": "",
       "items": [
         {
-          "number": "01",
-          "title": "News & events",
-          "text": "The AIWC@5 International Symposium, WATER TALKS 2025 and the webinar series.",
           "page": "news",
-          "cta": "What’s on"
+          "label": "01",
+          "title": "News & events",
+          "text": "The AIWC@5 International Symposium, WATER TALKS 2025 and the webinar series."
         },
         {
-          "number": "02",
-          "title": "WaterWise",
-          "text": "The Centre’s blog for sustainable water futures — a dialogue, not a broadcast.",
           "page": "waterwise",
-          "cta": "Read the blog"
+          "label": "02",
+          "title": "WaterWise",
+          "text": "The Centre’s blog for sustainable water futures — a dialogue, not a broadcast."
         },
         {
-          "number": "03",
-          "title": "Resources",
-          "text": "Recorded webinars and seminar series, including Dams for Life.",
           "page": "resources",
-          "cta": "Resources"
+          "label": "03",
+          "title": "Resources",
+          "text": "Recorded webinars and seminar series, including Dams for Life."
         }
       ]
     }
-  ]
+  ],
+  "menuImage": {
+    "image": "/assets/photos/page-our-work-3.jpg",
+    "zoom": 100,
+    "positionX": 50,
+    "positionY": 50,
+    "fit": "cover"
+  },
+  "heroImage": {
+    "image": "/assets/photos/page-our-work-3.jpg",
+    "zoom": 100,
+    "positionX": 50,
+    "positionY": 45,
+    "fit": "cover"
+  }
 }

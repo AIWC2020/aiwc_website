@@ -8,39 +8,61 @@
   "intro": {
     "eyebrow": "Our work · Education",
     "title": "Master’s Program in\nSustainable Water Futures",
-    "lede": "A comprehensive and transdisciplinary education that equips participants with the knowledge, skills, and expertise to address the complex challenges of water sustainability."
+    "lede": "A comprehensive and transdisciplinary education that equips participants with the knowledge, skills, and expertise to address the complex challenges of water sustainability.",
+    "eyebrowSize": 100,
+    "titleSize": 70,
+    "ledeSize": 100,
+    "textAlign": "left",
+    "textPosition": "bottom",
+    "textWidth": 100,
+    "textOffsetX": 0,
+    "textOffsetY": 0
   },
   "blocks": [
     {
-      "type": "prose",
-      "tone": "paper",
-      "label": "The programme",
-      "body": [
-        "The Master’s program specialising in Sustainable Water Futures offers a comprehensive and transdisciplinary education that equips participants with the knowledge, skills, and expertise to address the complex challenges of water sustainability.",
-        "With a focus on transdisciplinary approaches, policy, governance, agriculture, and catchment management, this program prepares graduates to become water conservation and management leaders. Through a blend of theoretical knowledge, practical skills, reflection and research-based projects, the participants will gain a deep understanding of water in different landscapes and the ability to develop innovative solutions for a sustainable water future.",
-        {
-          "kind": "h",
-          "text": "Core themes:"
-        },
-        "Sustainability through Transdisciplinary Approaches: Explore the multifaceted challenges of water sustainability and develop critical thinking, self-reflexivity, and systemic thinking competencies. Understand the role of culture, society, and transdisciplinary leadership in environmental sustainability.",
-        "Water Planning, Policy and Governance: Gain insights into the complexity of water planning, policy, and governance. Learn to integrate ecology, economics, and social sciences for effective water management. Delve into adaptive water management, economics, hydro-diplomacy, and public participation.",
-        "Water Sustainability in Agriculture: Study the impacts of population growth, urbanisation, and climate change on agricultural water management. Discover strategies for sustainable allocation, distribution, and water use in agriculture. Explore irrigation techniques, rainwater harvesting, and digital technologies for efficient water management.",
-        "Water Sustainability in Catchments: Develop expertise in catchment management, focusing on natural, urban, and peri-urban catchments. Analyse hydrologic processes and anthropogenic activities that influence water availability. Learn to manage water supplies, river systems and achieve water security at a catchment level."
-      ]
+      "type": "banner",
+      "eyebrow": "The programme",
+      "title": "",
+      "lede": ""
+    },
+    {
+      "type": "split",
+      "left": {
+        "kind": "prose",
+        "paragraphs": [
+          "The Master’s program specialising in Sustainable Water Futures offers a comprehensive and transdisciplinary education that equips participants with the knowledge, skills, and expertise to address the complex challenges of water sustainability.",
+          "With a focus on transdisciplinary approaches, policy, governance, agriculture, and catchment management, this program prepares graduates to become water conservation and management leaders. Through a blend of theoretical knowledge, practical skills, reflection and research-based projects, the participants will gain a deep understanding of water in different landscapes and the ability to develop innovative solutions for a sustainable water future.",
+          "Core themes:",
+          "Sustainability through Transdisciplinary Approaches: Explore the multifaceted challenges of water sustainability and develop critical thinking, self-reflexivity, and systemic thinking competencies. Understand the role of culture, society, and transdisciplinary leadership in environmental sustainability."
+        ]
+      },
+      "right": {
+        "kind": "prose",
+        "paragraphs": [
+          "Water Planning, Policy and Governance: Gain insights into the complexity of water planning, policy, and governance. Learn to integrate ecology, economics, and social sciences for effective water management. Delve into adaptive water management, economics, hydro-diplomacy, and public participation.",
+          "Water Sustainability in Agriculture: Study the impacts of population growth, urbanisation, and climate change on agricultural water management. Discover strategies for sustainable allocation, distribution, and water use in agriculture. Explore irrigation techniques, rainwater harvesting, and digital technologies for efficient water management.",
+          "Water Sustainability in Catchments: Develop expertise in catchment management, focusing on natural, urban, and peri-urban catchments. Analyse hydrologic processes and anthropogenic activities that influence water availability. Learn to manage water supplies, river systems and achieve water security at a catchment level."
+        ]
+      }
     },
     {
       "type": "callout",
-      "tone": "paper",
-      "accent": "sand",
-      "title": "Interested in the programme?",
-      "text": "Education is led by Dr Jason Reynolds (Western Sydney University) and Dr Vijaya Lakshmi (JNTU Hyderabad). Get in touch with the Centre for current intake details.",
-      "actions": [
-        {
-          "label": "Contact the Centre",
-          "page": "contact",
-          "primary": true
-        }
-      ]
+      "heading": "Interested in the programme?",
+      "body": "Education is led by Dr Jason Reynolds (Western Sydney University) and Dr Vijaya Lakshmi (JNTU Hyderabad). Get in touch with the Centre for current intake details."
     }
-  ]
+  ],
+  "menuImage": {
+    "image": "/assets/photos/page-our-work-1.jpg",
+    "zoom": 100,
+    "positionX": 50,
+    "positionY": 50,
+    "fit": "cover"
+  },
+  "heroImage": {
+    "image": "/assets/photos/page-our-work-1.jpg",
+    "zoom": 100,
+    "positionX": 50,
+    "positionY": 45,
+    "fit": "cover"
+  }
 }

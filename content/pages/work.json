@@ -7,62 +7,82 @@
   "intro": {
     "eyebrow": "Our work",
     "title": "Research, education,\ntraining, outreach.",
-    "lede": "AIWC’s key activities are structured into four distinct areas, each led by two or more programme leaders drawn from partner institutions in both countries."
+    "lede": "AIWC’s key activities are structured into four distinct areas, each led by two or more programme leaders drawn from partner institutions in both countries.",
+    "eyebrowSize": 100,
+    "titleSize": 70,
+    "ledeSize": 100,
+    "textAlign": "left",
+    "textPosition": "bottom",
+    "textWidth": 100,
+    "textOffsetX": 0,
+    "textOffsetY": 0
   },
   "blocks": [
     {
-      "type": "programmes",
-      "tone": "paper",
+      "type": "storyCards",
+      "eyebrow": "",
+      "title": "",
+      "lede": "",
       "items": [
         {
-          "number": "01",
-          "title": "Research",
-          "text": "Transdisciplinary projects on groundwater management, spring recharge, coastal reservoirs and water security, run jointly across Australian and Indian institutions.",
           "page": "research",
+          "label": "01",
+          "title": "Research",
           "photo": {
             "image": "/assets/photos/page-our-work-0.jpg",
             "positionX": 50,
-            "positionY": 50
-          },
-          "cta": "Research"
+            "positionY": 50,
+            "alt": ""
+          }
         },
         {
-          "number": "02",
-          "title": "Education",
-          "text": "A Master’s program specialising in Sustainable Water Futures — transdisciplinary approaches, policy and governance, agriculture and catchment management.",
           "page": "education",
+          "label": "02",
+          "title": "Education",
           "photo": {
             "image": "/assets/photos/page-our-work-1.jpg",
             "positionX": 50,
-            "positionY": 50
-          },
-          "cta": "Education"
+            "positionY": 50,
+            "alt": ""
+          }
         },
         {
-          "number": "03",
-          "title": "Training & capacity building",
-          "text": "Five programmes: MARVI, Young Water Professionals, DRIP II, dam safety and risk management, and village groundwater cooperatives.",
           "page": "training",
+          "label": "03",
+          "title": "Training & capacity building",
           "photo": {
             "image": "/assets/photos/page-our-work-2.jpg",
             "positionX": 50,
-            "positionY": 50
-          },
-          "cta": "Training"
+            "positionY": 50,
+            "alt": ""
+          }
         },
         {
-          "number": "04",
-          "title": "Outreach",
-          "text": "The Australia India Technical Exchange Program workshop series, webinars and public dialogue with policy-makers and practitioners.",
           "page": "outreach",
+          "label": "04",
+          "title": "Outreach",
           "photo": {
             "image": "/assets/photos/page-our-work-3.jpg",
             "positionX": 50,
-            "positionY": 50
-          },
-          "cta": "Outreach"
+            "positionY": 50,
+            "alt": ""
+          }
         }
       ]
     }
-  ]
+  ],
+  "menuImage": {
+    "image": "/assets/photos/page-our-work-0.jpg",
+    "zoom": 100,
+    "positionX": 50,
+    "positionY": 50,
+    "fit": "cover"
+  },
+  "heroImage": {
+    "image": "/assets/photos/page-our-work-0.jpg",
+    "zoom": 100,
+    "positionX": 50,
+    "positionY": 45,
+    "fit": "cover"
+  }
 }

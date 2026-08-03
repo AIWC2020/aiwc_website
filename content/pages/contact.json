@@ -7,70 +7,63 @@
   "intro": {
     "eyebrow": "Contact",
     "title": "Get in touch.",
-    "lede": "The Centre is co-led from Western Sydney University in Australia and IIT Guwahati in India."
+    "lede": "The Centre is co-led from Western Sydney University in Australia and IIT Guwahati in India.",
+    "eyebrowSize": 100,
+    "titleSize": 70,
+    "ledeSize": 100,
+    "textAlign": "left",
+    "textPosition": "bottom",
+    "textWidth": 100,
+    "textOffsetX": 0,
+    "textOffsetY": 0
   },
   "blocks": [
     {
-      "type": "contactCards",
-      "tone": "paper",
-      "items": [
-        {
-          "country": "Australia",
-          "address": "Western Sydney University, Locked Bag 1797, Penrith NSW 2751",
-          "people": [
-            {
-              "name": "Distinguished Professor Basant Maheshwari",
-              "role": "Director — AIWC, Western Sydney University",
-              "email": "b.maheshwari@westernsydney.edu.au"
-            },
-            {
-              "name": "A/Professor Dharma Hagare",
-              "role": "AIWC Country Co-ordinator, Australia",
-              "email": "D.Hagare@westernsydney.edu.au"
-            },
-            {
-              "name": "Centre Manager",
-              "role": "AIWC — Western Sydney University",
-              "email": "aiwc@westernsydney.edu.au"
-            }
-          ]
-        },
-        {
-          "country": "India",
-          "address": "Indian Institute of Technology Guwahati, Guwahati 781039",
-          "people": [
-            {
-              "name": "Professor Parmeswar Iyer",
-              "role": "Co-Director — AIWC; Director, IIT Guwahati",
-              "email": "director@iitg.ac.in"
-            },
-            {
-              "name": "Prof. Subashisa Datta",
-              "role": "AIWC Country Co-ordinator, India",
-              "email": "subashisa@iitg.ac.in"
-            },
-            {
-              "name": "Prof. Suresh Kartha",
-              "role": "Head, Centre for Sustainable Water Research",
-              "email": "hocswr@iitg.ac.in"
-            }
-          ]
-        }
-      ]
+      "type": "split",
+      "left": {
+        "kind": "prose",
+        "lead": "Australia",
+        "paragraphs": [
+          "Western Sydney University, Locked Bag 1797, Penrith NSW 2751",
+          "Distinguished Professor Basant Maheshwari — Director — AIWC, Western Sydney University — b.maheshwari@westernsydney.edu.au",
+          "A/Professor Dharma Hagare — AIWC Country Co-ordinator, Australia — D.Hagare@westernsydney.edu.au",
+          "Centre Manager — AIWC — Western Sydney University — aiwc@westernsydney.edu.au"
+        ]
+      },
+      "right": {
+        "kind": "prose",
+        "lead": "India",
+        "paragraphs": [
+          "Indian Institute of Technology Guwahati, Guwahati 781039",
+          "Professor Parmeswar Iyer — Co-Director — AIWC; Director, IIT Guwahati — director@iitg.ac.in",
+          "Prof. Subashisa Datta — AIWC Country Co-ordinator, India — subashisa@iitg.ac.in",
+          "Prof. Suresh Kartha — Head, Centre for Sustainable Water Research — hocswr@iitg.ac.in"
+        ]
+      }
     },
     {
       "type": "callout",
-      "tone": "paper",
-      "accent": "sand",
-      "title": "Follow the work.",
-      "text": "Webinars, symposium sessions and the WATER TALKS series are published on the Centre’s YouTube channel.",
-      "actions": [
-        {
-          "label": "AIWC on YouTube",
-          "href": "https://www.youtube.com/@australiaindiawatercentre-9628",
-          "primary": true
-        }
-      ]
+      "heading": "Follow the work.",
+      "body": "Webinars, symposium sessions and the WATER TALKS series are published on the Centre’s YouTube channel."
+    },
+    {
+      "type": "button",
+      "label": "AIWC on YouTube",
+      "url": "https://www.youtube.com/@australiaindiawatercentre-9628"
     }
-  ]
+  ],
+  "menuImage": {
+    "image": "/assets/photos/page-aiwc5-conference-1.jpg",
+    "zoom": 100,
+    "positionX": 50,
+    "positionY": 50,
+    "fit": "cover"
+  },
+  "heroImage": {
+    "image": "/assets/photos/page-aiwc5-conference-1.jpg",
+    "zoom": 100,
+    "positionX": 50,
+    "positionY": 45,
+    "fit": "cover"
+  }
 }

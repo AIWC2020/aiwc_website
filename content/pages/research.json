@@ -8,77 +8,111 @@
   "intro": {
     "eyebrow": "Our work · Research",
     "title": "Research activities",
-    "lede": "Joint projects run across Australian and Indian institutions, several of them funded under India’s Scheme for Promotion of Academic and Research Collaboration (SPARC)."
+    "lede": "Joint projects run across Australian and Indian institutions, several of them funded under India’s Scheme for Promotion of Academic and Research Collaboration (SPARC).",
+    "eyebrowSize": 100,
+    "titleSize": 70,
+    "ledeSize": 100,
+    "textAlign": "left",
+    "textPosition": "bottom",
+    "textWidth": 100,
+    "textOffsetX": 0,
+    "textOffsetY": 0
   },
   "blocks": [
     {
-      "type": "pubList",
-      "tone": "paper",
-      "label": "Current and recent projects",
+      "type": "banner",
+      "eyebrow": "Current and recent projects",
+      "title": "",
+      "lede": ""
+    },
+    {
+      "type": "publicationList",
       "items": [
         {
-          "text": "Securing Water for Agricultural and Food Sustainability: Developing Transdisciplinary Approach to Groundwater Management.",
-          "href": "https://sparc.iitkgp.ac.in/detailpage.php?id=1285"
+          "title": "Securing Water for Agricultural and Food Sustainability: Developing Transdisciplinary Approach to Groundwater Management.",
+          "editions": [
+            {
+              "label": "Open",
+              "url": "https://sparc.iitkgp.ac.in/detailpage.php?id=1285"
+            }
+          ]
         },
         {
-          "text": "Recharge Process of Springs and Its Management to mitigate anthropogenic and climate change impact for water Security: A case study in part of Kumaun Lesser Himalaya, India.",
-          "href": "https://sparc.iitkgp.ac.in/detailpage.php?id=69"
+          "title": "Recharge Process of Springs and Its Management to mitigate anthropogenic and climate change impact for water Security: A case study in part of Kumaun Lesser Himalaya, India.",
+          "editions": [
+            {
+              "label": "Open",
+              "url": "https://sparc.iitkgp.ac.in/detailpage.php?id=69"
+            }
+          ]
         },
         {
-          "text": "Coastal reservoirs as a sustainable strategy for Water Security.",
-          "href": "https://sparc.iitkgp.ac.in/detailpage.php?id=330"
+          "title": "Coastal reservoirs as a sustainable strategy for Water Security.",
+          "editions": [
+            {
+              "label": "Open",
+              "url": "https://sparc.iitkgp.ac.in/detailpage.php?id=330"
+            }
+          ]
         },
         {
-          "text": "Integrated Urban Water Management for Enhanced Water Security.",
-          "href": "https://sparc.iitkgp.ac.in/detailpage.php?id=593"
+          "title": "Integrated Urban Water Management for Enhanced Water Security.",
+          "editions": [
+            {
+              "label": "Open",
+              "url": "https://sparc.iitkgp.ac.in/detailpage.php?id=593"
+            }
+          ]
         },
         {
-          "text": "Managing Aquifer Recharge and Sustaining Groundwater Use through Village-level Intervention. www.marvi.org.in"
+          "title": "Managing Aquifer Recharge and Sustaining Groundwater Use through Village-level Intervention. www.marvi.org.in"
         }
       ]
     },
     {
-      "type": "cards",
-      "tone": "sand",
-      "label": "Where research sits",
+      "type": "storyCards",
+      "eyebrow": "Where research sits",
       "title": "Research is one of four programmes.",
-      "columns": 3,
+      "lede": "",
       "items": [
         {
-          "number": "02",
-          "title": "Education",
-          "text": "The Master’s specialisation in Sustainable Water Futures.",
           "page": "education",
-          "cta": "Education"
+          "label": "02",
+          "title": "Education",
+          "text": "The Master’s specialisation in Sustainable Water Futures."
         },
         {
-          "number": "03",
-          "title": "Training",
-          "text": "MARVI, YWP, DRIP II, dam safety and village groundwater cooperatives.",
           "page": "training",
-          "cta": "Training"
+          "label": "03",
+          "title": "Training",
+          "text": "MARVI, YWP, DRIP II, dam safety and village groundwater cooperatives."
         },
         {
-          "number": "04",
-          "title": "Outreach",
-          "text": "Technical exchange workshops and public dialogue.",
           "page": "outreach",
-          "cta": "Outreach"
+          "label": "04",
+          "title": "Outreach",
+          "text": "Technical exchange workshops and public dialogue."
         }
       ]
     },
     {
       "type": "callout",
-      "tone": "paper",
-      "title": "Looking for a research collaborator?",
-      "text": "One hundred and eight researchers across 27 institutions, with their areas of interest, current projects and key publications on record.",
-      "actions": [
-        {
-          "label": "Search the directory",
-          "page": "people",
-          "primary": true
-        }
-      ]
+      "heading": "Looking for a research collaborator?",
+      "body": "One hundred and eight researchers across 27 institutions, with their areas of interest, current projects and key publications on record."
     }
-  ]
+  ],
+  "menuImage": {
+    "image": "/assets/photos/page-our-work-0.jpg",
+    "zoom": 100,
+    "positionX": 50,
+    "positionY": 50,
+    "fit": "cover"
+  },
+  "heroImage": {
+    "image": "/assets/photos/page-our-work-0.jpg",
+    "zoom": 100,
+    "positionX": 50,
+    "positionY": 45,
+    "fit": "cover"
+  }
 }

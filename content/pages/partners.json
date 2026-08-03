@@ -7,35 +7,55 @@
   "intro": {
     "eyebrow": "Our partners",
     "title": "Thirty-three institutions,\ntwo countries.",
-    "lede": "Universities, national research institutes, government departments and water businesses — the consortium that established the Centre and sustains it."
+    "lede": "Universities, national research institutes, government departments and water businesses — the consortium that established the Centre and sustains it.",
+    "eyebrowSize": 100,
+    "titleSize": 70,
+    "ledeSize": 100,
+    "textAlign": "left",
+    "textPosition": "bottom",
+    "textWidth": 100,
+    "textOffsetX": 0,
+    "textOffsetY": 0
   },
   "blocks": [
     {
-      "type": "partnerRows",
-      "tone": "paper",
-      "country": "Australia",
-      "label": "01 — Australia",
-      "title": "Partners in Australia"
+      "type": "banner",
+      "eyebrow": "01 — Australia",
+      "title": "Partners in Australia",
+      "lede": ""
     },
     {
-      "type": "partnerRows",
-      "tone": "sand",
-      "country": "India",
-      "label": "02 — India",
-      "title": "Partners in India"
+      "type": "partnerDirectory",
+      "country": "Australia"
+    },
+    {
+      "type": "banner",
+      "eyebrow": "02 — India",
+      "title": "Partners in India",
+      "lede": ""
+    },
+    {
+      "type": "partnerDirectory",
+      "country": "India"
     },
     {
       "type": "callout",
-      "tone": "paper",
-      "title": "Become a partner institution.",
-      "text": "AIWC is built on equal partnership between Australia and India, with support for all partners for their growth and benefits. If your institution works on water, we would like to talk.",
-      "actions": [
-        {
-          "label": "Contact the Centre",
-          "page": "contact",
-          "primary": true
-        }
-      ]
+      "heading": "Become a partner institution.",
+      "body": "AIWC is built on equal partnership between Australia and India, with support for all partners for their growth and benefits. If your institution works on water, we would like to talk."
     }
-  ]
+  ],
+  "menuImage": {
+    "image": "/assets/photos/page-aiwc5-conference-3.jpg",
+    "zoom": 100,
+    "positionX": 50,
+    "positionY": 50,
+    "fit": "cover"
+  },
+  "heroImage": {
+    "image": "/assets/photos/page-aiwc5-conference-3.jpg",
+    "zoom": 100,
+    "positionX": 50,
+    "positionY": 45,
+    "fit": "cover"
+  }
 }

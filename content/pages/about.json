@@ -7,147 +7,159 @@
   "intro": {
     "eyebrow": "About the Centre",
     "title": "A partnership for\nsustainable water futures.",
-    "lede": "A joint initiative of institutions, government agencies and water businesses from Australia and India."
+    "lede": "A joint initiative of institutions, government agencies and water businesses from Australia and India.",
+    "eyebrowSize": 100,
+    "titleSize": 70,
+    "ledeSize": 100,
+    "textAlign": "left",
+    "textPosition": "bottom",
+    "textWidth": 100,
+    "textOffsetX": 0,
+    "textOffsetY": 0
   },
   "blocks": [
     {
-      "type": "prose",
-      "tone": "paper",
-      "label": "Context",
+      "type": "banner",
+      "eyebrow": "Context",
       "title": "Why the Centre exists.",
-      "body": [
-        "Australia and India’s water issues and challenges share many common elements, including natural extremes of floods and droughts, increasing competition for water between urban, peri-urban and rural sectors and increased threats to water security from climate change. There are also pressures due to the over-exploitation and water quality degradation of surface and groundwater resources.",
-        "Although India has a much larger population than Australia, the Gross Domestic Product of both countries heavily relies on access to fresh water. Therefore, effective surface and groundwater management plays a critical role in food production, sustaining livelihoods, human well-being, and socio-economic development.",
-        "Both countries are going through increasing urbanisation, which has added to the complexity of managing stormwater, provision of sanitation services, surface and groundwater pollution and the demands for drinking water and other uses. Further, India is currently undergoing a rapid socio-economic transformation with changing demographics and the need to sustain the farming sector; for this, water availability of the required quality and quantity will be critical. As such, both countries can partner for mutual benefits and learn significantly from each other’s experiences and strengths.",
-        "The Australia India Water Centre (AIWC) was established by a consortium of Australian and Indian universities, research institutions, government agencies and water businesses to promote cooperation and collaboration in water research, education, training and capacity building and outreach. The Centre provides a platform for long-term partnerships and dialogue between Australian and Indian water researchers, policy-makers, industry partners and non-governmental organisations to work together for a common goal."
-      ]
+      "lede": ""
+    },
+    {
+      "type": "split",
+      "left": {
+        "kind": "prose",
+        "paragraphs": [
+          "Australia and India’s water issues and challenges share many common elements, including natural extremes of floods and droughts, increasing competition for water between urban, peri-urban and rural sectors and increased threats to water security from climate change. There are also pressures due to the over-exploitation and water quality degradation of surface and groundwater resources.",
+          "Although India has a much larger population than Australia, the Gross Domestic Product of both countries heavily relies on access to fresh water. Therefore, effective surface and groundwater management plays a critical role in food production, sustaining livelihoods, human well-being, and socio-economic development."
+        ]
+      },
+      "right": {
+        "kind": "prose",
+        "paragraphs": [
+          "Both countries are going through increasing urbanisation, which has added to the complexity of managing stormwater, provision of sanitation services, surface and groundwater pollution and the demands for drinking water and other uses. Further, India is currently undergoing a rapid socio-economic transformation with changing demographics and the need to sustain the farming sector; for this, water availability of the required quality and quantity will be critical. As such, both countries can partner for mutual benefits and learn significantly from each other’s experiences and strengths.",
+          "The Australia India Water Centre (AIWC) was established by a consortium of Australian and Indian universities, research institutions, government agencies and water businesses to promote cooperation and collaboration in water research, education, training and capacity building and outreach. The Centre provides a platform for long-term partnerships and dialogue between Australian and Indian water researchers, policy-makers, industry partners and non-governmental organisations to work together for a common goal."
+        ]
+      }
     },
     {
       "type": "statement",
-      "tone": "deep",
       "label": "Our vision",
-      "quote": "Water management is not just a technical challenge.",
-      "cite": "The AIWC is to act as a catalyst for the Australian and Indian partners to break down silos, think differently and facilitate sustainable water futures through bilateral partnerships and transdisciplinary approaches."
+      "quote": "Water management is not just a technical challenge."
     },
     {
-      "type": "cols",
-      "tone": "paper",
-      "label": "Centre focus",
+      "type": "sourceNote",
+      "parts": [
+        {
+          "text": "The AIWC is to act as a catalyst for the Australian and Indian partners to break down silos, think differently and facilitate sustainable water futures through bilateral partnerships and transdisciplinary approaches."
+        }
+      ]
+    },
+    {
+      "type": "banner",
+      "eyebrow": "Centre focus",
       "title": "Six things the Centre set out to do.",
-      "columns": [
-        {
-          "body": [
-            {
-              "kind": "list",
-              "items": [
-                "Develop tools and techniques for improving the management of surface and groundwater resources (including springs, stormwater, wetlands, lakes and coastal reservoirs), water policy and governance and resilience and adaptation to climate change;",
-                "Establish joint educational programs in ‘sustainable water futures’ at the postgraduate level;",
-                "Conduct capacity-building and training programs for young water professionals, policy-makers, and industry personnel through short courses, workshops, conferences and webinars;"
-              ]
-            }
-          ]
-        },
-        {
-          "body": [
-            {
-              "kind": "list",
-              "items": [
-                "Promote transdisciplinary research, socio-economic and cultural aspects, woman empowerment, citizen science and community engagement in water resources management;",
-                "Establish Australia India Water Knowledge Platform — a ‘one-stop shop’ for easy access and sharing of water knowledge, tools and expertise from both Australia and India; and",
-                "Support the water expertise of the Centre partners for international engagement, networking and people-to-people contacts."
-              ]
-            }
-          ]
-        }
-      ]
+      "lede": ""
     },
     {
-      "type": "prose",
-      "tone": "sand",
-      "label": "Governance",
+      "type": "split",
+      "left": {
+        "kind": "prose",
+        "paragraphs": [
+          "• Develop tools and techniques for improving the management of surface and groundwater resources (including springs, stormwater, wetlands, lakes and coastal reservoirs), water policy and governance and resilience and adaptation to climate change;",
+          "• Establish joint educational programs in ‘sustainable water futures’ at the postgraduate level;",
+          "• Conduct capacity-building and training programs for young water professionals, policy-makers, and industry personnel through short courses, workshops, conferences and webinars;"
+        ]
+      },
+      "right": {
+        "kind": "prose",
+        "paragraphs": [
+          "• Promote transdisciplinary research, socio-economic and cultural aspects, woman empowerment, citizen science and community engagement in water resources management;",
+          "• Establish Australia India Water Knowledge Platform — a ‘one-stop shop’ for easy access and sharing of water knowledge, tools and expertise from both Australia and India; and",
+          "• Support the water expertise of the Centre partners for international engagement, networking and people-to-people contacts."
+        ]
+      }
+    },
+    {
+      "type": "banner",
+      "eyebrow": "Governance",
       "title": "How the Centre is run.",
-      "body": [
-        "AIWC’s key activities are structured into four distinct areas: Research, Education, Training, and Outreach. Each program has two or more leaders to support the initiatives. The Program Leaders meet six times a year to discuss the facilitation and seamless execution of various activities spanning programs, partners, and stakeholders. Further they strategically plan design and oversee activities to ensure tangible outcomes in alignment with the Centre’s mission.",
-        {
-          "kind": "h",
-          "text": "Programme leader positions"
-        },
-        {
-          "kind": "list",
-          "items": [
-            "Distinguished Professor Basant Maheshwari — Committee Chair",
-            "Dr Dharma Hagare — Country Coordinator, Australia",
-            "Prof. Subashisa Dutta — Country Coordinator, India",
-            "Associate Professor Shu-Qing Yang — Program Leader, Research",
-            "Associate Professor Sumit Sen — Program Leader, Research",
-            "Dr Jason Reynolds — Program Leader, Education",
-            "Dr Vijaya Lakshmi — Program Leader, Education",
-            "Dr Pankaj Kumar — Program Leader, Training",
-            "Professor Pushpa Tuppad — Program Leader, Training",
-            "Professor Shiva Prasad — Program Leader, Engagement and Outreach"
-          ]
-        }
-      ]
+      "lede": ""
     },
     {
-      "type": "cols",
-      "tone": "paper",
-      "label": "Principles and reach",
-      "columns": [
-        {
-          "title": "Guiding principles",
-          "body": [
-            {
-              "kind": "list",
-              "items": [
-                "Equal partnership between Australia and India;",
-                "A transdisciplinary approach to water research, innovation, education, training and capacity building;",
-                "Support for all partners for their growth and benefits; and",
-                "Promote transparency and trust in the operation of AIWC, ensuring long-lasting collaboration and legacy."
-              ]
-            }
-          ]
-        },
-        {
-          "title": "Who the work is for",
-          "body": [
-            {
-              "kind": "list",
-              "items": [
-                "Government policy-makers",
-                "Water professionals working in government agencies",
-                "Researchers involved in transdisciplinary research",
-                "Water educators, consultants, practitioners and NGOs",
-                "Prospective training participants",
-                "Prospective undergraduate and postgraduate students",
-                "Water businesses, community and media"
-              ]
-            }
-          ]
-        }
-      ]
+      "type": "split",
+      "left": {
+        "kind": "prose",
+        "paragraphs": [
+          "AIWC’s key activities are structured into four distinct areas: Research, Education, Training, and Outreach. Each program has two or more leaders to support the initiatives. The Program Leaders meet six times a year to discuss the facilitation and seamless execution of various activities spanning programs, partners, and stakeholders. Further they strategically plan design and oversee activities to ensure tangible outcomes in alignment with the Centre’s mission.",
+          "Programme leader positions",
+          "• Distinguished Professor Basant Maheshwari — Committee Chair",
+          "• Dr Dharma Hagare — Country Coordinator, Australia",
+          "• Prof. Subashisa Dutta — Country Coordinator, India",
+          "• Associate Professor Shu-Qing Yang — Program Leader, Research"
+        ]
+      },
+      "right": {
+        "kind": "prose",
+        "paragraphs": [
+          "• Associate Professor Sumit Sen — Program Leader, Research",
+          "• Dr Jason Reynolds — Program Leader, Education",
+          "• Dr Vijaya Lakshmi — Program Leader, Education",
+          "• Dr Pankaj Kumar — Program Leader, Training",
+          "• Professor Pushpa Tuppad — Program Leader, Training",
+          "• Professor Shiva Prasad — Program Leader, Engagement and Outreach"
+        ]
+      }
+    },
+    {
+      "type": "banner",
+      "eyebrow": "Principles and reach",
+      "title": "",
+      "lede": ""
+    },
+    {
+      "type": "split",
+      "left": {
+        "kind": "prose",
+        "lead": "Guiding principles",
+        "paragraphs": [
+          "• Equal partnership between Australia and India;",
+          "• A transdisciplinary approach to water research, innovation, education, training and capacity building;",
+          "• Support for all partners for their growth and benefits; and",
+          "• Promote transparency and trust in the operation of AIWC, ensuring long-lasting collaboration and legacy."
+        ]
+      },
+      "right": {
+        "kind": "prose",
+        "lead": "Who the work is for",
+        "paragraphs": [
+          "• Government policy-makers",
+          "• Water professionals working in government agencies",
+          "• Researchers involved in transdisciplinary research",
+          "• Water educators, consultants, practitioners and NGOs",
+          "• Prospective training participants",
+          "• Prospective undergraduate and postgraduate students",
+          "• Water businesses, community and media"
+        ]
+      }
     },
     {
       "type": "callout",
-      "tone": "paper",
-      "accent": "sand",
-      "title": "Read the work itself.",
-      "text": "The four programmes, the researchers behind them, and everything the Centre has published.",
-      "actions": [
-        {
-          "label": "Our work",
-          "page": "work",
-          "primary": true
-        },
-        {
-          "label": "Our people",
-          "page": "people"
-        },
-        {
-          "label": "Publications",
-          "page": "publications"
-        }
-      ]
+      "heading": "Read the work itself.",
+      "body": "The four programmes, the researchers behind them, and everything the Centre has published."
     }
-  ]
+  ],
+  "menuImage": {
+    "image": "/assets/photos/page-aiwc5-conference-1.jpg",
+    "zoom": 100,
+    "positionX": 50,
+    "positionY": 50,
+    "fit": "cover"
+  },
+  "heroImage": {
+    "image": "/assets/photos/page-aiwc5-conference-1.jpg",
+    "zoom": 100,
+    "positionX": 50,
+    "positionY": 45,
+    "fit": "cover"
+  }
 }
