@@ -530,7 +530,8 @@
           "summary": "",
           "body": []
         }
-      ]
+      ],
+      "layout": "directory"
     },
     {
       "type": "banner",

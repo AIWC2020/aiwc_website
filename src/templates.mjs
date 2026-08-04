@@ -781,8 +781,13 @@ const BLOCKS = {
       return card;
     };
 
+    // The full directory — chips, search, collapsible country groups — is
+    // opt-in. It belongs on the partners page, where the job is "find an
+    // institution". Everywhere else, and on the home page in particular, the
+    // block is a showcase and a plain grid is the right answer: a search box
+    // on a homepage asks the reader to work before they have a question.
     const groups = groupByCountry(list);
-    if (block.country || groups.length < 2) {
+    if (block.layout !== 'directory' || block.country || groups.length < 2) {
       const grid = el(document, 'div', { class: 'people-grid' });
       list.forEach((partner) => grid.appendChild(partnerCard(partner)));
       return grid;

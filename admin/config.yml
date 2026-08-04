@@ -482,6 +482,15 @@ collections:
             summary: "Partner institutions ({{fields.items.length}})"
             fields:
               - { label: "Country", name: "country", widget: "select", required: false, options: [{ label: "All", value: "" }, "Australia", "India"], hint: "Leave as All to list every partner." }
+              - label: "Layout"
+                name: "layout"
+                widget: "select"
+                default: "grid"
+                required: false
+                options:
+                  - { label: "Grid — a simple showcase", value: "grid" }
+                  - { label: "Directory — search, country filters and collapsible groups", value: "directory" }
+                hint: "Directory is for the partners page, where the reader is looking for an institution. Use Grid anywhere the block is showing off the partnership rather than being searched."
               - label: "Partner institutions"
                 name: "items"
                 widget: "list"
