@@ -8,7 +8,7 @@
   <title>AIWC — Australia India Water Centre</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --ink: #0A1A24;
@@ -18,10 +18,15 @@
       --blue: #2E8078;
       --blue-dark: #235F59;
       --copper: #BC5A24;
+      /* Text-only tints. The brand copper and teal are bright enough to fail
+         WCAG AA as small text on paper (4.1:1 and 3.6:1 measured), so labels
+         and eyebrows use these darker siblings; fills and borders keep the
+         original hues. */
+      --copper-text: #9F4718;
+      --blue-text: #1D665E;
       --line: rgba(10, 26, 36, .16);
-      --muted: #5C6B72;
+      --muted: #4E5B62;
       --sidebar: 278px;
-      --serif: "Newsreader", Georgia, serif;
       --sans: "Manrope", Arial, sans-serif;
       --mono: "DM Mono", monospace;
       /* Photo scrims. Legibility is bought locally — a pool anchored under the
@@ -133,7 +138,7 @@
       text-transform: uppercase;
       letter-spacing: .12em;
     }
-    .nav-label { margin: 0 0 13px; color: #737F87; font-size: .62rem; }
+    .nav-label { margin: 0 0 13px; color: #99A3AA; font-size: .62rem; }
     .lang-switch { margin: 0 0 22px; }
     .lang-switch select {
       width: 100%; padding: 9px 30px 9px 11px; cursor: pointer;
@@ -176,12 +181,12 @@
       width: 3px;
       background: var(--copper);
     }
-    .nav-number { color: #616E77; font: .63rem var(--mono); }
+    .nav-number { color: #949EA5; font: .63rem var(--mono); }
     .nav-name { font-size: .78rem; font-weight: 600; letter-spacing: .01em; }
     .nav-thumb { display: none; }
     .nav-arrow { opacity: 0; transform: translateX(-5px); transition: .2s ease; }
     .nav-tab:hover .nav-arrow, .nav-tab[aria-selected="true"], .nav-tab[aria-current="page"] .nav-arrow { opacity: 1; transform: none; }
-    .sidebar-foot { margin-top: auto; padding-top: 35px; color: #737F87; font: .62rem/1.7 var(--mono); }
+    .sidebar-foot { margin-top: auto; padding-top: 35px; color: #99A3AA; font: .62rem/1.7 var(--mono); }
     .sidebar-foot a { color: #AFB9C0; text-decoration: none; }
 
     .mobile-bar { display: none; }
@@ -197,14 +202,19 @@
       padding: 65px 0 45px;
       border-bottom: 1px solid var(--line);
     }
-    .section-index { padding-top: 10px; color: var(--copper); font-size: .67rem; }
-    .eyebrow { margin: 0 0 17px; color: var(--blue); font-size: .66rem; }
+    .section-index { padding-top: 10px; color: var(--copper-text); font-size: .67rem; }
+    .eyebrow { margin: 0 0 17px; color: var(--blue-text); font-size: .66rem; }
     h1, h2, h3, p { margin-top: 0; }
+    /* One display face. Manrope carries every heading now; Newsreader was
+       retired because the desktop layer had already overridden it for h1 and
+       most card titles, leaving headings that changed typeface between
+       levels and between breakpoints. Weight 500 and tighter tracking match
+       the optical weight the serif had at these sizes. */
     h1, h2, .display {
-      font-family: var(--serif);
-      font-weight: 400;
-      letter-spacing: -.035em;
-      line-height: .98;
+      font-family: var(--sans);
+      font-weight: 500;
+      letter-spacing: -.042em;
+      line-height: 1.02;
     }
     h1 { max-width: 900px; margin-bottom: 20px; font-size: clamp(3.35rem, 7.2vw, 7rem); }
     h2 { margin-bottom: 22px; font-size: clamp(2.5rem, 5vw, 5.1rem); }
@@ -320,14 +330,14 @@
 
     .home-statement { padding: 74px max(44px, 6vw); color: var(--white); background: var(--blue-dark); }
     .statement-grid { display: grid; grid-template-columns: .75fr 1.5fr; gap: 8vw; }
-    .statement-grid .meta { color: #87b0b7; font-size: .63rem; }
-    .statement-grid blockquote { margin: 0; font: 400 clamp(2rem, 4vw, 4.1rem)/1.06 var(--serif); letter-spacing: -.03em; }
+    .statement-grid .meta { color: #C6DEE1; font-size: .63rem; }
+    .statement-grid blockquote { margin: 0; font: 500 clamp(2rem, 4vw, 4.1rem)/1.1 var(--sans); letter-spacing: -.04em; }
     .metric-row { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgba(255,255,255,.24); margin-top: 65px; }
     .metric { padding: 23px 24px 0 0; border-right: 1px solid rgba(255,255,255,.2); }
     .metric:last-child { padding-left: 24px; border-right: 0; }
     .metric:nth-child(2) { padding-left: 24px; }
-    .metric strong { display: block; margin-bottom: 5px; font: 400 clamp(2.3rem, 4vw, 4rem)/1 var(--serif); }
-    .metric span { color: #b8d0d3; font-size: .77rem; }
+    .metric strong { display: block; margin-bottom: 5px; font: 500 clamp(2.3rem, 4vw, 4rem)/1 var(--sans); letter-spacing: -.035em; font-variant-numeric: tabular-nums; }
+    .metric span { color: #CFE4E6; font-size: .77rem; }
 
     .section-body { padding: 58px 0 85px; }
     .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
@@ -335,7 +345,7 @@
     .split { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(42px, 8vw, 110px); }
     .prose { max-width: 760px; }
     .prose p { color: #4E5A61; font-size: 1.03rem; }
-    .prose .large { color: var(--ink); font: 400 clamp(1.55rem, 2.6vw, 2.4rem)/1.2 var(--serif); }
+    .prose .large { color: var(--ink); font: 500 clamp(1.55rem, 2.6vw, 2.4rem)/1.28 var(--sans); letter-spacing: -.03em; }
     .project-card {
       position: relative;
       min-height: 250px;
@@ -345,8 +355,8 @@
       transition: transform .25s ease, background .25s ease;
     }
     .project-card:hover { transform: translateY(-5px); background: var(--white); }
-    .card-number { display: block; margin-bottom: 65px; color: var(--copper); font: .63rem var(--mono); }
-    .project-card h3 { max-width: 280px; margin-bottom: 11px; font: 500 1.45rem/1.15 var(--serif); }
+    .card-number { display: block; margin-bottom: 65px; color: var(--copper-text); font: .63rem var(--mono); }
+    .project-card h3 { max-width: 280px; margin-bottom: 11px; font: 500 1.45rem/1.15 var(--sans); }
     .project-card p { margin-bottom: 0; color: var(--muted); font-size: .88rem; }
     .dark-block { padding: clamp(36px, 6vw, 70px); color: var(--white); background: var(--ink); }
     .dark-block h2 { max-width: 760px; }
@@ -364,7 +374,7 @@
     .image-data-panel img { width: 100%; height: 500px; object-fit: cover; filter: saturate(.78) brightness(1.04); }
     .image-data-panel::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgb(var(--scrim-rgb) / 0), rgb(var(--scrim-rgb) / var(--scrim-deep))); }
     .image-data-overlay { position: absolute; z-index: 2; inset: auto 28px 26px; display: flex; align-items: end; justify-content: space-between; gap: 25px; }
-    .image-data-overlay strong { font: 400 clamp(4rem, 8vw, 7rem)/.8 var(--serif); }
+    .image-data-overlay strong { font: 500 clamp(4rem, 8vw, 7rem)/.85 var(--sans); letter-spacing: -.05em; font-variant-numeric: tabular-nums; }
     .image-data-overlay span { max-width: 165px; text-align: right; font: .59rem/1.55 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
 
     .photo-ribbon { display: grid; grid-template-columns: 1.25fr .75fr 1fr; gap: 10px; margin-bottom: 24px; }
@@ -383,8 +393,8 @@
       border-top: 1px solid var(--line);
       align-items: start;
     }
-    .process-step::before { content: "0" counter(process); color: var(--copper); font: .63rem var(--mono); }
-    .process-step h3 { margin: 0; font: 500 1.2rem var(--serif); }
+    .process-step::before { content: "0" counter(process); color: var(--copper-text); font: .63rem var(--mono); }
+    .process-step h3 { margin: 0; font: 500 1.2rem var(--sans); }
     .process-step p { margin: 0; color: var(--muted); font-size: .9rem; }
 
     .data-panel {
@@ -397,7 +407,7 @@
       justify-content: space-between;
     }
     .data-kicker { font: .63rem var(--mono); text-transform: uppercase; letter-spacing: .1em; }
-    .data-value { font: 400 clamp(4rem, 9vw, 8rem)/.8 var(--serif); letter-spacing: -.06em; }
+    .data-value { font: 500 clamp(4rem, 9vw, 8rem)/.85 var(--sans); letter-spacing: -.05em; font-variant-numeric: tabular-nums; }
     .data-axis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; height: 110px; align-items: end; }
     .data-axis span { display: block; background: rgba(255,255,255,.27); }
     .data-axis span:nth-child(1) { height: 90%; }
@@ -413,7 +423,7 @@
     .app-screen-strip img { max-height: 150px; width: 100%; object-fit: contain; }
     .feature-list { display: grid; margin-top: 38px; }
     .feature-item { display: grid; grid-template-columns: 38px 1fr; gap: 18px; padding: 17px 0; border-top: 1px solid var(--line); }
-    .feature-item span:first-child { color: var(--copper); font: .65rem var(--mono); }
+    .feature-item span:first-child { color: var(--copper-text); font: .65rem var(--mono); }
     .feature-item strong { display: block; margin-bottom: 4px; font-weight: 600; }
     .feature-item small { color: var(--muted); }
 
@@ -443,8 +453,8 @@
       transition: color .22s, background .22s;
     }
     .media-card:hover { color: var(--white); background: var(--blue-dark); }
-    .media-card .meta { margin-bottom: 38px; color: var(--copper); font-size: .59rem; }
-    .media-card h3 { margin-bottom: 13px; font: 500 1.35rem/1.18 var(--serif); }
+    .media-card .meta { margin-bottom: 38px; color: var(--copper-text); font-size: .59rem; }
+    .media-card h3 { margin-bottom: 13px; font: 500 1.35rem/1.18 var(--sans); }
     .media-card p { color: var(--muted); font-size: .82rem; }
     .media-card:hover p { color: #b9cecf; }
     .media-card .read { margin-top: auto; font: .62rem var(--mono); text-transform: uppercase; letter-spacing: .08em; }
@@ -456,13 +466,13 @@
     .video-card:hover img { transform: scale(1.025); filter: none; }
     .play { position: absolute; right: 17px; bottom: 17px; width: 52px; height: 52px; border-radius: 50%; background: var(--white); }
     .play::before { content: ""; position: absolute; left: 21px; top: 17px; border-left: 14px solid var(--ink); border-top: 9px solid transparent; border-bottom: 9px solid transparent; }
-    .video-card .meta { display: block; margin: 15px 0 8px; color: var(--copper); font-size: .58rem; }
-    .video-card h3 { margin-bottom: 0; font: 500 1.25rem/1.3 var(--serif); }
+    .video-card .meta { display: block; margin: 15px 0 8px; color: var(--copper-text); font-size: .58rem; }
+    .video-card h3 { margin-bottom: 0; font: 500 1.25rem/1.3 var(--sans); }
 
     .people-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
     .people-card { min-height: 180px; padding: 22px; display: block; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); color: inherit; text-decoration: none; }
-    .people-card .meta { color: var(--copper); font-size: .58rem; }
-    .people-card h3 { margin: 30px 0 0; font: 500 1.14rem/1.35 var(--serif); }
+    .people-card .meta { color: var(--copper-text); font-size: .58rem; }
+    .people-card h3 { margin: 30px 0 0; font: 500 1.14rem/1.35 var(--sans); }
     .people-card[href] { cursor: pointer; }
     .people-card[href]:focus-visible { outline: 3px solid var(--copper); outline-offset: -3px; }
 
@@ -481,8 +491,8 @@
       transition: background .22s;
     }
     .pub-card:hover { background: rgba(253, 252, 250,.92); }
-    .pub-card .meta { margin-bottom: 34px; color: var(--copper); font-size: .59rem; }
-    .pub-card h3 { margin-bottom: 12px; font: 500 1.3rem/1.2 var(--serif); }
+    .pub-card .meta { margin-bottom: 34px; color: var(--copper-text); font-size: .59rem; }
+    .pub-card h3 { margin-bottom: 12px; font: 500 1.3rem/1.2 var(--sans); }
     .pub-card p { color: var(--muted); font-size: .82rem; }
     .pub-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 20px; }
     .pub-links a {
@@ -558,8 +568,8 @@
     .tool-shot { position: relative; flex: none; aspect-ratio: 16 / 10; overflow: hidden; background: #DDE1E6; }
     .tool-shot img { position: absolute; inset: 18px; width: calc(100% - 36px); height: calc(100% - 36px); object-fit: contain; }
     .tool-copy { flex: 1; display: flex; flex-direction: column; padding: 26px; }
-    .tool-copy .meta { color: var(--copper); font-size: .59rem; }
-    .tool-copy h3 { margin: 14px 0 11px; font: 500 1.55rem/1.15 var(--serif); }
+    .tool-copy .meta { color: var(--copper-text); font-size: .59rem; }
+    .tool-copy h3 { margin: 14px 0 11px; font: 500 1.55rem/1.15 var(--sans); }
     .tool-copy p { color: var(--muted); font-size: .84rem; }
     .tool-copy .button { align-self: flex-start; margin-top: auto; }
 
@@ -587,7 +597,7 @@
     .fact-list > div { display: grid; gap: 3px; padding: 12px 0; border-bottom: 1px solid var(--line); }
     .fact-list dt { color: var(--muted); }
     .fact-list dd { margin: 0; font-size: .9rem; line-height: 1.5; overflow-wrap: anywhere; }
-    .fact-list dd a { color: var(--blue); }
+    .fact-list dd a { color: var(--blue-text); }
     .pub-list { margin-top: 34px; }
     .pub-list h2 { margin-bottom: 16px; }
     .pub-list .pub-card { min-height: 0; padding: 15px 18px; margin-bottom: 8px; }
@@ -801,14 +811,18 @@
     .explore-head p:last-child {
       max-width: 310px;
       margin: 0 0 8px;
-      color: #5d6862;
+      color: #4B5651;
       font-size: .88rem;
     }
+    /* Cards fit themselves to the container: inner pages hold 3–5 of them
+       inside a narrower column than the home page, and a fixed three-track
+       grid could not serve both. Home keeps its deliberate asymmetry. */
     .story-grid {
       display: grid;
-      grid-template-columns: 1.15fr .85fr .85fr;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr));
       gap: 14px;
     }
+    #panel-home .story-grid { grid-template-columns: 1.15fr .85fr .85fr; }
     .story-card {
       --spot-x: 50%;
       --spot-y: 50%;
@@ -965,7 +979,13 @@
       .hero-image-index { right: 35px; top: 31px; }
       .hero-image-index { font-size: 1rem; }
       .hero-image-caption { right: 36px; bottom: 34px; }
-      .home-statement, .home-explore { padding-left: 304px; }
+      /* Dock clearance, for the HOME page only. On inner pages these blocks
+         sit inside .section-body, which already carries the clearance — so
+         applying it again indented them twice and crushed the story cards
+         into 33px slivers on every "Our work" page. */
+      #panel-home > .home-statement, #panel-home > .home-explore { padding-left: 304px; }
+      .panel:not(#panel-home) .home-explore,
+      .panel:not(#panel-home) .home-statement { padding-inline: clamp(28px, 3vw, 46px); }
       /* Home renders its blocks as bare panel children; every one of them
          must clear the floating dock, or it slides underneath it. The
          self-padded sections above manage their own clearance. */
@@ -1078,7 +1098,7 @@
 
     @media (min-width: 801px) and (max-width: 1120px) {
       .hero-copy, .panel:not(#panel-home) .page-head { padding-left: 288px; }
-      .home-statement, .home-explore { padding-left: 288px; }
+      #panel-home > .home-statement, #panel-home > .home-explore { padding-left: 288px; }
       #panel-home > :where(p, .dark-block, .split, .process, .people-grid, .media-grid,
         .video-grid, .grid-2, .grid-3, .photo-ribbon, .editorial-images, .image-data-panel,
         .feature-list, .app-shot, .game-frame, .pub-section, .tool-grid) {
@@ -1424,7 +1444,7 @@
     .cms-block-callout[data-tone="green"] { background: #31594a; }
     .cms-block-callout[data-tone="copper"] { background: #866146; }
     .cms-block-callout h2 { max-width: 900px; }
-    .cms-block-callout p { max-width: 900px; margin: 0; font: 400 clamp(1.45rem, 2.5vw, 2.35rem)/1.2 var(--serif); }
+    .cms-block-callout p { max-width: 900px; margin: 0; font: 500 clamp(1.45rem, 2.5vw, 2.35rem)/1.28 var(--sans); letter-spacing: -.03em; }
     .cms-block-button { padding-block: 12px; }
 
     @media (max-width: 800px) {
