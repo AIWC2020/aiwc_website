@@ -30,7 +30,12 @@
 
       /* the two brand hues, plus the tints legible on each background */
       --teal: #2E8078;
-      --teal-dark: #235F59;
+      /* Deep enough to sit with the inks. #235F59 measured L=.0926 — 5.8x
+         --ink and the only large filled surface outside the near-black
+         band, which is why it was the one slab that looked applied rather
+         than structural. #0E3A35 is L=.0338, in the same family, and still
+         unmistakably water-green at full-bleed size. */
+      --teal-deep: #0E3A35;
       --teal-text: #1D665E;
       --on-teal: #CFE4E6;
       --copper: #BC5A24;
@@ -266,7 +271,7 @@
     }
     .button:hover { color: var(--white); background: var(--ink); transform: translateY(-1px); }
     .button:active { transform: translateY(0); }
-    .button.primary { color: var(--white); background: var(--teal-dark); border-color: var(--teal-dark); }
+    .button.primary { color: var(--white); background: var(--teal-deep); border-color: var(--teal-deep); }
     /* --copper puts white 12px/700 button text at 4.47:1, just under AA's
        4.5. --copper-text carries the same accent at 6.10:1. The contrast
        audit never caught this because it only ever measured rest states. */
@@ -345,7 +350,7 @@
     .flow-label--au { left: 23%; top: 15%; }
     .flow-label--in { right: 7%; top: 11%; }
 
-    .home-statement { padding: 74px max(44px, 6vw); color: var(--white); background: var(--teal-dark); }
+    .home-statement { padding: 74px max(44px, 6vw); color: var(--white); background: var(--teal-deep); }
     .statement-grid { display: grid; grid-template-columns: .75fr 1.5fr; gap: 8vw; }
     .statement-grid .meta { color: var(--on-teal); font-size: 0.72rem; }
     .statement-grid blockquote { margin: 0; font: 500 clamp(2rem, 4vw, 4.1rem)/1.1 var(--sans); letter-spacing: -.04em; }
@@ -393,7 +398,7 @@
     .editorial-image:hover img { transform: scale(1.035); filter: saturate(1); }
     .image-note { position: absolute; inset: auto 0 0; padding: 25px 19px 15px; color: var(--white); background: linear-gradient(transparent, rgb(var(--scrim-rgb) / var(--scrim-deep))); font: 0.72rem/1.45 var(--mono); letter-spacing: .06em; text-transform: uppercase; }
 
-    .image-data-panel { position: relative; min-height: 500px; overflow: hidden; color: var(--white); background: var(--teal-dark); }
+    .image-data-panel { position: relative; min-height: 500px; overflow: hidden; color: var(--white); background: var(--teal-deep); }
     .image-data-panel img { width: 100%; height: 500px; object-fit: cover; filter: saturate(.78) brightness(1.04); }
     .image-data-panel::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgb(var(--scrim-rgb) / 0), rgb(var(--scrim-rgb) / var(--scrim-deep))); }
     .image-data-overlay { position: absolute; z-index: 2; inset: auto 28px 26px; display: flex; align-items: end; justify-content: space-between; gap: 25px; }
@@ -424,7 +429,7 @@
       min-height: 420px;
       padding: 35px;
       color: var(--on-teal);
-      background: var(--teal-dark);
+      background: var(--teal-deep);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -475,7 +480,7 @@
       background: rgba(253, 252, 250,.32);
       transition: color .22s, background .22s;
     }
-    .media-card:hover { color: var(--white); background: var(--teal-dark); }
+    .media-card:hover { color: var(--white); background: var(--teal-deep); }
     .media-card .meta { margin-bottom: 38px; color: var(--copper-text); font-size: 0.72rem; }
     .media-card h3 { margin-bottom: 13px; font: 500 1.35rem/1.18 var(--sans); }
     .media-card p { color: var(--muted); font-size: .82rem; }
@@ -575,7 +580,7 @@
       transition: transform .28s ease;
     }
     .disc-toggle[aria-expanded="true"]::before { transform: rotate(45deg) translate(-2px, -2px); }
-    .disc-toggle:hover { color: var(--teal-dark); }
+    .disc-toggle:hover { color: var(--teal-deep); }
     /* On a dark section banner the toggle inherits the banner's white type,
        so only the chevron needs its own colour. */
     .dark-block.is-collapsible { cursor: default; }
@@ -1107,12 +1112,12 @@
         border: 0;
         border-radius: 3px;
         color: var(--white);
-        background-color: var(--teal-dark);
+        background-color: var(--teal-deep);
         background-position: center;
         background-size: cover;
         box-shadow: 0 16px 45px rgba(15, 29, 46,.08);
       }
-      .project-card:hover { transform: translateY(-7px); background-color: var(--teal-dark); }
+      .project-card:hover { transform: translateY(-7px); background-color: var(--teal-deep); }
       .project-card .card-number { margin: 0 0 auto; color: rgba(255,255,255,.72); }
       .project-card h3 { max-width: 330px; color: var(--white); font-family: var(--sans); font-size: 1.65rem; font-weight: 600; letter-spacing: -.04em; }
       .project-card p { color: rgba(255,255,255,.76); }
@@ -1137,7 +1142,7 @@
       .tool-copy h3 { font-family: var(--sans); font-size: 1.6rem; font-weight: 600; letter-spacing: -.035em; }
       .people-grid { gap: 10px; border: 0; }
       .people-card { min-height: 210px; border: 0; border-radius: 3px; background: var(--surface); transition: transform .25s ease, color .25s ease, background .25s ease; }
-      .people-card:hover { transform: translateY(-5px); color: var(--white); background: var(--teal-dark); }
+      .people-card:hover { transform: translateY(-5px); color: var(--white); background: var(--teal-deep); }
       .people-card h3 { font-family: var(--sans); font-weight: 600; letter-spacing: -.025em; }
       .dark-block { border-radius: 3px; }
       .video-image, .app-shot, .game-frame { border-radius: 3px; overflow: hidden; }
@@ -1337,7 +1342,7 @@
         border: 0;
         border-radius: 16px;
         color: var(--white);
-        background-color: var(--teal-dark);
+        background-color: var(--teal-deep);
         background-position: center;
         background-size: cover;
       }
@@ -1498,7 +1503,7 @@
       padding: clamp(30px, 4vw, 54px);
       border-radius: 3px;
       color: var(--white);
-      background: var(--teal-dark);
+      background: var(--teal-deep);
     }
     .cms-block-callout::before {
       content: "";
@@ -1506,10 +1511,13 @@
       inset: 0 auto 0 0;
       width: 3px;
       border-radius: 3px 0 0 3px;
-      background: var(--copper);
+      /* --copper reads 2.76:1 on this fill, under the 3:1 a non-text mark
+         needs; --copper-light reaches 6.80:1. On the previous fill it was
+         1.62:1 — the accent has never actually been visible until now. */
+      background: var(--copper-light);
     }
-    .cms-block-callout[data-tone="copper"] { background: #7A4A2C; }
-    .cms-block-callout[data-tone="copper"]::before { background: var(--copper-light); }
+    .cms-block-callout[data-tone="copper"] { background: var(--ink-deep); }
+    .cms-block-callout[data-tone="copper"]::before { background: var(--copper); }
     .cms-block-callout h2 {
       max-width: 20ch;
       margin-bottom: 16px;
