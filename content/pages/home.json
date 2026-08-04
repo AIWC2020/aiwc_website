@@ -161,13 +161,27 @@
           "page": "people",
           "label": "108",
           "title": "Researchers across 27 institutions",
-          "text": "Every profile carries their qualifications, areas of interest, current projects and key publications — searchable by country and institution."
+          "text": "Every profile carries their qualifications, areas of interest, current projects and key publications — searchable by country and institution.",
+          "photo": {
+            "image": "/assets/photos/page-aiwc5-conference-2.jpg",
+            "zoom": 100,
+            "positionX": 50,
+            "positionY": 50,
+            "fit": "cover"
+          }
         },
         {
           "page": "partners",
           "label": "33",
           "title": "Partner institutions",
-          "text": "Universities, national research institutes, government agencies and water businesses in Australia and India."
+          "text": "Universities, national research institutes, government agencies and water businesses in Australia and India.",
+          "photo": {
+            "image": "/assets/photos/page-aiwc5-conference-3.jpg",
+            "zoom": 100,
+            "positionX": 50,
+            "positionY": 50,
+            "fit": "cover"
+          }
         }
       ]
     },

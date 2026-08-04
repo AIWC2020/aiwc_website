@@ -229,6 +229,19 @@ const BLOCKS = {
   },
 
   banner(document, block, ctx) {
+    // A banner with no heading has nothing to fill a dark slab with — it was
+    // rendering as a large empty panel holding one small label. Those become
+    // a quiet rule-and-label marker instead, which is all the content is.
+    if (!(block.title || '').trim()) {
+      if (!block.eyebrow && !block.lede) return null;
+      const marker = el(document, 'div', { class: 'section-marker' });
+      if (block.eyebrow) {
+        marker.appendChild(el(document, 'p', { class: 'eyebrow', text: block.eyebrow, key: ctx.t('eyebrow') }));
+      }
+      if (block.lede) marker.appendChild(el(document, 'p', { class: 'lede', text: block.lede, key: ctx.t('lede') }));
+      return marker;
+    }
+
     const wrap = el(document, 'div', { class: 'dark-block' });
     // A titled banner is an addressable section boundary: it gets a stable
     // anchor id, and the in-page navigation (jump links or tabs — see

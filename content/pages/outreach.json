@@ -54,19 +54,40 @@
           "page": "news",
           "label": "01",
           "title": "News & events",
-          "text": "The AIWC@5 International Symposium, WATER TALKS 2025 and the webinar series."
+          "text": "The AIWC@5 International Symposium, WATER TALKS 2025 and the webinar series.",
+          "photo": {
+            "image": "/assets/photos/page-news-0.jpg",
+            "zoom": 100,
+            "positionX": 50,
+            "positionY": 50,
+            "fit": "cover"
+          }
         },
         {
           "page": "waterwise",
           "label": "02",
           "title": "WaterWise",
-          "text": "The Centre’s blog for sustainable water futures — a dialogue, not a broadcast."
+          "text": "The Centre’s blog for sustainable water futures — a dialogue, not a broadcast.",
+          "photo": {
+            "image": "/assets/photos/page-waterwise-blog-0.png",
+            "zoom": 100,
+            "positionX": 50,
+            "positionY": 50,
+            "fit": "cover"
+          }
         },
         {
           "page": "resources",
           "label": "03",
           "title": "Resources",
-          "text": "Recorded webinars and seminar series, including Dams for Life."
+          "text": "Recorded webinars and seminar series, including Dams for Life.",
+          "photo": {
+            "image": "/assets/photos/page-aiwc5-conference-5.jpg",
+            "zoom": 100,
+            "positionX": 50,
+            "positionY": 50,
+            "fit": "cover"
+          }
         }
       ]
     }

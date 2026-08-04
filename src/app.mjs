@@ -365,11 +365,22 @@ function setupMediaSearch() {
  */
 function setupSectionNav() {
   const panel = document.querySelector('.panel[data-section-nav]');
-  const body = panel?.querySelector('.section-body');
-  if (!body) return;
+  if (!panel) return;
+  // Standard pages nest their blocks in .section-body. The home template has
+  // no such wrapper — its blocks are direct children of the panel — so the
+  // panel itself is the container there.
+  const body = panel.querySelector('.section-body') || panel;
   const banners = [...body.querySelectorAll(':scope > [data-section-anchor]')];
   if (banners.length < 2) return;
   const mode = panel.getAttribute('data-section-nav');
+
+  // A section runs until the next banner — or until the trailing
+  // .cms-sections wrapper, which holds page-level blocks (the closing
+  // callout). That wrapper belongs to the page rather than to the last
+  // section, so it must never be swept into one and hidden with it.
+  const endsSection = (node, i) =>
+    (i + 1 < banners.length && node === banners[i + 1]) ||
+    node.classList.contains('cms-sections');
 
   const labelFor = (banner) => {
     if (banner.dataset.tabLabel) return banner.dataset.tabLabel;
@@ -391,7 +402,7 @@ function setupSectionNav() {
       holder.id = banner.id + '-body';
       const members = [];
       let next = banner.nextElementSibling;
-      while (next && !(i + 1 < banners.length && next === banners[i + 1])) {
+      while (next && !endsSection(next, i)) {
         members.push(next);
         next = next.nextElementSibling;
       }
@@ -463,7 +474,7 @@ function setupSectionNav() {
     holder.id = banner.id + '-panel';
     const members = [banner];
     let next = banner.nextElementSibling;
-    while (next && !(i + 1 < banners.length && next === banners[i + 1])) {
+    while (next && !endsSection(next, i)) {
       members.push(next);
       next = next.nextElementSibling;
     }

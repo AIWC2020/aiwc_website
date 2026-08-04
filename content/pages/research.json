@@ -81,19 +81,40 @@
           "page": "education",
           "label": "02",
           "title": "Education",
-          "text": "The Master’s specialisation in Sustainable Water Futures."
+          "text": "The Master’s specialisation in Sustainable Water Futures.",
+          "photo": {
+            "image": "/assets/photos/page-our-work-1.jpg",
+            "zoom": 100,
+            "positionX": 50,
+            "positionY": 50,
+            "fit": "cover"
+          }
         },
         {
           "page": "training",
           "label": "03",
           "title": "Training",
-          "text": "MARVI, YWP, DRIP II, dam safety and village groundwater cooperatives."
+          "text": "MARVI, YWP, DRIP II, dam safety and village groundwater cooperatives.",
+          "photo": {
+            "image": "/assets/photos/page-our-work-2.jpg",
+            "zoom": 100,
+            "positionX": 50,
+            "positionY": 50,
+            "fit": "cover"
+          }
         },
         {
           "page": "outreach",
           "label": "04",
           "title": "Outreach",
-          "text": "Technical exchange workshops and public dialogue."
+          "text": "Technical exchange workshops and public dialogue.",
+          "photo": {
+            "image": "/assets/photos/page-our-work-3.jpg",
+            "zoom": 100,
+            "positionX": 50,
+            "positionY": 50,
+            "fit": "cover"
+          }
         }
       ]
     },

@@ -28,27 +28,62 @@
         {
           "label": "01",
           "title": "Managing Aquifer Recharge and Sustaining Groundwater Use through Village-level Interventions",
-          "text": "The MARVI project is focused on developing a village level participatory approach, models and tools to assist in improving…"
+          "text": "The MARVI project is focused on developing a village level participatory approach, models and tools to assist in improving…",
+          "photo": {
+            "image": "/assets/photos/managing-groundwater-use-and-sustaining-aquifer-recharge-through-village-level-interventions-marvi-0.jpg",
+            "zoom": 100,
+            "positionX": 50,
+            "positionY": 50,
+            "fit": "cover"
+          }
         },
         {
           "label": "02",
           "title": "The Young Water Professionals Program",
-          "text": "The YWP program is a unique, transdisciplinary training initiative aimed at equipping young professionals with skills in…"
+          "text": "The YWP program is a unique, transdisciplinary training initiative aimed at equipping young professionals with skills in…",
+          "photo": {
+            "image": "/assets/photos/the-young-water-professionals-program-ywp-0.jpg",
+            "zoom": 100,
+            "positionX": 50,
+            "positionY": 50,
+            "fit": "cover"
+          }
         },
         {
           "label": "03",
           "title": "Dam Rehabilitation Improvement Project",
-          "text": "This collaborative project focused on knowledge exchange and capacity building to improve dam safety practices in India. The…"
+          "text": "This collaborative project focused on knowledge exchange and capacity building to improve dam safety practices in India. The…",
+          "photo": {
+            "image": "/assets/photos/dam-rehabilitation-improvement-project-drip-ii-0.jpg",
+            "zoom": 100,
+            "positionX": 50,
+            "positionY": 50,
+            "fit": "cover"
+          }
         },
         {
           "label": "04",
           "title": "Training Program on Dam Safety and Risk Management in Australia",
-          "text": "Drawing on the success of DRIP II, the “Training Program on Dam Safety and Risk Management in Australia” focused on equipping…"
+          "text": "Drawing on the success of DRIP II, the “Training Program on Dam Safety and Risk Management in Australia” focused on equipping…",
+          "photo": {
+            "image": "/assets/photos/training-program-on-dam-safety-and-risk-management-in-australia-0.jpg",
+            "zoom": 100,
+            "positionX": 50,
+            "positionY": 50,
+            "fit": "cover"
+          }
         },
         {
           "label": "05",
           "title": "Village Groundwater Cooperatives",
-          "text": "Emerging from the MARVI initiative, Village Groundwater Cooperatives (VGCs) offer a promising institutional mechanism for…"
+          "text": "Emerging from the MARVI initiative, Village Groundwater Cooperatives (VGCs) offer a promising institutional mechanism for…",
+          "photo": {
+            "image": "/assets/photos/village-groundwater-cooperatives-vgcs-0.jpg",
+            "zoom": 100,
+            "positionX": 50,
+            "positionY": 50,
+            "fit": "cover"
+          }
         }
       ]
     },
