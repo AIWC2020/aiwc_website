@@ -271,12 +271,17 @@ const BLOCKS = {
 
   storyCards(document, block, ctx) {
     const section = el(document, 'section', { class: 'home-explore' });
-    section.setAttribute('aria-labelledby', 'explore-title');
+    // The id is derived from the block's own title. It used to be the constant
+    // 'explore-title', and the home page renders two of these blocks — so the
+    // document carried a duplicate id and both sections' aria-labelledby
+    // resolved to the first heading.
+    const headingId = 'explore-' + (slugish(block.title) || 'section');
+    section.setAttribute('aria-labelledby', headingId);
     const head = el(document, 'header', { class: 'explore-head' });
     const headText = el(document, 'div');
     headText.appendChild(el(document, 'p', { class: 'eyebrow', text: block.eyebrow, key: ctx.t('eyebrow') }));
     const h2 = el(document, 'h2', { text: block.title, key: ctx.t('title') });
-    h2.id = 'explore-title';
+    h2.id = headingId;
     headText.appendChild(h2);
     head.appendChild(headText);
     head.appendChild(el(document, 'p', { text: block.lede, key: ctx.t('lede') }));
