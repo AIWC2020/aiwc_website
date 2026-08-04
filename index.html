@@ -588,6 +588,60 @@
     .dark-block.is-collapsible .lede { margin-bottom: 0; }
     .disc-body { margin-top: 26px; }
     .disc-toggle:focus-visible { outline: 3px solid var(--copper); outline-offset: 5px; }
+    /* A country's slice of a directory. */
+    .dir-group { margin-bottom: 54px; }
+    .dir-group:last-of-type { margin-bottom: 0; }
+    .dir-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 22px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+    .dir-head h2 { margin: 0; font-size: clamp(1.35rem, 2vw, 1.9rem); }
+    .dir-count { color: var(--muted); white-space: nowrap; }
+
+    /* Partner cards carry the two things all 33 records have: the name and
+       the country. Uniform by construction, so the grid cannot run ragged. */
+    .partner-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 264px), 1fr));
+      gap: 12px;
+    }
+    .partner-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 132px;
+      padding: 22px 24px;
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      background: var(--surface);
+      color: var(--ink);
+      text-decoration: none;
+      transition: color .25s, background-color .25s, transform .25s, border-color .25s;
+    }
+    .partner-card .meta { color: var(--copper-text); }
+    .partner-card h3 {
+      margin: 0;
+      max-width: 22ch;
+      font: 500 1.02rem/1.35 var(--sans);
+      letter-spacing: -.01em;
+    }
+    .partner-go { position: absolute; right: 20px; bottom: 18px; color: var(--muted); font-size: .8rem; }
+    .partner-card:hover {
+      transform: translateY(-3px);
+      color: var(--white);
+      background: var(--ink);
+      border-color: var(--ink);
+    }
+    .partner-card:hover .meta { color: var(--copper-light); }
+    .partner-card:hover .partner-go { color: var(--white); }
+    .partner-card:focus-visible { outline: 3px solid var(--copper); outline-offset: 3px; }
+
     /* Opens a directory that is showing only its first row. */
     .reveal-row { display: flex; justify-content: center; margin-top: 30px; }
     .reveal-all {

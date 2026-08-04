@@ -630,10 +630,8 @@ if (!redirectLegacyHash()) {
    hides and reveals, so a reader without JavaScript gets the whole list. */
 
 function setupDirectory({ gridSel, filtersSel, searchSel, instSel, countSel, emptySel, kind, noun }) {
-  const grid = document.querySelector(gridSel);
-  if (!grid) return;
-  const cards = [...grid.children];
-  if (!cards.length) return;
+  const grids = [...document.querySelectorAll(gridSel)];
+  if (!grids.length) return;
 
   const filters = document.querySelector(filtersSel);
   const search = searchSel && document.querySelector(searchSel);
@@ -641,84 +639,100 @@ function setupDirectory({ gridSel, filtersSel, searchSel, instSel, countSel, emp
   const counter = countSel && document.querySelector(countSel);
   const empty = emptySel && document.querySelector(emptySel);
   const sortSelect = document.querySelector(`[data-sort="${kind}"]`);
-  const reveal = document.querySelector(`[data-reveal="${kind}"]`);
 
-  const state = { country: '', inst: '', query: '', sort: 'shuffle', open: false };
-  const shuffled = cards.slice();
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
+  const state = { country: '', inst: '', query: '', sort: 'shuffle' };
+
+  // Each country is its own list: its own shuffle, its own row, its own
+  // button. Neither country's names sit permanently above the other's.
+  const groups = grids.map((grid) => {
+    const cards = [...grid.children];
+    const shuffled = cards.slice();
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    const section = grid.closest('.dir-group');
+    return {
+      grid, cards, shuffled, section,
+      reveal: section?.querySelector(`[data-reveal="${kind}"]`) || null,
+      tally: section?.querySelector('[data-group-count]') || null,
+      open: false
+    };
+  });
 
   // Sorting the raw name files everyone with a doctorate under D. Titles are
   // dropped from the sort key only — the card still shows the full name.
   const plain = (card) =>
     (card.dataset.name || '').replace(/^((a\/)?prof|dr|mr|mrs|ms|miss|assoc\.?\s*prof)\.?\s+/i, '');
-
   const key = (card) => ({
     name: plain(card),
     country: (card.dataset.country || '') + ' ' + plain(card),
     institute: (card.dataset.inst || '') + ' ' + plain(card)
   });
 
-  const order = () => {
-    if (state.sort === 'shuffle') return shuffled;
-    return cards.slice().sort((a, b) => key(a)[state.sort].localeCompare(key(b)[state.sort]));
-  };
-
   const matches = (card) =>
     (!state.country || card.dataset.country === state.country) &&
     (!state.inst || card.dataset.inst === state.inst) &&
     (!state.query || (card.dataset.search || '').includes(state.query));
 
-  // One row means "as many as fit on the first line", which only the layout
-  // knows — so it is read back from the rendered grid rather than assumed.
-  const firstRowCount = () => {
-    const visible = cards.filter((c) => !c.hidden);
+  // "One row" is whatever the grid actually fits on its first line, so it is
+  // read back from layout rather than assumed, and remeasured on resize.
+  const firstRowCount = (g) => {
+    const visible = g.cards.filter((c) => !c.hidden);
     if (!visible.length) return 0;
     const top = visible[0].offsetTop;
-    const n = visible.filter((c) => c.offsetTop === top).length;
-    return n || visible.length;
+    return visible.filter((c) => c.offsetTop === top).length || visible.length;
   };
 
   const apply = () => {
-    order().forEach((card) => grid.appendChild(card));
-    let shown = 0;
-    cards.forEach((card) => {
-      const ok = matches(card);
-      card.hidden = !ok;
-      if (ok) shown++;
+    let total = 0, grand = 0;
+    groups.forEach((g) => {
+      const ordered = state.sort === 'shuffle'
+        ? g.shuffled
+        : g.cards.slice().sort((a, b) => key(a)[state.sort].localeCompare(key(b)[state.sort]));
+      ordered.forEach((card) => g.grid.appendChild(card));
+
+      let shown = 0;
+      g.cards.forEach((card) => { const ok = matches(card); card.hidden = !ok; if (ok) shown++; });
+
+      let previewed = shown;
+      if (!g.open) {
+        const perRow = firstRowCount(g);
+        let seen = 0;
+        g.cards.forEach((card) => {
+          if (card.hidden) return;
+          seen++;
+          if (seen > perRow) card.hidden = true;
+        });
+        previewed = Math.min(perRow, shown);
+      }
+
+      if (g.section) g.section.hidden = shown === 0;
+      if (g.tally) {
+        const [one, many] = (g.tally.dataset.noun || 'item|items').split('|');
+        g.tally.textContent = `${shown} ${shown === 1 ? one : many}`;
+      }
+      if (g.reveal) {
+        g.reveal.hidden = shown <= previewed && !g.open;
+        g.reveal.textContent = g.open
+          ? `Show fewer`
+          : `Show all ${shown} ${shown === 1 ? noun[0] : noun[1]}`;
+        g.reveal.setAttribute('aria-expanded', String(g.open));
+      }
+      total += shown;
+      grand += g.cards.length;
     });
-    if (empty) empty.hidden = shown > 0;
 
-    let previewed = shown;
-    if (!state.open) {
-      const perRow = firstRowCount();
-      let seen = 0;
-      cards.forEach((card) => {
-        if (card.hidden) return;
-        seen++;
-        if (seen > perRow) card.hidden = true;
-      });
-      previewed = Math.min(perRow, shown);
-    }
-
-    if (reveal) {
-      const rest = shown - previewed;
-      reveal.hidden = shown <= previewed && !state.open;
-      const word = shown === 1 ? noun[0] : noun[1];
-      reveal.textContent = state.open ? `Show fewer ${noun[1]}` : `Show all ${shown} ${word}`;
-      reveal.setAttribute('aria-expanded', String(state.open));
-      void rest;
-    }
+    if (empty) empty.hidden = total > 0;
     if (counter) {
       const scope = [state.country, state.inst].filter(Boolean).join(' · ');
-      counter.textContent = shown === cards.length
-        ? `Showing all ${cards.length} ${noun[1]}`
-        : `${shown} of ${cards.length} ${noun[1]}${scope ? ' — ' + scope : ''}`;
+      counter.textContent = total === grand
+        ? `Showing all ${grand} ${noun[1]}`
+        : `${total} of ${grand} ${noun[1]}${scope ? ' — ' + scope : ''}`;
     }
   };
 
+  groups.forEach((g) => g.reveal?.addEventListener('click', () => { g.open = !g.open; apply(); }));
   filters?.addEventListener('click', (event) => {
     const chip = event.target.closest('[data-filter]');
     if (!chip) return;
@@ -730,11 +744,9 @@ function setupDirectory({ gridSel, filtersSel, searchSel, instSel, countSel, emp
   search?.addEventListener('input', () => { state.query = search.value.trim().toLowerCase(); apply(); });
   instSelect?.addEventListener('change', () => { state.inst = instSelect.value; apply(); });
   sortSelect?.addEventListener('change', () => { state.sort = sortSelect.value; apply(); });
-  reveal?.addEventListener('click', () => { state.open = !state.open; apply(); });
-  // The row width changes with the window, so the preview is remeasured.
+
   let resizeTimer;
   window.addEventListener('resize', () => {
-    if (state.open) return;
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(apply, 150);
   });

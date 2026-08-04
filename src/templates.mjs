@@ -758,14 +758,15 @@ const BLOCKS = {
 
     // 108 portraits are split into collapsible country groups, so the page
     // opens as a short index rather than a wall of faces.
-    // One flat list. The static order is stable — alphabetical, so the file
-    // is reviewable and a crawler sees something deterministic — and app.mjs
-    // shuffles it on load so no researcher is permanently first.
-    const band = el(document, 'div', { class: 'portrait-band' });
-    band.setAttribute('data-people-grid', '');
-    people.forEach((person) => band.appendChild(portrait(person)));
-    wrap.appendChild(band);
-    wrap.appendChild(revealButton(document, people.length, ['researcher', 'researchers'], 'people'));
+    // One group per country. The static order within each is stable, so the
+    // file stays reviewable and a crawler sees something deterministic;
+    // app.mjs shuffles each group separately on load.
+    groupByCountry(people).forEach(([country, members]) => {
+      wrap.appendChild(directoryGroup(document, {
+        country, members, gridClass: 'portrait-band', gridAttr: 'data-people-grid',
+        kind: 'people', noun: ['researcher', 'researchers'], renderCard: portrait
+      }));
+    });
 
     const empty = el(document, 'p', { class: 'prose', text: 'No researchers match that filter.' });
     empty.setAttribute('data-people-empty', '');
@@ -787,8 +788,20 @@ const BLOCKS = {
     const limit = Number(block.limit) > 0 ? Number(block.limit) : 0;
     const list = limit && block.layout !== 'directory' ? byCountry.slice(0, limit) : byCountry;
 
+    /**
+     * A partner card is the institution's name and where it is — the two
+     * things every one of the 33 records actually has.
+     *
+     * It used to carry the summary and a logo, and both were uneven: 7 of 33
+     * have a summary, so the grid ran ragged; and all 10 logo files in the
+     * repository are Australian, so every Indian institution was showing a
+     * generic site photograph dressed as its mark. In a centre built on two
+     * countries being equal partners, that asymmetry is worse than having no
+     * pictures at all. The summary and the logo both still appear on the
+     * institution's own page, where there is room to be uneven honestly.
+     */
     const partnerCard = (partner) => {
-      const card = el(document, 'a', { class: 'people-card' });
+      const card = el(document, 'a', { class: 'partner-card' });
       card.href = ctx.entryUrl ? ctx.entryUrl('partners', partner.slug) : '#';
       card.setAttribute('data-country', partner.country || '');
       card.setAttribute('data-name', (partner.name || '').toLowerCase());
@@ -798,7 +811,7 @@ const BLOCKS = {
       );
       card.appendChild(el(document, 'span', { class: 'meta', text: partner.country }));
       card.appendChild(el(document, 'h3', { text: partner.name }));
-      if (partner.summary) card.appendChild(el(document, 'p', { text: partner.summary }));
+      card.appendChild(el(document, 'span', { class: 'partner-go', text: '↗' }));
       return card;
     };
 
@@ -850,13 +863,12 @@ const BLOCKS = {
     count.setAttribute('data-partner-count', '');
     wrap.appendChild(count);
 
-    // Flat and stable in the markup; shuffled by app.mjs on load, so no
-    // institution is permanently at the top of its own partner list.
-    const grid = el(document, 'div', { class: 'people-grid' });
-    grid.setAttribute('data-partner-grid', '');
-    list.forEach((partner) => grid.appendChild(partnerCard(partner)));
-    wrap.appendChild(grid);
-    wrap.appendChild(revealButton(document, list.length, ['institution', 'institutions'], 'partners'));
+    groups.forEach(([country, members]) => {
+      wrap.appendChild(directoryGroup(document, {
+        country, members, gridClass: 'partner-grid', gridAttr: 'data-partner-grid',
+        kind: 'partners', noun: ['institution', 'institutions'], renderCard: partnerCard
+      }));
+    });
 
     const empty = el(document, 'p', { class: 'prose', text: 'No institutions match that filter.' });
     empty.setAttribute('data-partner-empty', '');
@@ -926,6 +938,34 @@ const groupByCountry = (records) => {
  * so a reader without JavaScript sees the full list and a button that says
  * so — app.mjs is what collapses the list, never what fills it.
  */
+/**
+ * One country's slice of a directory: a heading, a grid, and the button that
+ * opens it. The two countries stay visibly separate — this is a bilateral
+ * centre and the split is the point — while each one shuffles independently,
+ * so neither the Australian nor the Indian list has a permanent first name.
+ */
+const directoryGroup = (document, { country, members, gridClass, gridAttr, kind, noun, renderCard }) => {
+  const section = el(document, 'section', { class: 'dir-group' });
+  section.setAttribute('data-dir-group', country);
+  const head = el(document, 'header', { class: 'dir-head' });
+  head.appendChild(el(document, 'h2', { text: country }));
+  const tally = el(document, 'span', {
+    class: 'filter-label dir-count',
+    text: `${members.length} ${members.length === 1 ? noun[0] : noun[1]}`
+  });
+  tally.setAttribute('data-group-count', '');
+  tally.setAttribute('data-noun', noun.join('|'));
+  head.appendChild(tally);
+  section.appendChild(head);
+
+  const grid = el(document, 'div', { class: gridClass });
+  grid.setAttribute(gridAttr, '');
+  members.forEach((record) => grid.appendChild(renderCard(record)));
+  section.appendChild(grid);
+  section.appendChild(revealButton(document, members.length, noun, kind));
+  return section;
+};
+
 const revealButton = (document, count, noun, kind) => {
   const wrap = el(document, 'div', { class: 'reveal-row' });
   const button = el(document, 'button', {
