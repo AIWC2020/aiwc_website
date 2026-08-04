@@ -414,7 +414,9 @@ function setupSectionNav() {
         toggle.setAttribute('aria-expanded', String(open));
         banner.classList.toggle('is-open', open);
       };
-      setOpen(false);
+      // The first section starts open, so the page introduces itself rather
+      // than presenting a reader with nothing but headings.
+      setOpen(i === 0);
       toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
       // A link into this section arrives with it open.
       const hashId = location.hash.slice(1);
