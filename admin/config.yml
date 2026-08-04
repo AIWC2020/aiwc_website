@@ -168,7 +168,15 @@ collections:
             fields:
               - { label: "Heading (optional)", name: "heading", widget: "string", required: false }
               - { label: "Callout text", name: "body", widget: "text" }
-              - { label: "Style", name: "tone", widget: "select", default: "blue", required: false, options: ["blue", "green", "copper"] }
+              - label: "Style"
+                name: "tone"
+                widget: "select"
+                default: "blue"
+                required: false
+                options:
+                  - { label: "Teal", value: "blue" }
+                  - { label: "Copper", value: "copper" }
+                hint: "The site uses two accent colours. Green was a third that rendered the same as teal, so it has been folded into it."
           - label: "Button link"
             name: "button"
             widget: "object"
