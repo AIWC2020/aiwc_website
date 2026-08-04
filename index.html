@@ -267,7 +267,10 @@
     .button:hover { color: var(--white); background: var(--ink); transform: translateY(-1px); }
     .button:active { transform: translateY(0); }
     .button.primary { color: var(--white); background: var(--teal-dark); border-color: var(--teal-dark); }
-    .button.primary:hover { background: var(--copper); border-color: var(--copper); }
+    /* --copper puts white 12px/700 button text at 4.47:1, just under AA's
+       4.5. --copper-text carries the same accent at 6.10:1. The contrast
+       audit never caught this because it only ever measured rest states. */
+    .button.primary:hover { background: var(--copper-text); border-color: var(--copper-text); }
 
     .hero-image-stage {
       position: relative;
@@ -998,7 +1001,7 @@
       .hero-copy .button { color: var(--white); border-color: rgba(255,255,255,.58); backdrop-filter: blur(8px); text-shadow: none; }
       .hero-copy .button:hover { color: var(--ink); background: var(--white); }
       .hero-copy .button.primary { color: var(--ink); border-color: var(--white); background: var(--white); }
-      .hero-copy .button.primary:hover { color: var(--white); border-color: var(--copper); background: var(--copper); }
+      .hero-copy .button.primary:hover { color: var(--white); border-color: var(--copper-text); background: var(--copper-text); }
       .hero-image-stage { position: absolute; inset: 0; min-height: 100svh; }
       .hero-image-main { min-height: 100svh; object-position: center 47%; }
       .hero-image-stage::after {
