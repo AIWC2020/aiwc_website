@@ -1033,10 +1033,11 @@
          which stops them being direct children, so the clearance above no
          longer reaches them and every block slides under the dock. The
          wrapper becomes the direct child, so it carries the clearance. */
-      #panel-home > :where(.disc-body, .section-tab-panel) {
+      #panel-home > :where(.disc-body, .section-tab-panel, .section-nav) {
         margin-left: 304px;
         margin-right: max(4vw, 44px);
       }
+      #panel-home > .section-nav { max-width: calc(100% - 304px - max(4vw, 44px)); }
       #panel-home > :where(.disc-body, .section-tab-panel) > * { margin-left: 0; margin-right: 0; }
       /* The self-padded sections indent themselves past the dock when they
          are direct children. Inside a wrapper that inset is already paid, so
@@ -1151,10 +1152,11 @@
       #panel-home > :where(p, .dark-block, .split, .process, .people-grid, .media-grid,
         .video-grid, .grid-2, .grid-3, .photo-ribbon, .editorial-images, .image-data-panel,
         .feature-list, .app-shot, .game-frame, .pub-section, .tool-grid),
-      #panel-home > :where(.disc-body, .section-tab-panel) {
+      #panel-home > :where(.disc-body, .section-tab-panel, .section-nav) {
         margin-left: 288px;
         margin-right: 32px;
       }
+      #panel-home > .section-nav { max-width: calc(100% - 320px); }
       .hero-copy h1 { font-size: clamp(4rem, 7.6vw, 6.3rem); }
       .page-head h1 { font-size: clamp(3.5rem, 6.7vw, 5.5rem); }
       .panel:not(#panel-home) .section-body { width: calc(100% - 320px); margin-left: 288px; margin-right: 32px; }
@@ -1548,7 +1550,13 @@
       display: flex;
       gap: 7px;
       width: fit-content;
+      /* The bar hugs its tabs, but must never grow past its own column. Its
+         margins live on this same element, so a plain max-width: 100% does
+         not subtract them — the caps are set alongside those margins below.
+         Scrolling rather than wrapping keeps the pill one row high. */
       max-width: 100%;
+      overflow-x: auto;
+      scrollbar-width: none;
       margin: 0 0 40px;
       padding: 8px;
       border: 1px solid var(--line);
