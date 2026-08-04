@@ -193,34 +193,54 @@ function setupArchive() {
  * correct once the real sections exist, and building it client-side means
  * a no-JS visitor simply sees every section — nothing breaks.
  */
-function setupPublications() {
-  // Disclosure: titled sections collapse to their header row, closed by
-  // default — the counts still say what each holds. Applied here, not in
-  // the markup, so a no-JS visitor gets the fully expanded page.
-  const allSections = [...document.querySelectorAll('.pub-section')];
-  const setOpen = (section, open) => {
-    const grid = section.querySelector('.pub-grid');
-    const toggle = section.querySelector('.pub-section-toggle');
-    if (!grid || !toggle) return;
-    grid.hidden = !open;
-    toggle.setAttribute('aria-expanded', String(open));
-    section.classList.toggle('is-open', open);
-  };
-  allSections.forEach((section) => {
-    const toggle = section.querySelector('.pub-section-toggle');
+/**
+ * Collapsible categories, shared by publications, researchers and partner
+ * institutions. Every .disc-group closes on load — its count still says what
+ * it holds — so a long directory opens as a short index. Collapsing here
+ * rather than in the markup means no-JS readers get everything expanded.
+ */
+const discGroups = () => [...document.querySelectorAll('.disc-group')];
+
+function setGroupOpen(group, open) {
+  const toggle = group.querySelector('.disc-toggle');
+  if (!toggle) return;
+  // Everything except the header row is the disclosure's content.
+  [...group.children].forEach((child) => {
+    if (!child.classList.contains('disc-head')) child.hidden = !open;
+  });
+  toggle.setAttribute('aria-expanded', String(open));
+  group.classList.toggle('is-open', open);
+}
+
+function setupDisclosureGroups() {
+  const groups = discGroups();
+  groups.forEach((group) => {
+    const toggle = group.querySelector('.disc-toggle');
     if (!toggle) return;
-    setOpen(section, false);
+    setGroupOpen(group, false);
     toggle.addEventListener('click', () => {
-      setOpen(section, toggle.getAttribute('aria-expanded') !== 'true');
+      setGroupOpen(group, toggle.getAttribute('aria-expanded') !== 'true');
     });
   });
-  // A shared link straight to a section arrives with it open.
+  // A shared link straight to a category arrives with it open.
   if (location.hash) {
     const target = document.getElementById(location.hash.slice(1));
-    const holder = target && allSections.find((section) => section.contains(target));
-    if (holder) setOpen(holder, true);
+    const holder = target && groups.find((group) => group.contains(target));
+    if (holder) setGroupOpen(holder, true);
   }
+}
 
+/** Re-label a group's count as filtering changes what it holds. */
+function retallyGroup(group, visible) {
+  const tally = group.querySelector('[data-group-count]');
+  if (!tally) return;
+  const [one, many] = (tally.dataset.noun || 'item|items').split('|');
+  tally.textContent = `${visible} ${visible === 1 ? one : many}`;
+}
+
+function setupPublications() {
+  const allSections = discGroups().filter((s) => s.classList.contains('pub-section'));
+  const setOpen = setGroupOpen;
   const sections = allSections.filter((section) => section.dataset.kind);
   if (sections.length < 2) return;
 
@@ -451,6 +471,58 @@ function setupSectionNav() {
   if (start > 0) panels[start].scrollIntoView({ block: 'start' });
 }
 
+/* ---------- partner institutions ---------- */
+
+/**
+ * The partner directory mirrors the researcher one: country chips, a search
+ * box, and collapsible country groups. Filtering opens the groups that still
+ * hold something and hides the ones that do not, so a search never leaves the
+ * reader staring at collapsed headers wondering where the matches went.
+ */
+function setupPartners() {
+  const bar = document.querySelector('[data-partner-filters]');
+  if (!bar) return;
+  const groups = [...document.querySelectorAll('.disc-group')]
+    .filter((g) => g.querySelector('[data-partner-grid]'));
+  if (!groups.length) return;
+  const empty = document.querySelector('[data-partner-empty]');
+  const search = document.querySelector('[data-partner-search]');
+  const state = { country: '', query: '' };
+
+  const apply = ({ userInitiated }) => {
+    let shown = 0;
+    groups.forEach((group) => {
+      let visible = 0;
+      group.querySelectorAll('.people-card').forEach((card) => {
+        const match =
+          (!state.country || card.dataset.country === state.country) &&
+          (!state.query || (card.dataset.search || '').includes(state.query));
+        card.hidden = !match;
+        if (match) visible++;
+      });
+      group.hidden = visible === 0;
+      retallyGroup(group, visible);
+      // A narrowed directory should show its results, not hide them.
+      if (userInitiated && visible > 0 && (state.country || state.query)) setGroupOpen(group, true);
+      shown += visible;
+    });
+    if (empty) empty.hidden = shown > 0;
+  };
+
+  bar.addEventListener('click', (event) => {
+    const chip = event.target.closest('[data-filter]');
+    if (!chip) return;
+    bar.querySelectorAll('[data-filter]').forEach((b) => b.setAttribute('aria-pressed', String(b === chip)));
+    const value = chip.dataset.filter;
+    state.country = value.startsWith('country:') ? value.slice(8) : '';
+    apply({ userInitiated: true });
+  });
+  search?.addEventListener('input', () => {
+    state.query = search.value.trim().toLowerCase();
+    apply({ userInitiated: true });
+  });
+}
+
 /* ---------- chrome ---------- */
 
 function setupMenu() {
@@ -501,9 +573,11 @@ if (!redirectLegacyHash()) {
       refreshTextScales();
     });
   });
+  setupDisclosureGroups();
   setupSectionNav();
   setupMotion();
   setupMenu();
+  setupPartners();
   setupLanguageSwitcher();
   setupMediaSearch();
   setupArchive();
@@ -518,17 +592,21 @@ if (!redirectLegacyHash()) {
    Everything is already in the DOM, so this only hides and shows.        */
 
 const peopleFilters = document.querySelector('[data-people-filters]');
-const peopleGrid = document.querySelector('[data-people-grid]');
+const peopleBands = [...document.querySelectorAll('[data-people-grid]')];
 
-if (peopleFilters && peopleGrid) {
-  const cards = [...peopleGrid.children];
+if (peopleFilters && peopleBands.length) {
+  // Researchers are split across one band per country group, so the filter
+  // works over every band and then decides which groups still have anything
+  // to show.
+  const groupsOf = peopleBands.map((band) => band.closest('.disc-group')).filter(Boolean);
+  const cards = peopleBands.flatMap((band) => [...band.children]);
   const empty = document.querySelector('[data-people-empty]');
   const search = document.querySelector('[data-people-search]');
   const instSelect = document.querySelector('[data-people-inst]');
   const counter = document.querySelector('[data-people-count]');
   const state = { country: '', inst: '', query: '' };
 
-  const apply = () => {
+  const apply = ({ userInitiated } = {}) => {
     let shown = 0;
     for (const card of cards) {
       const match =
@@ -538,6 +616,13 @@ if (peopleFilters && peopleGrid) {
       card.hidden = !match;
       if (match) shown++;
     }
+    const narrowed = Boolean(state.country || state.inst || state.query);
+    groupsOf.forEach((group) => {
+      const visible = [...group.querySelectorAll('.portrait-card')].filter((c) => !c.hidden).length;
+      group.hidden = visible === 0;
+      retallyGroup(group, visible);
+      if (userInitiated && narrowed && visible > 0) setGroupOpen(group, true);
+    });
     if (empty) empty.hidden = shown > 0;
     if (counter) {
       const scope = [state.country, state.inst].filter(Boolean).join(' \u00b7 ');
@@ -556,16 +641,16 @@ if (peopleFilters && peopleGrid) {
     }
     const value = chip.dataset.filter;
     state.country = value.startsWith('country:') ? value.slice(8) : '';
-    apply();
+    apply({ userInitiated: true });
   });
 
   search?.addEventListener('input', () => {
     state.query = search.value.trim().toLowerCase();
-    apply();
+    apply({ userInitiated: true });
   });
 
   instSelect?.addEventListener('change', () => {
     state.inst = instSelect.value;
-    apply();
+    apply({ userInitiated: true });
   });
 }

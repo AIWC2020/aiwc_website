@@ -509,9 +509,8 @@
 
     /* Publications are grouped into kind sections; the filter bar that
        app.mjs builds sits above the first one and hides whole sections. */
-    .pub-section { margin-bottom: 64px; }
-    .pub-section:last-child { margin-bottom: 0; }
-    .pub-section-head {
+    
+    .disc-head {
       display: flex;
       align-items: baseline;
       justify-content: space-between;
@@ -520,14 +519,14 @@
       padding-top: 30px;
       border-top: 1px solid var(--line);
     }
-    .pub-section-head h2 { margin: 0; font-size: clamp(1.85rem, 3.2vw, 3.1rem); }
-    .pub-section-count { color: var(--muted); font-size: .62rem; white-space: nowrap; }
+    .disc-head h2 { margin: 0; font-size: clamp(1.6rem, 2.6vw, 2.5rem); }
+    .disc-count { color: var(--muted); font-size: .62rem; white-space: nowrap; }
     .pub-filter-bar { margin-bottom: 38px; }
 
     /* The section heading doubles as a disclosure toggle; app.mjs closes
        sections by default. The chevron points right when closed, down when
        open. Without JS the button is inert and everything stays visible. */
-    .pub-section-toggle {
+    .disc-toggle {
       margin: 0;
       padding: 0;
       border: 0;
@@ -541,7 +540,7 @@
       font: inherit;
       letter-spacing: inherit;
     }
-    .pub-section-toggle::before {
+    .disc-toggle::before {
       content: "";
       width: .34em;
       height: .34em;
@@ -552,12 +551,12 @@
       transform: rotate(-45deg);
       transition: transform .28s ease;
     }
-    .pub-section-toggle[aria-expanded="true"]::before { transform: rotate(45deg) translate(-2px, -2px); }
-    .pub-section-toggle:hover { color: var(--blue-dark); }
-    .pub-section-toggle:focus-visible { outline: 3px solid var(--copper); outline-offset: 5px; }
-    .pub-section { margin-bottom: 0; }
-    .pub-section.is-open { margin-bottom: 46px; }
-    .pub-section .pub-grid { margin-top: 6px; }
+    .disc-toggle[aria-expanded="true"]::before { transform: rotate(45deg) translate(-2px, -2px); }
+    .disc-toggle:hover { color: var(--blue-dark); }
+    .disc-toggle:focus-visible { outline: 3px solid var(--copper); outline-offset: 5px; }
+    .disc-group { margin-bottom: 0; }
+    .disc-group.is-open { margin-bottom: 46px; }
+    .disc-group > :not(.disc-head) { margin-top: 8px; }
 
     .tool-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
     .tool-card { display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--line); background: rgba(253, 252, 250,.42); }
@@ -1511,7 +1510,8 @@
        on a phone the wrapped chip rows would eat the screen. */
     @media (min-width: 801px) {
       .pub-filter-bar,
-      #panel-people .filter-bar {
+      #panel-people .filter-bar,
+      #panel-partners .filter-bar {
         position: sticky;
         top: 12px;
         z-index: 15;

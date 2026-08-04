@@ -53,8 +53,10 @@ await import('../src/app.mjs');
 
 /* ── drive it ───────────────────────────────────────────────────────── */
 
-const grid = document.querySelector('[data-people-grid]');
-const cards = [...grid.children];
+// Researchers are split into one band per country group, so the directory is
+// the union of every band rather than the first one.
+const bands = [...document.querySelectorAll('[data-people-grid]')];
+const cards = bands.flatMap((band) => [...band.children]);
 const counter = document.querySelector('[data-people-count]');
 const empty = document.querySelector('[data-people-empty]');
 const search = document.querySelector('[data-people-search]');

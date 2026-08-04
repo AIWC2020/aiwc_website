@@ -431,30 +431,19 @@ const BLOCKS = {
    * as a page held two of them.
    */
   publicationList(document, block) {
-    const section = el(document, 'section', { class: 'pub-section' });
     const items = block.items || [];
     const kind = block.kind || '';
-    if (kind) section.setAttribute('data-kind', kind);
     const heading = block.heading || kind;
-    if (heading) {
-      if (kind) {
-        section.setAttribute('id', 'pub-' + kind.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''));
-      }
-      // The heading is a disclosure toggle: app.mjs collapses sections by
-      // default and wires it up. Without JS the button is inert and the
-      // list below stays fully visible — nothing is ever locked away.
-      const head = el(document, 'header', { class: 'pub-section-head' });
-      const h2 = el(document, 'h2');
-      const toggle = el(document, 'button', { class: 'pub-section-toggle', text: heading });
-      toggle.setAttribute('type', 'button');
-      h2.appendChild(toggle);
-      head.appendChild(h2);
-      head.appendChild(el(document, 'span', {
-        class: 'filter-label pub-section-count',
-        text: `${items.length} ${items.length === 1 ? 'publication' : 'publications'}`
-      }));
-      section.appendChild(head);
-    }
+    const section = heading
+      ? discGroup(document, {
+          id: kind ? 'pub-' + slugish(kind) : '',
+          title: heading,
+          count: items.length,
+          noun: ['publication', 'publications']
+        })
+      : el(document, 'section', { class: 'disc-group' });
+    section.classList.add('pub-section');
+    if (kind) section.setAttribute('data-kind', kind);
 
     const grid = el(document, 'div', { class: 'pub-grid' });
     items.forEach((item) => {
@@ -707,9 +696,7 @@ const BLOCKS = {
       wrap.appendChild(count);
     }
 
-    const band = el(document, 'div', { class: 'portrait-band' });
-    band.setAttribute('data-people-grid', '');
-    people.forEach((person) => {
+    const portrait = (person) => {
       const card = el(document, 'a', { class: 'portrait-card' });
       card.href = ctx.entryUrl ? ctx.entryUrl('people', person.slug) : '#';
       card.setAttribute('data-country', person.country || '');
@@ -726,9 +713,24 @@ const BLOCKS = {
       if (person.designation) info.appendChild(el(document, 'span', { text: person.designation }));
       if (person.institute) info.appendChild(el(document, 'small', { text: person.institute }));
       card.appendChild(info);
-      band.appendChild(card);
+      return card;
+    };
+
+    // 108 portraits are split into collapsible country groups, so the page
+    // opens as a short index rather than a wall of faces.
+    groupByCountry(people).forEach(([country, members]) => {
+      const group = discGroup(document, {
+        id: 'people-' + slugish(country),
+        title: country,
+        count: members.length,
+        noun: ['researcher', 'researchers']
+      });
+      const band = el(document, 'div', { class: 'portrait-band' });
+      band.setAttribute('data-people-grid', '');
+      members.forEach((person) => band.appendChild(portrait(person)));
+      group.appendChild(band);
+      wrap.appendChild(group);
     });
-    wrap.appendChild(band);
 
     const empty = el(document, 'p', { class: 'prose', text: 'No researchers match that filter.' });
     empty.setAttribute('data-people-empty', '');
@@ -737,20 +739,83 @@ const BLOCKS = {
     return wrap;
   },
 
-  /** The partner collection, in MARVI's people-card grid. */
+  /**
+   * The partner collection. When the block shows every country it becomes a
+   * filtered directory of collapsible country groups, matching researchers
+   * and publications; pinned to one country it stays a plain grid, which is
+   * how the home page uses it.
+   */
   partnerDirectory(document, block, ctx) {
-    const grid = el(document, 'div', { class: 'people-grid' });
     const all = block.items || ctx.partners || [];
     const list = block.country ? all.filter((p) => p.country === block.country) : all;
-    list.forEach((partner) => {
+
+    const partnerCard = (partner) => {
       const card = el(document, 'a', { class: 'people-card' });
       card.href = ctx.entryUrl ? ctx.entryUrl('partners', partner.slug) : '#';
+      card.setAttribute('data-country', partner.country || '');
+      card.setAttribute(
+        'data-search',
+        [partner.name, partner.instituteName, partner.summary].filter(Boolean).join(' ').toLowerCase()
+      );
       card.appendChild(el(document, 'span', { class: 'meta', text: partner.country }));
       card.appendChild(el(document, 'h3', { text: partner.name }));
       if (partner.summary) card.appendChild(el(document, 'p', { text: partner.summary }));
-      grid.appendChild(card);
+      return card;
+    };
+
+    const groups = groupByCountry(list);
+    if (block.country || groups.length < 2) {
+      const grid = el(document, 'div', { class: 'people-grid' });
+      list.forEach((partner) => grid.appendChild(partnerCard(partner)));
+      return grid;
+    }
+
+    const wrap = el(document, 'div');
+    const bar = el(document, 'div', { class: 'filter-bar' });
+    bar.setAttribute('data-partner-filters', '');
+    const chip = (label, value, count, pressed) => {
+      const b = el(document, 'button', { class: 'filter-chip' });
+      b.setAttribute('type', 'button');
+      b.setAttribute('data-filter', value);
+      b.setAttribute('aria-pressed', pressed ? 'true' : 'false');
+      b.appendChild(el(document, 'span', { text: label }));
+      b.appendChild(el(document, 'span', { class: 'filter-n', text: String(count) }));
+      return b;
+    };
+    const chips = el(document, 'div');
+    chips.appendChild(chip('All', 'all', list.length, true));
+    groups.forEach(([country, members]) => chips.appendChild(chip(country, 'country:' + country, members.length)));
+    bar.appendChild(chips);
+
+    const field = el(document, 'div', { class: 'filter-field' });
+    const input = el(document, 'input');
+    input.setAttribute('type', 'search');
+    input.setAttribute('placeholder', 'Search institutions');
+    input.setAttribute('aria-label', 'Search partner institutions');
+    input.setAttribute('data-partner-search', '');
+    field.appendChild(input);
+    bar.appendChild(field);
+    wrap.appendChild(bar);
+
+    groups.forEach(([country, members]) => {
+      const group = discGroup(document, {
+        id: 'partners-' + slugish(country),
+        title: country,
+        count: members.length,
+        noun: ['institution', 'institutions']
+      });
+      const grid = el(document, 'div', { class: 'people-grid' });
+      grid.setAttribute('data-partner-grid', '');
+      members.forEach((partner) => grid.appendChild(partnerCard(partner)));
+      group.appendChild(grid);
+      wrap.appendChild(group);
     });
-    return grid;
+
+    const empty = el(document, 'p', { class: 'prose', text: 'No institutions match that filter.' });
+    empty.setAttribute('data-partner-empty', '');
+    empty.setAttribute('hidden', '');
+    wrap.appendChild(empty);
+    return wrap;
   },
 
 };
@@ -779,6 +844,55 @@ export const BLOCK_TYPES = Object.keys(BLOCKS);
 /* The "flexible section" types render appended after the section body inside
  * a .cms-sections wrapper — that is where their CSS expects them. */
 const FLEX_TYPES = new Set(['text', 'imageText', 'gallery', 'callout', 'button', 'embed']);
+
+/**
+ * A collapsible category: a heading that is also a disclosure button, its
+ * count, and the content it holds. Publications, researchers and partner
+ * institutions all use this, so the three long directories behave the same
+ * way — app.mjs collapses every group on load and wires the toggles.
+ *
+ * Without JS the button is inert and the content stays visible, so nothing
+ * is ever locked away from a reader (or a crawler) that cannot run scripts.
+ */
+const slugish = (value) =>
+  String(value || '').toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+
+/**
+ * Group records by country, with the Centre's two partners first and any
+ * other country after them alphabetically. Records with no country fall
+ * into a trailing group rather than disappearing.
+ */
+const groupByCountry = (records) => {
+  const groups = new Map();
+  records.forEach((record) => {
+    const key = record.country || 'Other';
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(record);
+  });
+  const rank = (name) => (name === 'Australia' ? 0 : name === 'India' ? 1 : name === 'Other' ? 3 : 2);
+  return [...groups.entries()].sort((a, b) => rank(a[0]) - rank(b[0]) || a[0].localeCompare(b[0]));
+};
+
+const discGroup = (document, { id, title, count, noun }) => {
+  const section = el(document, 'section', { class: 'disc-group' });
+  if (id) section.setAttribute('id', id);
+  section.setAttribute('data-group', title);
+  const head = el(document, 'header', { class: 'disc-head' });
+  const heading = el(document, 'h2');
+  const toggle = el(document, 'button', { class: 'disc-toggle', text: title });
+  toggle.setAttribute('type', 'button');
+  heading.appendChild(toggle);
+  head.appendChild(heading);
+  const tally = el(document, 'span', {
+    class: 'filter-label disc-count',
+    text: `${count} ${count === 1 ? noun[0] : noun[1]}`
+  });
+  tally.setAttribute('data-group-count', '');
+  tally.setAttribute('data-noun', noun.join('|'));
+  head.appendChild(tally);
+  section.appendChild(head);
+  return section;
+};
 
 /* ---------- page renderers ---------- */
 
