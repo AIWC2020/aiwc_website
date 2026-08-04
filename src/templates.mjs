@@ -235,7 +235,13 @@ const BLOCKS = {
     if (!(block.title || '').trim()) {
       if (!block.eyebrow && !block.lede) return null;
       const marker = el(document, 'div', { class: 'section-marker' });
+      // A marker still begins a section — its label is the eyebrow. Without
+      // this, a page whose first section is introduced by a label rather than
+      // a heading has only one boundary and cannot be divided at all.
       if (block.eyebrow) {
+        marker.setAttribute('id', 's-' + (slugish(block.eyebrow) || 'section'));
+        marker.setAttribute('data-section-anchor', '');
+        marker.setAttribute('data-tab-label', block.tabLabel || block.eyebrow);
         marker.appendChild(el(document, 'p', { class: 'eyebrow', text: block.eyebrow, key: ctx.t('eyebrow') }));
       }
       if (block.lede) marker.appendChild(el(document, 'p', { class: 'lede', text: block.lede, key: ctx.t('lede') }));
@@ -290,6 +296,15 @@ const BLOCKS = {
     // resolved to the first heading.
     const headingId = 'explore-' + (slugish(block.title) || 'section');
     section.setAttribute('aria-labelledby', headingId);
+    // A titled card section is a section boundary too, not just a banner —
+    // otherwise a page whose structure comes from these blocks has nothing
+    // for the in-page navigation to divide it at.
+    const cardsLabel = (block.title || '').trim() || (block.eyebrow || '').trim();
+    if (cardsLabel) {
+      section.setAttribute('id', 's-' + (slugish(cardsLabel) || 'cards'));
+      section.setAttribute('data-section-anchor', '');
+      section.setAttribute('data-tab-label', block.tabLabel || cardsLabel);
+    }
     const head = el(document, 'header', { class: 'explore-head' });
     const headText = el(document, 'div');
     headText.appendChild(el(document, 'p', { class: 'eyebrow', text: block.eyebrow, key: ctx.t('eyebrow') }));

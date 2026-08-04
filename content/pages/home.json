@@ -81,7 +81,8 @@
       "type": "banner",
       "eyebrow": "02 — Why a joint centre",
       "title": "The same problems,\nfrom opposite ends\nof one ocean.",
-      "lede": ""
+      "lede": "",
+      "tabLabel": "The problem"
     },
     {
       "type": "split",
@@ -149,7 +150,8 @@
             "alt": "Workshop participants in discussion"
           }
         }
-      ]
+      ],
+      "tabLabel": "What we do"
     },
     {
       "type": "storyCards",
@@ -183,13 +185,15 @@
             "fit": "cover"
           }
         }
-      ]
+      ],
+      "tabLabel": "The people"
     },
     {
       "type": "banner",
       "eyebrow": "05 — The journey",
       "title": "Five years, and the next five.",
-      "lede": ""
+      "lede": "",
+      "tabLabel": "The journey"
     },
     {
       "type": "steps",
@@ -220,7 +224,8 @@
       "type": "banner",
       "eyebrow": "06 — Our partners",
       "title": "Who is in the room.",
-      "lede": "Universities, national institutes, government departments and water businesses — eleven partners in Australia, twenty-two in India."
+      "lede": "Universities, national institutes, government departments and water businesses — eleven partners in Australia, twenty-two in India.",
+      "tabLabel": "Our partners"
     },
     {
       "type": "partnerDirectory"
@@ -238,5 +243,5 @@
     "positionY": 50,
     "fit": "cover"
   },
-  "sectionNav": "collapse"
+  "sectionNav": "tabs"
 }

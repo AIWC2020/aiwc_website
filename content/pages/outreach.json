@@ -23,7 +23,8 @@
       "type": "banner",
       "eyebrow": "Australia India Technical Exchange Program",
       "title": "Water and Food Security workshop series",
-      "lede": ""
+      "lede": "",
+      "tabLabel": "Workshop series"
     },
     {
       "type": "split",
@@ -89,7 +90,8 @@
             "fit": "cover"
           }
         }
-      ]
+      ],
+      "tabLabel": "Also part of outreach"
     }
   ],
   "menuImage": {
@@ -105,5 +107,6 @@
     "positionX": 50,
     "positionY": 45,
     "fit": "cover"
-  }
+  },
+  "sectionNav": "tabs"
 }

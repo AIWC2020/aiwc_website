@@ -23,7 +23,8 @@
       "type": "banner",
       "eyebrow": "Current and recent projects",
       "title": "",
-      "lede": ""
+      "lede": "",
+      "tabLabel": "Projects"
     },
     {
       "type": "publicationList",
@@ -116,7 +117,8 @@
             "fit": "cover"
           }
         }
-      ]
+      ],
+      "tabLabel": "The other three"
     },
     {
       "type": "callout",
@@ -137,5 +139,6 @@
     "positionX": 50,
     "positionY": 45,
     "fit": "cover"
-  }
+  },
+  "sectionNav": "tabs"
 }

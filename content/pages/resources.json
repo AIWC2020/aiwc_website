@@ -22,7 +22,8 @@
       "type": "banner",
       "eyebrow": "Background",
       "title": "",
-      "lede": ""
+      "lede": "",
+      "tabLabel": "Background"
     },
     {
       "type": "split",
@@ -44,7 +45,8 @@
       "type": "banner",
       "eyebrow": "Webinar series",
       "title": "Recorded sessions",
-      "lede": ""
+      "lede": "",
+      "tabLabel": "Recorded sessions"
     },
     {
       "type": "toolList",
@@ -89,5 +91,6 @@
     "positionX": 50,
     "positionY": 45,
     "fit": "cover"
-  }
+  },
+  "sectionNav": "tabs"
 }

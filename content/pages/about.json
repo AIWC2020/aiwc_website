@@ -165,5 +165,5 @@
     "positionY": 45,
     "fit": "cover"
   },
-  "sectionNav": "collapse"
+  "sectionNav": "tabs"
 }
