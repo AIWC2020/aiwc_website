@@ -425,9 +425,9 @@ function setupSectionNav() {
         toggle.setAttribute('aria-expanded', String(open));
         banner.classList.toggle('is-open', open);
       };
-      // The first section starts open, so the page introduces itself rather
-      // than presenting a reader with nothing but headings.
-      setOpen(i === 0);
+      // The first section starts open so the page introduces itself, unless
+      // the CMS asks for everything shut.
+      setOpen(i === 0 && !panel.hasAttribute('data-start-collapsed'));
       toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
       // A link into this section arrives with it open.
       const hashId = location.hash.slice(1);
@@ -483,15 +483,41 @@ function setupSectionNav() {
     return holder;
   });
 
-  const tabs = banners.map((banner, i) => {
+  /* Anything before the first section is the page's own opening. Left loose
+     it sits above every tab and is read on the way to all of them, which is
+     what kept Training long — its five programme cards say exactly what the
+     five tabs say. Folded into a tab of its own, one thing shows at a time.
+     The hero stays outside: it is the page's identity, not a section. */
+  const introLabel = panel.dataset.introTab;
+  if (introLabel !== 'off') {
+    const intro = [];
+    let node = body.firstElementChild;
+    while (node && node !== panels[0]) {
+      if (!node.classList.contains('home-hero') && !node.classList.contains('page-head')) intro.push(node);
+      node = node.nextElementSibling;
+    }
+    if (intro.length) {
+      const holder = document.createElement('div');
+      holder.className = 'section-tab-panel';
+      holder.setAttribute('role', 'tabpanel');
+      holder.id = 'section-intro-panel';
+      body.insertBefore(holder, intro[0]);
+      intro.forEach((n) => holder.appendChild(n));
+      panels.unshift(holder);
+      banners.unshift(null); // keeps banners and panels index-aligned
+    }
+  }
+
+  const tabs = panels.map((holder, i) => {
+    const banner = banners[i];
     const tab = document.createElement('button');
     tab.type = 'button';
     tab.className = 'section-nav-link';
-    tab.id = banner.id + '-tab';
+    tab.id = (banner ? banner.id : 'section-intro') + '-tab';
     tab.setAttribute('role', 'tab');
-    tab.setAttribute('aria-controls', panels[i].id);
-    tab.textContent = labelFor(banner);
-    panels[i].setAttribute('aria-labelledby', tab.id);
+    tab.setAttribute('aria-controls', holder.id);
+    tab.textContent = banner ? labelFor(banner) : (introLabel || 'Overview');
+    holder.setAttribute('aria-labelledby', tab.id);
     bar.appendChild(tab);
     return tab;
   });
@@ -516,6 +542,10 @@ function setupSectionNav() {
     tabs[target].focus();
   });
 
+  // The bar sits at the very top of the content — after the hero, before the
+  // first panel — so the whole page is one choice away rather than something
+  // you scroll into.
+  bar.classList.add('section-nav--top');
   body.insertBefore(bar, panels[0]);
 
   let start = 0;

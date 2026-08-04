@@ -30,14 +30,8 @@
 
       /* the two brand hues, plus the tints legible on each background */
       --teal: #2E8078;
-      /* Deep enough to sit with the inks. #235F59 measured L=.0926 — 5.8x
-         --ink and the only large filled surface outside the near-black
-         band, which is why it was the one slab that looked applied rather
-         than structural. #0E3A35 is L=.0338, in the same family, and still
-         unmistakably water-green at full-bleed size. */
-      --teal-deep: #0E3A35;
       --teal-text: #1D665E;
-      --on-teal: #CFE4E6;
+      --on-ink: #CFE4E6;
       --copper: #BC5A24;
       --copper-text: #9F4718;
       --copper-light: #F2B183;
@@ -271,7 +265,7 @@
     }
     .button:hover { color: var(--white); background: var(--ink); transform: translateY(-1px); }
     .button:active { transform: translateY(0); }
-    .button.primary { color: var(--white); background: var(--teal-deep); border-color: var(--teal-deep); }
+    .button.primary { color: var(--white); background: var(--ink); border-color: var(--ink); }
     /* --copper puts white 12px/700 button text at 4.47:1, just under AA's
        4.5. --copper-text carries the same accent at 6.10:1. The contrast
        audit never caught this because it only ever measured rest states. */
@@ -350,16 +344,16 @@
     .flow-label--au { left: 23%; top: 15%; }
     .flow-label--in { right: 7%; top: 11%; }
 
-    .home-statement { padding: 74px max(44px, 6vw); color: var(--white); background: var(--teal-deep); }
+    .home-statement { padding: 74px max(44px, 6vw); color: var(--white); background: var(--ink); }
     .statement-grid { display: grid; grid-template-columns: .75fr 1.5fr; gap: 8vw; }
-    .statement-grid .meta { color: var(--on-teal); font-size: 0.72rem; }
+    .statement-grid .meta { color: var(--on-ink); font-size: 0.72rem; }
     .statement-grid blockquote { margin: 0; font: 500 clamp(2rem, 4vw, 4.1rem)/1.1 var(--sans); letter-spacing: -.04em; }
     .metric-row { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgba(255,255,255,.24); margin-top: 65px; }
     .metric { padding: 23px 24px 0 0; border-right: 1px solid rgba(255,255,255,.2); }
     .metric:last-child { padding-left: 24px; border-right: 0; }
     .metric:nth-child(2) { padding-left: 24px; }
     .metric strong { display: block; margin-bottom: 5px; font: 500 clamp(2.3rem, 4vw, 4rem)/1 var(--sans); letter-spacing: -.035em; font-variant-numeric: tabular-nums; }
-    .metric span { color: var(--on-teal); font-size: .77rem; }
+    .metric span { color: var(--on-ink); font-size: .77rem; }
 
     .section-body { padding: 58px 0 85px; }
     .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
@@ -398,7 +392,7 @@
     .editorial-image:hover img { transform: scale(1.035); filter: saturate(1); }
     .image-note { position: absolute; inset: auto 0 0; padding: 25px 19px 15px; color: var(--white); background: linear-gradient(transparent, rgb(var(--scrim-rgb) / var(--scrim-deep))); font: 0.72rem/1.45 var(--mono); letter-spacing: .06em; text-transform: uppercase; }
 
-    .image-data-panel { position: relative; min-height: 500px; overflow: hidden; color: var(--white); background: var(--teal-deep); }
+    .image-data-panel { position: relative; min-height: 500px; overflow: hidden; color: var(--white); background: var(--ink); }
     .image-data-panel img { width: 100%; height: 500px; object-fit: cover; filter: saturate(.78) brightness(1.04); }
     .image-data-panel::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgb(var(--scrim-rgb) / 0), rgb(var(--scrim-rgb) / var(--scrim-deep))); }
     .image-data-overlay { position: absolute; z-index: 2; inset: auto 28px 26px; display: flex; align-items: end; justify-content: space-between; gap: 25px; }
@@ -428,8 +422,8 @@
     .data-panel {
       min-height: 420px;
       padding: 35px;
-      color: var(--on-teal);
-      background: var(--teal-deep);
+      color: var(--on-ink);
+      background: var(--ink);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -480,11 +474,11 @@
       background: rgba(253, 252, 250,.32);
       transition: color .22s, background .22s;
     }
-    .media-card:hover { color: var(--white); background: var(--teal-deep); }
+    .media-card:hover { color: var(--white); background: var(--ink); }
     .media-card .meta { margin-bottom: 38px; color: var(--copper-text); font-size: 0.72rem; }
     .media-card h3 { margin-bottom: 13px; font: 500 1.35rem/1.18 var(--sans); }
     .media-card p { color: var(--muted); font-size: .82rem; }
-    .media-card:hover p { color: var(--on-teal); }
+    .media-card:hover p { color: var(--on-ink); }
     .media-card .read { margin-top: auto; font: 0.72rem var(--mono); text-transform: uppercase; letter-spacing: .06em; }
 
     .video-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px 20px; }
@@ -580,7 +574,7 @@
       transition: transform .28s ease;
     }
     .disc-toggle[aria-expanded="true"]::before { transform: rotate(45deg) translate(-2px, -2px); }
-    .disc-toggle:hover { color: var(--teal-deep); }
+    .disc-toggle:hover { color: var(--teal-text); }
     /* On a dark section banner the toggle inherits the banner's white type,
        so only the chevron needs its own colour. */
     .dark-block.is-collapsible { cursor: default; }
@@ -1112,12 +1106,12 @@
         border: 0;
         border-radius: 3px;
         color: var(--white);
-        background-color: var(--teal-deep);
+        background-color: var(--ink);
         background-position: center;
         background-size: cover;
         box-shadow: 0 16px 45px rgba(15, 29, 46,.08);
       }
-      .project-card:hover { transform: translateY(-7px); background-color: var(--teal-deep); }
+      .project-card:hover { transform: translateY(-7px); background-color: var(--ink); }
       .project-card .card-number { margin: 0 0 auto; color: rgba(255,255,255,.72); }
       .project-card h3 { max-width: 330px; color: var(--white); font-family: var(--sans); font-size: 1.65rem; font-weight: 600; letter-spacing: -.04em; }
       .project-card p { color: rgba(255,255,255,.76); }
@@ -1142,7 +1136,7 @@
       .tool-copy h3 { font-family: var(--sans); font-size: 1.6rem; font-weight: 600; letter-spacing: -.035em; }
       .people-grid { gap: 10px; border: 0; }
       .people-card { min-height: 210px; border: 0; border-radius: 3px; background: var(--surface); transition: transform .25s ease, color .25s ease, background .25s ease; }
-      .people-card:hover { transform: translateY(-5px); color: var(--white); background: var(--teal-deep); }
+      .people-card:hover { transform: translateY(-5px); color: var(--white); background: var(--ink); }
       .people-card h3 { font-family: var(--sans); font-weight: 600; letter-spacing: -.025em; }
       .dark-block { border-radius: 3px; }
       .video-image, .app-shot, .game-frame { border-radius: 3px; overflow: hidden; }
@@ -1342,7 +1336,7 @@
         border: 0;
         border-radius: 16px;
         color: var(--white);
-        background-color: var(--teal-deep);
+        background-color: var(--ink);
         background-position: center;
         background-size: cover;
       }
@@ -1503,7 +1497,7 @@
       padding: clamp(30px, 4vw, 54px);
       border-radius: 3px;
       color: var(--white);
-      background: var(--teal-deep);
+      background: var(--ink);
     }
     .cms-block-callout::before {
       content: "";
@@ -1582,6 +1576,9 @@
     .section-nav-link[aria-current="true"] { color: var(--white); background: var(--ink); }
     .section-nav-link:focus-visible { outline: 3px solid var(--copper); outline-offset: 2px; }
     .section-tab-panel { animation: panel-in .45s cubic-bezier(.2,.75,.25,1); }
+    /* The bar sits at the head of the content and stays with the reader, so
+       every section is one click away from anywhere on the page. */
+    .section-nav--top { margin-top: 0; margin-bottom: 34px; }
     @media (max-width: 800px) {
       .section-nav {
         top: 78px;

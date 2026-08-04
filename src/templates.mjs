@@ -780,7 +780,10 @@ const BLOCKS = {
    */
   partnerDirectory(document, block, ctx) {
     const all = block.items || ctx.partners || [];
-    const list = block.country ? all.filter((p) => p.country === block.country) : all;
+    const byCountry = block.country ? all.filter((p) => p.country === block.country) : all;
+    // A showcase can carry a sample; the directory always carries everyone.
+    const limit = Number(block.limit) > 0 ? Number(block.limit) : 0;
+    const list = limit && block.layout !== 'directory' ? byCountry.slice(0, limit) : byCountry;
 
     const partnerCard = (partner) => {
       const card = el(document, 'a', { class: 'people-card' });
@@ -1145,6 +1148,13 @@ export function renderPage(document, page, ctx) {
   // never opt in — app.mjs reads this attribute to decide what to build.
   if (page.sectionNav && page.sectionNav !== 'none') {
     section.setAttribute('data-section-nav', page.sectionNav);
+    // The opening content becomes its own first tab, named here. 'off' leaves
+    // it loose above the tabs, which is right when it is a single line of
+    // scene-setting rather than a section in its own right.
+    if (page.introTab) section.setAttribute('data-intro-tab', page.introTab);
+    // Collapsible pages can open with everything shut rather than the first
+    // section showing.
+    if (page.startCollapsed) section.setAttribute('data-start-collapsed', '');
   }
 
   if (page.template === 'home') {

@@ -165,5 +165,6 @@
     "positionY": 45,
     "fit": "cover"
   },
-  "sectionNav": "tabs"
+  "sectionNav": "tabs",
+  "introTab": "In short"
 }

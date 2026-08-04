@@ -105,7 +105,21 @@ collections:
           - { label: "Jump links — an on-this-page bar", value: "jump" }
           - { label: "Tabs — one section at a time", value: "tabs" }
           - { label: "Collapsible sections — open what you want", value: "collapse" }
-        hint: "For long pages. Sections start at each Section banner that has a heading; banners without a heading stay part of the section above. Jump links keep the whole page visible; Tabs show one section at a time; Collapsible opens the page as a list of section headings that readers expand — several can be open at once. Nothing is ever removed: without JavaScript every section shows in full."
+        hint: "For long pages. A section starts at each Section banner or Story cards block that has a heading — or, if it has no heading, at its small label. Jump links keep the whole page visible; Tabs show one section at a time; Collapsible opens the page as a list of headings readers expand, several at once. Nothing is ever removed: without JavaScript every section shows in full."
+
+      - label: "Name for the opening tab"
+        name: "introTab"
+        widget: "string"
+        required: false
+        default: "Overview"
+        hint: "Tabs only. Whatever sits above the first section becomes its own tab with this name, so exactly one thing shows at a time. Type off to leave that content loose above the tabs instead."
+
+      - label: "Start with every section closed"
+        name: "startCollapsed"
+        widget: "boolean"
+        default: false
+        required: false
+        hint: "Collapsible only. Off means the first section is open so the page introduces itself; on means the page opens as a bare list of headings."
 
       - label: "Homepage hero (home page only)"
         name: "hero"
@@ -491,6 +505,7 @@ collections:
                   - { label: "Grid — a simple showcase", value: "grid" }
                   - { label: "Directory — search, country filters and collapsible groups", value: "directory" }
                 hint: "Directory is for the partners page, where the reader is looking for an institution. Use Grid anywhere the block is showing off the partnership rather than being searched."
+              - { label: "Show at most", name: "limit", widget: "number", value_type: "int", min: 0, required: false, hint: "Grid only. 0 or empty shows every institution. A smaller number keeps a showcase short — the partners page always lists them all regardless." }
               - label: "Partner institutions"
                 name: "items"
                 widget: "list"

@@ -228,7 +228,8 @@
       "tabLabel": "Our partners"
     },
     {
-      "type": "partnerDirectory"
+      "type": "partnerDirectory",
+      "limit": 12
     },
     {
       "type": "callout",
@@ -243,5 +244,6 @@
     "positionY": 50,
     "fit": "cover"
   },
-  "sectionNav": "tabs"
+  "sectionNav": "tabs",
+  "introTab": "The premise"
 }
