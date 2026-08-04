@@ -79,6 +79,7 @@ collections:
         widget: "object"
         collapsed: true
         required: false
+        hint: "On the home page, leaving the photo empty shows the animated water artwork instead."
         fields: &photoFields
           - { label: "Photo", name: "image", widget: "image", required: false }
           - { label: "Description for screen readers", name: "alt", widget: "string", required: false }
@@ -347,16 +348,22 @@ collections:
                   - { label: "Category", name: "category", widget: "string", hint: "Groups the image under a filter button." }
                   - { label: "Title", name: "title", widget: "string" }
                   - { label: "Source (optional)", name: "source", widget: "string", required: false }
-          - label: "Publication list (filters)"
+          - label: "Publication section"
             name: "publicationList"
             widget: "object"
             fields:
+              - { label: "Section heading", name: "heading", widget: "string", required: false, hint: "Shown above this group — e.g. Journal articles." }
+              - label: "Type"
+                name: "kind"
+                widget: "select"
+                options: ["Journal articles", "Conference papers", "Theses", "Books & chapters", "Reports & other"]
+                default: "Journal articles"
+                hint: "Groups this section under the filter buttons at the top of the page. Sections appear in the order you arrange them; a type with no section simply has no filter button yet."
               - label: "Publications"
                 name: "items"
                 widget: "list"
                 summary: "{{fields.title}}"
                 fields:
-                  - { label: "Kind", name: "kind", widget: "string", hint: "e.g. Brochure or Book — becomes a filter button." }
                   - { label: "Small label", name: "meta", widget: "string", required: false }
                   - { label: "Title", name: "title", widget: "string" }
                   - { label: "Description", name: "description", widget: "text", required: false }

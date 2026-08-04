@@ -111,6 +111,14 @@ function composeDocument(lang, activeSlug, panel, { langBase = '' } = {}) {
     n.setAttribute('href', href(lang, PAGES[0]));
   });
 
+  /* The rail foot's institution count comes from the real partner records,
+     so it can never drift from the site again (it shipped as "27" for a
+     while after the partner list had grown to 33). */
+  const foot = document.querySelector('.sidebar-foot');
+  if (foot && foot.firstChild?.nodeType === 3 && partners.length) {
+    foot.firstChild.textContent = `${partners.length} institutions`;
+  }
+
   /* language switch — only meaningful once a second language exists */
   const select = document.getElementById('lang-select');
   if (select) {
@@ -262,7 +270,9 @@ for (const lang of LANGS) {
       title: isHome ? `${SITE.name} — ${SITE.tagline}` : `${page.intro?.title?.replace(/\n/g, ' ') || page.menuName} — ${SITE.name}`,
       description,
       canonical: SITE_URL + rel,
-      image: absImage(page.heroImage?.image),
+      // Pages without a header photo (the home page runs the animated water
+      // field instead) still need a share image for link unfurls.
+      image: absImage(page.heroImage?.image) || absImage('/assets/photos/page-aiwc5-conference-0.jpg'),
       alternates: LANGS.length > 1 ? LANGS.map((l) => [l, SITE_URL + href(l, page)]) : [],
     });
     emit(rel.replace(BASE, '').replace(/^\//, ''), doc);

@@ -13,8 +13,13 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
 
 function setupMotion() {
   document.body.classList.add('motion-ready');
+  // Story cards are excluded: their pointer-tilt writes inline transforms,
+  // and a transform transition would drag behind the pointer.
   const motionItems = [
-    ...document.querySelectorAll('.project-card, .process-step, .media-card, .video-card, .people-card, .metric')
+    ...document.querySelectorAll(
+      '.project-card, .process-step, .media-card, .video-card, .people-card, .metric, ' +
+      '.pub-card, .tool-card, .portrait-card, .cms-block, .data-panel, .editorial-image, .photo-ribbon figure'
+    )
   ];
   motionItems.forEach((item, index) => {
     item.classList.add('motion-item');
@@ -37,36 +42,39 @@ function setupMotion() {
     motionItems.forEach((item) => motionObserver.observe(item));
   }
 
-  const metrics = [...document.querySelectorAll('.metric strong')];
-  metrics.forEach((metric) => {
-    metric.dataset.value = metric.textContent.trim();
-  });
-  const animateMetric = (metric) => {
-    if (metric.dataset.animated) return;
-    metric.dataset.animated = 'true';
-    const end = Number(metric.dataset.value);
-    if (!Number.isFinite(end) || reduceMotion) return;
-    const start = end >= 1000 ? end - 12 : 0;
+  // Big numbers count up the first time they scroll into view. The suffix
+  // split is what lets "10,000+" animate: the digits run 0→10,000 while the
+  // "+" stays put. Anything that does not lead with a digit is left alone.
+  const counters = [...document.querySelectorAll('.metric strong, .data-value, .image-data-overlay strong')];
+  const animateCounter = (node) => {
+    if (node.dataset.animated) return;
+    node.dataset.animated = 'true';
+    const match = node.textContent.trim().match(/^([\d][\d,]*)(.*)$/s);
+    if (!match || reduceMotion) return;
+    const end = Number(match[1].replace(/,/g, ''));
+    const suffix = match[2];
+    if (!Number.isFinite(end) || end === 0) return;
     const started = performance.now();
     const tick = (now) => {
       const progress = Math.min((now - started) / 1100, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
-      metric.textContent = Math.round(start + (end - start) * eased).toLocaleString();
+      node.textContent = Math.round(end * eased).toLocaleString() + suffix;
       if (progress < 1) requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);
   };
-  const metricRow = document.querySelector('.metric-row');
-  if (metricRow && !reduceMotion && 'IntersectionObserver' in window) {
-    const metricObserver = new IntersectionObserver(
+  if (counters.length && !reduceMotion && 'IntersectionObserver' in window) {
+    const counterObserver = new IntersectionObserver(
       (entries) => {
-        if (!entries.some((entry) => entry.isIntersecting)) return;
-        metrics.forEach(animateMetric);
-        metricObserver.disconnect();
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          animateCounter(entry.target);
+          counterObserver.unobserve(entry.target);
+        });
       },
       { threshold: 0.4 }
     );
-    metricObserver.observe(metricRow);
+    counters.forEach((counter) => counterObserver.observe(counter));
   }
 
   if (!reduceMotion && window.matchMedia('(pointer: fine)').matches) {
@@ -178,15 +186,60 @@ function setupArchive() {
   });
 }
 
+/**
+ * Publications are grouped into .pub-section blocks (Journal articles,
+ * Conference papers, …), each carrying data-kind. The filter bar is built
+ * here rather than in the template: it is pure behaviour, it can only be
+ * correct once the real sections exist, and building it client-side means
+ * a no-JS visitor simply sees every section — nothing breaks.
+ */
 function setupPublications() {
-  wireFilters({
-    filterWrap: document.getElementById('publication-filters'),
-    grid: document.getElementById('publication-grid'),
-    itemSel: '.pub-card',
-    categoryAttr: 'data-kind',
-    count: document.getElementById('publication-count'),
-    noun: ['publication', 'publications']
+  const sections = [...document.querySelectorAll('.pub-section[data-kind]')];
+  if (sections.length < 2) return;
+
+  const total = sections.reduce((sum, s) => sum + s.querySelectorAll('.pub-card').length, 0);
+  const bar = document.createElement('div');
+  bar.className = 'archive-tools pub-filter-bar';
+  const count = document.createElement('span');
+  count.className = 'filter-label';
+  const chips = document.createElement('div');
+  chips.className = 'archive-filters';
+  chips.setAttribute('aria-label', 'Show one kind of publication');
+
+  const describe = (n) => `${n} ${n === 1 ? 'publication' : 'publications'}`;
+  count.textContent = describe(total);
+
+  const select = (kind, chip) => {
+    chips.querySelectorAll('.archive-filter')
+      .forEach((b) => b.setAttribute('aria-pressed', String(b === chip)));
+    let visible = 0;
+    sections.forEach((section) => {
+      const match = kind === 'All' || section.dataset.kind === kind;
+      section.hidden = !match;
+      if (match) visible += section.querySelectorAll('.pub-card').length;
+    });
+    count.textContent = describe(visible);
+  };
+
+  ['All', ...sections.map((s) => s.dataset.kind)].forEach((kind, i) => {
+    const chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'archive-filter';
+    chip.textContent = kind;
+    if (kind !== 'All') {
+      const n = document.createElement('span');
+      n.className = 'filter-n';
+      n.textContent = String(sections[i - 1].querySelectorAll('.pub-card').length);
+      chip.appendChild(n);
+    }
+    chip.setAttribute('aria-pressed', String(kind === 'All'));
+    chip.addEventListener('click', () => select(kind, chip));
+    chips.appendChild(chip);
   });
+
+  bar.appendChild(count);
+  bar.appendChild(chips);
+  sections[0].parentElement.insertBefore(bar, sections[0]);
 }
 
 function setupLightbox() {

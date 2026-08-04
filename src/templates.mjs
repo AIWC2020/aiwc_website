@@ -410,30 +410,31 @@ const BLOCKS = {
     return frag;
   },
 
+  /**
+   * One section of the publications page — a heading, a count and its list.
+   * `kind` groups sections for the page-level filter, which app.mjs builds
+   * client-side from whatever sections are actually present (the CMS preview
+   * shows the content; the filter is behaviour, not content). The old model
+   * put a filter bar inside every list block, which duplicated ids as soon
+   * as a page held two of them.
+   */
   publicationList(document, block) {
-    const frag = el(document, 'div', { class: 'publications-wrap' });
+    const section = el(document, 'section', { class: 'pub-section' });
     const items = block.items || [];
-    const tools = el(document, 'div', { class: 'archive-tools' });
-    const count = el(document, 'span', {
-      class: 'filter-label',
-      text: `${items.length} ${items.length === 1 ? 'publication' : 'publications'}`
-    });
-    count.id = 'publication-count';
-    tools.appendChild(count);
-    const filters = el(document, 'div', { class: 'archive-filters' });
-    filters.id = 'publication-filters';
-    filters.setAttribute('aria-label', 'Filter publications by kind');
-    ['All', ...new Set(items.map((i) => i.kind).filter(Boolean))].forEach((kind) => {
-      const filter = el(document, 'button', { class: 'archive-filter', text: kind });
-      filter.setAttribute('type', 'button');
-      filter.setAttribute('aria-pressed', String(kind === 'All'));
-      filters.appendChild(filter);
-    });
-    tools.appendChild(filters);
-    frag.appendChild(tools);
+    const kind = block.kind || '';
+    if (kind) section.setAttribute('data-kind', kind);
+    const heading = block.heading || kind;
+    if (heading) {
+      const head = el(document, 'header', { class: 'pub-section-head' });
+      head.appendChild(el(document, 'h2', { text: heading }));
+      head.appendChild(el(document, 'span', {
+        class: 'filter-label pub-section-count',
+        text: `${items.length} ${items.length === 1 ? 'publication' : 'publications'}`
+      }));
+      section.appendChild(head);
+    }
 
     const grid = el(document, 'div', { class: 'pub-grid' });
-    grid.id = 'publication-grid';
     items.forEach((item) => {
       const card = el(document, 'article', { class: 'pub-card' });
       if (item.kind) card.setAttribute('data-kind', item.kind);
@@ -453,8 +454,8 @@ const BLOCKS = {
       if (links.childNodes.length) card.appendChild(links);
       grid.appendChild(card);
     });
-    frag.appendChild(grid);
-    return frag;
+    section.appendChild(grid);
+    return section;
   },
 
   toolList(document, block, ctx) {
@@ -759,6 +760,70 @@ const FLEX_TYPES = new Set(['text', 'imageText', 'gallery', 'callout', 'button',
 
 /* ---------- page renderers ---------- */
 
+/**
+ * The animated water field shown when the home page has no header photo.
+ *
+ * Two families of streams — one entering from the left for Australia, one
+ * from the right for India — converge on a confluence and leave the frame as
+ * a single braided flow: the site's own thesis drawn as a picture. Everything
+ * is stroke work on the ink background, so it stays quiet behind the display
+ * text.
+ *
+ * All motion is CSS (dash drift, offset-path dots, a breathing contour), so
+ * the chrome's prefers-reduced-motion rule silences the whole thing and the
+ * static line drawing remains. `pathLength="1000"` normalises every pulse
+ * path, letting one keyframe rule pace all of them.
+ */
+const flowPath = (side, i) =>
+  side === 'L'
+    ? `M -60 ${150 + i * 46} C ${260 + i * 14} ${170 + i * 40}, ${520 - i * 8} ${300 + i * 26}, 700 ${418 + i * 22} ` +
+      `C 790 ${480 + i * 14}, 842 ${520 + i * 8}, 868 ${552 + i * 5} ` +
+      `C 930 ${620 + i * 6}, 1010 ${720 + i * 9}, ${1085 + i * 16} 940`
+    : `M 1500 ${70 + i * 40} C ${1280 - i * 10} ${120 + i * 34}, 1120 ${210 + i * 28}, 1000 ${330 + i * 20} ` +
+      `C 930 ${400 + i * 12}, 892 ${480 + i * 8}, 874 ${556 + i * 4} ` +
+      `C 920 ${640 + i * 7}, 990 ${750 + i * 10}, ${1060 + i * 14} 940`;
+
+const flowFieldSvg = () => {
+  const leftStyle = [
+    ['#3E948B', 1.6, 0.5], ['#8A96D8', 1.2, 0.38], ['#2E8078', 2, 0.55],
+    ['#CFE6E1', 1, 0.3], ['url(#flow-blend)', 2.2, 0.6], ['#2E8078', 1.3, 0.35]
+  ];
+  const rightStyle = [
+    ['#BC5A24', 1.8, 0.5], ['#D08A5B', 1.2, 0.35], ['#3E948B', 1.8, 0.5],
+    ['#8A96D8', 1.1, 0.3], ['#CFE6E1', 1, 0.32], ['#2E8078', 1.6, 0.45]
+  ];
+  const line = (d, [stroke, width, opacity]) =>
+    `<path class="flow-line" d="${d}" stroke="${stroke}" stroke-width="${width}" opacity="${opacity}"/>`;
+  const pulse = (d, dur) =>
+    `<path class="flow-line flow-pulse" d="${d}" pathLength="1000" stroke-dasharray="16 984" ` +
+    `stroke="#EAF6F3" stroke-width="1.6" opacity=".5" style="--dur:${dur}s"/>`;
+  const dot = (side, i, r, fill, dur, delay) =>
+    `<circle class="flow-dot" r="${r}" fill="${fill}" ` +
+    `style="offset-path: path('${flowPath(side, i)}'); --dur:${dur}s; --delay:${delay}s"/>`;
+
+  return (
+    `<svg class="flow-field" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">` +
+    `<defs><linearGradient id="flow-blend" x1="0" y1="0" x2="1" y2="0">` +
+    `<stop offset="0" stop-color="#2E8078"/><stop offset=".55" stop-color="#3E948B"/><stop offset="1" stop-color="#BC5A24"/>` +
+    `</linearGradient></defs>` +
+    `<ellipse class="flow-contour" cx="870" cy="560" rx="430" ry="250" transform="rotate(-14 870 560)" fill="none" stroke="rgba(255,255,255,.03)"/>` +
+    `<ellipse class="flow-contour" cx="870" cy="560" rx="320" ry="180" transform="rotate(-14 870 560)" fill="none" stroke="rgba(255,255,255,.04)" style="animation-delay:-4s"/>` +
+    `<ellipse class="flow-contour" cx="870" cy="560" rx="220" ry="120" transform="rotate(-14 870 560)" fill="none" stroke="rgba(255,255,255,.05)" style="animation-delay:-9s"/>` +
+    `<path class="flow-line" d="${flowPath('L', 2)}" stroke="#2E8078" stroke-width="40" opacity=".05"/>` +
+    `<path class="flow-line" d="${flowPath('R', 2)}" stroke="#BC5A24" stroke-width="34" opacity=".04"/>` +
+    leftStyle.map((style, i) => line(flowPath('L', i), style)).join('') +
+    rightStyle.map((style, i) => line(flowPath('R', i), style)).join('') +
+    pulse(flowPath('L', 0), 26) + pulse(flowPath('L', 4), 34) +
+    pulse(flowPath('R', 0), 30) + pulse(flowPath('R', 2), 38) +
+    dot('L', 1, 2.6, '#EAF4F2', 30, -3) + dot('L', 3, 2.2, '#CFE6E1', 40, -15) +
+    dot('L', 4, 3, '#EAF4F2', 36, -11) + dot('R', 1, 2.4, '#EBA173', 32, -7) +
+    dot('R', 3, 2, '#EAF4F2', 44, -19) + dot('R', 4, 2.8, '#EBA173', 38, -25) +
+    `</svg>` +
+    `<span class="flow-label flow-label--au" aria-hidden="true">Australia</span>` +
+    `<span class="flow-label flow-label--in" aria-hidden="true">India</span>`
+  );
+};
+
 const standardHead = (document, page, { index, total }) => {
   const head = el(document, 'header', { class: 'page-head' });
   head.appendChild(el(document, 'span', {
@@ -794,18 +859,27 @@ const homeHero = (document, page, ctx) => {
   applyTextControls(copy, intro);
   wrap.appendChild(copy);
 
+  // A photo makes the classic photographic hero; no photo brings up the
+  // animated confluence artwork instead. The CMS's "Header photo" field is
+  // the switch, so editors can move between the two without a deploy.
   const stage = el(document, 'div', { class: 'hero-image-stage' });
   if (hero.stageAlt) stage.setAttribute('aria-label', hero.stageAlt);
-  stage.appendChild(photo(document, page.heroImage || {}, { alt: hero.imageAlt || '', lazy: false, className: 'hero-image-main' }));
-  if (hero.label) {
-    stage.appendChild(multiline(document, el(document, 'div', { class: 'hero-image-label', key: t('label') }), hero.label));
+  if (page.heroImage?.image) {
+    stage.appendChild(photo(document, page.heroImage, { alt: hero.imageAlt || '', lazy: false, className: 'hero-image-main' }));
+    if (hero.label) {
+      stage.appendChild(multiline(document, el(document, 'div', { class: 'hero-image-label', key: t('label') }), hero.label));
+    }
+    if (hero.caption) {
+      stage.appendChild(multiline(document, el(document, 'div', { class: 'hero-image-caption', key: t('caption') }), hero.caption));
+    }
+  } else {
+    stage.className = 'hero-image-stage hero-flow-stage';
+    if (!hero.stageAlt) stage.setAttribute('aria-hidden', 'true');
+    stage.innerHTML = flowFieldSvg();
   }
   const index = el(document, 'div', { class: 'hero-image-index', text: '↓' });
   index.setAttribute('aria-hidden', 'true');
   stage.appendChild(index);
-  if (hero.caption) {
-    stage.appendChild(multiline(document, el(document, 'div', { class: 'hero-image-caption', key: t('caption') }), hero.caption));
-  }
   wrap.appendChild(stage);
   return wrap;
 };

@@ -19,13 +19,9 @@
   },
   "blocks": [
     {
-      "type": "banner",
-      "eyebrow": "01 — Journal articles",
-      "title": "Journal articles",
-      "lede": ""
-    },
-    {
       "type": "publicationList",
+      "heading": "Journal articles",
+      "kind": "Journal articles",
       "items": [
         {
           "title": "T Vijaya Lakshmi,” Geospatial data and web based tools for managing irrigation infrastructure expansion projects” World Water Policy. 2023;1–16,03 August 2023, DOI: 10.1002/wwp2.12130"
@@ -462,13 +458,9 @@
       ]
     },
     {
-      "type": "banner",
-      "eyebrow": "02 — Conference papers",
-      "title": "Conference papers",
-      "lede": ""
-    },
-    {
       "type": "publicationList",
+      "heading": "Conference papers",
+      "kind": "Conference papers",
       "items": [
         {
           "title": "Renukumar, KS, Pushpa Tuppad, and Anjaneyappa. ‘Economic sustainability of Non-Revenue Water Reduction Program: A Case study in Bengaluru, India’, Presented in International e-Conference on Water Source Sustainability, Organized by Indian Water Resources Society (IWRS) and Department of Water Resources Development & Management, held on June 18-20, 2021."
@@ -491,13 +483,9 @@
       ]
     },
     {
-      "type": "banner",
-      "eyebrow": "03 — Books & chapters",
-      "title": "Books and chapters",
-      "lede": ""
-    },
-    {
       "type": "publicationList",
+      "heading": "Books and chapters",
+      "kind": "Books & chapters",
       "items": [
         {
           "title": "Wang, X, Tuppad, P, Williams, JR 2015, ‘Combining landscape segmentation and agroecosystem simulation model’, pp. 221-243. In GIS Applications in Agriculture, Volume Four: Conservation Planning, eds. T.G. Mueller, and G.F. Sassenrath, Chapter 13. Taylor and Frances Group, Boca Raton, FL."

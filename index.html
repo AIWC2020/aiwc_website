@@ -233,7 +233,8 @@
       letter-spacing: .04em;
       transition: .22s ease;
     }
-    .button:hover { color: var(--white); background: var(--ink); }
+    .button:hover { color: var(--white); background: var(--ink); transform: translateY(-1px); }
+    .button:active { transform: translateY(0); }
     .button.primary { color: var(--white); background: var(--blue-dark); border-color: var(--blue-dark); }
     .button.primary:hover { background: var(--copper); border-color: var(--copper); }
 
@@ -260,11 +261,55 @@
       filter: saturate(.82) brightness(1.05);
       animation: image-drift 18s ease-in-out infinite alternate;
     }
-    @keyframes image-drift { from { transform: scale(1.01); } to { transform: scale(1.075) translateX(-1.5%); } }
+    @keyframes image-drift { from { transform: scale(1.005); } to { transform: scale(1.045) translateX(-1%); } }
     .hero-image-label, .hero-image-index, .hero-image-caption { text-shadow: var(--text-shade); }
     .hero-image-label { position: absolute; z-index: 2; top: 27px; left: 28px; font: .6rem/1.6 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
     .hero-image-index { position: absolute; z-index: 2; right: 25px; top: 26px; width: 63px; height: 63px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.65); border-radius: 50%; font: .6rem var(--mono); }
     .hero-image-caption { position: absolute; z-index: 2; right: 28px; bottom: 28px; max-width: 240px; text-align: right; font: .62rem/1.55 var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+
+    /* ── The confluence artwork ─────────────────────────────────────
+       Shown when the home page has no header photo: two families of
+       streams — Australia from the left, India from the right — meet
+       and leave the frame as one braided flow. Pure stroke work over
+       ink, so the display text stays effortlessly legible; the global
+       prefers-reduced-motion rule stills it into a line drawing. */
+    .hero-flow-stage {
+      background:
+        radial-gradient(58% 52% at 61% 60%, #143039 0%, rgba(20, 48, 57, 0) 70%),
+        linear-gradient(174deg, #0C2028 0%, var(--ink) 55%, #071019 100%);
+    }
+    .hero-flow-stage::after { background: none; }
+    .hero-flow-stage .flow-field { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .flow-line { fill: none; stroke-linecap: round; }
+    .flow-pulse { animation: flow-pulse-drift var(--dur, 32s) linear infinite; }
+    @keyframes flow-pulse-drift { to { stroke-dashoffset: -1000; } }
+    .flow-dot {
+      opacity: .5;
+      offset-rotate: 0deg;
+      animation: flow-dot-travel var(--dur, 30s) linear infinite;
+      animation-delay: var(--delay, 0s);
+    }
+    @keyframes flow-dot-travel {
+      0% { offset-distance: 0%; opacity: 0; }
+      7% { opacity: .9; }
+      86% { opacity: .8; }
+      100% { offset-distance: 100%; opacity: 0; }
+    }
+    .flow-contour {
+      transform-origin: 870px 560px;
+      animation: flow-breathe 16s ease-in-out infinite alternate;
+    }
+    @keyframes flow-breathe { from { scale: 1; } to { scale: 1.035; } }
+    .flow-label {
+      position: absolute;
+      z-index: 2;
+      color: rgba(234, 244, 242, .55);
+      font: .6rem/1 var(--mono);
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
+    .flow-label--au { left: 23%; top: 15%; }
+    .flow-label--in { right: 7%; top: 11%; }
 
     .home-statement { padding: 74px max(44px, 6vw); color: var(--white); background: var(--blue-dark); }
     .statement-grid { display: grid; grid-template-columns: .75fr 1.5fr; gap: 8vw; }
@@ -445,6 +490,23 @@
     .pub-links a:hover { color: var(--white); border-color: var(--ink); background: var(--ink); }
     .pub-links a:focus-visible { outline: 3px solid var(--copper); outline-offset: 2px; }
 
+    /* Publications are grouped into kind sections; the filter bar that
+       app.mjs builds sits above the first one and hides whole sections. */
+    .pub-section { margin-bottom: 64px; }
+    .pub-section:last-child { margin-bottom: 0; }
+    .pub-section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 22px;
+      margin-bottom: 20px;
+      padding-top: 30px;
+      border-top: 1px solid var(--line);
+    }
+    .pub-section-head h2 { margin: 0; font-size: clamp(1.85rem, 3.2vw, 3.1rem); }
+    .pub-section-count { color: var(--muted); font-size: .62rem; white-space: nowrap; }
+    .pub-filter-bar { margin-bottom: 38px; }
+
     .tool-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
     .tool-card { display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--line); background: rgba(253, 252, 250,.42); }
     /* The card is a column flex container, so an in-flow image would make the
@@ -579,8 +641,8 @@
       to { opacity: 1; transform: none; }
     }
     @keyframes cover-breathe {
-      from { transform: scale(1.01); }
-      to { transform: scale(1.07) translate3d(-.7%, -.4%, 0); }
+      from { transform: scale(1.005); }
+      to { transform: scale(1.045) translate3d(-.5%, -.3%, 0); }
     }
     .motion-item {
       opacity: 0;
@@ -597,7 +659,13 @@
     .game-dots span:first-child { background: var(--copper); }
 
     .footer { margin-left: var(--sidebar); padding: 26px 36px; display: flex; justify-content: space-between; gap: 20px; color: #A7B1B9; background: #0e1513; font: .6rem var(--mono); letter-spacing: .06em; text-transform: uppercase; }
-    .footer a { color: var(--white); text-decoration: none; }
+    .footer a, .sidebar-foot a {
+      text-decoration: none;
+      background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+      transition: background-size .28s ease;
+    }
+    .footer a { color: var(--white); }
+    .footer a:hover, .sidebar-foot a:hover { background-size: 100% 1px; }
 
     @media (max-width: 1080px) {
       :root { --sidebar: 238px; }
@@ -686,7 +754,7 @@
       font-family: var(--sans);
       font-size: clamp(2.8rem, 6vw, 6.2rem);
       font-weight: 500;
-      letter-spacing: -.065em;
+      letter-spacing: -.042em;
     }
     .explore-head p:last-child {
       max-width: 310px;
@@ -791,6 +859,20 @@
       .nav-number { display: none; }
       .nav-name { font-size: .73rem; }
       .nav-arrow { justify-self: end; }
+      /* Sub-pages (Research, Education, … under Our work) read as a tree:
+         indented, with a short tick marking the branch. */
+      .nav-tab.is-child { margin-left: 15px; padding-left: 19px; }
+      .nav-tab.is-child::after {
+        content: "";
+        position: absolute;
+        left: 7px;
+        top: 50%;
+        width: 7px;
+        height: 1px;
+        background: rgba(255, 255, 255, .32);
+      }
+      .nav-tab.is-child[aria-current="page"]::after { background: rgba(10, 26, 36, .45); }
+      .nav-tab.is-child .nav-name { font-weight: 500; }
       .sidebar-foot { padding-top: 22px; font-size: .54rem; }
       main, .footer { margin-left: 0; }
 
@@ -818,11 +900,13 @@
         font-family: var(--sans);
         font-size: clamp(4.3rem, 8.2vw, 8.8rem);
         font-weight: 500;
-        line-height: .85;
-        letter-spacing: -.078em;
+        /* Looser than the original -.078em/.85 — at display sizes that
+           tracking welded letters together and cost real readability. */
+        line-height: .9;
+        letter-spacing: -.052em;
       }
       .hero-copy { text-shadow: var(--text-shade); }
-      .hero-copy .eyebrow { color: #EBA173; }
+      .hero-copy .eyebrow { color: #F2B183; }
       .hero-copy .lede { max-width: 690px; color: rgba(255,255,255,.88); }
       .hero-copy .button { color: var(--white); border-color: rgba(255,255,255,.58); backdrop-filter: blur(8px); text-shadow: none; }
       .hero-copy .button:hover { color: var(--ink); background: var(--white); }
@@ -840,6 +924,16 @@
       .hero-image-index { font-size: 1rem; }
       .hero-image-caption { right: 36px; bottom: 34px; }
       .home-statement, .home-explore { padding-left: 304px; }
+      /* Home renders its blocks as bare panel children; every one of them
+         must clear the floating dock, or it slides underneath it. The
+         self-padded sections above manage their own clearance. */
+      #panel-home > :where(p, .dark-block, .split, .process, .people-grid, .media-grid,
+        .video-grid, .grid-2, .grid-3, .photo-ribbon, .editorial-images, .image-data-panel,
+        .feature-list, .app-shot, .game-frame, .pub-section, .tool-grid) {
+        margin-left: 304px;
+        margin-right: max(4vw, 44px);
+      }
+      #panel-home > p { max-width: 730px; }
 
       .panel:not(#panel-home) .content-wrap { width: 100%; }
       .panel:not(#panel-home) .page-head {
@@ -877,11 +971,11 @@
         font-family: var(--sans);
         font-size: clamp(3.7rem, 7vw, 7.7rem);
         font-weight: 500;
-        line-height: .9;
-        letter-spacing: -.072em;
+        line-height: .94;
+        letter-spacing: -.05em;
       }
       .panel:not(#panel-home) .page-head { text-shadow: var(--text-shade); }
-      .page-head .eyebrow { margin-bottom: 15px; color: #efb389; }
+      .page-head .eyebrow { margin-bottom: 15px; color: #F2B183; }
       .page-head .lede { max-width: 680px; color: rgba(255,255,255,.86); }
       #panel-people .page-head { --cover: url("assets/photos/page-aiwc5-conference-0.jpg"); --cover-position: center 57%; }
       #panel-publications .page-head { --cover: url("assets/photos/page-aiwc5-conference-0.jpg"); --cover-position: center 55%; }
@@ -943,6 +1037,12 @@
     @media (min-width: 801px) and (max-width: 1120px) {
       .hero-copy, .panel:not(#panel-home) .page-head { padding-left: 288px; }
       .home-statement, .home-explore { padding-left: 288px; }
+      #panel-home > :where(p, .dark-block, .split, .process, .people-grid, .media-grid,
+        .video-grid, .grid-2, .grid-3, .photo-ribbon, .editorial-images, .image-data-panel,
+        .feature-list, .app-shot, .game-frame, .pub-section, .tool-grid) {
+        margin-left: 288px;
+        margin-right: 32px;
+      }
       .hero-copy h1 { font-size: clamp(4rem, 7.6vw, 6.3rem); }
       .page-head h1 { font-size: clamp(3.5rem, 6.7vw, 5.5rem); }
       .panel:not(#panel-home) .section-body { width: calc(100% - 320px); margin-left: 288px; margin-right: 32px; }
@@ -963,7 +1063,9 @@
       }
       .sidebar {
         z-index: 25;
-        width: 100vw;
+        /* 100% of the viewport, not 100vw — vw includes the scrollbar
+           gutter, which is exactly how the page grew a sideways scroll. */
+        width: 100%;
         padding: 86px 18px 24px;
         border-radius: 0;
         background: #10201c;
@@ -997,6 +1099,9 @@
       .nav-tab[aria-selected="true"], .nav-tab[aria-current="page"]::before { display: none; }
       .nav-number { display: block; margin-bottom: auto; color: #D2D8DE; font-size: .57rem; text-shadow: 0 1px 4px rgba(0,0,0,.55); }
       .nav-name { max-width: 115px; font-size: .78rem; font-weight: 650; line-height: 1.25; color: #fff; text-shadow: var(--text-shade); }
+      /* In the card menu an indent is meaningless, so sub-pages mark their
+         parentage with a branch glyph instead. */
+      .nav-tab.is-child .nav-name::before { content: "↳ "; opacity: .7; }
       .nav-arrow { position: absolute; right: 13px; bottom: 12px; opacity: 1; transform: none; }
       /* Editable photo behind each menu card (mobile only) */
       .nav-tab > span { position: relative; z-index: 2; }
@@ -1052,11 +1157,11 @@
         font-family: var(--sans);
         font-size: clamp(3.35rem, 15.4vw, 5.2rem);
         font-weight: 550;
-        line-height: .87;
-        letter-spacing: -.075em;
+        line-height: .92;
+        letter-spacing: -.052em;
       }
       .hero-copy { text-shadow: var(--text-shade); }
-      .hero-copy .eyebrow { color: #EBA173; }
+      .hero-copy .eyebrow { color: #F2B183; }
       .hero-copy .lede { color: rgba(255,255,255,.88); font-size: 1rem; }
       .hero-copy .button { color: var(--white); border-color: rgba(255,255,255,.6); background: rgba(6, 16, 26,.18); text-shadow: none; }
       .hero-copy .button.primary { color: var(--ink); border-color: var(--white); background: var(--white); }
@@ -1070,7 +1175,7 @@
       .explore-head p:last-child { margin-top: 20px; }
       .story-grid { grid-template-columns: 1fr; }
       .story-card, .story-card:nth-child(2) { min-height: 430px; margin-top: 0; border-radius: 16px; }
-      .page-head h1 { font-family: var(--sans); font-weight: 550; letter-spacing: -.065em; }
+      .page-head h1 { font-family: var(--sans); font-weight: 550; letter-spacing: -.048em; }
       .panel:not(#panel-home) .page-head {
         position: relative;
         isolation: isolate;
@@ -1103,7 +1208,7 @@
       .panel:not(#panel-home) .page-head .section-index { display: none; }
       .panel:not(#panel-home) .page-head h1 { margin-bottom: 16px; color: var(--white); font-size: clamp(3rem, 14vw, 4.5rem); line-height: .9; }
       .panel:not(#panel-home) .page-head { text-shadow: var(--text-shade); }
-      .panel:not(#panel-home) .page-head .eyebrow { color: #EBA173; }
+      .panel:not(#panel-home) .page-head .eyebrow { color: #F2B183; }
       .panel:not(#panel-home) .page-head .lede { color: rgba(255,255,255,.86); font-size: 1rem; }
       #panel-people .page-head { --cover: url("assets/photos/page-aiwc5-conference-0.jpg"); --cover-position: center 57%; }
       #panel-publications .page-head { --cover: url("assets/photos/page-aiwc5-conference-0.jpg"); --cover-position: center 55%; }
@@ -1132,12 +1237,17 @@
         grid-auto-columns: min(82vw, 320px);
         grid-template-columns: none;
         gap: 10px;
-        margin-right: -20px;
         padding: 0 20px 12px 0;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
         scrollbar-width: none;
       }
+      /* The scroll strip bleeds to the screen edge only when a content-wrap
+         provides the 20px gutter to bleed into. On the home page the strip
+         is a bare panel child — bleeding there overflowed the page. */
+      .content-wrap .process { margin-right: -20px; }
+      #panel-home > .process { padding-left: 20px; }
+      #panel-home > p, #panel-home > .split { padding-inline: 20px; }
       .process::-webkit-scrollbar { display: none; }
       .process-step {
         min-height: 260px;
@@ -1204,16 +1314,18 @@
     .panel:not(#panel-home) .page-head[data-text-position="bottom"] { align-items: flex-end; }
 
     /* One CMS layout model drives the real heroes and their admin previews.
-       Individual `scale` composes with decorative hover transforms elsewhere. */
+       The editor's zoom lives on the `scale` PROPERTY while the ambient
+       drift animates `transform` — individual transform properties apply
+       alongside the transform matrix, so the two multiply instead of
+       fighting. (The previous fix was `animation: none`, which made the
+       zoom deterministic by flattening every cover on the site.) */
     .hero-image-main {
-      animation: none;
       scale: var(--cms-photo-scale, 1);
     }
     .panel:not(#panel-home) .page-head::before {
-      animation: none;
       background-position: var(--cms-photo-position, var(--cover-position, center));
       background-size: var(--cms-photo-fit, cover);
-      transform: scale(var(--cms-photo-scale, 1));
+      scale: var(--cms-photo-scale, 1);
     }
     .hero-copy-inner,
     .panel:not(#panel-home) .page-head > div {
@@ -1331,7 +1443,7 @@
       <button class="nav-tab" type="button" role="tab" aria-selected="false" aria-controls="panel-publications" data-tab="publications"><img class="nav-thumb" alt="" aria-hidden="true"><span class="nav-number">11</span><span class="nav-name">Publications</span><span class="nav-arrow">↗</span></button>
       <button class="nav-tab" type="button" role="tab" aria-selected="false" aria-controls="panel-tools" data-tab="tools"><img class="nav-thumb" alt="" aria-hidden="true"><span class="nav-number">12</span><span class="nav-name">Tools</span><span class="nav-arrow">↗</span></button>
     </nav>
-    <div class="sidebar-foot">27 institutions<br>Australia &amp; India<br><a href="https://aiwc.org.au" target="_blank" rel="noopener">aiwc.org.au ↗</a></div>
+    <div class="sidebar-foot">33 institutions<br>Australia &amp; India<br><a href="https://aiwc.org.au" target="_blank" rel="noopener">aiwc.org.au ↗</a></div>
   </aside>
 
   <main id="content">

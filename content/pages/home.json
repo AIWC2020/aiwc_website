@@ -223,12 +223,5 @@
     "positionX": 50,
     "positionY": 50,
     "fit": "cover"
-  },
-  "heroImage": {
-    "image": "/assets/photos/page-aiwc5-conference-0.jpg",
-    "zoom": 100,
-    "positionX": 50,
-    "positionY": 45,
-    "fit": "cover"
   }
 }
