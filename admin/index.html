@@ -40,6 +40,10 @@
     <!-- The CMS's own fonts, re-pointed at local copies so they survive the
          policy above. Relative, so it follows the site's base path. -->
     <link rel="stylesheet" href="fonts.css" />
+    <!-- Opens the CMS in its light theme. Must run before the bundle below,
+         which reads the preference once at boot. Seeds only when unset, so
+         the Theme setting keeps working. -->
+    <script src="default-theme.js"></script>
   </head>
   <body>
     <!-- Sveltia CMS, vendored into this repository rather than loaded from a
