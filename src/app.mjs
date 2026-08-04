@@ -301,6 +301,127 @@ function setupMediaSearch() {
   });
 }
 
+/* ---------- in-page section navigation ---------- */
+
+/**
+ * Long pages opt into an "on this page" bar via data-section-nav on their
+ * panel ("jump" or "tabs", chosen per page in the CMS). Sections are the
+ * titled banner blocks; everything between one banner and the next belongs
+ * to it. Content before the first banner is an intro and stays put.
+ *
+ * The static page is always the full sequential document — this only builds
+ * on top. Tabs wrap each section in a real tabpanel so hidden content is one
+ * subtree, arrow keys walk the tablist, and a deep link into a hidden
+ * section activates its tab instead of scrolling to nothing.
+ */
+function setupSectionNav() {
+  const panel = document.querySelector('.panel[data-section-nav]');
+  const body = panel?.querySelector('.section-body');
+  if (!body) return;
+  const banners = [...body.querySelectorAll(':scope > [data-section-anchor]')];
+  if (banners.length < 2) return;
+  const mode = panel.getAttribute('data-section-nav');
+
+  const labelFor = (banner) => {
+    if (banner.dataset.tabLabel) return banner.dataset.tabLabel;
+    const title = (banner.querySelector('h2')?.textContent || '').trim();
+    const acronym = title.match(/\(([^)]{2,14})\)\s*$/);
+    if (acronym) return acronym[1];
+    if (title.length <= 30) return title;
+    return title.slice(0, 27).replace(/\s+\S*$/, '') + '…';
+  };
+
+  const bar = document.createElement('nav');
+  bar.className = 'section-nav';
+  bar.setAttribute('aria-label', 'On this page');
+
+  if (mode === 'jump') {
+    const links = banners.map((banner) => {
+      const link = document.createElement('a');
+      link.className = 'section-nav-link';
+      link.href = '#' + banner.id;
+      link.textContent = labelFor(banner);
+      bar.appendChild(link);
+      return link;
+    });
+    body.insertBefore(bar, body.firstChild);
+    if ('IntersectionObserver' in window) {
+      const highlight = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const current = banners.indexOf(entry.target);
+          links.forEach((link, i) => link.setAttribute('aria-current', i === current ? 'true' : 'false'));
+        });
+      }, { rootMargin: '-30% 0px -55% 0px' });
+      banners.forEach((banner) => highlight.observe(banner));
+    }
+    return;
+  }
+
+  /* tabs: wrap [banner .. next banner) into tabpanels */
+  bar.setAttribute('role', 'tablist');
+  const panels = banners.map((banner, i) => {
+    const holder = document.createElement('div');
+    holder.className = 'section-tab-panel';
+    holder.setAttribute('role', 'tabpanel');
+    holder.id = banner.id + '-panel';
+    const members = [banner];
+    let next = banner.nextElementSibling;
+    while (next && !(i + 1 < banners.length && next === banners[i + 1])) {
+      members.push(next);
+      next = next.nextElementSibling;
+    }
+    body.insertBefore(holder, banner);
+    members.forEach((m) => holder.appendChild(m));
+    return holder;
+  });
+
+  const tabs = banners.map((banner, i) => {
+    const tab = document.createElement('button');
+    tab.type = 'button';
+    tab.className = 'section-nav-link';
+    tab.id = banner.id + '-tab';
+    tab.setAttribute('role', 'tab');
+    tab.setAttribute('aria-controls', panels[i].id);
+    tab.textContent = labelFor(banner);
+    panels[i].setAttribute('aria-labelledby', tab.id);
+    bar.appendChild(tab);
+    return tab;
+  });
+
+  const show = (index, { scroll = true } = {}) => {
+    panels.forEach((holder, i) => { holder.hidden = i !== index; });
+    tabs.forEach((tab, i) => {
+      tab.setAttribute('aria-selected', String(i === index));
+      tab.tabIndex = i === index ? 0 : -1;
+    });
+    if (scroll && bar.getBoundingClientRect().top < 0) bar.scrollIntoView({ block: 'start' });
+  };
+
+  tabs.forEach((tab, i) => tab.addEventListener('click', () => show(i)));
+  bar.addEventListener('keydown', (event) => {
+    const current = tabs.findIndex((tab) => tab.getAttribute('aria-selected') === 'true');
+    const last = tabs.length - 1;
+    const target = { ArrowRight: current + 1 > last ? 0 : current + 1, ArrowLeft: current - 1 < 0 ? last : current - 1, Home: 0, End: last }[event.key];
+    if (target === undefined) return;
+    event.preventDefault();
+    show(target);
+    tabs[target].focus();
+  });
+
+  body.insertBefore(bar, panels[0]);
+
+  let start = 0;
+  const hashId = location.hash.slice(1);
+  if (hashId) {
+    const target = document.getElementById(hashId);
+    const index = panels.findIndex((holder) => target && holder.contains(target));
+    if (index > -1) start = index;
+  }
+  show(start, { scroll: false });
+  if (start > 0) panels[start].scrollIntoView({ block: 'start' });
+}
+
 /* ---------- chrome ---------- */
 
 function setupMenu() {
@@ -351,6 +472,7 @@ if (!redirectLegacyHash()) {
       refreshTextScales();
     });
   });
+  setupSectionNav();
   setupMotion();
   setupMenu();
   setupLanguageSwitcher();

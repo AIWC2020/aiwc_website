@@ -22,7 +22,8 @@
       "type": "banner",
       "eyebrow": "Symposium",
       "title": "AIWC@5 International Symposium",
-      "lede": ""
+      "lede": "",
+      "tabLabel": "AIWC@5 Symposium"
     },
     {
       "type": "split",
@@ -80,7 +81,8 @@
       "type": "banner",
       "eyebrow": "Webinar series",
       "title": "WATER TALKS 2025",
-      "lede": ""
+      "lede": "",
+      "tabLabel": "Water Talks 2025"
     },
     {
       "type": "split",
@@ -128,5 +130,6 @@
     "positionX": 50,
     "positionY": 45,
     "fit": "cover"
-  }
+  },
+  "sectionNav": "jump"
 }

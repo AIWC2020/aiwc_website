@@ -96,6 +96,16 @@ collections:
         hint: "Shown on the mobile menu card and when the page is shared. Falls back to the header photo."
         fields: *photoFields
 
+      - label: "In-page navigation"
+        name: "sectionNav"
+        widget: "select"
+        required: false
+        options:
+          - { label: "None", value: "none" }
+          - { label: "Jump links — an on-this-page bar", value: "jump" }
+          - { label: "Tabs — one section at a time", value: "tabs" }
+        hint: "For long pages. Sections start at each Section banner that has a heading; banners without a heading stay part of the section above. Jump links keep the whole page visible; Tabs show one section at a time."
+
       - label: "Homepage hero (home page only)"
         name: "hero"
         widget: "object"
@@ -253,6 +263,7 @@ collections:
             fields:
               - { label: "Small label", name: "eyebrow", widget: "string", required: false }
               - { label: "Heading", name: "title", widget: "string" }
+              - { label: "Tab label", name: "tabLabel", widget: "string", required: false, hint: "Short name shown when the page uses tabs or jump links. Falls back to the acronym in the heading, then the heading itself." }
               - { label: "Text", name: "lede", widget: "text", required: false }
               - { label: "Label colour", name: "accent", widget: "string", required: false, hint: "Optional CSS colour, e.g. #88b3b8" }
               - { label: "i18n", name: "i18n", widget: "hidden", required: false }

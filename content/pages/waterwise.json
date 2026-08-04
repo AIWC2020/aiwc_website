@@ -22,7 +22,8 @@
       "type": "banner",
       "eyebrow": "01 — 2022-06-30",
       "title": "WaterWise: The AIWC blog for ‘Sustainable Water Futures’",
-      "lede": ""
+      "lede": "",
+      "tabLabel": "The blog"
     },
     {
       "type": "split",
@@ -51,7 +52,8 @@
       "type": "banner",
       "eyebrow": "02 — 2024-08-17",
       "title": "Dams Safety and Rehabilitation",
-      "lede": ""
+      "lede": "",
+      "tabLabel": "Dams safety"
     },
     {
       "type": "split",
@@ -74,7 +76,8 @@
       "type": "banner",
       "eyebrow": "03 — 2024-08-17",
       "title": "Rejuvenation of the springs in the Himalayan region-Evaluation of options and Strategies",
-      "lede": ""
+      "lede": "",
+      "tabLabel": "Himalayan springs"
     },
     {
       "type": "split",
@@ -108,5 +111,6 @@
     "positionX": 50,
     "positionY": 45,
     "fit": "cover"
-  }
+  },
+  "sectionNav": "tabs"
 }

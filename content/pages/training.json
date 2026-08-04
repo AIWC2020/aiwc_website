@@ -56,7 +56,8 @@
       "type": "banner",
       "eyebrow": "01 — Programme",
       "title": "Managing Aquifer Recharge and Sustaining Groundwater Use through Village-level Interventions (MARVI)",
-      "lede": ""
+      "lede": "",
+      "tabLabel": "MARVI"
     },
     {
       "type": "split",
@@ -86,7 +87,8 @@
       "type": "banner",
       "eyebrow": "02 — Programme",
       "title": "The Young Water Professionals Program (YWP)",
-      "lede": ""
+      "lede": "",
+      "tabLabel": "YWP"
     },
     {
       "type": "split",
@@ -114,7 +116,8 @@
       "type": "banner",
       "eyebrow": "03 — Programme",
       "title": "Dam Rehabilitation Improvement Project (DRIP II)",
-      "lede": ""
+      "lede": "",
+      "tabLabel": "DRIP II"
     },
     {
       "type": "split",
@@ -162,7 +165,8 @@
       "type": "banner",
       "eyebrow": "04 — Programme",
       "title": "Training Program on Dam Safety and Risk Management in Australia",
-      "lede": ""
+      "lede": "",
+      "tabLabel": "Dam safety training"
     },
     {
       "type": "split",
@@ -197,7 +201,8 @@
       "type": "banner",
       "eyebrow": "05 — Programme",
       "title": "Village Groundwater Cooperatives (VGCs)",
-      "lede": ""
+      "lede": "",
+      "tabLabel": "VGCs"
     },
     {
       "type": "split",
@@ -236,5 +241,6 @@
     "positionX": 50,
     "positionY": 45,
     "fit": "cover"
-  }
+  },
+  "sectionNav": "tabs"
 }

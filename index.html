@@ -1394,6 +1394,108 @@
       .cms-block-gallery figure { height: 250px; }
     }
 
+    /* ── In-page section navigation ─────────────────────────────────
+       Built by app.mjs on pages that opt in (data-section-nav="jump"
+       or "tabs" from the CMS). One look for both modes. */
+    .section-nav {
+      position: sticky;
+      top: 12px;
+      z-index: 15;
+      display: flex;
+      gap: 7px;
+      width: fit-content;
+      max-width: 100%;
+      margin: 0 0 40px;
+      padding: 8px;
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      background: rgba(250, 247, 242, .88);
+      backdrop-filter: blur(12px) saturate(1.05);
+      -webkit-backdrop-filter: blur(12px) saturate(1.05);
+    }
+    .section-nav-link {
+      padding: 9px 16px;
+      border: 0;
+      border-radius: 100px;
+      background: none;
+      color: var(--muted);
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+      font: 500 .68rem/1 var(--mono);
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      transition: color .2s, background-color .2s;
+    }
+    .section-nav-link:hover { color: var(--ink); }
+    .section-nav-link[aria-selected="true"],
+    .section-nav-link[aria-current="true"] { color: var(--white); background: var(--ink); }
+    .section-nav-link:focus-visible { outline: 3px solid var(--copper); outline-offset: 2px; }
+    .section-tab-panel { animation: panel-in .45s cubic-bezier(.2,.75,.25,1); }
+    @media (max-width: 800px) {
+      .section-nav {
+        top: 78px;
+        width: auto;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scrollbar-width: none;
+        border-radius: 14px;
+      }
+      .section-nav::-webkit-scrollbar { display: none; }
+    }
+
+    /* Directory tools follow the reader on long pages — switching a
+       filter must not require scrolling back to the top. Desktop only:
+       on a phone the wrapped chip rows would eat the screen. */
+    @media (min-width: 801px) {
+      .pub-filter-bar,
+      #panel-people .filter-bar {
+        position: sticky;
+        top: 12px;
+        z-index: 15;
+        margin-bottom: 34px;
+        padding: 12px 16px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: rgba(250, 247, 242, .9);
+        backdrop-filter: blur(12px) saturate(1.05);
+        -webkit-backdrop-filter: blur(12px) saturate(1.05);
+      }
+    }
+
+    /* A bibliography is not a card wall. Inside kind sections, each
+       publication is a dense row: citation left, edition links right.
+       Late in the file on purpose — it must outrank the desktop card
+       treatments above. */
+    .pub-section .pub-grid { display: block; border: 0; gap: 0; }
+    .pub-section .pub-card {
+      min-height: 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 6px 26px;
+      align-items: baseline;
+      padding: 17px 4px;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      border-radius: 0;
+      background: transparent;
+    }
+    .pub-section .pub-card:first-child { border-top: 1px solid var(--line); }
+    .pub-section .pub-card:hover { background: rgba(253, 252, 250, .85); }
+    .pub-section .pub-card .meta { margin: 0; }
+    .pub-section .pub-card h3 {
+      max-width: 980px;
+      margin: 0;
+      font: 400 1.02rem/1.6 var(--sans);
+      letter-spacing: 0;
+    }
+    .pub-section .pub-card p { margin: 0; color: var(--muted); font-size: .84rem; }
+    .pub-section .pub-links { grid-column: 2; grid-row: 1; margin: 0; padding: 0; }
+    @media (max-width: 800px) {
+      .pub-section .pub-card { grid-template-columns: 1fr; }
+      .pub-section .pub-links { grid-column: 1; grid-row: auto; }
+    }
+
   </style>
 </head>
 <body>

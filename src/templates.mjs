@@ -230,6 +230,18 @@ const BLOCKS = {
 
   banner(document, block, ctx) {
     const wrap = el(document, 'div', { class: 'dark-block' });
+    // A titled banner is an addressable section boundary: it gets a stable
+    // anchor id, and the in-page navigation (jump links or tabs — see
+    // setupSectionNav in app.mjs) is built from exactly these. Banners with
+    // no title are visual interludes and never split a section.
+    const title = (block.title || '').trim();
+    if (title) {
+      const anchor = 's-' + title.toLowerCase().normalize('NFKD')
+        .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60);
+      wrap.setAttribute('id', anchor);
+      wrap.setAttribute('data-section-anchor', '');
+      if (block.tabLabel) wrap.setAttribute('data-tab-label', block.tabLabel);
+    }
     if (block.eyebrow) {
       const eyebrow = el(document, 'p', { class: 'eyebrow', text: block.eyebrow, key: ctx.t('eyebrow') });
       if (block.accent) eyebrow.style.color = block.accent;
@@ -929,6 +941,12 @@ export function renderPage(document, page, ctx) {
   core.forEach((n) => body.appendChild(n));
   wrap.appendChild(body);
   if (flex.length) wrap.appendChild(flexWrap(document, flex));
+  // The page's in-page navigation mode ("jump" | "tabs"), chosen in the CMS.
+  // Rendering stays sequential either way; app.mjs reads this and builds the
+  // bar, so a no-JS visitor simply gets the whole page.
+  if (page.sectionNav && page.sectionNav !== 'none') {
+    section.setAttribute('data-section-nav', page.sectionNav);
+  }
   section.appendChild(wrap);
   return section;
 }

@@ -22,7 +22,8 @@
       "type": "banner",
       "eyebrow": "Context",
       "title": "Why the Centre exists.",
-      "lede": ""
+      "lede": "",
+      "tabLabel": "Why we exist"
     },
     {
       "type": "split",
@@ -58,7 +59,8 @@
       "type": "banner",
       "eyebrow": "Centre focus",
       "title": "Six things the Centre set out to do.",
-      "lede": ""
+      "lede": "",
+      "tabLabel": "Six goals"
     },
     {
       "type": "split",
@@ -83,7 +85,8 @@
       "type": "banner",
       "eyebrow": "Governance",
       "title": "How the Centre is run.",
-      "lede": ""
+      "lede": "",
+      "tabLabel": "How we are run"
     },
     {
       "type": "split",
@@ -161,5 +164,6 @@
     "positionX": 50,
     "positionY": 45,
     "fit": "cover"
-  }
+  },
+  "sectionNav": "jump"
 }
