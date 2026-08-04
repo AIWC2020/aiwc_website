@@ -1039,12 +1039,19 @@
       }
       #panel-home > .section-nav { max-width: calc(100% - 304px - max(4vw, 44px)); }
       #panel-home > :where(.disc-body, .section-tab-panel) > * { margin-left: 0; margin-right: 0; }
-      /* The self-padded sections indent themselves past the dock when they
-         are direct children. Inside a wrapper that inset is already paid, so
-         paying it twice would narrow the column and make the page TALLER
-         folded than it was flat. */
+      /* These sections are full-bleed panels with inset text: the dark box
+         reaches the window edge while its words line up with the rest of the
+         column. Inside a wrapper they would otherwise be boxed in by the
+         wrapper's margin, so they step back out of it and keep their own
+         padding. Zeroing that padding instead — which is what happened first
+         — left the text sitting hard against the panel edge, because the
+         dock clearance and the panel's internal breathing room are two
+         different measurements that happened to share a number. */
       #panel-home > :where(.disc-body, .section-tab-panel) > :where(.home-explore, .home-statement) {
-        padding-inline: 0;
+        margin-left: -304px;
+        margin-right: calc(-1 * max(4vw, 44px));
+        padding-left: 304px;
+        padding-right: max(44px, 6vw);
       }
 
       .panel:not(#panel-home) .content-wrap { width: 100%; }
@@ -1157,6 +1164,13 @@
         margin-right: 32px;
       }
       #panel-home > .section-nav { max-width: calc(100% - 320px); }
+      /* Same full-bleed step-out, at this breakpoint's clearance. */
+      #panel-home > :where(.disc-body, .section-tab-panel) > :where(.home-explore, .home-statement) {
+        margin-left: -288px;
+        margin-right: -32px;
+        padding-left: 288px;
+        padding-right: max(44px, 6vw);
+      }
       .hero-copy h1 { font-size: clamp(4rem, 7.6vw, 6.3rem); }
       .page-head h1 { font-size: clamp(3.5rem, 6.7vw, 5.5rem); }
       .panel:not(#panel-home) .section-body { width: calc(100% - 320px); margin-left: 288px; margin-right: 32px; }
