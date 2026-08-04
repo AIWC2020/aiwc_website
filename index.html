@@ -553,6 +553,18 @@
     }
     .disc-toggle[aria-expanded="true"]::before { transform: rotate(45deg) translate(-2px, -2px); }
     .disc-toggle:hover { color: var(--blue-dark); }
+    /* On a dark section banner the toggle inherits the banner's white type,
+       so only the chevron needs its own colour. */
+    .dark-block.is-collapsible { cursor: default; }
+    .disc-toggle--banner { align-items: flex-start; gap: .38em; }
+    .disc-toggle--banner::before {
+      margin-top: .34em;
+      border-color: var(--copper);
+    }
+    .disc-toggle--banner:hover { color: rgba(255, 255, 255, .82); }
+    .disc-toggle--banner:focus-visible { outline-color: #F2B183; }
+    .dark-block.is-collapsible .lede { margin-bottom: 0; }
+    .disc-body { margin-top: 26px; }
     .disc-toggle:focus-visible { outline: 3px solid var(--copper); outline-offset: 5px; }
     .disc-group { margin-bottom: 0; }
     .disc-group.is-open { margin-bottom: 46px; }

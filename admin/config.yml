@@ -104,7 +104,8 @@ collections:
           - { label: "None", value: "none" }
           - { label: "Jump links — an on-this-page bar", value: "jump" }
           - { label: "Tabs — one section at a time", value: "tabs" }
-        hint: "For long pages. Sections start at each Section banner that has a heading; banners without a heading stay part of the section above. Jump links keep the whole page visible; Tabs show one section at a time."
+          - { label: "Collapsible sections — open what you want", value: "collapse" }
+        hint: "For long pages. Sections start at each Section banner that has a heading; banners without a heading stay part of the section above. Jump links keep the whole page visible; Tabs show one section at a time; Collapsible opens the page as a list of section headings that readers expand — several can be open at once. Nothing is ever removed: without JavaScript every section shows in full."
 
       - label: "Homepage hero (home page only)"
         name: "hero"

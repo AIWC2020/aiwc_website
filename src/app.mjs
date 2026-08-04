@@ -380,6 +380,51 @@ function setupSectionNav() {
     return title.slice(0, 27).replace(/\s+\S*$/, '') + '…';
   };
 
+  /* collapse: each banner becomes the header of a disclosure holding
+     everything until the next banner. Nothing is removed — a long page just
+     opens as a list of its sections, and the reader expands what they want.
+     Several can be open at once, which is the difference from tabs. */
+  if (mode === 'collapse') {
+    banners.forEach((banner, i) => {
+      const holder = document.createElement('div');
+      holder.className = 'disc-body';
+      holder.id = banner.id + '-body';
+      const members = [];
+      let next = banner.nextElementSibling;
+      while (next && !(i + 1 < banners.length && next === banners[i + 1])) {
+        members.push(next);
+        next = next.nextElementSibling;
+      }
+      if (!members.length) return;
+      banner.insertAdjacentElement('afterend', holder);
+      members.forEach((m) => holder.appendChild(m));
+
+      const heading = banner.querySelector('h2');
+      if (!heading) return;
+      const toggle = document.createElement('button');
+      toggle.type = 'button';
+      toggle.className = 'disc-toggle disc-toggle--banner';
+      toggle.setAttribute('aria-controls', holder.id);
+      while (heading.firstChild) toggle.appendChild(heading.firstChild);
+      heading.appendChild(toggle);
+      banner.classList.add('is-collapsible');
+
+      const setOpen = (open) => {
+        holder.hidden = !open;
+        toggle.setAttribute('aria-expanded', String(open));
+        banner.classList.toggle('is-open', open);
+      };
+      setOpen(false);
+      toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+      // A link into this section arrives with it open.
+      const hashId = location.hash.slice(1);
+      if (hashId && (hashId === banner.id || holder.querySelector('#' + (window.CSS?.escape ? CSS.escape(hashId) : hashId)))) {
+        setOpen(true);
+      }
+    });
+    return;
+  }
+
   const bar = document.createElement('nav');
   bar.className = 'section-nav';
   bar.setAttribute('aria-label', 'On this page');
