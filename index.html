@@ -588,6 +588,33 @@
     .dark-block.is-collapsible .lede { margin-bottom: 0; }
     .disc-body { margin-top: 26px; }
     .disc-toggle:focus-visible { outline: 3px solid var(--copper); outline-offset: 5px; }
+    /* Opens a directory that is showing only its first row. */
+    .reveal-row { display: flex; justify-content: center; margin-top: 30px; }
+    .reveal-all {
+      padding: 14px 30px;
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      background: none;
+      color: var(--ink);
+      cursor: pointer;
+      font: 500 .72rem/1 var(--mono);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      transition: color .2s, background-color .2s, border-color .2s;
+    }
+    .reveal-all:hover { color: var(--white); background: var(--ink); border-color: var(--ink); }
+    .reveal-all:focus-visible { outline: 3px solid var(--copper); outline-offset: 3px; }
+    .sort-field { display: flex; align-items: center; gap: 9px; }
+    .sort-field label { white-space: nowrap; }
+    .sort-field select {
+      padding: 9px 13px;
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      background: var(--white);
+      color: var(--ink);
+      font: .72rem var(--mono);
+    }
+
     .disc-group { margin-bottom: 0; }
     .disc-group.is-open { margin-bottom: 46px; }
     .disc-group > :not(.disc-head) { margin-top: 8px; }

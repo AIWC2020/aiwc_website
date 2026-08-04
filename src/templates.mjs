@@ -719,6 +719,12 @@ const BLOCKS = {
         });
       field.appendChild(select);
       bar.appendChild(field);
+      bar.appendChild(sortControl(document, 'people', [
+        ['shuffle', 'Shuffled'],
+        ['name', 'Name A–Z'],
+        ['country', 'Country'],
+        ['institute', 'Institution']
+      ]));
       wrap.appendChild(bar);
 
       const count = el(document, 'p', {
@@ -734,6 +740,7 @@ const BLOCKS = {
       card.href = ctx.entryUrl ? ctx.entryUrl('people', person.slug) : '#';
       card.setAttribute('data-country', person.country || '');
       card.setAttribute('data-inst', person.institute || '');
+      card.setAttribute('data-name', (person.name || '').toLowerCase());
       card.setAttribute(
         'data-search',
         [person.name, person.designation, person.institute, person.interests].filter(Boolean).join(' ').toLowerCase()
@@ -751,19 +758,14 @@ const BLOCKS = {
 
     // 108 portraits are split into collapsible country groups, so the page
     // opens as a short index rather than a wall of faces.
-    groupByCountry(people).forEach(([country, members]) => {
-      const group = discGroup(document, {
-        id: 'people-' + slugish(country),
-        title: country,
-        count: members.length,
-        noun: ['researcher', 'researchers']
-      });
-      const band = el(document, 'div', { class: 'portrait-band' });
-      band.setAttribute('data-people-grid', '');
-      members.forEach((person) => band.appendChild(portrait(person)));
-      group.appendChild(band);
-      wrap.appendChild(group);
-    });
+    // One flat list. The static order is stable — alphabetical, so the file
+    // is reviewable and a crawler sees something deterministic — and app.mjs
+    // shuffles it on load so no researcher is permanently first.
+    const band = el(document, 'div', { class: 'portrait-band' });
+    band.setAttribute('data-people-grid', '');
+    people.forEach((person) => band.appendChild(portrait(person)));
+    wrap.appendChild(band);
+    wrap.appendChild(revealButton(document, people.length, ['researcher', 'researchers'], 'people'));
 
     const empty = el(document, 'p', { class: 'prose', text: 'No researchers match that filter.' });
     empty.setAttribute('data-people-empty', '');
@@ -789,6 +791,7 @@ const BLOCKS = {
       const card = el(document, 'a', { class: 'people-card' });
       card.href = ctx.entryUrl ? ctx.entryUrl('partners', partner.slug) : '#';
       card.setAttribute('data-country', partner.country || '');
+      card.setAttribute('data-name', (partner.name || '').toLowerCase());
       card.setAttribute(
         'data-search',
         [partner.name, partner.instituteName, partner.summary].filter(Boolean).join(' ').toLowerCase()
@@ -836,21 +839,24 @@ const BLOCKS = {
     input.setAttribute('data-partner-search', '');
     field.appendChild(input);
     bar.appendChild(field);
+    bar.appendChild(sortControl(document, 'partners', [
+      ['shuffle', 'Shuffled'],
+      ['name', 'Name A–Z'],
+      ['country', 'Country']
+    ]));
     wrap.appendChild(bar);
 
-    groups.forEach(([country, members]) => {
-      const group = discGroup(document, {
-        id: 'partners-' + slugish(country),
-        title: country,
-        count: members.length,
-        noun: ['institution', 'institutions']
-      });
-      const grid = el(document, 'div', { class: 'people-grid' });
-      grid.setAttribute('data-partner-grid', '');
-      members.forEach((partner) => grid.appendChild(partnerCard(partner)));
-      group.appendChild(grid);
-      wrap.appendChild(group);
-    });
+    const count = el(document, 'p', { class: 'filter-label meta', text: `Showing all ${list.length} institutions` });
+    count.setAttribute('data-partner-count', '');
+    wrap.appendChild(count);
+
+    // Flat and stable in the markup; shuffled by app.mjs on load, so no
+    // institution is permanently at the top of its own partner list.
+    const grid = el(document, 'div', { class: 'people-grid' });
+    grid.setAttribute('data-partner-grid', '');
+    list.forEach((partner) => grid.appendChild(partnerCard(partner)));
+    wrap.appendChild(grid);
+    wrap.appendChild(revealButton(document, list.length, ['institution', 'institutions'], 'partners'));
 
     const empty = el(document, 'p', { class: 'prose', text: 'No institutions match that filter.' });
     empty.setAttribute('data-partner-empty', '');
@@ -912,6 +918,45 @@ const groupByCountry = (records) => {
   });
   const rank = (name) => (name === 'Australia' ? 0 : name === 'India' ? 1 : name === 'Other' ? 3 : 2);
   return [...groups.entries()].sort((a, b) => rank(a[0]) - rank(b[0]) || a[0].localeCompare(b[0]));
+};
+
+/**
+ * The control that opens a directory. A long list shows one row and this
+ * button; pressing it reveals the rest. Rendered here rather than injected,
+ * so a reader without JavaScript sees the full list and a button that says
+ * so — app.mjs is what collapses the list, never what fills it.
+ */
+const revealButton = (document, count, noun, kind) => {
+  const wrap = el(document, 'div', { class: 'reveal-row' });
+  const button = el(document, 'button', {
+    class: 'reveal-all',
+    text: `Show all ${count} ${count === 1 ? noun[0] : noun[1]}`
+  });
+  button.setAttribute('type', 'button');
+  button.setAttribute('data-reveal', kind);
+  button.setAttribute('data-noun', noun.join('|'));
+  button.setAttribute('hidden', '');
+  wrap.appendChild(button);
+  return wrap;
+};
+
+/** A sort order the reader can change. Shuffled is the default. */
+const sortControl = (document, kind, options) => {
+  const field = el(document, 'div', { class: 'sort-field' });
+  const id = `sort-${kind}`;
+  const label = el(document, 'label', { class: 'filter-label', text: 'Sort' });
+  label.setAttribute('for', id);
+  const select = el(document, 'select');
+  select.id = id;
+  select.setAttribute('data-sort', kind);
+  options.forEach(([value, text]) => {
+    const option = el(document, 'option', { text });
+    option.value = value;
+    select.appendChild(option);
+  });
+  field.appendChild(label);
+  field.appendChild(select);
+  return field;
 };
 
 const discGroup = (document, { id, title, count, noun }) => {

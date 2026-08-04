@@ -559,58 +559,6 @@ function setupSectionNav() {
   if (start > 0) panels[start].scrollIntoView({ block: 'start' });
 }
 
-/* ---------- partner institutions ---------- */
-
-/**
- * The partner directory mirrors the researcher one: country chips, a search
- * box, and collapsible country groups. Filtering opens the groups that still
- * hold something and hides the ones that do not, so a search never leaves the
- * reader staring at collapsed headers wondering where the matches went.
- */
-function setupPartners() {
-  const bar = document.querySelector('[data-partner-filters]');
-  if (!bar) return;
-  const groups = [...document.querySelectorAll('.disc-group')]
-    .filter((g) => g.querySelector('[data-partner-grid]'));
-  if (!groups.length) return;
-  const empty = document.querySelector('[data-partner-empty]');
-  const search = document.querySelector('[data-partner-search]');
-  const state = { country: '', query: '' };
-
-  const apply = ({ userInitiated }) => {
-    let shown = 0;
-    groups.forEach((group) => {
-      let visible = 0;
-      group.querySelectorAll('.people-card').forEach((card) => {
-        const match =
-          (!state.country || card.dataset.country === state.country) &&
-          (!state.query || (card.dataset.search || '').includes(state.query));
-        card.hidden = !match;
-        if (match) visible++;
-      });
-      group.hidden = visible === 0;
-      retallyGroup(group, visible);
-      // A narrowed directory should show its results, not hide them.
-      if (userInitiated && visible > 0 && (state.country || state.query)) setGroupOpen(group, true);
-      shown += visible;
-    });
-    if (empty) empty.hidden = shown > 0;
-  };
-
-  bar.addEventListener('click', (event) => {
-    const chip = event.target.closest('[data-filter]');
-    if (!chip) return;
-    bar.querySelectorAll('[data-filter]').forEach((b) => b.setAttribute('aria-pressed', String(b === chip)));
-    const value = chip.dataset.filter;
-    state.country = value.startsWith('country:') ? value.slice(8) : '';
-    apply({ userInitiated: true });
-  });
-  search?.addEventListener('input', () => {
-    state.query = search.value.trim().toLowerCase();
-    apply({ userInitiated: true });
-  });
-}
-
 /* ---------- chrome ---------- */
 
 function setupMenu() {
@@ -665,7 +613,6 @@ if (!redirectLegacyHash()) {
   setupSectionNav();
   setupMotion();
   setupMenu();
-  setupPartners();
   setupLanguageSwitcher();
   setupMediaSearch();
   setupArchive();
@@ -674,71 +621,137 @@ if (!redirectLegacyHash()) {
   showReveals(document);
 }
 
-/* ── researcher directory filter ──────────────────────────────────────
-   AIWC lists 108 researchers on one page; country chips and a free-text
-   search narrow it. Country and text compose — each narrows the last.
-   Everything is already in the DOM, so this only hides and shows.        */
+/* ── directories: shuffle, sort, and a one-row preview ────────────────
+   People and Partners are long lists where order implies ranking. They are
+   shuffled on load so nobody is permanently first, sorted by whatever the
+   reader picks, and shown one row deep with a button that opens the rest.
 
-const peopleFilters = document.querySelector('[data-people-filters]');
-const peopleBands = [...document.querySelectorAll('[data-people-grid]')];
+   The markup arrives complete and in a stable order — this only reorders,
+   hides and reveals, so a reader without JavaScript gets the whole list. */
 
-if (peopleFilters && peopleBands.length) {
-  // Researchers are split across one band per country group, so the filter
-  // works over every band and then decides which groups still have anything
-  // to show.
-  const groupsOf = peopleBands.map((band) => band.closest('.disc-group')).filter(Boolean);
-  const cards = peopleBands.flatMap((band) => [...band.children]);
-  const empty = document.querySelector('[data-people-empty]');
-  const search = document.querySelector('[data-people-search]');
-  const instSelect = document.querySelector('[data-people-inst]');
-  const counter = document.querySelector('[data-people-count]');
-  const state = { country: '', inst: '', query: '' };
+function setupDirectory({ gridSel, filtersSel, searchSel, instSel, countSel, emptySel, kind, noun }) {
+  const grid = document.querySelector(gridSel);
+  if (!grid) return;
+  const cards = [...grid.children];
+  if (!cards.length) return;
 
-  const apply = ({ userInitiated } = {}) => {
+  const filters = document.querySelector(filtersSel);
+  const search = searchSel && document.querySelector(searchSel);
+  const instSelect = instSel && document.querySelector(instSel);
+  const counter = countSel && document.querySelector(countSel);
+  const empty = emptySel && document.querySelector(emptySel);
+  const sortSelect = document.querySelector(`[data-sort="${kind}"]`);
+  const reveal = document.querySelector(`[data-reveal="${kind}"]`);
+
+  const state = { country: '', inst: '', query: '', sort: 'shuffle', open: false };
+  const shuffled = cards.slice();
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+
+  // Sorting the raw name files everyone with a doctorate under D. Titles are
+  // dropped from the sort key only — the card still shows the full name.
+  const plain = (card) =>
+    (card.dataset.name || '').replace(/^((a\/)?prof|dr|mr|mrs|ms|miss|assoc\.?\s*prof)\.?\s+/i, '');
+
+  const key = (card) => ({
+    name: plain(card),
+    country: (card.dataset.country || '') + ' ' + plain(card),
+    institute: (card.dataset.inst || '') + ' ' + plain(card)
+  });
+
+  const order = () => {
+    if (state.sort === 'shuffle') return shuffled;
+    return cards.slice().sort((a, b) => key(a)[state.sort].localeCompare(key(b)[state.sort]));
+  };
+
+  const matches = (card) =>
+    (!state.country || card.dataset.country === state.country) &&
+    (!state.inst || card.dataset.inst === state.inst) &&
+    (!state.query || (card.dataset.search || '').includes(state.query));
+
+  // One row means "as many as fit on the first line", which only the layout
+  // knows — so it is read back from the rendered grid rather than assumed.
+  const firstRowCount = () => {
+    const visible = cards.filter((c) => !c.hidden);
+    if (!visible.length) return 0;
+    const top = visible[0].offsetTop;
+    const n = visible.filter((c) => c.offsetTop === top).length;
+    return n || visible.length;
+  };
+
+  const apply = () => {
+    order().forEach((card) => grid.appendChild(card));
     let shown = 0;
-    for (const card of cards) {
-      const match =
-        (!state.country || card.dataset.country === state.country) &&
-        (!state.inst || card.dataset.inst === state.inst) &&
-        (!state.query || (card.dataset.search || '').includes(state.query));
-      card.hidden = !match;
-      if (match) shown++;
-    }
-    const narrowed = Boolean(state.country || state.inst || state.query);
-    groupsOf.forEach((group) => {
-      const visible = [...group.querySelectorAll('.portrait-card')].filter((c) => !c.hidden).length;
-      group.hidden = visible === 0;
-      retallyGroup(group, visible);
-      if (userInitiated && narrowed && visible > 0) setGroupOpen(group, true);
+    cards.forEach((card) => {
+      const ok = matches(card);
+      card.hidden = !ok;
+      if (ok) shown++;
     });
     if (empty) empty.hidden = shown > 0;
+
+    let previewed = shown;
+    if (!state.open) {
+      const perRow = firstRowCount();
+      let seen = 0;
+      cards.forEach((card) => {
+        if (card.hidden) return;
+        seen++;
+        if (seen > perRow) card.hidden = true;
+      });
+      previewed = Math.min(perRow, shown);
+    }
+
+    if (reveal) {
+      const rest = shown - previewed;
+      reveal.hidden = shown <= previewed && !state.open;
+      const word = shown === 1 ? noun[0] : noun[1];
+      reveal.textContent = state.open ? `Show fewer ${noun[1]}` : `Show all ${shown} ${word}`;
+      reveal.setAttribute('aria-expanded', String(state.open));
+      void rest;
+    }
     if (counter) {
-      const scope = [state.country, state.inst].filter(Boolean).join(' \u00b7 ');
-      counter.textContent =
-        shown === cards.length
-          ? `Showing all ${cards.length} researchers`
-          : `${shown} of ${cards.length} researchers${scope ? ' \u2014 ' + scope : ''}`;
+      const scope = [state.country, state.inst].filter(Boolean).join(' · ');
+      counter.textContent = shown === cards.length
+        ? `Showing all ${cards.length} ${noun[1]}`
+        : `${shown} of ${cards.length} ${noun[1]}${scope ? ' — ' + scope : ''}`;
     }
   };
 
-  peopleFilters.addEventListener('click', (event) => {
+  filters?.addEventListener('click', (event) => {
     const chip = event.target.closest('[data-filter]');
     if (!chip) return;
-    for (const other of peopleFilters.querySelectorAll('[data-filter]')) {
-      other.setAttribute('aria-pressed', String(other === chip));
-    }
+    filters.querySelectorAll('[data-filter]').forEach((b) => b.setAttribute('aria-pressed', String(b === chip)));
     const value = chip.dataset.filter;
     state.country = value.startsWith('country:') ? value.slice(8) : '';
-    apply({ userInitiated: true });
+    apply();
+  });
+  search?.addEventListener('input', () => { state.query = search.value.trim().toLowerCase(); apply(); });
+  instSelect?.addEventListener('change', () => { state.inst = instSelect.value; apply(); });
+  sortSelect?.addEventListener('change', () => { state.sort = sortSelect.value; apply(); });
+  reveal?.addEventListener('click', () => { state.open = !state.open; apply(); });
+  // The row width changes with the window, so the preview is remeasured.
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    if (state.open) return;
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(apply, 150);
   });
 
-  search?.addEventListener('input', () => {
-    state.query = search.value.trim().toLowerCase();
-    apply({ userInitiated: true });
-  });
-
-  instSelect?.addEventListener('change', () => {
-    state.inst = instSelect.value;
-    apply({ userInitiated: true });
-  });
+  apply();
 }
+
+setupDirectory({
+  gridSel: '[data-people-grid]', filtersSel: '[data-people-filters]',
+  searchSel: '[data-people-search]', instSel: '[data-people-inst]',
+  countSel: '[data-people-count]', emptySel: '[data-people-empty]',
+  kind: 'people', noun: ['researcher', 'researchers']
+});
+
+setupDirectory({
+  gridSel: '[data-partner-grid]', filtersSel: '[data-partner-filters]',
+  searchSel: '[data-partner-search]',
+  countSel: '[data-partner-count]', emptySel: '[data-partner-empty]',
+  kind: 'partners', noun: ['institution', 'institutions']
+});
