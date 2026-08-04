@@ -1125,6 +1125,13 @@ export function renderPage(document, page, ctx) {
     (FLEX_TYPES.has(block.type) ? flex : core).push(node);
   });
 
+  // The page's in-page navigation mode ("jump" | "tabs" | "collapse"), chosen
+  // in the CMS. Set before the home branch returns, or the home template can
+  // never opt in — app.mjs reads this attribute to decide what to build.
+  if (page.sectionNav && page.sectionNav !== 'none') {
+    section.setAttribute('data-section-nav', page.sectionNav);
+  }
+
   if (page.template === 'home') {
     section.appendChild(homeHero(document, page, ctx));
     core.forEach((n) => section.appendChild(n));
@@ -1138,12 +1145,6 @@ export function renderPage(document, page, ctx) {
   core.forEach((n) => body.appendChild(n));
   wrap.appendChild(body);
   if (flex.length) wrap.appendChild(flexWrap(document, flex));
-  // The page's in-page navigation mode ("jump" | "tabs"), chosen in the CMS.
-  // Rendering stays sequential either way; app.mjs reads this and builds the
-  // bar, so a no-JS visitor simply gets the whole page.
-  if (page.sectionNav && page.sectionNav !== 'none') {
-    section.setAttribute('data-section-nav', page.sectionNav);
-  }
   section.appendChild(wrap);
   return section;
 }

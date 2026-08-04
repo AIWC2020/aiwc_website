@@ -237,5 +237,6 @@
     "positionX": 50,
     "positionY": 50,
     "fit": "cover"
-  }
+  },
+  "sectionNav": "collapse"
 }

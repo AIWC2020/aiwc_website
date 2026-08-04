@@ -1030,6 +1030,22 @@
         margin-right: max(4vw, 44px);
       }
       #panel-home > p { max-width: 730px; }
+      /* When an in-page mechanism folds the home page, it wraps the blocks —
+         which stops them being direct children, so the clearance above no
+         longer reaches them and every block slides under the dock. The
+         wrapper becomes the direct child, so it carries the clearance. */
+      #panel-home > :where(.disc-body, .section-tab-panel) {
+        margin-left: 304px;
+        margin-right: max(4vw, 44px);
+      }
+      #panel-home > :where(.disc-body, .section-tab-panel) > * { margin-left: 0; margin-right: 0; }
+      /* The self-padded sections indent themselves past the dock when they
+         are direct children. Inside a wrapper that inset is already paid, so
+         paying it twice would narrow the column and make the page TALLER
+         folded than it was flat. */
+      #panel-home > :where(.disc-body, .section-tab-panel) > :where(.home-explore, .home-statement) {
+        padding-inline: 0;
+      }
 
       .panel:not(#panel-home) .content-wrap { width: 100%; }
       .panel:not(#panel-home) .page-head {
@@ -1135,7 +1151,8 @@
       #panel-home > .home-statement, #panel-home > .home-explore { padding-left: 288px; }
       #panel-home > :where(p, .dark-block, .split, .process, .people-grid, .media-grid,
         .video-grid, .grid-2, .grid-3, .photo-ribbon, .editorial-images, .image-data-panel,
-        .feature-list, .app-shot, .game-frame, .pub-section, .tool-grid) {
+        .feature-list, .app-shot, .game-frame, .pub-section, .tool-grid),
+      #panel-home > :where(.disc-body, .section-tab-panel) {
         margin-left: 288px;
         margin-right: 32px;
       }
