@@ -437,8 +437,18 @@ const BLOCKS = {
     if (kind) section.setAttribute('data-kind', kind);
     const heading = block.heading || kind;
     if (heading) {
+      if (kind) {
+        section.setAttribute('id', 'pub-' + kind.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''));
+      }
+      // The heading is a disclosure toggle: app.mjs collapses sections by
+      // default and wires it up. Without JS the button is inert and the
+      // list below stays fully visible — nothing is ever locked away.
       const head = el(document, 'header', { class: 'pub-section-head' });
-      head.appendChild(el(document, 'h2', { text: heading }));
+      const h2 = el(document, 'h2');
+      const toggle = el(document, 'button', { class: 'pub-section-toggle', text: heading });
+      toggle.setAttribute('type', 'button');
+      h2.appendChild(toggle);
+      head.appendChild(h2);
       head.appendChild(el(document, 'span', {
         class: 'filter-label pub-section-count',
         text: `${items.length} ${items.length === 1 ? 'publication' : 'publications'}`
@@ -834,6 +844,56 @@ const flowFieldSvg = () => {
     `<span class="flow-label flow-label--au" aria-hidden="true">Australia</span>` +
     `<span class="flow-label flow-label--in" aria-hidden="true">India</span>`
   );
+};
+
+/**
+ * The brand mark: the confluence, reduced to a glyph. Two streams — teal
+ * from the left, copper from the right, the same pair as the hero artwork —
+ * meet and continue as one line. The container around it is the editable
+ * part: content/brand.json picks a shape in the CMS, and every option keeps
+ * identical line work, so the mark changes clothes without changing meaning.
+ *
+ * Two variants: 'chrome' is sized by CSS and drawn for the dark rail;
+ * 'favicon' is a standalone file with its own light/dark styling, because a
+ * browser tab is the one place the site's background colour doesn't reach.
+ */
+export const BRAND_SHAPES = ['drop', 'circle', 'squircle', 'pebble'];
+
+export const brandMarkSvg = (shape = 'drop', variant = 'chrome') => {
+  const container = {
+    circle: '<circle cx="24" cy="24" r="21.5"/>',
+    squircle: '<rect x="4.5" y="4.5" width="39" height="39" rx="13.5"/>',
+    pebble: '<path d="M25.5 4.5 C35.5 5.5 44 13 43 24.5 C42 35.5 34.5 43.5 23 43.5 C12 43.5 4.5 35 5 23.5 C5.5 12.5 15.5 3.5 25.5 4.5 Z"/>',
+    drop: '<path d="M24 3.5 C24 3.5 8.5 20.5 8.5 30 A15.5 15.5 0 0 0 39.5 30 C39.5 20.5 24 3.5 24 3.5 Z"/>'
+  }[BRAND_SHAPES.includes(shape) ? shape : 'drop'];
+
+  // The droplet narrows towards its apex, so its streams start closer in.
+  const wide = shape !== 'drop';
+  const left = wide
+    ? 'M14.5 15.5 C19 19.5, 21.8 23.5, 23.9 27.5'
+    : 'M17.5 18 C21 21.5, 22.8 24.5, 23.9 28';
+  const right = wide
+    ? 'M33.5 13.5 C29 18.5, 26 23, 24.1 27.5'
+    : 'M30.5 16.5 C27.5 20.5, 25.5 24, 24.1 28';
+  const merged = wide
+    ? 'M24 27 C23.6 31, 24.3 34.5, 24 38.5'
+    : 'M24 27.5 C23.6 31, 24.3 34, 24 38';
+
+  const favicon = variant === 'favicon';
+  const frame = favicon ? 'var(--frame)' : 'rgba(255,255,255,.55)';
+  const flow = favicon ? 'var(--flow)' : '#EAF4F2';
+  const faviconStyle = favicon
+    ? '<style>:root{--frame:#0A1A24;--flow:#0A1A24}@media(prefers-color-scheme:dark){:root{--frame:rgba(255,255,255,.75);--flow:#EAF4F2}}</style>'
+    : '';
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"${favicon ? ' width="48" height="48"' : ''} fill="none" aria-hidden="true" focusable="false">` +
+    faviconStyle +
+    `<g stroke="${frame}" stroke-width="1.6">${container}</g>` +
+    `<g stroke-width="2.4" stroke-linecap="round">` +
+    `<path d="${left}" stroke="#7FB8AE"/>` +
+    `<path d="${right}" stroke="#D08A5B"/>` +
+    `<path d="${merged}" stroke="${flow}"/>` +
+    `</g></svg>`;
 };
 
 const standardHead = (document, page, { index, total }) => {

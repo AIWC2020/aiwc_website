@@ -17,13 +17,17 @@ import { readFileSync, writeFileSync, mkdirSync, cpSync, existsSync, rmSync } fr
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseHTML } from 'linkedom';
-import { renderPage, renderPerson, renderPartner } from '../src/templates.mjs';
+import { renderPage, renderPerson, renderPartner, brandMarkSvg, BRAND_SHAPES } from '../src/templates.mjs';
 import { buildRegistry, loadCollections, loadSite, navTree, urlFor, urlForEntry } from '../src/registry.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = join(ROOT, '_site');
 
 const SITE = loadSite(ROOT);
+// The brand mark's container shape, editable in the CMS (Site → Brand mark).
+const BRAND_FILE = join(ROOT, 'content/brand.json');
+const BRAND_RAW = existsSync(BRAND_FILE) ? JSON.parse(readFileSync(BRAND_FILE, 'utf8')) : {};
+const BRAND_SHAPE = BRAND_SHAPES.includes(BRAND_RAW.shape) ? BRAND_RAW.shape : 'drop';
 const BASE = SITE.base;
 const SITE_URL = SITE.url.replace(/\/$/, '');
 const LANGS = SITE.languages;
@@ -117,6 +121,20 @@ function composeDocument(lang, activeSlug, panel, { langBase = '' } = {}) {
   const foot = document.querySelector('.sidebar-foot');
   if (foot && foot.firstChild?.nodeType === 3 && partners.length) {
     foot.firstChild.textContent = `${partners.length} institutions`;
+  }
+
+  /* the brand mark — the confluence glyph in the shape content/brand.json
+     picked. The chrome's CSS-drawn fallback stays for anything unbuilt. */
+  document.querySelectorAll('.brand-mark').forEach((n) => {
+    n.innerHTML = brandMarkSvg(BRAND_SHAPE, 'chrome');
+  });
+  const mobileBrand = document.querySelector('.mobile-brand');
+  if (mobileBrand && !mobileBrand.querySelector('.brand-mark')) {
+    const mark = document.createElement('span');
+    mark.className = 'brand-mark brand-mark--bar';
+    mark.setAttribute('aria-hidden', 'true');
+    mark.innerHTML = brandMarkSvg(BRAND_SHAPE, 'chrome');
+    mobileBrand.prepend(mark);
   }
 
   /* language switch — only meaningful once a second language exists */
@@ -215,6 +233,11 @@ function applyHead(document, { lang, title, description, canonical, image, alter
 
   meta('name', 'description', description);
   link('canonical', canonical);
+  const icon = document.createElement('link');
+  icon.setAttribute('rel', 'icon');
+  icon.setAttribute('type', 'image/svg+xml');
+  icon.setAttribute('href', `${BASE}/assets/brand-mark.svg`);
+  head.appendChild(icon);
   alternates.forEach(([l, url]) => link('alternate', url, l));
 
   meta('property', 'og:type', 'website');
@@ -364,6 +387,9 @@ if (existsSync(cmsTemplatePath)) {
   writeFileSync(cmsTemplatePath, config);
 }
 cpSync(join(ROOT, 'src/app.mjs'), join(OUT, 'assets/app.mjs'));
+// The favicon is the same confluence mark, carrying its own light/dark
+// styling because the browser tab has no site background behind it.
+write('assets/brand-mark.svg', brandMarkSvg(BRAND_SHAPE, 'favicon'));
 cpSync(join(ROOT, 'src/templates.mjs'), join(OUT, 'assets/templates.mjs'));
 
 // The CMS preview iframe needs the site's CSS as a standalone file.

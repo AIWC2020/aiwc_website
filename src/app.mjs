@@ -194,7 +194,34 @@ function setupArchive() {
  * a no-JS visitor simply sees every section — nothing breaks.
  */
 function setupPublications() {
-  const sections = [...document.querySelectorAll('.pub-section[data-kind]')];
+  // Disclosure: titled sections collapse to their header row, closed by
+  // default — the counts still say what each holds. Applied here, not in
+  // the markup, so a no-JS visitor gets the fully expanded page.
+  const allSections = [...document.querySelectorAll('.pub-section')];
+  const setOpen = (section, open) => {
+    const grid = section.querySelector('.pub-grid');
+    const toggle = section.querySelector('.pub-section-toggle');
+    if (!grid || !toggle) return;
+    grid.hidden = !open;
+    toggle.setAttribute('aria-expanded', String(open));
+    section.classList.toggle('is-open', open);
+  };
+  allSections.forEach((section) => {
+    const toggle = section.querySelector('.pub-section-toggle');
+    if (!toggle) return;
+    setOpen(section, false);
+    toggle.addEventListener('click', () => {
+      setOpen(section, toggle.getAttribute('aria-expanded') !== 'true');
+    });
+  });
+  // A shared link straight to a section arrives with it open.
+  if (location.hash) {
+    const target = document.getElementById(location.hash.slice(1));
+    const holder = target && allSections.find((section) => section.contains(target));
+    if (holder) setOpen(holder, true);
+  }
+
+  const sections = allSections.filter((section) => section.dataset.kind);
   if (sections.length < 2) return;
 
   const total = sections.reduce((sum, s) => sum + s.querySelectorAll('.pub-card').length, 0);
@@ -217,6 +244,8 @@ function setupPublications() {
       const match = kind === 'All' || section.dataset.kind === kind;
       section.hidden = !match;
       if (match) visible += section.querySelectorAll('.pub-card').length;
+      // Asking for one kind is asking to read it — open it on arrival.
+      if (match && kind !== 'All') setOpen(section, true);
     });
     count.textContent = describe(visible);
   };

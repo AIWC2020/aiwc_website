@@ -510,3 +510,23 @@ collections:
                   - { label: "Link", name: "link", widget: "object", collapsed: true, required: false, fields: [{ label: "Label", name: "label", widget: "string", required: false }, { label: "URL", name: "url", widget: "string", required: false }, { label: "Downloads a file", name: "download", widget: "boolean", default: false, required: false }, { label: "Opens in a new tab", name: "external", widget: "boolean", default: false, required: false }] }
               - { label: "style", name: "style", widget: "hidden", required: false }
 
+
+  # Site-wide settings live in their own tiny files, so editing them can
+  # never touch the deployment fields in site.json.
+  - name: "site"
+    label: "Site"
+    files:
+      - name: "brand"
+        label: "Brand mark"
+        file: "content/brand.json"
+        fields:
+          - label: "Icon shape"
+            name: "shape"
+            widget: "select"
+            default: "drop"
+            options:
+              - { label: "Droplet", value: "drop" }
+              - { label: "Circle", value: "circle" }
+              - { label: "Squircle", value: "squircle" }
+              - { label: "Pebble", value: "pebble" }
+            hint: "The container around the confluence glyph — two streams meeting as one — shown in the rail, the mobile bar and the browser tab. Every shape keeps the same line work, so the mark stays on-design."
