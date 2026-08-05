@@ -697,7 +697,16 @@
     .filter-chip[aria-pressed="true"] { color: var(--white); background: var(--ink); border-color: var(--ink); }
     .filter-n { opacity: .55; margin-left: 6px; }
     .filter-bar > div:first-child { display: flex; flex-wrap: wrap; gap: 7px; }
-    .filter-field { display: flex; flex-wrap: wrap; gap: 8px; }
+    /* The bar holds three things: the country chips, the search and
+       institution fields, and the sort. It wraps rather than compressing,
+       because a flex row without wrap shrinks whichever child can shrink —
+       here the search field, down to a sliver. */
+    .filter-bar { flex-wrap: wrap; row-gap: 16px; }
+    .filter-chips { display: flex; flex-wrap: wrap; gap: 8px; flex: 0 1 auto; }
+    .filter-field { display: flex; flex-wrap: wrap; gap: 8px; flex: 1 1 280px; min-width: 220px; }
+    .filter-field input { flex: 1 1 200px; min-width: 180px; }
+    .filter-field select { flex: 0 1 auto; min-width: 160px; }
+    .sort-field { flex: 0 0 auto; }
     .filter-field input, .filter-field select { padding: 8px 15px; min-width: 220px; border: 1px solid var(--line); border-radius: 100px; background: var(--white); color: var(--ink); font: 400 .8rem/1.3 var(--sans); }
     .filter-field select { cursor: pointer; max-width: 300px; }
     .filter-field input:hover, .filter-field select:hover { border-color: var(--muted); }
@@ -896,7 +905,14 @@
       .archive-tools { align-items: flex-start; flex-direction: column; }
       .metric-row { grid-template-columns: 1fr; }
       .metric, .metric:nth-child(2), .metric:last-child { padding: 18px 0; border-right: 0; border-bottom: 1px solid rgba(255,255,255,.2); }
+      /* The bar stacks here, which turns its main axis vertical — so the
+         flex-basis values that size these across a row would size them DOWN
+         a column instead, and a 280px basis becomes a 280px-tall search box.
+         Everything goes full width and sizes to its content. */
       .filter-bar { align-items: flex-start; flex-direction: column; }
+      .filter-chips, .filter-field, .sort-field { flex: 0 0 auto; width: 100%; }
+      .filter-field { min-width: 0; }
+      .filter-field input, .filter-field select { flex: 1 1 auto; min-width: 0; width: 100%; }
       .media-card, .pub-card { min-height: 260px; }
       .hero-actions .button { width: 100%; }
     }

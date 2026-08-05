@@ -686,9 +686,14 @@ const BLOCKS = {
         if (count != null) b.appendChild(el(document, 'span', { class: 'filter-n', text: String(count) }));
         return b;
       };
-      bar.appendChild(chip('All', 'all', people.length, true));
-      bar.appendChild(chip('Australia', 'country:Australia', people.filter((p) => p.country === 'Australia').length));
-      bar.appendChild(chip('India', 'country:India', people.filter((p) => p.country === 'India').length));
+      // The chips travel together as one item, or the bar tries to space five
+      // separate children across a row that cannot hold them and the search
+      // field is the one that collapses.
+      const chips = el(document, 'div', { class: 'filter-chips' });
+      chips.appendChild(chip('All', 'all', people.length, true));
+      chips.appendChild(chip('Australia', 'country:Australia', people.filter((p) => p.country === 'Australia').length));
+      chips.appendChild(chip('India', 'country:India', people.filter((p) => p.country === 'India').length));
+      bar.appendChild(chips);
 
       const field = el(document, 'div', { class: 'filter-field' });
       const input = el(document, 'input');
@@ -839,7 +844,7 @@ const BLOCKS = {
       b.appendChild(el(document, 'span', { class: 'filter-n', text: String(count) }));
       return b;
     };
-    const chips = el(document, 'div');
+    const chips = el(document, 'div', { class: 'filter-chips' });
     chips.appendChild(chip('All', 'all', list.length, true));
     groups.forEach(([country, members]) => chips.appendChild(chip(country, 'country:' + country, members.length)));
     bar.appendChild(chips);
