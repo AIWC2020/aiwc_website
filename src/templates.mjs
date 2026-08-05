@@ -508,6 +508,13 @@ const BLOCKS = {
     items.forEach((item) => {
       const card = el(document, 'article', { class: 'pub-card' });
       if (item.kind) card.setAttribute('data-kind', item.kind);
+      // These records have no date field, but every one of the 77 citations
+      // names its year in the text. The latest year mentioned is the
+      // publication year in every case here; a citation that also cites a
+      // study period would need a real field instead of this.
+      const year = pubYear(item);
+      if (year) card.setAttribute('data-year', String(year));
+      card.setAttribute('data-title', (item.title || '').toLowerCase());
       card.appendChild(el(document, 'span', { class: 'meta', text: item.meta }));
       card.appendChild(el(document, 'h3', { text: item.title }));
       if (item.description) card.appendChild(el(document, 'p', { text: item.description }));
@@ -944,6 +951,12 @@ const FLEX_TYPES = new Set(['text', 'imageText', 'gallery', 'callout', 'button',
  * Without JS the button is inert and the content stays visible, so nothing
  * is ever locked away from a reader (or a crawler) that cannot run scripts.
  */
+/** The latest four-digit year anywhere in a publication record. */
+const pubYear = (item) => {
+  const found = JSON.stringify(item || {}).match(/\b(?:19|20)\d{2}\b/g);
+  return found ? Math.max(...found.map(Number)) : 0;
+};
+
 const slugish = (value) =>
   String(value || '').toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 

@@ -212,12 +212,17 @@ function setGroupOpen(group, open) {
   group.classList.toggle('is-open', open);
 }
 
+// A category small enough to read without scrolling has nothing to gain from
+// being shut — closing it just adds a click. Only the long ones fold.
+const OPEN_UNDER = 12;
+
 function setupDisclosureGroups() {
   const groups = discGroups();
   groups.forEach((group) => {
     const toggle = group.querySelector('.disc-toggle');
     if (!toggle) return;
-    setGroupOpen(group, false);
+    const items = group.querySelectorAll('.pub-card, .portrait-card, .partner-card').length;
+    setGroupOpen(group, items > 0 && items < OPEN_UNDER);
     toggle.addEventListener('click', () => {
       setGroupOpen(group, toggle.getAttribute('aria-expanded') !== 'true');
     });
@@ -256,6 +261,64 @@ function setupPublications() {
   const describe = (n) => `${n} ${n === 1 ? 'publication' : 'publications'}`;
   count.textContent = describe(total);
 
+  /* Order. A bibliography's natural order is newest first, which is also the
+     one order the markup cannot ship in — the records carry no date field,
+     so the year is read out of each citation at build time. Anything without
+     a year sorts last rather than as year zero. */
+  const sortField = document.createElement('div');
+  sortField.className = 'sort-field';
+  const sortLabel = document.createElement('label');
+  sortLabel.className = 'filter-label';
+  sortLabel.textContent = 'Sort';
+  sortLabel.setAttribute('for', 'sort-publications');
+  const sortSelect = document.createElement('select');
+  sortSelect.id = 'sort-publications';
+  [['newest', 'Newest first'], ['oldest', 'Oldest first'], ['title', 'Title A–Z'], ['shuffle', 'Shuffled']]
+    .forEach(([value, text]) => {
+      const option = document.createElement('option');
+      option.value = value;
+      option.textContent = text;
+      sortSelect.appendChild(option);
+    });
+  sortField.appendChild(sortLabel);
+  sortField.appendChild(sortSelect);
+
+  const original = new Map(sections.map((s) => [s, [...s.querySelectorAll('.pub-card')]]));
+  const shuffled = new Map(
+    sections.map((s) => {
+      const cards = original.get(s).slice();
+      for (let i = cards.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [cards[i], cards[j]] = [cards[j], cards[i]];
+      }
+      return [s, cards];
+    })
+  );
+  const yearOf = (card) => Number(card.dataset.year) || 0;
+  const applySort = () => {
+    const mode = sortSelect.value;
+    sections.forEach((section) => {
+      const grid = section.querySelector('.pub-grid');
+      if (!grid) return;
+      let cards = original.get(section).slice();
+      if (mode === 'shuffle') cards = shuffled.get(section);
+      else if (mode === 'title') cards.sort((a, b) => (a.dataset.title || '').localeCompare(b.dataset.title || ''));
+      else {
+        // A missing year should not masquerade as 0 and pile up at one end.
+        cards.sort((a, b) => {
+          const ya = yearOf(a), yb = yearOf(b);
+          if (!ya && !yb) return 0;
+          if (!ya) return 1;
+          if (!yb) return -1;
+          return mode === 'newest' ? yb - ya : ya - yb;
+        });
+      }
+      cards.forEach((card) => grid.appendChild(card));
+    });
+  };
+  sortSelect.addEventListener('change', applySort);
+  applySort();
+
   const select = (kind, chip) => {
     chips.querySelectorAll('.archive-filter')
       .forEach((b) => b.setAttribute('aria-pressed', String(b === chip)));
@@ -288,6 +351,7 @@ function setupPublications() {
 
   bar.appendChild(count);
   bar.appendChild(chips);
+  bar.appendChild(sortField);
   sections[0].parentElement.insertBefore(bar, sections[0]);
 }
 
