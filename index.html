@@ -380,9 +380,23 @@
     .section-marker .eyebrow { margin: 0; color: var(--copper-text); }
     .section-marker .lede { margin: 8px 0 0; max-width: 62ch; }
 
-    .dark-block { padding: clamp(36px, 6vw, 70px); color: var(--white); background: var(--ink); }
-    .dark-block h2 { max-width: 760px; }
-    .dark-block p { color: var(--on-dark); }
+    /* A section's opening. It used to be a full-height dark panel, and of
+       the nineteen on this site only one carries a lede — so eighteen were a
+       large filled box holding an eyebrow and a single line, repeated at the
+       top of every tab. It is a heading now: the label, the line, and a rule
+       to sit on. The page keeps its dark surfaces for things that are
+       actually blocks of content. */
+    .section-head {
+      margin-bottom: 34px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+      color: var(--ink);
+      background: none;
+    }
+    .section-head .eyebrow { margin-bottom: 12px; }
+    .section-head h2 { max-width: 22ch; margin: 0; font-size: clamp(1.7rem, 3vw, 2.7rem); }
+    .section-head .lede { max-width: 62ch; margin: 16px 0 0; color: var(--muted); }
+    .section-head p { color: var(--muted); }
 
     .editorial-images { display: grid; grid-template-columns: 1.3fr .7fr; gap: 18px; margin-top: 22px; align-items: end; }
     .editorial-image { position: relative; overflow: hidden; background: var(--surface-2); }
@@ -577,15 +591,15 @@
     .disc-toggle:hover { color: var(--teal-text); }
     /* On a dark section banner the toggle inherits the banner's white type,
        so only the chevron needs its own colour. */
-    .dark-block.is-collapsible { cursor: default; }
+    .section-head.is-collapsible { cursor: default; }
     .disc-toggle--banner { align-items: flex-start; gap: .38em; }
     .disc-toggle--banner::before {
       margin-top: .34em;
       border-color: var(--copper);
     }
-    .disc-toggle--banner:hover { color: rgba(255, 255, 255, .82); }
-    .disc-toggle--banner:focus-visible { outline-color: var(--copper-light); }
-    .dark-block.is-collapsible .lede { margin-bottom: 0; }
+    .disc-toggle--banner:hover { color: var(--teal-text); }
+    .disc-toggle--banner:focus-visible { outline-color: var(--copper); }
+    .section-head.is-collapsible .lede { margin-bottom: 0; }
     .disc-body { margin-top: 26px; }
     .disc-toggle:focus-visible { outline: 3px solid var(--copper); outline-offset: 5px; }
     /* Lists inside prose. The marker is CSS, so it never lands in the text
@@ -1145,7 +1159,7 @@
       /* Home renders its blocks as bare panel children; every one of them
          must clear the floating dock, or it slides underneath it. The
          self-padded sections above manage their own clearance. */
-      #panel-home > :where(p, .dark-block, .split, .process, .people-grid, .media-grid,
+      #panel-home > :where(p, .section-head, .split, .process, .people-grid, .media-grid,
         .video-grid, .grid-2, .grid-3, .photo-ribbon, .editorial-images, .image-data-panel,
         .feature-list, .app-shot, .game-frame, .pub-section, .tool-grid) {
         margin-left: 304px;
@@ -1269,7 +1283,6 @@
       .people-card { min-height: 210px; border: 0; border-radius: 3px; background: var(--surface); transition: transform .25s ease, color .25s ease, background .25s ease; }
       .people-card:hover { transform: translateY(-5px); color: var(--white); background: var(--ink); }
       .people-card h3 { font-family: var(--sans); font-weight: 600; letter-spacing: -.025em; }
-      .dark-block { border-radius: 3px; }
       .video-image, .app-shot, .game-frame { border-radius: 3px; overflow: hidden; }
       .photo-ribbon figure { height: 365px; border-radius: 3px; }
       .editorial-image { border-radius: 3px; }
@@ -1279,7 +1292,7 @@
     @media (min-width: 801px) and (max-width: 1120px) {
       .hero-copy, .panel:not(#panel-home) .page-head { padding-left: 288px; }
       #panel-home > .home-statement, #panel-home > .home-explore { padding-left: 288px; }
-      #panel-home > :where(p, .dark-block, .split, .process, .people-grid, .media-grid,
+      #panel-home > :where(p, .section-head, .split, .process, .people-grid, .media-grid,
         .video-grid, .grid-2, .grid-3, .photo-ribbon, .editorial-images, .image-data-panel,
         .feature-list, .app-shot, .game-frame, .pub-section, .tool-grid),
       #panel-home > :where(.disc-body, .section-tab-panel, .section-nav) {
@@ -1529,7 +1542,7 @@
       .tool-card { border: 0; border-radius: 16px; background: var(--surface); }
       .tool-copy { padding: 23px; }
       .tool-copy h3 { font-family: var(--sans); font-weight: 600; letter-spacing: -.03em; }
-      .dark-block, .image-data-panel, .editorial-image, .photo-ribbon figure, .video-image, .app-shot, .game-frame, .app-screen-strip figure { border-radius: 16px; overflow: hidden; }
+      .image-data-panel, .editorial-image, .photo-ribbon figure, .video-image, .app-shot, .game-frame, .app-screen-strip figure { border-radius: 16px; overflow: hidden; }
     }
 
     @media (max-width: 580px) {

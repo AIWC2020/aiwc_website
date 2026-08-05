@@ -266,7 +266,7 @@ const BLOCKS = {
       return marker;
     }
 
-    const wrap = el(document, 'div', { class: 'dark-block' });
+    const wrap = el(document, 'div', { class: 'section-head' });
     // A titled banner is an addressable section boundary: it gets a stable
     // anchor id, and the in-page navigation (jump links or tabs — see
     // setupSectionNav in app.mjs) is built from exactly these. Banners with
