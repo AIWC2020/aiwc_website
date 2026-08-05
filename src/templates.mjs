@@ -137,8 +137,26 @@ const proseColumn = (document, col, ctx, side) => {
   if (col.lead) {
     wrap.appendChild(el(document, 'p', { class: 'large', text: col.lead, key: ctx.t(`${side}.lead`) }));
   }
-  (col.paragraphs || []).forEach((text, i) => {
-    wrap.appendChild(el(document, 'p', { text, key: ctx.t(`${side}.paragraphs.${i}`) }));
+  // Editors write lists the way they read them — one paragraph per line,
+  // each starting with a bullet character. Rendered literally that is a run
+  // of paragraphs each opening with a stray "•", which is what several pages
+  // were showing. Consecutive bulleted lines become one real list; the
+  // marker is drawn by CSS, so it is never part of the text.
+  const paragraphs = col.paragraphs || [];
+  const BULLET = /^\s*[•·▪◦‣]\s+|^\s*[-–—]\s+/;
+  let list = null;
+  paragraphs.forEach((text, i) => {
+    const key = ctx.t(`${side}.paragraphs.${i}`);
+    if (BULLET.test(text)) {
+      if (!list) {
+        list = el(document, 'ul', { class: 'prose-list' });
+        wrap.appendChild(list);
+      }
+      list.appendChild(el(document, 'li', { text: text.replace(BULLET, ''), key }));
+      return;
+    }
+    list = null;
+    wrap.appendChild(el(document, 'p', { text, key }));
   });
   if (Array.isArray(col.features) && col.features.length) {
     const list = el(document, 'div', { class: 'feature-list' });
@@ -277,14 +295,22 @@ const BLOCKS = {
     grid.appendChild(el(document, 'p', { class: 'meta', text: block.label, key: ctx.t('label') }));
     grid.appendChild(el(document, 'blockquote', { text: block.quote, key: ctx.t('quote') }));
     wrap.appendChild(grid);
-    const row = el(document, 'div', { class: 'metric-row' });
-    (block.metrics || []).forEach((m, i) => {
-      const metric = el(document, 'div', { class: 'metric' });
-      metric.appendChild(el(document, 'strong', { text: m.value }));
-      metric.appendChild(el(document, 'span', { text: m.label, key: ctx.t(`metrics.${i}.label`) }));
-      row.appendChild(metric);
-    });
-    wrap.appendChild(row);
+    // Two of these blocks carry a quote and no numbers, and were drawing the
+    // metric row anyway — a tall empty band under the quote. With nothing to
+    // put in it the block is simply a pull-quote.
+    const metrics = block.metrics || [];
+    if (metrics.length) {
+      const row = el(document, 'div', { class: 'metric-row' });
+      metrics.forEach((m, i) => {
+        const metric = el(document, 'div', { class: 'metric' });
+        metric.appendChild(el(document, 'strong', { text: m.value }));
+        metric.appendChild(el(document, 'span', { text: m.label, key: ctx.t(`metrics.${i}.label`) }));
+        row.appendChild(metric);
+      });
+      wrap.appendChild(row);
+    } else {
+      wrap.classList.add('home-statement--quote');
+    }
     return wrap;
   },
 

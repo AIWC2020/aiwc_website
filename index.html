@@ -588,6 +588,32 @@
     .dark-block.is-collapsible .lede { margin-bottom: 0; }
     .disc-body { margin-top: 26px; }
     .disc-toggle:focus-visible { outline: 3px solid var(--copper); outline-offset: 5px; }
+    /* Lists inside prose. The marker is CSS, so it never lands in the text
+       or gets read out twice by a screen reader. */
+    .prose-list { margin: 0 0 20px; padding: 0; list-style: none; }
+    .prose-list li {
+      position: relative;
+      margin-bottom: 9px;
+      padding-left: 22px;
+      color: var(--muted);
+      font-size: 1.03rem;
+      line-height: 1.62;
+    }
+    .prose-list li::before {
+      content: "";
+      position: absolute;
+      left: 2px;
+      top: .72em;
+      width: 6px;
+      height: 1px;
+      background: var(--copper);
+    }
+
+    /* A statement block with no numbers is a pull-quote, and should not keep
+       the vertical room its metric row would have taken. */
+    .home-statement--quote { padding-bottom: clamp(44px, 5vw, 74px); }
+    .home-statement--quote .statement-grid { margin-bottom: 0; }
+
     /* A country's slice of a directory. */
     .dir-group { margin-bottom: 54px; }
     .dir-group:last-of-type { margin-bottom: 0; }
