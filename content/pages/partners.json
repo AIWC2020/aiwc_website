@@ -33,12 +33,6 @@
   },
   "blocks": [
     {
-      "type": "banner",
-      "eyebrow": "01 — Australia",
-      "title": "Partners in Australia",
-      "lede": ""
-    },
-    {
       "type": "partnerDirectory",
       "items": [
         {
@@ -532,12 +526,6 @@
         }
       ],
       "layout": "directory"
-    },
-    {
-      "type": "banner",
-      "eyebrow": "02 — India",
-      "title": "Partners in India",
-      "lede": ""
     },
     {
       "type": "callout",
