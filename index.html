@@ -623,10 +623,21 @@
       background: var(--copper);
     }
 
-    /* A statement block with no numbers is a pull-quote, and should not keep
-       the vertical room its metric row would have taken. */
-    .home-statement--quote { padding-bottom: clamp(44px, 5vw, 74px); }
+    /* A statement block with no numbers is a pull-quote, so it stops being a
+       filled panel too. Two full-bleed dark blocks stacked with a thin strip
+       of paper between them read as banding rather than as two ideas, and
+       that is what the top of Overview was doing: a quote in a dark box,
+       then its source note on paper, then the numbers in another dark box.
+       The quote now sits on the page; the numbers keep the panel, because a
+       row of figures is a block of content and a sentence is not. */
+    .home-statement--quote {
+      color: var(--ink);
+      background: none;
+      padding-block: clamp(38px, 4.5vw, 70px);
+    }
     .home-statement--quote .statement-grid { margin-bottom: 0; }
+    .home-statement--quote .meta { color: var(--copper-text); }
+    .home-statement--quote blockquote { color: var(--ink); }
 
     /* A country's slice of a directory. */
     .dir-group { margin-bottom: 54px; }
