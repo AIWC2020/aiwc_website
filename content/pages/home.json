@@ -6,7 +6,7 @@
   "template": "home",
   "intro": {
     "eyebrow": "Australia India Water Centre · Established 2020",
-    "title": "Two countries.\nOne water problem.",
+    "title": "Two countries.!\nOne water problem.",
     "lede": "Water is a global resource that matters to everyone and everything we do. More than ever, we need to understand and work together on water issues and challenges, now and in the future — and those issues need to be addressed with collective concerns, experiences, learnings and efforts.",
     "eyebrowSize": 100,
     "titleSize": 70,
@@ -17,17 +17,15 @@
     "textOffsetX": 0,
     "textOffsetY": 0
   },
-  "actions": [
-    {
-      "label": "How we work",
-      "page": "work",
-      "primary": true
-    },
-    {
-      "label": "Meet the researchers",
-      "page": "people"
-    }
-  ],
+  "menuImage": {
+    "image": "/assets/photos/page-aiwc5-conference-0.jpg",
+    "zoom": 100,
+    "positionX": 50,
+    "positionY": 50,
+    "fit": "cover"
+  },
+  "sectionNav": "tabs",
+  "introTab": "The premise",
   "blocks": [
     {
       "type": "statement",
@@ -81,8 +79,8 @@
       "type": "banner",
       "eyebrow": "02 — Why a joint centre",
       "title": "The same problems,\nfrom opposite ends\nof one ocean.",
-      "lede": "",
-      "tabLabel": "The problem"
+      "tabLabel": "The problem",
+      "lede": ""
     },
     {
       "type": "split",
@@ -104,64 +102,61 @@
       "type": "storyCards",
       "eyebrow": "03 — What we do",
       "title": "Four programmes, one agenda.",
-      "lede": "AIWC’s key activities are structured into four distinct areas. Each has two or more programme leaders, who meet six times a year to plan, design and oversee activities across partners and stakeholders.",
       "items": [
         {
-          "page": "research",
-          "label": "01",
           "title": "Research",
           "photo": {
             "image": "/assets/photos/page-our-work-0.jpg",
+            "alt": "Field researchers sampling water",
             "positionX": 50,
-            "positionY": 50,
-            "alt": "Field researchers sampling water"
-          }
+            "positionY": 50
+          },
+          "page": "research",
+          "label": "01"
         },
         {
-          "page": "education",
-          "label": "02",
           "title": "Education",
           "photo": {
             "image": "/assets/photos/page-our-work-1.jpg",
+            "alt": "Students in a teaching session",
             "positionX": 50,
-            "positionY": 50,
-            "alt": "Students in a teaching session"
-          }
+            "positionY": 50
+          },
+          "page": "education",
+          "label": "02"
         },
         {
-          "page": "training",
-          "label": "03",
           "title": "Training & capacity building",
           "photo": {
             "image": "/assets/photos/page-our-work-2.jpg",
+            "alt": "Training participants at a field site",
             "positionX": 50,
-            "positionY": 50,
-            "alt": "Training participants at a field site"
-          }
+            "positionY": 50
+          },
+          "page": "training",
+          "label": "03"
         },
         {
-          "page": "outreach",
-          "label": "04",
           "title": "Outreach",
           "photo": {
             "image": "/assets/photos/page-our-work-3.jpg",
+            "alt": "Workshop participants in discussion",
             "positionX": 50,
-            "positionY": 50,
-            "alt": "Workshop participants in discussion"
-          }
+            "positionY": 50
+          },
+          "page": "outreach",
+          "label": "04"
         }
       ],
-      "tabLabel": "What we do"
+      "tabLabel": "What we do",
+      "lede": "AIWC’s key activities are structured into four distinct areas. Each has two or more programme leaders, who meet six times a year to plan, design and oversee activities across partners and stakeholders."
     },
     {
       "type": "storyCards",
       "eyebrow": "04 — The people",
       "title": "Expertise that crosses disciplines,\nnot just borders.",
-      "lede": "AIWC partners bring engineering, ecology, social science, law and agriculture to the same table — which is what makes it a genuinely transdisciplinary group rather than a network of hydrologists.",
       "items": [
         {
-          "page": "people",
-          "label": "108",
           "title": "Researchers across 27 institutions",
           "text": "Every profile carries their qualifications, areas of interest, current projects and key publications — searchable by country and institution.",
           "photo": {
@@ -170,11 +165,11 @@
             "positionX": 50,
             "positionY": 50,
             "fit": "cover"
-          }
+          },
+          "page": "people",
+          "label": "108"
         },
         {
-          "page": "partners",
-          "label": "33",
           "title": "Partner institutions",
           "text": "Universities, national research institutes, government agencies and water businesses in Australia and India.",
           "photo": {
@@ -183,17 +178,20 @@
             "positionX": 50,
             "positionY": 50,
             "fit": "cover"
-          }
+          },
+          "page": "partners",
+          "label": "33"
         }
       ],
-      "tabLabel": "The people"
+      "tabLabel": "The people",
+      "lede": "AIWC partners bring engineering, ecology, social science, law and agriculture to the same table — which is what makes it a genuinely transdisciplinary group rather than a network of hydrologists."
     },
     {
       "type": "banner",
       "eyebrow": "05 — The journey",
       "title": "Five years, and the next five.",
-      "lede": "",
-      "tabLabel": "The journey"
+      "tabLabel": "The journey",
+      "lede": ""
     },
     {
       "type": "steps",
@@ -224,8 +222,8 @@
       "type": "banner",
       "eyebrow": "06 — Our partners",
       "title": "Who is in the room.",
-      "lede": "Universities, national institutes, government departments and water businesses — eleven partners in Australia, twenty-two in India.",
-      "tabLabel": "Our partners"
+      "tabLabel": "Our partners",
+      "lede": "Universities, national institutes, government departments and water businesses — eleven partners in Australia, twenty-two in India."
     },
     {
       "type": "partnerDirectory",
@@ -237,13 +235,15 @@
       "body": "Climate-resilient agriculture, groundwater security, PFAS and water quality, digital water tools, joint degree programmes and micro-credentials — the priorities set by partners at AIWC@5. If your institution works in any of them, we would like to hear from you."
     }
   ],
-  "menuImage": {
-    "image": "/assets/photos/page-aiwc5-conference-0.jpg",
-    "zoom": 100,
-    "positionX": 50,
-    "positionY": 50,
-    "fit": "cover"
-  },
-  "sectionNav": "tabs",
-  "introTab": "The premise"
+  "actions": [
+    {
+      "primary": true,
+      "page": "work",
+      "label": "How we work"
+    },
+    {
+      "page": "people",
+      "label": "Meet the researchers"
+    }
+  ]
 }
