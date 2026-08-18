@@ -39,6 +39,8 @@
         {
           "photo": {
             "image": "/assets/people/ajit-godbole.jpg",
+            "alt": "",
+            "zoom": null,
             "positionX": 50,
             "positionY": 22
           },
