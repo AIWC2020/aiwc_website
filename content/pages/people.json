@@ -6,7 +6,7 @@
   "template": "standard",
   "intro": {
     "eyebrow": "Our people",
-    "title": "{{ResearchersInWords}}\nwater researchers.",
+    "title": "One hundred and eight\nwater researchers.",
     "lede": "Engineering, ecology, social science, law and agriculture — filter by country or institution, and open any profile for areas of interest, current projects and key publications.",
     "eyebrowSize": 100,
     "titleSize": 70,
@@ -790,6 +790,8 @@
         {
           "photo": {
             "image": "/assets/people/ataur-rahman.webp",
+            "alt": "",
+            "zoom": null,
             "positionX": 50,
             "positionY": 22
           },
@@ -802,31 +804,31 @@
           "country": "Australia",
           "qualification": "PhD, Monash University",
           "interests": "Flood hydrology, statistical hydrology, urban stormwater management, rainwater harvesting, climate change impact assessment, green roof and social hydrology.",
-          "email": null,
+          "email": "A.Rahman@westernsydney.edu.au",
           "homepage": "https://www.westernsydney.edu.au/staff_profiles/WSU/professor_ataur_rahman",
           "profiles": [
             "https://scholar.google.com.au/citations?user=Efn_VmIAAAAJ&hl=en&oi=ao"
           ],
           "bio": [
-            "Ataur Rahman is a professor in water and environmental engineering and has over 30 years’ experiences in water industry, teaching and research. He is one of the authors of Australian Rainfall and Runoff. His current research focuses on statistical hydrology, urban hydrology, rainwater harvesting, stormwater management and climate change impact assessment. He has authored 392 refereed publications, which include 119 journal articles. He won the G N Alexander Medal from Engineers Australia and Western Sydney University’s Vice Chancellor’s Excellence Award in Post-Graduate Research Supervision. He is serving in the editorial board of Journal of Hydrologic Engineering (ASCE) and Water (Switzerland)."
+            "Ataur Rahman is a professor in water and environmental engineering and has over 30 years’ experiences in water industry, teaching and research. He is one of the authors of Australian Rainfall and Runoff (national guideline). His current research focuses on statistical hydrology, urban hydrology, rainwater harvesting, stormwater management and climate change impact assessment. He has authored 556 refereed publications, which include 199 journal articles. He won the G N Alexander Medal from Engineers Australia and Western Sydney University’s Vice Chancellor’s Excellence Award in Post-Graduate Research Supervision. He is serving in the editorial board of Journal of Hydrologic Engineering (ASCE) and Water (Switzerland)."
           ],
           "sections": [
             {
               "title": "Research Project",
               "items": [
-                "Regional flood methods in Australia, Project 5-Australian Rainfall and Runoff, funded by Engineers Australia.",
-                "Use of purple (vegetated) roof for stormwater management in Western Sydney, funded by Kanuf, Green Roof Diagnostics and Sydney Water.",
-                "Research and development of stormwater improvement devices, funded by Ocean Protect."
+                "1. Regional flood methods in Australia, Project 5-Australian Rainfall and Runoff, funded by Engineers Australia.",
+                "2. Use of purple (vegetated) roof for stormwater management in Western Sydney, funded by Kanuf, Green Roof Diagnostics and Sydney Water.",
+                "3. Evaluation of bioretention systems as a component of water sensitive urban design, funded by Blacktown City Council."
               ]
             },
             {
               "title": "Key Publications/Reports",
               "items": [
-                "Alim, M.A., Rahman, A., Tao, Z., Samali, B., Khan, M.M., Shirin, S. (2020). Feasibility Analysis of a Small-Scale Rainwater Harvesting System for Drinking Water Production at Werrington, New South Wales, Australia, Journal of Cleaner Production, 270, 122437.",
-                "Amos, C., Rahman, A., Gathenya, J.M., Friedler, E., Karim, F., Renzaho, A. (2020). Roof-Harvested Rainwater Use in Household Agriculture: Contributions to the Sustainable Development Goals, Water, 2020, 12, 332.",
-                "Rahman, A., Charron, C., Ouarda, T.B.M.J., Chebana, F. (2018). Development of regional flood frequency analysis techniques using generalized additive models for Australia, Stochastic Environmental Research & Risk Assessment, 32, 123-139.",
-                "Haque, M., Rahman, A., Hagare, D., Kibria, G., Karim, F. (2015). Estimation of catchment yield and associated uncertainties due to climate change in a mountainous catchment in Australia, Hydrological Processes, 29, 19, 4339-4349.",
-                "Ishak, E., Rahman, A., Westra, S., Sharma, A. and Kuczera, G. (2013). Evaluating the Non-stationarity of Australian Annual Maximum Floods. Journal of Hydrology, 494, 134-145."
+                "1. Afrin, N., Rahman, A., Mim, S.T., Sharafati, A., Ahamed, F. (2026). Uncertainty analysis for AI-based regional flood methods in Australia, Hydrological Sciences Journal, 1-17.",
+                "2. Pan, X., Yildirim, G., Rahman, A. (2026). Peaks-Over-Threshold Based Regional Flood Frequency Analysis Models based on Ordinary Kriging: A Case Study for Eastern Australia, Stochastic Environmental Research and Risk Assessment, (2026) 40:32.",
+                "3. Ross, T., Alim, M.A., Rahman, A. (2025). Simple and effective filtration system for drinking water production from harvested rainwater in rural areas. Journal of Environmental Management, 373, 123887.",
+                "4. Ahmed, A., Khan, Z., Rahman, A. (2024). Searching for Homogeneous Regions in Regional Flood Frequency Analysis for Southeast Australia, Journal of Hydrology – Regional Studies, 53, 101782.",
+                "5. Alim, M.A., Jahan, S., Rahman, A., Rahman, M.A., Liebman, M., Garner, B., Griffith, R., Griffith, M, Tao, Z.  (2023). Experimental investigation of a multilayer detention roof for stormwater management, Journal of Cleaner Production, 395, 136413."
               ]
             }
           ],
@@ -1747,7 +1749,7 @@
           "homepage": "https://www.westernsydney.edu.au/staff_profiles/uws_profiles/doctor_jason_reynolds",
           "profiles": [
             "https://scholar.google.com/citations?user=0qC2pQUAAAAJ&hl=en",
-            "https://orcid.org/0000-0002-2170-1370"
+            "https://orcid.org/my-orcid?orcid=0000-0002-2170-1370"
           ],
           "bio": [
             "Dr Jason K. Reynolds is an environmental geochemist at Western Sydney University with 15 years' experience researching the biogeochemistry of soils, sediments and waters, with particular expertise in peatlands and acid sulfate soils and their associated impacts on water quality. His work examines carbon and nutrient dynamics in world-heritage peatlands and the effects of bushfire, drought and erosion on these vulnerable systems, alongside the mobilisation of acidity and trace elements from acid sulfate soils and the consequences for terrestrial and estuarine water quality. He is Program Lead for Environmental Sciences at Western Sydney University, President of the New South Wales Branch of Soil Science Australia, and a member of the Soil Science Australia Federal Accreditation Board. Dr Reynolds has published peer-reviewed papers on peatland soil carbon loss, sulfur and microbial controls on soil biodiversity, trace-element geochemistry in coastal acid sulfate landscapes, and nutrient cycling and recovery."
@@ -2664,7 +2666,7 @@
           "email": "m.varua@westernsydney.edu.au",
           "homepage": "http://www.westernsydney.edu.au/staff_profiles/uws_profiles/professor_basant_maheshwari",
           "profiles": [
-            "https://scholar.google.com.au/citations?user=w2SatUoAAAAJ"
+            "https://scholar-google-com-au.ezproxy.uws.edu.au/citations?user=w2SatUoAAAAJ"
           ],
           "bio": [
             "Maria is an agricultural economist with expertise in agricultural, water and resource economics, with a special focus on rural development, gender equity, sustainable consumption, sustainable tourism, cost benefit analysis and capacity building. She also conducts research on corporate social responsibility, finance, and business education. Maria Estela has participated in several consultancy and research projects, including a $1.2 million project with ACIAR on water management, a CRC project on water use, and a Westpac Foundation project on NGO-corporate relationships. She has published in various academic journals such as Journal of Hydrology, Economic Record, Emerging Markets Review, Asia Journal of Tourism Research, Third Sector Review, China-USA Business Review, International Journal of Economics and Finance, International Journal of Development and Conflict, International Business Research, Asia Pacific Development Journal."
@@ -3653,7 +3655,7 @@
           "email": "rbharti@iitg.ac.in",
           "homepage": "https://www.iitg.ac.in/rbharti/",
           "profiles": [
-            "https://scholar.google.com/citations?user=_HClKrEAAAAJ&hl=en"
+            "http://www.scholar.google.com/citations?user=_HClKrEAAAAJ&hl=en"
           ],
           "bio": [
             "Faculty member at the Department of Civil Engineering, Indian Institute of Technology Guwahati. With the 11 years’ of experience in geoinformatics (Remote Sensing and GIS) technology and its applications in the Earth Sciences, I have dedicated myself in earth and planetary studies such as hydro-geomorphology, snow and glacier studies, spectroscopy of natural and manmade materials and Martian surface exploration. I am actively involved in the research works with ISRO and DRDO to establish a spectroscopy lab (with equipment) for the UG/PG students of our institute."
@@ -4366,7 +4368,7 @@
           "email": "susana.neto@netcabo.pt",
           "homepage": "https://research-repository.uwa.edu.au/en/persons/susana-neto",
           "profiles": [
-            "https://orcid.org/0000-0001-5231-8633"
+            "http://orcid.org/0000-0001-5231-8633"
           ],
           "bio": [
             "Susana Neto worked in research and policy for integrated water management and territorial planning for the last 35 years, holding a degree in Civil Engineering (1982), a MSc in Urban and Regional Planning (1987), and a PhD in Water and Territorial Planning (2010). She has published and presented around 200 titles in water governance, and territorial planning.",
@@ -4799,6 +4801,22 @@
             }
           ],
           "instituteSlug": "university-of-melbourne"
+        },
+        {
+          "photo": null,
+          "name": "test",
+          "slug": "test",
+          "sortName": "",
+          "designation": "",
+          "institute": "test",
+          "country": "Australia",
+          "qualification": "",
+          "interests": "",
+          "email": "",
+          "homepage": "",
+          "profiles": [],
+          "bio": [],
+          "sections": []
         }
       ]
     }
