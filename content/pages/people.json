@@ -6,7 +6,7 @@
   "template": "standard",
   "intro": {
     "eyebrow": "Our people",
-    "title": "One hundred and eight\nwater researchers.",
+    "title": "{{ResearchersInWords}}\nwater researchers.",
     "lede": "Engineering, ecology, social science, law and agriculture — filter by country or institution, and open any profile for areas of interest, current projects and key publications.",
     "eyebrowSize": 100,
     "titleSize": 70,

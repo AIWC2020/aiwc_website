@@ -2,7 +2,7 @@
   "name": "AIWC",
   "fullName": "Australia India Water Centre",
   "tagline": "A partnership for sustainable water futures",
-  "description": "The Australia India Water Centre — a partnership of 33 institutions and 108 researchers across Australia and India, working on research, education, training and outreach for sustainable water futures.",
+  "description": "The Australia India Water Centre — a partnership of {{partnerInstitutions}} institutions and {{researchers}} researchers across Australia and India, working on research, education, training and outreach for sustainable water futures.",
   "url": "https://aiwc2020.github.io",
   "base": "/aiwc_website",
   "languages": [

@@ -35,7 +35,84 @@ const LANGS = SITE.languages;
 const template = readFileSync(join(ROOT, 'index.html'), 'utf8');
 const PAGES = buildRegistry(ROOT);
 const { people, partners } = loadCollections(ROOT);
+/* ── counts that appear in prose ─────────────────────────────────────────
+ *
+ * "One hundred and eight water researchers" was typed by hand, so the 109th
+ * researcher would quietly make the headline a lie while the counter beside
+ * it — which is computed — disagreed with it on the same screen.
+ *
+ * Only these tokens are substituted, never bare digits. "Launched with 24
+ * partners" is a fact about 2020 and must not follow the partner list around,
+ * and a researcher's own publication count is theirs, not ours. A number is
+ * only derived if somebody marked it derived.
+ *
+ * The two senses of "institution" are deliberately not one token: 33 partner
+ * institutions and the 27 institutions our researchers actually belong to are
+ * different figures, and naming them apart is what stops them being confused.
+ */
+const ONES = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten',
+  'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
+const TENS = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+
+/** Spelled-out form for headline prose. Falls back to digits past 999. */
+const inWords = (n) => {
+  if (!Number.isInteger(n) || n < 0 || n > 999) return String(n);
+  if (n < 20) return ONES[n];
+  if (n < 100) return TENS[Math.floor(n / 10)] + (n % 10 ? '-' + ONES[n % 10] : '');
+  const rest = n % 100;
+  return ONES[Math.floor(n / 100)] + ' hundred' + (rest ? ' and ' + inWords(rest) : '');
+};
+
+const upperFirst = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+
+const COUNTS = {
+  researchers: people.length,
+  partnerInstitutions: partners.length,
+  researcherInstitutions: new Set(people.map((p) => p.institute).filter(Boolean)).size,
+};
+
+/* Each count offers three forms: digits, words, and words for the start of a
+ * sentence — so an author never has to reach for the raw number. */
+const TOKENS = {};
+for (const [name, value] of Object.entries(COUNTS)) {
+  TOKENS[name] = String(value);
+  TOKENS[name + 'InWords'] = inWords(value);
+  TOKENS[upperFirst(name) + 'InWords'] = upperFirst(inWords(value));
+}
+
+const unknownTokens = new Set();
+const fillCounts = (value) => {
+  if (typeof value === 'string') {
+    return value.replace(/\{\{(\w+)\}\}/g, (whole, name) => {
+      if (name in TOKENS) return TOKENS[name];
+      unknownTokens.add(name);
+      return whole;
+    });
+  }
+  if (Array.isArray(value)) return value.map(fillCounts);
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, fillCounts(v)]));
+  }
+  return value;
+};
+
+for (let i = 0; i < PAGES.length; i++) PAGES[i] = fillCounts(PAGES[i]);
+SITE.description = fillCounts(SITE.description);
+
+// A misspelled token renders literally on the page, so name it rather than
+// letting {{researcher}} reach a reader. Not fatal: one wrong word is not a
+// reason to stop publishing the site.
+if (unknownTokens.size) {
+  console.warn(
+    `Unknown count token${unknownTokens.size > 1 ? 's' : ''} left as written: ` +
+      `${[...unknownTokens].map((t) => `{{${t}}}`).join(', ')}. ` +
+      `Available: ${Object.keys(TOKENS).map((t) => `{{${t}}}`).join(', ')}`
+  );
+}
+
+// Built after substitution, or the lookup would hand back the unfilled copies.
 const pageById = new Map(PAGES.map((p) => [p.slug, p]));
+
 
 const href = (lang, page) => urlFor(lang, page, PAGES, BASE);
 const entryHref = (lang, kind, slug) => urlForEntry(lang, kind, slug, BASE);

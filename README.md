@@ -31,6 +31,25 @@ each other on every build, so the editor cannot offer a block the site cannot
 draw, and cannot call a field optional that the site refuses to publish without.
 If those two ever drift apart the build says so by name.
 
+**Never type a count into the prose.** The people page headline used to say
+"One hundred and eight water researchers" as plain text, beside a counter that
+computes itself — so the 109th researcher would have made the page contradict
+itself in public. Write a token instead and the build fills in the real figure:
+
+| Token | Today | |
+|---|---|---|
+| `{{researchers}}` | 108 | researchers on the site |
+| `{{researcherInstitutions}}` | 27 | institutions those researchers belong to |
+| `{{partnerInstitutions}}` | 33 | partner institutions |
+
+Each also has `…InWords` ("one hundred and eight") and `…InWords` capitalised
+for the start of a sentence — `{{ResearchersInWords}}`.
+
+The two senses of *institution* are separate tokens on purpose: 33 partners and
+27 employers are different numbers, and merging them is how the wrong one gets
+published. Only tokens are substituted, never bare digits — "launched with 24
+partners" is a fact about 2020 and must keep saying 24.
+
 **A researcher with no portrait still publishes.** Their card shows their
 initials until a photo is added — "Dr Vanita Yadav" becomes *VY* — and `npm run
 verify` lists who is missing one on every run. This is deliberate: blocking the

@@ -157,7 +157,7 @@
       "title": "Expertise that crosses disciplines,\nnot just borders.",
       "items": [
         {
-          "title": "Researchers across 27 institutions",
+          "title": "Researchers across {{researcherInstitutions}} institutions",
           "text": "Every profile carries their qualifications, areas of interest, current projects and key publications — searchable by country and institution.",
           "photo": {
             "image": "/assets/photos/page-aiwc5-conference-2.jpg",

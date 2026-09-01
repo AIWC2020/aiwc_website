@@ -63,8 +63,11 @@ collections:
         collapsed: false
         fields: &introFields
           - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
-          - { label: "Title", name: "title", widget: "text", hint: "Line break = where the title wraps to a new line." }
-          - { label: "Introduction", name: "lede", widget: "text", hint: "One or two sentences. Also the page's Google description and its preview when shared." }
+          # Counting anything by hand goes stale the moment someone is added, and
+          # the number sits next to a counter that updates itself — so the page
+          # contradicts itself in public. These write the real figure at build.
+          - { label: "Title", name: "title", widget: "text", hint: "Line break = where the title wraps to a new line. For a count, write {{ResearchersInWords}}, {{researchers}}, {{researcherInstitutions}} or {{partnerInstitutions}} instead of typing the number." }
+          - { label: "Introduction", name: "lede", widget: "text", hint: "One or two sentences. Also the page's Google description and its preview when shared. Never type a count — use {{researchers}}, {{researcherInstitutions}} or {{partnerInstitutions}}." }
           - { label: "Eyebrow Text Size (%)", name: "eyebrowSize", widget: "number", default: 100, value_type: "int", min: 0, max: 200, step: 5, required: false }
           - { label: "Title Size (%)", name: "titleSize", widget: "number", default: 70, value_type: "int", min: 0, max: 200, step: 5, required: false }
           - { label: "Intro Text Size (%)", name: "ledeSize", widget: "number", default: 100, value_type: "int", min: 0, max: 200, step: 5, required: false }
