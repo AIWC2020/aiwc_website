@@ -1,5 +1,11 @@
 # AIWC — Australia India Water Centre
 
+| | |
+|---|---|
+| **Website** | <https://aiwc2020.github.io/aiwc_website/> |
+| **Edit the site** | <https://aiwc2020.github.io/aiwc_website/admin/> — sign in with a GitHub access token ([how](#signing-in)) |
+| **Published by** | GitHub Actions, on every push to `main` ([what to do when a change does not appear](#my-change-is-not-on-the-site)) |
+
 The Centre's website: 15 pages, 108 researcher profiles and 33 partner
 institutions, built as static HTML and published to GitHub Pages.
 
@@ -8,72 +14,50 @@ structure: the same chrome, the same 24 block types, the same per-block layout
 controls and the same CMS. The palette is AIWC's own — cool deep water,
 indigo and ochre for the two countries, rather than MARVI's green and copper.
 
-Two block types exist here that MARVI has no equivalent for, because AIWC has
-content MARVI does not: `portraitDirectory` and `partnerDirectory` render the
-108 researchers and 33 partner institutions from their own collections, each
-linking to its own page.
-
-## How the site is built
-
-Every page is one file in `content/pages/` — `{ menuName, slug, order,
-published, template, parent, intro, heroImage, blocks[] }`. Researchers and
-partners are one file each in `content/people/` and `content/partners/`. The
-build renders all of it into `_site/`, one real URL per document:
-
-```bash
-npm run build     # content/ -> _site/ (156 documents)
-npm run verify    # structure, links, images, CMS coverage
-npm test          # drives the researcher directory against the built HTML
-npm run check     # all three
-npm run serve     # build + serve on :8913
-```
-
-**`index.html` is the chrome template only** — head, CSS, rail, footer. It
-contains no page content. The build strips external scripts and renders every
-panel from data through `src/templates.mjs`, so there is exactly one rendering
-path and the CMS preview cannot drift from the real page.
-
-### Base path — the thing to get right
-
-There is no `CNAME`, so this is a GitHub *project* page served from
-`https://marvi-groundwater.github.io/aiwc/`. Every absolute URL therefore
-carries `/aiwc`, taken from `base` in `content/site.json`.
-
-Adding a `CNAME` file switches the whole site to domain-root URLs
-automatically — `loadSite()` in `src/registry.mjs` ignores `base` the moment a
-`CNAME` exists. Nothing else needs changing.
-
-To preview the project-page layout locally, serve the parent of `_site` with
-`_site` linked as `aiwc/`, or just visit `http://127.0.0.1:8913/aiwc/` after
-`npm run serve` from a directory arranged that way.
+Two things exist here that the MARVI site has no equivalent for, because AIWC
+has content MARVI does not: the searchable **researcher directory** and the
+**partner directory**, each of which also gives every researcher and every
+institution a page of its own.
 
 ## Editing
 
-The CMS lives at `/admin/` (Decap, GitHub backend, via the org's OAuth broker).
-Three collections mirror `content/`: **Pages**, **Researchers**, **Partner
-institutions**. A page is a header plus content **blocks** you add and drag to
-reorder; each block type shows only its own fields.
+The CMS lives at <https://aiwc2020.github.io/aiwc_website/admin/> — **Sveltia
+CMS**, talking straight to GitHub with no broker in between. A page is a header
+plus content **blocks** you add and drag to reorder; each block type shows only
+its own fields. Saving commits to `main`, and the site rebuilds itself.
 
-`npm run verify` fails if a block type exists in `src/templates.mjs` but has no
-CMS editor, or vice versa — an un-editable block would be silently dropped the
-first time someone saved that page.
+What the CMS lets you save and what the site will publish are checked against
+each other on every build, so the editor cannot offer a block the site cannot
+draw, and cannot call a field optional that the site refuses to publish without.
+If those two ever drift apart the build says so by name.
 
-### Editing
+The CMS has **one collection: Pages**. Everything shown on a page is edited
+inside that page — including the 108 researchers (in the Researchers block on
+*Our people*) and the 33 partner institutions (in *Our partners*). Each of them
+still gets its own address, `/people/<name>/` and `/partners/<name>/`,
+generated from those blocks.
 
-The CMS at `/admin/` has **one collection: Pages**. Everything shown on a page
-is edited inside that page — including the 108 researchers (in the Researchers
-block on *Our people*) and the 33 partner institutions (in *Our partners*).
+The trade-off, stated plainly: `content/pages/people.json` is 434 KB, and the
+CMS rewrites the whole file on every save. That was a deliberate choice — one
+place per page beats a smaller diff — but it has a sharp edge worth
+understanding.
 
-They each still get their own address. `loadCollections()` in
-`src/registry.mjs` reads them back out of the pages, keyed on the block type
-rather than the page slug, and the build generates `/people/<slug>/` and
-`/partners/<slug>/` from them. So the storage shape follows the site rather
-than the other way round.
+**Two people editing *Our people* at the same time can lose work.** Sveltia
+commits with GitHub's `createCommitOnBranch` and an `expectedHeadOid`, but it
+reads that hash immediately before writing rather than when the editor opened
+the page. So the guard only covers the instant of the write. If you open the
+page, someone else saves, and you save ten minutes later, your copy of the
+whole file wins and their changes are gone — with no warning to either of you.
 
-The trade-off, stated plainly: `content/pages/people.json` is 436 KB, and the
-CMS rewrites the whole file on every save. Two people editing different
-researchers at the same time will conflict. That was a deliberate choice —
-one place per page beats a smaller diff.
+Until researchers live in one file each, the protection is procedural:
+
+- One person edits *Our people* at a time. It is a big page; agree who has it.
+- **Reload `/admin/` immediately before you start editing**, not before you
+  save. A stale tab is the whole danger.
+- After saving, check the change is live before closing the tab.
+
+Nothing has been lost so far — `git log content/pages/people.json` is the
+record, and every earlier save is still in it.
 
 ### Signing in
 
@@ -146,42 +130,48 @@ GitHub has announced client-side PKCE, which would give a one-click sign-in
 with no server at all. It is not shipped yet; when it is, this setup gets
 strictly better with no migration.
 
-## Structure
-
-```
-index.html              chrome template (design system lives here)
-src/
-  registry.mjs          what exists: pages, people, partners, URLs, base path
-  templates.mjs         every block renderer + the three page templates
-  app.mjs               browser behaviour: drawer, directory filter, reveal
-scripts/
-  build.mjs             content/ -> _site/
-  verify.mjs            structural checks
-  test-directory.mjs    drives the built directory page in a DOM
-  migrate/              one-time import from aiwc.org.au (provenance only)
-content/
-  site.json             name, URL, base path, languages
-  pages/*.json          15 navigable pages
-  people/*.json         108 researcher profiles
-  partners/*.json       33 partner institutions
-assets/                 portraits, logos, photography
-admin/                  Decap CMS
-```
-
-## Translation
-
-The build is multi-language capable — `languages` in `content/site.json` drives
-it, and pages render at `/<lang>/…` with `hreflang` alternates. It currently
-ships **English only**: shipping a language switcher that yields English
-content would be worse than not offering one, so the switcher is removed from
-the chrome whenever `languages` has a single entry.
-
 ## Deployment
 
 Push to `main` → `.github/workflows/deploy.yml` builds, verifies, runs the
 directory test, and publishes `_site/` to GitHub Pages.
 
 Pages must be set to **Source: GitHub Actions** (not "deploy from a branch").
+
+### My change is not on the site
+
+**Saving in the CMS is not publishing.** The CMS reports success the moment
+the commit lands, which is true — but the commit still has to pass `npm run
+build`, `npm run verify` and the directory test before Pages is updated. If any
+of them fails, the commit stays on `main` and the live site keeps serving the
+last version that passed. Nothing is lost; nothing is published either.
+
+Nobody is notified when that happens. So when a change does not appear:
+
+```bash
+gh run list --repo AIWC2020/aiwc_website --limit 5
+```
+
+A red run is the answer. Read why:
+
+```bash
+gh run view --repo AIWC2020/aiwc_website --log-failed
+```
+
+Then fix the content it names and push. The backlog releases itself — every
+commit that queued up behind the failure goes live together.
+
+**Do not fix a red build by relaxing the check.** Those checks are why a
+half-finished profile cannot reach the public directory. The failing record is
+the bug.
+
+> This is not hypothetical. On 2026-08-18 an empty profile named `test` was
+> created in the CMS. `verify` refuses to publish a researcher with no
+> portrait, so every deploy failed from that moment. Five real content commits
+> — an institution change, a new portrait and biography, a rewritten profile —
+> sat unpublished for two weeks while the CMS reported every save as
+> successful. Deleting the one empty profile released all of them at once.
+> The CMS now refuses to save a researcher without a portrait, which is the
+> same rule stated in the place where the mistake was made.
 
 ## Known gaps
 
@@ -194,3 +184,8 @@ Pages must be set to **Source: GitHub Actions** (not "deploy from a branch").
   verify` prints them as a warning each run.
 - **Symposium PDFs are linked, not mirrored** — they still resolve to
   aiwc.org.au and will break if that site goes away.
+
+## Developing
+
+How the build works, the project base path and the repository layout are in
+[docs/developing.md](docs/developing.md).
