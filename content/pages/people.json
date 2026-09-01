@@ -1727,6 +1727,8 @@
         {
           "photo": {
             "image": "/assets/people/jason-reynolds.webp",
+            "alt": "",
+            "zoom": null,
             "positionX": 50,
             "positionY": 22
           },
@@ -1742,10 +1744,11 @@
           "email": "j.reynolds@westernsydney.edu.au",
           "homepage": "https://www.westernsydney.edu.au/staff_profiles/uws_profiles/doctor_jason_reynolds",
           "profiles": [
-            "https://scholar.google.com/citations?user=0qC2pQUAAAAJ&hl=en"
+            "https://scholar.google.com/citations?user=0qC2pQUAAAAJ&hl=en",
+            "https://orcid.org/my-orcid?orcid=0000-0002-2170-1370"
           ],
           "bio": [
-            "Jason Reynolds is a senior lecturer in soil and water interactions with over 15 years’ teaching, research and outreach experience. His current research is focused on: geochemical modelling; groundwater monitoring; recycled water re-use; interactions between soil and water; emerging contaminants in the Anthropocene; capacity building and agricultural enterprise; and the water and soil nexus within the sustainable development goals. He is focused on understanding the social and indigenous aspects of water and land management. He has more than 60 publications to his name, including over 40 articles in peer-reviewed, international journals and leads several international programs focused on research and engagement."
+            "Dr Jason K. Reynolds is an environmental geochemist at Western Sydney University with 15 years' experience researching the biogeochemistry of soils, sediments and waters, with particular expertise in peatlands and acid sulfate soils and their associated impacts on water quality. His work examines carbon and nutrient dynamics in world-heritage peatlands and the effects of bushfire, drought and erosion on these vulnerable systems, alongside the mobilisation of acidity and trace elements from acid sulfate soils and the consequences for terrestrial and estuarine water quality. He is Program Lead for Environmental Sciences at Western Sydney University, President of the New South Wales Branch of Soil Science Australia, and a member of the Soil Science Australia Federal Accreditation Board. Dr Reynolds has published peer-reviewed papers on peatland soil carbon loss, sulfur and microbial controls on soil biodiversity, trace-element geochemistry in coastal acid sulfate landscapes, and nutrient cycling and recovery."
           ],
           "sections": [
             {
