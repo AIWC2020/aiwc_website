@@ -17,6 +17,21 @@
     "textOffsetX": 0,
     "textOffsetY": 0
   },
+  "heroImage": {
+    "image": "/assets/photos/page-aiwc5-conference-1.jpg",
+    "zoom": 100,
+    "positionX": 50,
+    "positionY": 45,
+    "fit": "cover"
+  },
+  "menuImage": {
+    "image": "/assets/photos/page-aiwc5-conference-1.jpg",
+    "zoom": 100,
+    "positionX": 50,
+    "positionY": 50,
+    "fit": "cover"
+  },
+  "introTab": "",
   "blocks": [
     {
       "type": "split",
@@ -27,8 +42,10 @@
           "Western Sydney University, Locked Bag 1797, Penrith NSW 2751",
           "Distinguished Professor Basant Maheshwari — Director — AIWC, Western Sydney University — b.maheshwari@westernsydney.edu.au",
           "A/Professor Dharma Hagare — AIWC Country Co-ordinator, Australia — D.Hagare@westernsydney.edu.au",
-          "Centre Manager — AIWC — Western Sydney University — aiwc@westernsydney.edu.au"
-        ]
+          "Ms. Edrina Choudhary, Centre Manager — AIWC — Western Sydney University — aiwc@westernsydney.edu.au"
+        ],
+        "stat": "",
+        "caption": ""
       },
       "right": {
         "kind": "prose",
@@ -38,7 +55,9 @@
           "Professor Parmeswar Iyer — Co-Director — AIWC; Director, IIT Guwahati — director@iitg.ac.in",
           "Prof. Subashisa Datta — AIWC Country Co-ordinator, India — subashisa@iitg.ac.in",
           "Prof. Suresh Kartha — Head, Centre for Sustainable Water Research — hocswr@iitg.ac.in"
-        ]
+        ],
+        "stat": "",
+        "caption": ""
       }
     },
     {
@@ -48,22 +67,9 @@
     },
     {
       "type": "button",
+      "heading": "",
       "label": "AIWC on YouTube",
       "url": "https://www.youtube.com/@australiaindiawatercentre-9628"
     }
-  ],
-  "menuImage": {
-    "image": "/assets/photos/page-aiwc5-conference-1.jpg",
-    "zoom": 100,
-    "positionX": 50,
-    "positionY": 50,
-    "fit": "cover"
-  },
-  "heroImage": {
-    "image": "/assets/photos/page-aiwc5-conference-1.jpg",
-    "zoom": 100,
-    "positionX": 50,
-    "positionY": 45,
-    "fit": "cover"
-  }
+  ]
 }
