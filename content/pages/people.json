@@ -972,6 +972,8 @@
         {
           "photo": {
             "image": "/assets/people/brajesh-singh.webp",
+            "alt": "",
+            "zoom": null,
             "positionX": 50,
             "positionY": 22
           },
@@ -980,12 +982,12 @@
           "slug": "brajesh-singh",
           "sortName": "Brajesh Singh",
           "designation": "Professor",
-          "institute": "Western Sydney University",
+          "institute": "University of Western Australia",
           "country": "Australia",
           "qualification": "PhD, Imperial College, London, UK",
           "interests": "Agriculture, environmental science irrigation, water-use efficiency, water microbiology with focus on industry and policy engagements.",
-          "email": "b.singh@westernsydney.edu.au",
-          "homepage": null,
+          "email": "brajesh.singh@uwa.edu.au",
+          "homepage": "https://research-repository.uwa.edu.au/en/persons/brajesh-kumar-singh/",
           "profiles": [],
           "bio": [
             "Prof Singh’s research has advanced critical areas of ecosystem science, particularly linking soil biodiversity to key ecosystem functions and services and has developed tools to improve farm productivity and environmental sustainability. This includes climate adaptation tools for the agriculture industry, management solutions to increase soil organic matter, increased export market access for agriculture produces, and training for farmers, consultants and policy advisors in sustainable agriculture and the Sustainable Development Goals."
