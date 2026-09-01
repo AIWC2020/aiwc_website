@@ -139,7 +139,17 @@ collections:
             summary: "{{fields.label}}"
             fields: &actionFields
               - { label: "Label", name: "label", widget: "string" }
-              - { label: "Goes to page (address)", name: "page", widget: "string", hint: "A page address from this site, e.g. approach" }
+              # A typed page address that does not exist fails the build and stops the
+              # whole site publishing, so this picks from the pages that exist rather
+              # than trusting anyone to type one correctly.
+              - label: "Goes to page"
+                name: "page"
+                widget: "relation"
+                collection: "pages"
+                value_field: "slug"
+                display_fields: ["menuName"]
+                search_fields: ["menuName", "slug"]
+                hint: "Choose a page on this site."
               - { label: "Filled style", name: "primary", widget: "boolean", default: false, required: false }
           - { label: "i18n", name: "i18n", widget: "hidden", required: false }
 
@@ -316,7 +326,17 @@ collections:
                 widget: "list"
                 summary: "{{fields.title}}"
                 fields:
-                  - { label: "Goes to page (address)", name: "page", widget: "string" }
+                  # A typed page address that does not exist fails the build and stops the
+                  # whole site publishing, so this picks from the pages that exist rather
+                  # than trusting anyone to type one correctly.
+                  - label: "Goes to page"
+                    name: "page"
+                    widget: "relation"
+                    collection: "pages"
+                    value_field: "slug"
+                    display_fields: ["menuName"]
+                    search_fields: ["menuName", "slug"]
+                    hint: "Choose a page on this site."
                   - { label: "Small label", name: "label", widget: "string", required: false }
                   - { label: "Title", name: "title", widget: "string" }
                   - { label: "Photo", name: "photo", widget: "object", collapsed: true, fields: *photoFields }
