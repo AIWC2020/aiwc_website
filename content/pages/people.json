@@ -4575,7 +4575,9 @@
         },
         {
           "photo": {
-            "image": "/assets/people/dr-vanita-yadav.jpg",
+            "image": "/aiwc_website/assets/photos/Dr Vanita Yadav 1.jpg",
+            "alt": "",
+            "zoom": null,
             "positionX": 50,
             "positionY": 22
           },
@@ -4595,25 +4597,26 @@
             "https://orcid.org/0000-0001-5237-1186"
           ],
           "bio": [
-            "Dr. Vanita Yadav is a Senior Research Fellow at the Urban Transformations Research Centre, Western Sydney University, Australia. With over 14 years of transdisciplinary experience spanning three countries – Australia, the USA, and India, Vanita has expertise in innovation management, entrepreneurship, sustainability, business strategy and sustainable business models. She was awarded the prestigious Fulbright fellowship for research in sustainability-driven entrepreneurship at the Massachusetts Institute of Technology (MIT), USA. She was also a fellow at the South Asia Institute, Harvard University, for her work on innovation management. Vanita has led and worked on externally funded grants (over $1.5 million) and held many leadership positions, such as Discipline Leader (Innovation & Management) and Area Chairperson. She has over 50 research publication outputs, including A/Q1 publications, Best Paper Awards, supervised PhDs to completion, serves on editorial boards, and is a keynote speaker and expert panelist at international events."
+            "Dr Vanita Yadav is an international research and innovation leader specialising in agribusiness, entrepreneurship, sustainability, innovation, and Australia–India collaboration. She is a Senior Researcher at Western Sydney University’s Urban Transformations Research Centre, where she leads transdisciplinary research and industry engagement initiatives that bring together government, industry, researchers, and communities to address complex challenges in food systems, climate governance, sustainable development, and economic growth.\nWith over 15 years of international experience across Australia, the United States, and India, Dr Vanita has led and contributed to major interdisciplinary projects spanning innovation, trade, governance, and sustainability. She is a Fulbright postdoctoral alumna of MIT and a former Research Affiliate at Harvard University’s South Asia Institute. She has authored over 50 scholarly publications, supervises doctoral researchers, and serves as keynote speaker and expert panelist at international forums.\nDr Yadav leads the AgriMaitri initiative, supported through a Maitri Grant from the Australian Government's Centre for Australia India Relations, strengthening agribusiness partnerships, knowledge exchange, and strategic policy dialogue between Australia and India."
           ],
           "sections": [
             {
               "title": "Research Project",
               "items": [
-                "Project: Enhancing Agribusiness and Strategic Policy Dialogue between Australia and India. Institute of Culture and Society (ICS), Western Sydney University.",
-                "Project: Women Entrepreneurs in the New Indian Middle Class: Macro and Micro Perspectives, Indian Council of Social Science Research (ICSSR), 2015-2018.",
-                "Project: Sustainability-driven Entrepreneurship. Fulbright Fellowship – Massachusetts Institute of Technology (MIT), United States India Education Foundation and the U.S. Department of State’s Bureau of Educational and Cultural Affairs, USA, 2012-13."
+                "Project 1: Enhancing Agribusiness and Strategic Policy Dialogue between Australia and India. Funding: Australian Government’s Centre for Australia India Relations Maitri Research Grant.",
+                "Project 2: Women Entrepreneurs in the New Indian Middle Class: Macro and Micro Perspectives, Indian Council of Social Science Research (ICSSR), 2015-2018.",
+                "Project 3: Sustainability-driven Entrepreneurship. Funding: United States India Education Foundation and the U.S. Department of State’s Bureau of Educational and Cultural Affairs, USA."
               ]
             },
             {
               "title": "Key Publications/Reports",
               "items": [
-                "Yadav, Vanita & Yadav, N. (2024). Beyond Sustainability, towards Resilience and Regeneration: Archetypes of Regenerative Innovation. Global Journal of Flexible Systems Management, https://doi.org/10.1007/s40171-024-00418-8 (open access).",
-                "Yadav, Vanita, Adya, M., Unni, J. & Morrison, N. (2023, Australian & New Zealand Academy of Management, Best Paper Award). What is your true entrepreneurial identity? The conundrum of Femininity and Identity in female entrepreneurs",
-                "Yadav, Vanita (2023). SME sustainability in turbulent times: A Review of Literature and Future Directions. In: Adapa, S., McKeown, T., Lazaris, M., Jurado, T. (eds) Small and Medium-sized Enterprises, and Business Uncertainty. Palgrave Studies in Global Entrepreneurship. Palgrave Macmillan",
-                "Yadav, Vanita & Goyal, P (2015). User Innovation and Entrepreneurship: Case studies from Rural India. Journal of Innovation and Entrepreneurship, 4(1), 1-20.",
-                "Yadav, Vanita (2014). Unique Identification Project for 1.2 billion People in India: Can it fill Institutional Voids and enable ‘Inclusive’ Innovation? Contemporary Readings in Law and Social Justice, 6(1), 2014."
+                "1. Yadav, Vanita, Bhattacharya, S., Morrison, N., Maheshwari, B., Varua, M.E., Tissue, D., Singh, B. and Narula, S. (2026) Australia–India Agribusiness: Strategic Pathways for Shared Value. Urban Transformations Research Centre Report, Parramatta: Western Sydney University. https://doi.org/10.26183/50k8-kz75",
+                "2. Yadav, Vanita & Yadav, N. (2024). Beyond Sustainability, towards Resilience and Regeneration: Archetypes of Regenerative Innovation. Global Journal of Flexible Systems Management, https://doi.org/10.1007/s40171-024-00418-8 (open access).",
+                "3. Yadav, Vanita, Adya, M., Unni, J. & Morrison, N. (2023, Australian & New Zealand Academy of Management, Best Paper Award). What is your true entrepreneurial identity? The conundrum of Femininity and Identity in female entrepreneurs.",
+                "4. Yadav, Vanita (2023). SME sustainability in turbulent times: A Review of Literature and Future Directions. In: Adapa, S., McKeown, T., Lazaris, M., Jurado, T. (eds) Small and Medium-sized Enterprises, and Business Uncertainty. Palgrave Studies in Global Entrepreneurship. Palgrave Macmillan.",
+                "5. Yadav, Vanita & Goyal, P (2015). User Innovation and Entrepreneurship: Case studies from Rural India. Journal of Innovation and Entrepreneurship, 4(1), 1-20.",
+                "6. Yadav, Vanita (2014). Unique Identification Project for 1.2 billion People in India: Can it fill Institutional Voids and enable ‘Inclusive’ Innovation? Contemporary Readings in Law and Social Justice, 6(1), 2014."
               ]
             }
           ],
