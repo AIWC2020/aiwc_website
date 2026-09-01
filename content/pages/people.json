@@ -4797,22 +4797,6 @@
             }
           ],
           "instituteSlug": "university-of-melbourne"
-        },
-        {
-          "photo": null,
-          "name": "test",
-          "slug": "test",
-          "sortName": "",
-          "designation": "",
-          "institute": "test",
-          "country": "Australia",
-          "qualification": "",
-          "interests": "",
-          "email": "",
-          "homepage": "",
-          "profiles": [],
-          "bio": [],
-          "sections": []
         }
       ]
     }
