@@ -797,6 +797,26 @@
       filter: grayscale(1) contrast(1.03);
       transition: filter .35s ease, scale .55s cubic-bezier(.2,.75,.25,1);
     }
+    /* Fills a portrait slot nobody has uploaded a photo for. The card is a
+       fixed cell in a grid, so something has to fill it — a monogram reads as
+       "no photo yet", where an empty image reads as broken. */
+    .portrait-monogram {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      place-items: center;
+      background: var(--surface-2);
+      font: 600 1.75rem/1 var(--sans);
+      letter-spacing: .07em;
+      user-select: none;
+      /* The two places this appears sit on opposite grounds — a dark directory
+         card and a light panel on the profile page — so the colour is set per
+         context rather than once, or one of them renders invisible. */
+      color: var(--muted);
+    }
+    .portrait-card .portrait-monogram { background: #16323f; color: rgb(255 255 255 / .38); }
+    .profile-portrait .portrait-monogram { font-size: 3.6rem; }
+
     .portrait-card-info {
       position: absolute;
       z-index: 2;

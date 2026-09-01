@@ -31,6 +31,12 @@ each other on every build, so the editor cannot offer a block the site cannot
 draw, and cannot call a field optional that the site refuses to publish without.
 If those two ever drift apart the build says so by name.
 
+**A researcher with no portrait still publishes.** Their card shows their
+initials until a photo is added — "Dr Vanita Yadav" becomes *VY* — and `npm run
+verify` lists who is missing one on every run. This is deliberate: blocking the
+entire site over one absent photograph is a worse outcome than a card with a
+monogram on it.
+
 The CMS has **one collection: Pages**. Everything shown on a page is edited
 inside that page — including the 108 researchers (in the Researchers block on
 *Our people*) and the 33 partner institutions (in *Our partners*). Each of them
@@ -145,7 +151,13 @@ build`, `npm run verify` and the directory test before Pages is updated. If any
 of them fails, the commit stays on `main` and the live site keeps serving the
 last version that passed. Nothing is lost; nothing is published either.
 
-Nobody is notified when that happens. So when a change does not appear:
+**A failed build opens an issue on this repository** titled *"The site is not
+publishing — a build check is failing"*, saying which commit and which check.
+Repeated failures comment on that same issue rather than opening new ones, and
+it closes itself as soon as a build goes green. So the first place to look is
+the repository's Issues tab.
+
+To check from the command line instead:
 
 ```bash
 gh run list --repo AIWC2020/aiwc_website --limit 5
@@ -165,13 +177,17 @@ half-finished profile cannot reach the public directory. The failing record is
 the bug.
 
 > This is not hypothetical. On 2026-08-18 an empty profile named `test` was
-> created in the CMS. `verify` refuses to publish a researcher with no
+> created in the CMS. The build then refused to publish a researcher with no
 > portrait, so every deploy failed from that moment. Five real content commits
 > — an institution change, a new portrait and biography, a rewritten profile —
 > sat unpublished for two weeks while the CMS reported every save as
 > successful. Deleting the one empty profile released all of them at once.
-> The CMS now refuses to save a researcher without a portrait, which is the
-> same rule stated in the place where the mistake was made.
+>
+> Two things changed so it cannot happen that way again. A missing portrait no
+> longer stops the build — the profile publishes with the researcher's initials
+> in the picture slot, and `verify` names it as a warning instead. And a failed
+> build now opens an issue on this repository, so nobody has to notice on their
+> own.
 
 ## Known gaps
 

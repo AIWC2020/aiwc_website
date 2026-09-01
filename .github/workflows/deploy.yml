@@ -18,6 +18,11 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  # A failed build is the one thing nobody sees: the CMS reports every save as
+  # successful, and Actions only emails the commit author. Without this, a
+  # broken check freezes the whole site silently — it did for two weeks in
+  # August. The job below turns a red run into a GitHub issue instead.
+  issues: write
 
 # Never let two deploys race; the newest content wins. Pull requests get
 # their own group so a PR build cannot cancel a live deploy.
@@ -63,3 +68,59 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  # Say so, in GitHub, when a build fails. One issue is reused for as long as
+  # the site is stuck, so a run of failures is one thread rather than a pile of
+  # duplicates, and it closes itself the moment a build goes green again.
+  report:
+    needs: build
+    if: always() && github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const failed = '${{ needs.build.result }}' !== 'success';
+            const title = 'The site is not publishing — a build check is failing';
+            const { owner, repo } = context.repo;
+            const run = `https://github.com/${owner}/${repo}/actions/runs/${context.runId}`;
+
+            const { data: open } = await github.rest.issues.listForRepo({
+              owner, repo, state: 'open', labels: 'build-failure',
+            });
+            const existing = open.find((i) => i.title === title);
+
+            if (!failed) {
+              if (existing) {
+                await github.rest.issues.createComment({
+                  owner, repo, issue_number: existing.number,
+                  body: `Publishing again as of ${context.sha.slice(0, 7)}. Everything that was queued behind the failure is now live.`,
+                });
+                await github.rest.issues.update({ owner, repo, issue_number: existing.number, state: 'closed' });
+              }
+              return;
+            }
+
+            const body = [
+              '**The website is not updating.** A check failed, so the last commit was not published.',
+              '',
+              'Nothing is lost — the change is safely on `main`. It just is not live yet, and it will',
+              'stay that way until the check passes, along with anything else pushed in the meantime.',
+              '',
+              `- Failing run: ${run}`,
+              `- Commit: ${context.sha.slice(0, 7)} — ${context.payload.head_commit?.message?.split('\n')[0] ?? ''}`,
+              `- Pushed by: @${context.payload.head_commit?.author?.username ?? context.actor}`,
+              '',
+              'Open the run above and read the step marked in red. It names the exact record at fault —',
+              'usually a page or profile that is missing something. Fix that record and push; this issue',
+              'closes itself when the site publishes again.',
+              '',
+              'Please do not fix a red build by removing the check. Those checks are the reason a',
+              'half-finished profile cannot reach the public site.',
+            ].join('\n');
+
+            if (existing) {
+              await github.rest.issues.createComment({ owner, repo, issue_number: existing.number, body });
+            } else {
+              await github.rest.issues.create({ owner, repo, title, body, labels: ['build-failure'] });
+            }

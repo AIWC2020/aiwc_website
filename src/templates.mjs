@@ -72,6 +72,37 @@ const photo = (document, entry = {}, { alt, lazy = true, className } = {}) => {
   return img;
 };
 
+/* Titles carry no initial anyone would recognise, so a monogram for
+ * "Dr Vanita Yadav" should read VY rather than DV. */
+const NAME_TITLE = /^(dr|prof|professor|mr|mrs|ms|miss|a\/prof|assoc|associate|sir|em|emeritus)\.?$/i;
+
+const initials = (name = '') =>
+  name
+    .replace(/[^\p{L}\s'-]/gu, ' ')
+    .split(/\s+/)
+    .filter((w) => w && !NAME_TITLE.test(w))
+    .slice(0, 2)
+    .map((w) => w[0].toUpperCase())
+    .join('') || '\u00b7';
+
+/**
+ * A researcher's portrait, or a monogram when nobody has uploaded one yet.
+ *
+ * The slot is always filled. The directory is a grid of equal cards, so a card
+ * that quietly loses its picture re-flows the row around a hole no reader can
+ * see — and an <img> with no src draws a broken box. A monogram reads as
+ * "no photo yet", which is the truth, and keeps the grid intact.
+ */
+const portraitImage = (document, person = {}, { lazy = true } = {}) => {
+  if (person.photo?.image) {
+    return photo(document, person.photo, { alt: 'Portrait of ' + person.name, lazy });
+  }
+  const mark = el(document, 'span', { class: 'portrait-monogram', text: initials(person.name) });
+  mark.setAttribute('role', 'img');
+  mark.setAttribute('aria-label', person.name ? person.name + ' — no portrait yet' : 'No portrait yet');
+  return mark;
+};
+
 /** The intro sizing/placement controls, applied to a head root at build time. */
 const applyTextControls = (root, intro = {}) => {
   const scale = (sel, value) => {
@@ -784,8 +815,7 @@ const BLOCKS = {
         [person.name, person.designation, person.institute, person.interests].filter(Boolean).join(' ').toLowerCase()
       );
       card.setAttribute('aria-label', [person.name, person.designation, person.institute].filter(Boolean).join(', '));
-      const img = photo(document, person.photo || {}, { alt: 'Portrait of ' + person.name });
-      if (img) card.appendChild(img);
+      card.appendChild(portraitImage(document, person));
       const info = el(document, 'span', { class: 'portrait-card-info' });
       info.appendChild(el(document, 'strong', { text: person.name }));
       if (person.designation) info.appendChild(el(document, 'span', { text: person.designation }));
@@ -1381,8 +1411,7 @@ export function renderPerson(document, person, ctx) {
   /* left: portrait + facts */
   const aside = el(document, 'div', { class: 'split-col' });
   const shot = el(document, 'figure', { class: 'profile-portrait' });
-  const img = photo(document, person.photo || {}, { alt: 'Portrait of ' + person.name, lazy: false });
-  if (img) shot.appendChild(img);
+  shot.appendChild(portraitImage(document, person, { lazy: false }));
   aside.appendChild(shot);
   aside.appendChild(factList(document, [
     ['Institution', person.institute],
@@ -1480,8 +1509,7 @@ export function renderPartner(document, partner, ctx) {
     here.forEach((person) => {
       const card = el(document, 'a', { class: 'portrait-card' });
       card.href = ctx.entryUrl('people', person.slug);
-      const pi = photo(document, person.photo || {}, { alt: 'Portrait of ' + person.name });
-      if (pi) card.appendChild(pi);
+      card.appendChild(portraitImage(document, person));
       const info = el(document, 'span', { class: 'portrait-card-info' });
       info.appendChild(el(document, 'strong', { text: person.name }));
       if (person.designation) info.appendChild(el(document, 'span', { text: person.designation }));

@@ -509,17 +509,17 @@ collections:
                       name: "url"
                       widget: "string"
                       pattern: ['^https://(?!orcid\.org/my-orcid)(?![^/]*\.ezproxy\.)\S+$', "Must be a public https:// link. For ORCID use https://orcid.org/0000-0000-0000-0000, not the my-orcid dashboard. Library ezproxy links only work for that university."]
-                  # Required, and it must stay required: scripts/verify.mjs fails the
-                  # build on a researcher with no portrait, so one profile saved without
-                  # one blocks every deploy — for the whole site, until someone notices.
-                  # Its own field list rather than *photoFields, because a hero photo is
-                  # allowed to be empty and a portrait is not.
+                  # Optional on purpose. A researcher with no portrait publishes with
+                  # their initials in the picture slot, so an unfinished profile costs
+                  # one card's photograph rather than the whole site's deploy. Its own
+                  # field list rather than *photoFields so the hint can say so.
                   - label: "Portrait"
                     name: "photo"
                     widget: "object"
-                    hint: "Required — a researcher cannot be published without a portrait."
+                    required: false
+                    hint: "Optional. Without one, the card shows the researcher's initials until a photo is added."
                     fields:
-                      - { label: "Photo", name: "image", widget: "image" }
+                      - { label: "Photo", name: "image", widget: "image", required: false }
                       - { label: "Description for screen readers", name: "alt", widget: "string", required: false, hint: "Leave empty if the name printed beside it already says who this is." }
                       - { label: "Zoom (%)", name: "zoom", widget: "number", default: 100, value_type: "int", min: 50, max: 200, step: 5, required: false }
                       - { label: "Focus X (%)", name: "positionX", widget: "number", default: 50, value_type: "int", min: 0, max: 100, step: 1, required: false }

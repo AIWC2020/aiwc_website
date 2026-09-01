@@ -118,10 +118,16 @@ for (const file of docs) {
 /* ── content-level checks ───────────────────────────────────────────── */
 
 const thin = [];
+const noPortrait = [];
 for (const p of people) {
   if (!p.name) fail(`people/${p.slug}`, 'missing name');
-  if (!p.photo?.image) fail(`people/${p.slug}`, 'missing portrait');
   if (!p.institute) fail(`people/${p.slug}`, 'missing institution');
+  // A profile with no portrait now renders a monogram rather than a hole, so
+  // it is publishable. Blocking the entire site over one missing photo was a
+  // cure far worse than the disease — it froze every page for two weeks in
+  // August. Nobody *means* to publish a profile without a picture, so it is
+  // still named on every run.
+  if (!p.photo?.image) noPortrait.push(p.slug);
   // Some researchers left the biography fields blank on aiwc.org.au. That is
   // upstream data, not a build fault — surface it so it can be chased, but
   // do not block a release on it.
@@ -191,7 +197,7 @@ if (existsSync(cmsPath)) {
     // here and mandatory above, and five content commits sat unpublished for
     // two weeks while the CMS reported every save as successful.
     const requiredInCms = {
-      portraitDirectory: ['name', 'institute', 'photo'],
+      portraitDirectory: ['name', 'institute'],
       partnerDirectory: ['name', 'country', 'logo'],
     };
     const blockTypes = pagesCollection?.fields?.find((f) => f.name === 'blocks')?.types || [];
@@ -241,6 +247,13 @@ if (thin.length) {
   console.warn(
     `\n${thin.length} profile${thin.length > 1 ? 's have' : ' has'} no biography on aiwc.org.au ` +
       `(name, role and portrait only): ${thin.join(', ')}`
+  );
+}
+
+if (noPortrait.length) {
+  console.warn(
+    `\n${noPortrait.length} profile${noPortrait.length > 1 ? 's have' : ' has'} no portrait ` +
+      `(shown as initials until one is uploaded): ${noPortrait.join(', ')}`
   );
 }
 
