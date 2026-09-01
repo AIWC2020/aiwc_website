@@ -475,8 +475,36 @@ collections:
                   - { label: "Areas of interest", name: "interests", widget: "text", required: false }
                   - { label: "Email", name: "email", widget: "string", required: false }
                   - { label: "Staff page", name: "homepage", widget: "string", required: false }
-                  - { label: "Research profiles", name: "profiles", widget: "list", required: false, field: { label: "URL", name: "url", widget: "string" } }
-                  - { label: "Portrait", name: "photo", widget: "object", required: false, fields: *photoFields }
+                  # Editors naturally copy a URL out of their own signed-in tab, which is
+                  # a page only they can open — ORCID's /my-orcid dashboard, or a library
+                  # ezproxy address. Both look right to the person who pasted them and
+                  # send every public visitor to a sign-in screen.
+                  - label: "Research profiles"
+                    name: "profiles"
+                    widget: "list"
+                    required: false
+                    hint: "Public links only. Open one in a private window first — if it asks you to sign in, it is the wrong URL."
+                    field:
+                      label: "URL"
+                      name: "url"
+                      widget: "string"
+                      pattern: ['^https://(?!orcid\.org/my-orcid)(?![^/]*\.ezproxy\.)\S+$', "Must be a public https:// link. For ORCID use https://orcid.org/0000-0000-0000-0000, not the my-orcid dashboard. Library ezproxy links only work for that university."]
+                  # Required, and it must stay required: scripts/verify.mjs fails the
+                  # build on a researcher with no portrait, so one profile saved without
+                  # one blocks every deploy — for the whole site, until someone notices.
+                  # Its own field list rather than *photoFields, because a hero photo is
+                  # allowed to be empty and a portrait is not.
+                  - label: "Portrait"
+                    name: "photo"
+                    widget: "object"
+                    hint: "Required — a researcher cannot be published without a portrait."
+                    fields:
+                      - { label: "Photo", name: "image", widget: "image" }
+                      - { label: "Description for screen readers", name: "alt", widget: "string", required: false, hint: "Leave empty if the name printed beside it already says who this is." }
+                      - { label: "Zoom (%)", name: "zoom", widget: "number", default: 100, value_type: "int", min: 50, max: 200, step: 5, required: false }
+                      - { label: "Focus X (%)", name: "positionX", widget: "number", default: 50, value_type: "int", min: 0, max: 100, step: 1, required: false }
+                      - { label: "Focus Y (%)", name: "positionY", widget: "number", default: 50, value_type: "int", min: 0, max: 100, step: 1, required: false }
+                      - { label: "Fit", name: "fit", widget: "select", default: "auto", required: false, options: ["auto", "cover", "contain"] }
                   - { label: "Biography", name: "bio", widget: "list", required: false, field: { label: "Paragraph", name: "text", widget: "text" } }
                   - label: "Sections"
                     name: "sections"

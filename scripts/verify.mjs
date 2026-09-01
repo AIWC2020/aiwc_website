@@ -182,6 +182,42 @@ if (existsSync(cmsPath)) {
     for (const type of used) {
       if (!editable.has(type)) fail('content', `block type "${type}" is in use but not editable in the CMS`);
     }
+
+    // Anything this file refuses to publish without must be required in the
+    // CMS too. Otherwise the editor is told a field is optional, saves without
+    // it, and the build then rejects the whole site — every page stops
+    // deploying until someone thinks to read the Actions log. That is exactly
+    // what one empty profile did on 2026-08-18: the portrait was optional
+    // here and mandatory above, and five content commits sat unpublished for
+    // two weeks while the CMS reported every save as successful.
+    const requiredInCms = {
+      portraitDirectory: ['name', 'institute', 'photo'],
+      partnerDirectory: ['name', 'country', 'logo'],
+    };
+    const blockTypes = pagesCollection?.fields?.find((f) => f.name === 'blocks')?.types || [];
+    for (const [block, names] of Object.entries(requiredInCms)) {
+      const itemFields = blockTypes.find((t) => t.name === block)?.fields?.find((f) => f.name === 'items')?.fields;
+      if (!itemFields) {
+        fail('admin/config.yml', `${block} has no "items" list, so its fields cannot be checked`);
+        continue;
+      }
+      for (const name of names) {
+        const field = itemFields.find((f) => f.name === name);
+        if (!field) {
+          fail('admin/config.yml', `${block}.${name} has no CMS field, but the build requires it`);
+          continue;
+        }
+        if (field.required === false) {
+          fail('admin/config.yml', `${block}.${name} is optional in the CMS but mandatory in this file`);
+        }
+        // Requiring the wrapper object is not enough — an empty object still
+        // satisfies it. The image inside is the thing the build actually reads.
+        const image = field.fields?.find((f) => f.name === 'image');
+        if (image?.required === false) {
+          fail('admin/config.yml', `${block}.${name}.image is optional in the CMS but mandatory in this file`);
+        }
+      }
+    }
   }
 }
 
