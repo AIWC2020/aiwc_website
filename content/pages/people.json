@@ -1153,7 +1153,9 @@
         },
         {
           "photo": {
-            "image": "/assets/people/david-tissue.webp",
+            "image": "/aiwc_website/assets/photos/Distinguished-Professor-David-Tissue.jpg",
+            "alt": "",
+            "zoom": null,
             "positionX": 50,
             "positionY": 22
           },
@@ -1172,7 +1174,7 @@
             "https://scholar.google.com.au/citations?user=auoXupcAAAAJ&hl=en"
           ],
           "bio": [
-            "Distinguished Professor David Tissue is a plant physiologist with >35 years-experience assessing plant response to environmental conditions, including temperature and water stress, in managed and native ecosystems and has published > 235 peer-reviewed papers on these topics. He is Scientific Research Director for the National Vegetable Protected Cropping Centre (NVPCC), Program 2 Scientific Research leader for the CRC Future Foods project and Discipline Leader for Agriculture and Food Science. He has conducted projects on cotton response to elevated CO2, temperature, drought, flooding and heatwaves in the field and controlled environments. Prof Tissue has mentored more than 30 graduate students and 15 post-docs."
+            "Distinguished Professor David Tissue is a plant physiologist with >35 years-experience assessing plant response to environmental conditions, including temperature and water stress, in managed and native ecosystems and has published > 235 peer-reviewed papers on these topics. He investigates the impact of environmental factors on leaf, soil and ecosystem fluxes of CO2 and water, with a particular emphasis on photosynthesis, respiration, and plant water relations on native plants and crops. His climate change research brings a fundamental shift in current understanding of plant and ecosystem response to the main and interactive effects of elevated CO2, elevated temperature, variation in the timing and magnitude of rainfall, and extreme climate (floods, droughts, heatwaves). His research underpins advancements in quantification of the processes that affect productivity, species composition and richness, carbon and water fluxes at the leaf, soil and ecosystem level, microbial community structure and function, and soil respiration. He has published more than 350 manuscripts and mentored more than 50 graduate students."
           ],
           "sections": [
             {
