@@ -3070,6 +3070,8 @@
         {
           "photo": {
             "image": "/assets/people/associate-professor-olayide-ogunsiji.jpg",
+            "alt": "",
+            "zoom": null,
             "positionX": 50,
             "positionY": 22
           },
@@ -3100,11 +3102,13 @@
             {
               "title": "Key Publications/Reports",
               "items": [
-                "Ogunsiji, O., & Ussher, J. (2021). Beyond illegality: Primary health care providers’ perspectives on elimination of female genital mutilation/cutting. Journal of clinical Nursing, 30 (99-10), 1253-1262.",
-                "Hussein, S.A.A.A., Dahlen, H.G., Ogunsiji, O., & Schmied, V. (2021). From hopelessness to some hope: a qualitative interpretive research project to improve birthing experiences in Jordan. Sexual and Reproductive Healthcare, 27, 100580.",
-                "Hussein, S.A.A.A., Dahlen, H.G., Ogunsiji, O., & Schmied, V. (2020). Uncovered and disrespected. A qualitative study of Jordanian women’s experience of privacy in birth. Women and Birth, 33 ( 5), 496-504.",
-                "Hussein, S.A.A.A., Dahlen, H.G., Ogunsiji, O., & Schmied, V. (2020). Jordanian women’s experiences and constructions of labour and birth in different settings, over time and across generations; a qualitative study. British Medical Council (BMC) Pregnancy and Childbirth, 20(1), 357.",
-                "Ogbo, F.A., Ezeh, O.K., Khanlari, S., (…), Ogunsiji, O., Barnett Am. B., & Eastwood, J. (2019). Determinants of exclusive breastfeeding cessation in the early postnatal period among culturally and linguistically diverse (CALD) Australian mothers. Nutrients, 11 (7), 1611."
+                "1. Singla, R., Pathrose, S., Lane, A., & Ogunsiji, O. (2026). Primary health care experiences of Indian immigrants living with Chronic illnesses in Australia: A qualitative study. Primary Health Care Research and Development, 27, e63",
+                "2. Endrawes, G., & Ogunsiji, O. (2025). Exploring African community attitudes towards mental illness in Australia: A cross-sectional study. Healthcare Switzerland, 13(23), 3115.",
+                "3. Ogunsiji, O., Foster, J., Green, H.,…Kayesa, N., & Fernandez, R. (2025). Experiences of African women who migrate to a developed country and encountered intimate partner violence: A systematic review of qualitative evidence. JBI Evidence Synthesis, 23(2).",
+                "4. Ogunsiji, O., Ogbeide, A.E., & Ussher, J. (2023). Experiences of primary health care workers in Australia towards women and girls living with female genital mutilation/cutting (FGM/C): A qualitative study. Healthcare Switzerland, 11(5), 702.",
+                "5. Power, R., Ussher, J.M., Hawkey, A., …Ogunsiji, O., McBride, K., & Monteiro, M. (2022). Co-designed, culturally tailored cervical screening education with migrant and refugee women in Australia: a feasibility study. BMC Women’s Health, 22(1), 353.",
+                "6. Pathrose, S.P., Raeburn, T., Sanchez, P,…Alomari, A., & Ogunsiji, O.(2022). Team teaching in undergraduate nursing programs: A scoping review. Collegian, 29(3).",
+                "7. Ogunsiji, O., Ogbeide, A. E., Mukuria, V…, Workman, A., & Dune, T. (2022). From the world to western: A community-engaged teaching strategy to enhance students’ learning of cultural issues relevant to health care. International Journal of Environmental Research and Public Health, 19(9), 5114."
               ]
             }
           ],
