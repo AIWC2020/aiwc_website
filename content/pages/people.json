@@ -2064,6 +2064,8 @@
         {
           "photo": {
             "image": "/assets/people/kadambot-h-m-siddique.jpg",
+            "alt": "",
+            "zoom": null,
             "positionX": 50,
             "positionY": 22
           },
@@ -2076,13 +2078,13 @@
           "country": "Australia",
           "qualification": "PhD, The University of Western Australia",
           "interests": "Crop physiology, water use and water use efficiency, production agronomy, farming systems, genetic resources, breeding research in cereal, grain and pasture legumes and oilseed crops. Adaptation of crops to dryland environments and the phenological, morphological, physiological, biochemical and genetic traits that enable crops to cope with various abiotic stresses.",
-          "email": "numberkadambot.siddique@uwa.edu.au",
+          "email": "kadambot.siddique@uwa.edu.au",
           "homepage": "https://research-repository.uwa.edu.au/en/persons/kadambot-siddique",
           "profiles": [
             "https://aus01.safelinks.protection.outlook.com/?url=http%3A%2F%2Fscholar.google.com.au%2Fcitations%3Fuser%3DU0a0g9EAAAAJ%26hl%3Den%26oi%3Dao&data=02%7C01%7Ccora.castens%40uwa.edu.au%7Ca5a5f48abd3f44f7c90808d85dcfe856%7C05894af0cb2846d8871674cdb46e2226%7C1%7C0%7C637362494831487690&sdata=uV9Vyst8zF1A7frBOgLs1U9lvyuxJKeEORniGFESqb4%3D&reserved=0"
           ],
           "bio": [
-            "Professor Kadambot Siddique has more than 30 years’ experience in agricultural research, teaching and management in both Australia and overseas. He has developed a national and international reputation in agricultural science especially in the fields of crop physiology, production agronomy, farming systems, genetic resources, breeding research in cereal, grain and pasture legumes and oilseed crops. Has conducted research on adaptation of crops to dryland environments and the phenological, morphological, physiological, biochemical and genetic traits that enable crops to cope with various abiotic stresses.",
+            "Professor Kadambot Siddique has more than 40 years’ experience in agricultural research, teaching and management in both Australia and overseas. He has developed a national and international reputation in agricultural science especially in the fields of crop physiology, production agronomy, farming systems, genetic resources, breeding research in cereal, grain and pasture legumes and oilseed crops. Has conducted research on adaptation of crops to dryland environments and the phenological, morphological, physiological, biochemical and genetic traits that enable crops to cope with various abiotic stresses. \nHas published more than 1300 scientific papers and books/book chapters and trained over 65 Honours, MSc and PhD students.  He has a Google Scholar H-index: 157 and citations: 92,482 and Web of Science H-index 114 and 53,117 citations (31 July 2026). Highly cited (Hi Ci) researcher in Agricultural Sciences (2019 - 2023) and Plant and Animal Science (2021- 2023) (Thomson Reuters/Clarivate Analytics).",
             "Has published more than 500 scientific papers and books/book chapters and trained over 50 Honours, MSc and PhD students. Highly cited Researcher in 2019 and 2020 in agricultural science (Web of Science)."
           ],
           "sections": [
