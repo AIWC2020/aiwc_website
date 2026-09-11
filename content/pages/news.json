@@ -17,18 +17,36 @@
     "textOffsetX": 0,
     "textOffsetY": 0
   },
+  "heroImage": {
+    "image": "/assets/photos/page-aiwc5-conference-6.jpg",
+    "zoom": 100,
+    "positionX": 50,
+    "positionY": 45,
+    "fit": "cover"
+  },
+  "menuImage": {
+    "image": "/assets/photos/page-aiwc5-conference-6.jpg",
+    "zoom": 100,
+    "positionX": 50,
+    "positionY": 50,
+    "fit": "cover"
+  },
+  "sectionNav": "tabs",
+  "introTab": "Overview",
   "blocks": [
     {
       "type": "banner",
       "eyebrow": "Symposium",
       "title": "AIWC@5 International Symposium",
+      "tabLabel": "AIWC@5 Symposium",
       "lede": "",
-      "tabLabel": "AIWC@5 Symposium"
+      "accent": ""
     },
     {
       "type": "split",
       "left": {
         "kind": "prose",
+        "lead": "",
         "paragraphs": [
           "Water Futures and Climate Resilience — bold ideas, real solutions, resilient futures. Two days, 18 and 19 November 2025, across Australia, India and the Asia Pacific, for researchers, policymakers, practitioners and students.",
           "As global water and climate challenges reach critical levels, it’s time to act together. The AIWC@5 Symposium is your gateway to shaping sustainable water futures through bold thinking, deep collaboration, and actionable innovation.",
@@ -37,10 +55,13 @@
           "• Spotlight real-world case studies",
           "• Showcase community-driven innovation",
           "• Drive policy and digital transformation"
-        ]
+        ],
+        "stat": "",
+        "caption": ""
       },
       "right": {
         "kind": "prose",
+        "lead": "",
         "paragraphs": [
           "Focus areas",
           "• Climate Adaptation & Resilience",
@@ -49,29 +70,35 @@
           "• Urban Water Transitions",
           "• Digital Tools & Policy Innovation",
           "The symposium is a catalyst for change. Be part of a growing movement driving inclusive, climate-resilient water solutions across the Asia Pacific."
-        ]
+        ],
+        "stat": "",
+        "caption": ""
       }
     },
     {
       "type": "banner",
       "eyebrow": "Symposium documents",
-      "title": "",
-      "lede": ""
+      "title": ".",
+      "tabLabel": "",
+      "lede": "",
+      "accent": ""
     },
     {
       "type": "toolList",
       "items": [
         {
-          "name": "Programme and themes",
+          "meta": "",
           "description": "The full symposium flyer.",
           "url": "https://aiwc.org.au/wp-content/uploads/2025/08/FLYER-International-Symposium-General.pdf",
+          "name": "Programme and themes",
           "linkLabel": "Open",
           "target": "_blank"
         },
         {
-          "name": "The venue",
+          "meta": "",
           "description": "Venue details for the 2025 symposium.",
           "url": "https://aiwc.org.au/wp-content/uploads/2025/08/Symposium-Venue-2025.pdf",
+          "name": "The venue",
           "linkLabel": "Open",
           "target": "_blank"
         }
@@ -80,14 +107,16 @@
     {
       "type": "banner",
       "eyebrow": "Webinar series",
-      "title": "WATER TALKS 2025",
+      "title": "WATER TALKS 2026",
+      "tabLabel": "Water Talks 2026",
       "lede": "",
-      "tabLabel": "Water Talks 2025"
+      "accent": ""
     },
     {
       "type": "split",
       "left": {
         "kind": "prose",
+        "lead": "",
         "paragraphs": [
           "WATER TALKS | October 2025",
           "10 October 2025Time: 3:00 – 4:00 pm (AEST) 10:30 – 11:30 am (IST)",
@@ -116,21 +145,5 @@
       "heading": "Read what came out of AIWC@5.",
       "body": "Five thematic breakout sessions set the Centre’s agenda to 2030 — research and innovation, training and education, policy partnerships, global positioning, and funding."
     }
-  ],
-  "menuImage": {
-    "image": "/assets/photos/page-aiwc5-conference-6.jpg",
-    "zoom": 100,
-    "positionX": 50,
-    "positionY": 50,
-    "fit": "cover"
-  },
-  "heroImage": {
-    "image": "/assets/photos/page-aiwc5-conference-6.jpg",
-    "zoom": 100,
-    "positionX": 50,
-    "positionY": 45,
-    "fit": "cover"
-  },
-  "sectionNav": "tabs",
-  "introTab": "Overview"
+  ]
 }
