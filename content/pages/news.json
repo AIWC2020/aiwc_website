@@ -89,7 +89,7 @@
         {
           "meta": "",
           "description": "The full symposium flyer.",
-          "url": "https://aiwc.org.au/wp-content/uploads/2025/08/FLYER-International-Symposium-General.pdf",
+          "url": "/assets/docs/FLYER-International-Symposium-General.pdf",
           "name": "Programme and themes",
           "linkLabel": "Open",
           "target": "_blank"
@@ -97,7 +97,7 @@
         {
           "meta": "",
           "description": "Venue details for the 2025 symposium.",
-          "url": "https://aiwc.org.au/wp-content/uploads/2025/08/Symposium-Venue-2025.pdf",
+          "url": "/assets/docs/Symposium-Venue-2025.pdf",
           "name": "The venue",
           "linkLabel": "Open",
           "target": "_blank"
