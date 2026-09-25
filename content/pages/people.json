@@ -1153,7 +1153,7 @@
         },
         {
           "photo": {
-            "image": "/aiwc_website/assets/photos/Distinguished-Professor-David-Tissue.jpg",
+            "image": "/assets/photos/Distinguished-Professor-David-Tissue.jpg",
             "alt": "",
             "zoom": null,
             "positionX": 50,
@@ -4599,7 +4599,7 @@
         },
         {
           "photo": {
-            "image": "/aiwc_website/assets/photos/Dr Vanita Yadav 1.jpg",
+            "image": "/assets/photos/Dr Vanita Yadav 1.jpg",
             "alt": "",
             "zoom": null,
             "positionX": 50,
@@ -4818,22 +4818,6 @@
             }
           ],
           "instituteSlug": "university-of-melbourne"
-        },
-        {
-          "photo": null,
-          "name": "test",
-          "slug": "test",
-          "sortName": "",
-          "designation": "",
-          "institute": "test",
-          "country": "Australia",
-          "qualification": "",
-          "interests": "",
-          "email": "",
-          "homepage": "",
-          "profiles": [],
-          "bio": [],
-          "sections": []
         }
       ]
     }
