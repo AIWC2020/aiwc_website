@@ -1,7 +1,7 @@
 {
   "menuName": "News & Events",
   "slug": "12",
-  "order": 99,
+  "order": 12,
   "published": true,
   "template": "standard",
   "intro": {
