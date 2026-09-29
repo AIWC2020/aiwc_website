@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <!-- Same policy as admin/index.html: this page reads the CMS's GitHub
+         token from local storage, so it may talk to GitHub's API and nothing
+         else. -->
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      connect-src 'self' https://api.github.com;
+      img-src 'self' data: blob:;
+      style-src 'self' 'unsafe-inline';
+      script-src 'self';
+      font-src 'self' data:;
+      base-uri 'self';
+      form-action 'none';
+      object-src 'none'">
+    <title>AIWC — Page text</title>
+    <style>
+      :root {
+        --ink: #1F2A30; --muted: #5C6B72; --line: #D9DEE0; --paper: #FAF7F2;
+        --accent: #0E6F66; --bad: #B42318; --warn: #9A3412; --good: #1B7A43;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: var(--paper); color: var(--ink); font: 400 15px/1.55 system-ui, sans-serif; }
+      header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 24px; background: #0A1A24; color: #fff; }
+      header h1 { margin: 0; font-size: 1.05rem; letter-spacing: .04em; }
+      header a { color: #CFE7E3; }
+      main { max-width: 1100px; margin: 0 auto; padding: 20px 24px 48px; }
+      .intro { color: var(--muted); max-width: 75ch; margin: 0 0 16px; }
+      .row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 12px; }
+      select, button, .file-button {
+        font: inherit; padding: 7px 12px; border: 1px solid var(--line); border-radius: 6px; background: #fff; color: var(--ink);
+      }
+      select { min-width: 260px; }
+      button, .file-button { cursor: pointer; }
+      button:hover, .file-button:hover { border-color: var(--accent); }
+      button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+      button:disabled { opacity: .5; cursor: default; }
+      .file-button input { display: none; }
+      .spacer { flex: 1; }
+      textarea {
+        width: 100%; min-height: 55vh; padding: 12px; border: 1px solid var(--line); border-radius: 6px; background: #fff;
+        font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; tab-size: 2; resize: vertical;
+      }
+      #status { margin: 12px 0 0; padding: 12px 14px; border-radius: 6px; background: #fff; border: 1px solid var(--line); white-space: pre-line; }
+      #status:empty { display: none; }
+      #status.bad { border-color: var(--bad); color: var(--bad); }
+      #status.warn { border-color: var(--warn); color: var(--warn); }
+      #status.good { border-color: var(--good); color: var(--good); }
+      #status a { color: inherit; }
+      .file-name { color: var(--muted); font-size: .9rem; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Page text — export &amp; import</h1>
+      <a href="./">← Back to the content admin</a>
+    </header>
+    <main>
+      <p class="intro">
+        Every page is one text file. Pick a page to see its text, edit it here or download it,
+        and upload a file to bring a page in. <strong>Check</strong> tests the text the same way the
+        site does; <strong>Save to site</strong> publishes it (about 1–2 minutes).
+        To make a new page, start from the template and give it a new page address (<code>slug</code>).
+      </p>
+
+      <div class="row">
+        <select id="page" aria-label="Page"><option value="">Loading pages…</option></select>
+        <button id="new" type="button">Start a new page</button>
+        <span class="spacer"></span>
+        <label class="file-button">Upload file…<input id="upload" type="file" accept=".json,application/json" /></label>
+        <button id="download" type="button">Download</button>
+      </div>
+
+      <p class="file-name" id="file-name"></p>
+      <textarea id="text" spellcheck="false" aria-label="Page text (JSON)"></textarea>
+
+      <div class="row" style="margin-top: 12px">
+        <button id="check" type="button">Check</button>
+        <button id="save" type="button" class="primary">Save to site</button>
+      </div>
+
+      <div id="status" role="status" aria-live="polite"></div>
+    </main>
+    <script type="module" src="page-text.js"></script>
+  </body>
+</html>

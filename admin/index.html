@@ -61,5 +61,18 @@
     <!-- Live preview: renders entries with the site's own renderer
          (/assets/templates.mjs), so it cannot drift from the real page. -->
     <script type="module" src="preview.js"></script>
+    <!-- Export / import a page as its JSON text (admin/page-text.html). Sits
+         outside the CMS app so a CMS upgrade cannot break it. -->
+    <a class="page-text-link" href="page-text.html" target="_blank" rel="noopener"
+       title="Download, edit or upload a page as a text file">Page text ⇄</a>
+    <style>
+      .page-text-link {
+        position: fixed; left: 16px; bottom: 16px; z-index: 1000;
+        padding: 8px 14px; border-radius: 999px; background: #0E6F66; color: #fff;
+        font: 500 13px/1 system-ui, sans-serif; text-decoration: none;
+        box-shadow: 0 2px 8px rgba(0,0,0,.18);
+      }
+      .page-text-link:hover { background: #0B5A53; }
+    </style>
   </body>
 </html>
