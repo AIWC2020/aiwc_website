@@ -5,7 +5,7 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "verify": "node scripts/verify.mjs",
-    "check": "node scripts/build.mjs && node scripts/verify.mjs && node scripts/test-directory.mjs",
+    "check": "node scripts/build.mjs && node scripts/verify.mjs && node scripts/test-directory.mjs && node scripts/test-admin-diff.mjs",
     "serve": "node scripts/build.mjs && python3 -m http.server 8913 --bind 127.0.0.1 --directory _site",
     "test": "node scripts/test-directory.mjs"
   },

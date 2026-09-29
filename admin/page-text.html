@@ -17,54 +17,84 @@
       base-uri 'self';
       form-action 'none';
       object-src 'none'">
-    <title>AIWC — Page text</title>
+    <title>AIWC — Page text &amp; versions</title>
     <style>
       :root {
-        --ink: #1F2A30; --muted: #5C6B72; --line: #D9DEE0; --paper: #FAF7F2;
+        --ink: #1F2A30; --muted: #5C6B72; --line: #D9DEE0; --paper: #FAF7F2; --card: #fff;
         --accent: #0E6F66; --bad: #B42318; --warn: #9A3412; --good: #1B7A43;
+        --add-bg: #E7F5EC; --del-bg: #FCEBEA;
       }
       * { box-sizing: border-box; }
       body { margin: 0; background: var(--paper); color: var(--ink); font: 400 15px/1.55 system-ui, sans-serif; }
-      header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 24px; background: #0A1A24; color: #fff; }
+      header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; padding: 14px 24px; background: #0A1A24; color: #fff; }
       header h1 { margin: 0; font-size: 1.05rem; letter-spacing: .04em; }
       header a { color: #CFE7E3; }
-      main { max-width: 1100px; margin: 0 auto; padding: 20px 24px 48px; }
+      main { max-width: 1100px; margin: 0 auto; padding: 20px 16px 64px; }
+      h2 { font-size: 1.05rem; margin: 32px 0 6px; }
       .intro { color: var(--muted); max-width: 75ch; margin: 0 0 16px; }
       .row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 12px; }
       select, button, .file-button {
-        font: inherit; padding: 7px 12px; border: 1px solid var(--line); border-radius: 6px; background: #fff; color: var(--ink);
+        font: inherit; padding: 7px 12px; border: 1px solid var(--line); border-radius: 6px; background: var(--card); color: var(--ink);
       }
-      select { min-width: 260px; }
+      select { min-width: min(260px, 100%); }
       button, .file-button { cursor: pointer; }
       button:hover, .file-button:hover { border-color: var(--accent); }
       button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+      button.small { padding: 3px 10px; font-size: .85rem; }
       button:disabled { opacity: .5; cursor: default; }
       .file-button input { display: none; }
       .spacer { flex: 1; }
       textarea {
-        width: 100%; min-height: 55vh; padding: 12px; border: 1px solid var(--line); border-radius: 6px; background: #fff;
+        width: 100%; min-height: 50vh; padding: 12px; border: 1px solid var(--line); border-radius: 6px; background: var(--card);
         font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; tab-size: 2; resize: vertical;
       }
-      #status { margin: 12px 0 0; padding: 12px 14px; border-radius: 6px; background: #fff; border: 1px solid var(--line); white-space: pre-line; }
-      #status:empty { display: none; }
-      #status.bad { border-color: var(--bad); color: var(--bad); }
-      #status.warn { border-color: var(--warn); color: var(--warn); }
-      #status.good { border-color: var(--good); color: var(--good); }
-      #status a { color: inherit; }
-      .file-name { color: var(--muted); font-size: .9rem; }
+      .status { margin: 12px 0 0; padding: 12px 14px; border-radius: 6px; background: var(--card); border: 1px solid var(--line); white-space: pre-line; }
+      .status:empty { display: none; }
+      .status.bad { border-color: var(--bad); color: var(--bad); }
+      .status.warn { border-color: var(--warn); color: var(--warn); }
+      .status.good { border-color: var(--good); color: var(--good); }
+      .status a { color: inherit; }
+      .file-name { color: var(--muted); font-size: .9rem; margin: 0 0 6px; }
+      .file-name.viewing { color: var(--warn); font-weight: 600; }
+
+      .list { border: 1px solid var(--line); border-radius: 6px; background: var(--card); overflow-x: auto; }
+      .list:empty { display: none; }
+      .list table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+      .list td { padding: 7px 10px; border-top: 1px solid var(--line); vertical-align: top; }
+      .list tr:first-child td { border-top: 0; }
+      .list td.when { white-space: nowrap; color: var(--muted); }
+      .list td.act { text-align: right; white-space: nowrap; }
+      .list tr.current td { background: #F3F8F7; }
+      .tag { display: inline-block; font-size: .75rem; padding: 1px 6px; border-radius: 4px; background: #E3ECEB; color: var(--accent); margin-left: 6px; }
+      .more { margin-top: 8px; }
+
+      .diff { margin-top: 12px; border: 1px solid var(--line); border-radius: 6px; background: var(--card); }
+      .diff:empty { display: none; }
+      .diff .sum { padding: 8px 12px; border-bottom: 1px solid var(--line); font-size: .9rem; }
+      .diff pre { margin: 0; padding: 6px 0; max-height: 40vh; overflow: auto; font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; }
+      .diff pre span { display: block; padding: 0 12px; white-space: pre-wrap; word-break: break-word; }
+      .diff .add { background: var(--add-bg); }
+      .diff .del { background: var(--del-bg); }
+      .diff .gap { color: var(--muted); }
+
+      details.section { margin-top: 28px; border-top: 1px solid var(--line); padding-top: 8px; }
+      details.section > summary { cursor: pointer; font-weight: 600; font-size: 1.05rem; padding: 8px 0; }
+      .plan { margin: 10px 0 0; padding: 12px 14px; border: 1px solid var(--warn); border-radius: 6px; background: var(--card); }
+      .plan:empty { display: none; }
+      .plan ul { margin: 6px 0 12px; padding-left: 20px; }
     </style>
   </head>
   <body>
     <header>
-      <h1>Page text — export &amp; import</h1>
+      <h1>Page text &amp; versions</h1>
       <a href="./">← Back to the content admin</a>
     </header>
     <main>
       <p class="intro">
-        Every page is one text file. Pick a page to see its text, edit it here or download it,
-        and upload a file to bring a page in. <strong>Check</strong> tests the text the same way the
-        site does; <strong>Save to site</strong> publishes it (about 1–2 minutes).
-        To make a new page, start from the template and give it a new page address (<code>slug</code>).
+        Every page is one text file, and every save is kept. Pick a page to edit its text, download or upload it,
+        or open an earlier version and restore it. Further down you can bring back a deleted page, or put the
+        whole website back to how it was at an earlier save. Every restore is itself a save, so it can be undone
+        the same way.
       </p>
 
       <div class="row">
@@ -75,15 +105,42 @@
         <button id="download" type="button">Download</button>
       </div>
 
+      <div id="versions-box" hidden>
+        <h2>Versions of this page</h2>
+        <div class="list" id="versions"></div>
+        <button id="versions-more" class="small more" type="button" hidden>Show older versions</button>
+      </div>
+
+      <h2>Text</h2>
       <p class="file-name" id="file-name"></p>
       <textarea id="text" spellcheck="false" aria-label="Page text (JSON)"></textarea>
+      <div class="diff" id="diff"></div>
 
       <div class="row" style="margin-top: 12px">
         <button id="check" type="button">Check</button>
         <button id="save" type="button" class="primary">Save to site</button>
       </div>
+      <div id="status" class="status" role="status" aria-live="polite"></div>
 
-      <div id="status" role="status" aria-live="polite"></div>
+      <details class="section" id="deleted-section">
+        <summary>Deleted pages</summary>
+        <p class="intro">Pages deleted in the last 50 saves. Restore opens the page's last text above; press <strong>Save to site</strong> to bring it back.</p>
+        <div class="list" id="deleted"></div>
+      </details>
+
+      <details class="section" id="site-section">
+        <summary>Restore the whole website</summary>
+        <p class="intro">
+          Puts every page and the logo back to how they were right after the save you choose. Pages made after
+          that point are removed, and pages deleted since come back. The site's address settings and
+          translations are left alone, and any photos or documents the older pages used are brought back too.
+          You see exactly what will change before anything is saved.
+        </p>
+        <div class="list" id="site-saves"></div>
+        <button id="site-more" class="small more" type="button" hidden>Show older saves</button>
+        <div class="plan" id="site-plan"></div>
+        <div id="site-status" class="status" role="status" aria-live="polite"></div>
+      </details>
     </main>
     <script type="module" src="page-text.js"></script>
   </body>

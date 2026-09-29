@@ -61,10 +61,10 @@
     <!-- Live preview: renders entries with the site's own renderer
          (/assets/templates.mjs), so it cannot drift from the real page. -->
     <script type="module" src="preview.js"></script>
-    <!-- Export / import a page as its JSON text (admin/page-text.html). Sits
+    <!-- Page text & versions (admin/page-text.html): export, import and restore. Sits
          outside the CMS app so a CMS upgrade cannot break it. -->
     <a class="page-text-link" href="page-text.html" target="_blank" rel="noopener"
-       title="Download, edit or upload a page as a text file">Page text ⇄</a>
+       title="Edit pages as text, and restore earlier versions of a page or the whole site">Page text &amp; versions ⇄</a>
     <style>
       .page-text-link {
         position: fixed; left: 16px; bottom: 16px; z-index: 1000;
