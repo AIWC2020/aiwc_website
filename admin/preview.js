@@ -58,6 +58,11 @@ CMS.registerPreviewStyle(
   .cms-preview-empty {
     padding: 44px; font: 400 .95rem/1.6 system-ui, sans-serif; color: #5C6B72;
   }
+  .cms-preview-empty p { margin: 0 0 .75em; max-width: 60ch; }
+  .cms-preview-empty .cms-preview-title { font-weight: 600; color: #1F2A30; }
+  .cms-preview-empty .cms-preview-warn { color: #9A3412; }
+  .cms-preview-empty summary { cursor: pointer; font-size: .85rem; }
+  .cms-preview-empty code { display: block; margin-top: .5em; font-size: .8rem; white-space: pre-wrap; }
   `,
   { raw: true }
 );
@@ -118,17 +123,36 @@ const previewCtx = {
 };
 
 /**
+ * Turns a render error into something an editor can act on. The renderer is
+ * the one the build uses, so an entry that fails here will usually fail the
+ * deploy too — which the CMS otherwise reports as a successful save.
+ */
+const explainFailure = (err) => {
+  const text = String(err?.message || err);
+  const field = text.match(/reading '([^']+)'/)?.[1];
+  if (field === 'image') {
+    return 'A picture field (cover or menu image) is empty. Choose an image, or remove the picture field.';
+  }
+  if (field) {
+    return `The field “${field}”, or the section that holds it, is empty but the page needs a value there. Fill it in, or remove that section.`;
+  }
+  return 'Something in this entry could not be drawn. Check the section you edited last.';
+};
+
+/**
  * Renders `node` into a Decap preview pane. Draws into a detached document so
  * rendering cannot touch the preview DOM, then imports the result across.
  */
 const paneFor = (render, emptyMessage) => ({ entry, getAsset }) => {
   let node = null;
+  let failure = null;
   try {
     const doc = document.implementation.createHTMLDocument('preview');
     node = render(doc, toData(entry, getAsset));
   } catch (err) {
     // A half-typed entry should show a message, not a blank pane.
     console.warn('[preview] render failed:', err);
+    failure = err;
   }
 
   return h('div', {
@@ -140,10 +164,27 @@ const paneFor = (render, emptyMessage) => ({ entry, getAsset }) => {
         el.appendChild(el.ownerDocument.importNode(node, true));
         return;
       }
-      const msg = el.ownerDocument.createElement('p');
-      msg.className = 'cms-preview-empty';
-      msg.textContent = emptyMessage;
-      el.appendChild(msg);
+      const d = el.ownerDocument;
+      const box = d.createElement('div');
+      box.className = 'cms-preview-empty';
+      const add = (tag, text, className) => {
+        const item = d.createElement(tag);
+        item.textContent = text;
+        if (className) item.className = className;
+        box.appendChild(item);
+        return item;
+      };
+      if (!failure) {
+        add('p', emptyMessage);
+      } else {
+        add('p', 'Preview unavailable', 'cms-preview-title');
+        add('p', explainFailure(failure));
+        add('p', 'Fix this before saving — saved like this, it will probably stop the live site from updating.', 'cms-preview-warn');
+        const details = add('details', '');
+        details.appendChild(Object.assign(d.createElement('summary'), { textContent: 'Technical detail' }));
+        details.appendChild(Object.assign(d.createElement('code'), { textContent: String(failure?.message || failure) }));
+      }
+      el.appendChild(box);
     },
   });
 };
