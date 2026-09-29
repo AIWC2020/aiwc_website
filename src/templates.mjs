@@ -126,7 +126,7 @@ const applyTextControls = (root, intro = {}) => {
 
 /** The page-head cover photo custom properties (mirror of applyHeroLayout). */
 const applyCoverControls = (root, entry = {}) => {
-  if (!entry.image) return;
+  if (!entry?.image) return;
   const layout = photoLayout(entry);
   root.style.setProperty('--cover', `url("${String(entry.image).replaceAll('"', '%22')}")`);
   root.style.setProperty('--cms-photo-position', `${layout.x}% ${layout.y}%`);
