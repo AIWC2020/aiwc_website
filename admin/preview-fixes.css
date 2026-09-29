@@ -1,0 +1,17 @@
+/* Preview-only corrections, shared by the CMS preview (preview.js) and the
+   visual preview in Page text & versions (page-text.js). The site's layout
+   offsets content by a fixed rail that does not exist inside a preview. */
+html, body { margin: 0; background: var(--paper, #FAF7F2); }
+.cms-preview-root { display: block; }
+.cms-preview-root main { margin-left: 0; }
+.cms-preview-root .panel { min-height: 0; }
+.cms-preview-root .home-hero { min-height: 60svh; }
+.cms-preview-root .panel:not(#panel-home) .page-head {
+  min-height: 38svh; padding: 90px max(4vw, 32px) 48px;
+}
+.cms-preview-root .content-wrap { width: min(920px, calc(100% - 40px)); }
+.cms-preview-root .motion-item { opacity: 1 !important; transform: none !important; }
+.cms-preview-root .wrap,
+.cms-preview-root .wrap-tight { width: min(1000px, calc(100% - 44px)); }
+/* Reveals never fire without the site's IntersectionObserver. */
+.cms-preview-root .reveal { opacity: 1 !important; transform: none !important; }

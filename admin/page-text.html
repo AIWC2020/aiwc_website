@@ -47,8 +47,11 @@
       button:disabled { opacity: .5; cursor: default; }
       .file-button input { display: none; }
       .spacer { flex: 1; }
+      .split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
+      @media (max-width: 900px) { .split { grid-template-columns: minmax(0, 1fr); } }
+      #visual { width: 100%; height: 70vh; border: 1px solid var(--line); border-radius: 6px; background: #FAF7F2; }
       textarea {
-        width: 100%; min-height: 50vh; padding: 12px; border: 1px solid var(--line); border-radius: 6px; background: var(--card);
+        width: 100%; min-height: 50vh; height: 70vh; padding: 12px; border: 1px solid var(--line); border-radius: 6px; background: var(--card);
         font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; tab-size: 2; resize: vertical;
       }
       .status { margin: 12px 0 0; padding: 12px 14px; border-radius: 6px; background: var(--card); border: 1px solid var(--line); white-space: pre-line; }
@@ -114,9 +117,14 @@
         <button id="versions-more" class="small more" type="button" hidden>Show older versions</button>
       </div>
 
-      <h2>Text</h2>
+      <h2>Text &amp; preview</h2>
       <p class="file-name" id="file-name"></p>
-      <textarea id="text" spellcheck="false" aria-label="Page text (JSON)"></textarea>
+      <!-- Text on the left, the page as the site draws it on the right —
+           the same layout as the CMS editor. -->
+      <div class="split">
+        <textarea id="text" spellcheck="false" aria-label="Page text (JSON)"></textarea>
+        <iframe id="visual" title="Preview of the page as it will look on the site"></iframe>
+      </div>
       <div class="diff" id="diff"></div>
 
       <div class="row" style="margin-top: 12px">

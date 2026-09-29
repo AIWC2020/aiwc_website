@@ -14,6 +14,8 @@
  */
 
 import { diffLines, summarise } from './diff.js';
+import { connect, NotSignedIn, pagePath, slugOf, when, short, who, what } from './github.js';
+import { checkText as checkPage, explainRenderFailure } from './page-check.js';
 
 const BASE = new URL('.', import.meta.url).pathname.replace(/\/admin\/$/, '');
 const { renderPage } = await import(`${BASE}/assets/templates.mjs`);
@@ -36,9 +38,9 @@ const isMedia = (path) => path.startsWith('assets/photos/') || path.startsWith('
 
 /* ---------- state ---------- */
 
+let client = null;        // see github.js
 let repo = null;          // "owner/name"
 let branch = 'main';
-let token = null;
 let pages = new Map();    // slug -> { sha }
 let loadedSlug = null;    // the page the text came from, if any
 let currentText = '';     // that page's text as it is on the site now
@@ -62,158 +64,22 @@ const say = (box, text, tone = '', link = null) => {
 };
 const status = (...args) => say(els.status, ...args);
 
-const when = (iso) => new Date(iso).toLocaleString(undefined, {
-  day: 'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute: '2-digit',
-});
-const short = (sha) => sha.slice(0, 7);
-const who = (c) => c.commit?.author?.name || c.author?.login || 'someone';
-// CMS commit messages read: Update page “news”. Keep them readable as-is.
-const what = (c) => c.commit.message.split('\n')[0];
-
-/* ---------- GitHub ---------- */
-
-const readToken = () => {
-  try {
-    const user = JSON.parse(localStorage.getItem('sveltia-cms.user') || 'null');
-    return typeof user?.token === 'string' && user.token ? user.token : null;
-  } catch {
-    return null;
-  }
-};
-
-class NotSignedIn extends Error {}
-
-const gh = async (path, options = {}) => {
-  if (!token) throw new NotSignedIn();
-  const res = await fetch(`https://api.github.com${path}`, {
-    ...options,
-    headers: {
-      Accept: 'application/vnd.github+json',
-      Authorization: `Bearer ${token}`,
-      ...(options.body ? { 'Content-Type': 'application/json' } : {}),
-    },
-  });
-  if (res.status === 401) throw new NotSignedIn();
-  if (!res.ok) {
-    const body = await res.json().catch(() => ({}));
-    throw Object.assign(new Error(body.message || `GitHub replied ${res.status}`), { status: res.status });
-  }
-  return res.status === 204 ? null : res.json();
-};
-
-const fromBase64 = (b64) => {
-  const bin = atob(b64.replace(/\s/g, ''));
-  return new TextDecoder().decode(Uint8Array.from(bin, (c) => c.charCodeAt(0)));
-};
-
-const toBase64 = (text) => {
-  const bytes = new TextEncoder().encode(text);
-  let bin = '';
-  for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
-  return btoa(bin);
-};
-
 /** Inside the CMS's Versions panel, tell the CMS a save happened: its editor
  *  still holds the old text, and saving that would undo this. */
 const notifyCms = () => {
   if (window.parent !== window) window.parent.postMessage({ type: 'aiwc-page-text-saved' }, location.origin);
 };
 
-const pagePath = (slug) => `content/pages/${slug}.json`;
-const slugOf = (path) => path.replace(/^content\/pages\//, '').replace(/\.json$/, '');
+const gh = (...args) => client.gh(...args);
+const readFile = (...args) => client.readFile(...args);
+const readBlob = (...args) => client.readBlob(...args);
+const commitsFor = (...args) => client.commitsFor(...args);
+const filesAt = (...args) => client.filesAt(...args);
+const listPages = async () => { pages = await client.listPages(); };
 
-const listPages = async () => {
-  const items = await gh(`/repos/${repo}/contents/content/pages?ref=${encodeURIComponent(branch)}`);
-  pages = new Map(items.filter((f) => f.type === 'file' && f.name.endsWith('.json')).map((f) => [slugOf(f.path), { sha: f.sha }]));
-};
+/* ---------- checks (page-check.js, mirroring scripts/verify.mjs) ---------- */
 
-/** A file's text at a commit (or the branch). Files over 1 MB come back
- *  without content from this endpoint; the blob endpoint has no limit. */
-const readFile = async (path, ref = branch) => {
-  const file = await gh(`/repos/${repo}/contents/${path}?ref=${encodeURIComponent(ref)}`);
-  const b64 = file.content || (await gh(`/repos/${repo}/git/blobs/${file.sha}`)).content;
-  return { text: fromBase64(b64), sha: file.sha };
-};
-
-const readBlob = async (sha) => fromBase64((await gh(`/repos/${repo}/git/blobs/${sha}`)).content);
-
-const commitsFor = (path, page) =>
-  gh(`/repos/${repo}/commits?sha=${encodeURIComponent(branch)}&path=${encodeURIComponent(path)}&per_page=10&page=${page}`);
-
-/** Every file in the repository at a commit, as Map(path -> { sha, mode }). */
-const filesAt = async (commitSha) => {
-  const commit = await gh(`/repos/${repo}/git/commits/${commitSha}`);
-  const tree = await gh(`/repos/${repo}/git/trees/${commit.tree.sha}?recursive=1`);
-  if (tree.truncated) throw new Error('The repository is too large to compare in one go.');
-  return {
-    treeSha: commit.tree.sha,
-    files: new Map(tree.tree.filter((t) => t.type === 'blob').map((t) => [t.path, { sha: t.sha, mode: t.mode }])),
-  };
-};
-
-/* ---------- checks (mirror scripts/verify.mjs and the build) ---------- */
-
-/** Line and column for a JSON.parse failure, from the character position. */
-const whereInText = (text, err) => {
-  const pos = Number(String(err.message).match(/position (\d+)/)?.[1]);
-  if (!Number.isFinite(pos)) return '';
-  const before = text.slice(0, pos).split('\n');
-  return ` (line ${before.length}, column ${before.at(-1).length + 1})`;
-};
-
-const explainRenderFailure = (err) => {
-  const field = String(err?.message || err).match(/reading '([^']+)'/)?.[1];
-  if (field === 'image') return 'A picture field is empty (null). Give it an image, or remove that picture field.';
-  if (field) return `The field “${field}”, or the section that holds it, is empty but the page needs a value there.`;
-  return 'The page could not be drawn. Check the section you changed last.';
-};
-
-/**
- * Returns { data, errors, warnings }. Errors block saving; warnings do not.
- * `known` is the set of page addresses that will exist once this is saved.
- */
-const checkText = (text, known = new Set(pages.keys())) => {
-  const errors = [];
-  const warnings = [];
-  let data;
-  try {
-    data = JSON.parse(text);
-  } catch (err) {
-    errors.push(`The text is not valid JSON${whereInText(text, err)}. Look for a missing or extra comma, or a missing quote, near there.`);
-    return { data: null, errors, warnings };
-  }
-  if (!data || typeof data !== 'object' || Array.isArray(data)) {
-    errors.push('The text must be one { … } page object.');
-    return { data: null, errors, warnings };
-  }
-
-  if (typeof data.menuName !== 'string' || !data.menuName.trim()) errors.push('“menuName” is missing — the name shown in the menu.');
-  if (typeof data.slug !== 'string' || !/^[a-z0-9-]+$/.test(data.slug)) {
-    errors.push('“slug” (the page address) must use lower-case letters, numbers and hyphens only, e.g. "water-talks".');
-  }
-  if (!Number.isInteger(data.order) || data.order < 1) errors.push('“order” must be a whole number of 1 or more.');
-  if (data.published !== undefined && typeof data.published !== 'boolean') errors.push('“published” must be true or false, without quotes.');
-  if (data.blocks !== undefined && !Array.isArray(data.blocks)) errors.push('“blocks” must be a [ … ] list.');
-  if (data.published === false) warnings.push('“published” is false, so this page will be saved but hidden from the site.');
-
-  const targets = new Set([...known, data.slug]);
-  for (const [, target] of JSON.stringify(data).matchAll(/"page":\s*"([^"]+)"/g)) {
-    if (!targets.has(target)) errors.push(`It links to a page that does not exist: "${target}".`);
-  }
-
-  if (!errors.length) {
-    try {
-      const doc = document.implementation.createHTMLDocument('check');
-      renderPage(doc, { template: 'standard', intro: {}, blocks: [], ...data }, {
-        people: [], partners: [], index: 1, total: 1,
-        urlFor: () => '#', entryUrl: () => '#', t: (k) => k,
-      });
-    } catch (err) {
-      errors.push(`${explainRenderFailure(err)}\n  Technical detail: ${err?.message || err}`);
-    }
-  }
-  return { data, errors, warnings };
-};
+const checkText = (text, known = new Set(pages.keys())) => checkPage(text, known, renderPage);
 
 const report = ({ errors, warnings }, okText) => {
   if (errors.length) {
@@ -224,6 +90,77 @@ const report = ({ errors, warnings }, okText) => {
   return true;
 };
 
+/* ---------- live preview (as in the CMS editor) ---------- */
+
+// Image paths are stored site-relative; prefix the base path the way the
+// CMS preview does, so a site served under a sub-path still shows them.
+const rebaseImages = (node) => {
+  if (Array.isArray(node)) return node.map(rebaseImages);
+  if (!node || typeof node !== 'object') return node;
+  return Object.fromEntries(Object.entries(node).map(([k, v]) => [
+    k,
+    k === 'image' && typeof v === 'string' && v.startsWith('/') && !v.startsWith(`${BASE}/`) ? BASE + v : rebaseImages(v),
+  ]));
+};
+
+/**
+ * Draws the editor's text into the preview frame with the site's renderer and
+ * stylesheet — the same pair the CMS preview uses — keeping the scroll
+ * position, so typing does not jump the preview back to the top.
+ */
+const drawVisual = () => {
+  const frame = $('visual');
+  const doc = frame.contentDocument;
+  if (!doc) return;
+  if (!doc.getElementById('site-css')) {
+    doc.open();
+    doc.write('<!DOCTYPE html><html><head><meta charset="utf-8"></head><body></body></html>');
+    doc.close();
+    for (const [id, href] of [['site-css', `${BASE}/assets/site.css`], ['fixes-css', `${BASE}/admin/preview-fixes.css`]]) {
+      doc.head.append(Object.assign(doc.createElement('link'), { id, rel: 'stylesheet', href }));
+    }
+    const own = doc.createElement('style');
+    own.textContent = '.preview-message{padding:32px;font:400 15px/1.6 system-ui,sans-serif;color:#5C6B72;white-space:pre-line}.preview-message strong{color:#B42318}';
+    doc.head.append(own);
+  }
+  const scroll = doc.scrollingElement?.scrollTop || 0;
+  const body = doc.body;
+  body.textContent = '';
+  const message = (title, detail) => {
+    const box = doc.createElement('div');
+    box.className = 'preview-message';
+    box.append(Object.assign(doc.createElement('strong'), { textContent: title }), `\n${detail}`);
+    body.append(box);
+  };
+
+  const text = els.text.value.trim();
+  if (!text) { message('Nothing to preview yet', 'Pick a page, start a new one, or upload a file.'); return; }
+  let data;
+  try {
+    data = JSON.parse(text);
+  } catch {
+    message('Preview paused — the text is not valid JSON', 'Press Check to see the line with the problem.');
+    return;
+  }
+  try {
+    const scratch = document.implementation.createHTMLDocument('preview');
+    const node = renderPage(scratch, {
+      template: 'standard', intro: {}, blocks: [], ...rebaseImages(data),
+      slug: data.slug || 'preview', menuName: data.menuName || 'Untitled page',
+    }, { people: [], partners: [], index: 1, total: 1, urlFor: () => '#', entryUrl: () => '#', t: (k) => k });
+    const root = doc.createElement('div');
+    root.className = 'cms-preview-root';
+    root.append(doc.importNode(node, true));
+    body.append(root);
+    if (doc.scrollingElement) doc.scrollingElement.scrollTop = scroll;
+  } catch (err) {
+    message('Preview unavailable', `${explainRenderFailure(err)}\nPress Check for details.`);
+  }
+};
+
+let visualTimer = 0;
+const drawVisualSoon = () => { clearTimeout(visualTimer); visualTimer = setTimeout(drawVisual, 250); };
+
 /* ---------- editor ---------- */
 
 const setText = (text, label, viewing = false) => {
@@ -231,6 +168,7 @@ const setText = (text, label, viewing = false) => {
   els.fileName.textContent = label;
   els.fileName.classList.toggle('viewing', viewing);
   els.save.textContent = viewing ? 'Restore this version' : 'Save to site';
+  drawVisual();
 };
 
 const clearRestore = () => {
@@ -410,20 +348,10 @@ const openDeleted = async (g) => {
 
 /** Follows the deploy for a commit so a failed build is never silent. */
 const watchDeploy = async (commitSha, box, success, successLink = null) => {
-  for (let i = 0; i < 36; i++) {
-    await new Promise((r) => setTimeout(r, 10000));
-    let run;
-    try {
-      run = (await gh(`/repos/${repo}/actions/runs?head_sha=${commitSha}&per_page=1`)).workflow_runs?.[0];
-    } catch {
-      return; // no permission to read Actions; the saved message stands
-    }
-    if (run?.status === 'completed') {
-      if (run.conclusion === 'success') say(box, success, 'good', successLink);
-      else say(box, 'Saved, but the site could not update, so nothing on the live site changed.', 'bad', { href: run.html_url, label: 'See what went wrong', external: true });
-      return;
-    }
-  }
+  const result = await client.deployResult(commitSha);
+  if (!result) return; // cannot tell; the saved message stands
+  if (result.ok) say(box, success, 'good', successLink);
+  else say(box, 'Saved, but the site could not update, so nothing on the live site changed.', 'bad', { href: result.url, label: 'See what went wrong', external: true });
 };
 
 const save = async () => {
@@ -456,10 +384,7 @@ const save = async () => {
   status('Saving…');
   try {
     const text = `${JSON.stringify(data, null, 2)}\n`;
-    const res = await gh(`/repos/${repo}/contents/${pagePath(target)}`, {
-      method: 'PUT',
-      body: JSON.stringify({ message, content: toBase64(text), branch, ...(existing ? { sha: existing.sha } : {}) }),
-    });
+    const res = await client.writePage(target, text, message, existing?.sha);
     pages.set(target, { sha: res.content.sha });
     notifyCms();
     fillPicker(target);
@@ -666,20 +591,21 @@ els.deletedSection.addEventListener('toggle', () => { if (els.deletedSection.ope
 els.siteSection.addEventListener('toggle', () => {
   if (els.siteSection.open && !els.siteSaves.textContent) loadSaves().catch((err) => say(els.siteStatus, `Could not load saves: ${err.message}`, 'bad'));
 });
+els.text.addEventListener('input', drawVisualSoon);
 els.text.addEventListener('keydown', (e) => {
   // Tab indents instead of leaving the box, as in any text editor.
   if (e.key !== 'Tab' || e.shiftKey) return;
   e.preventDefault();
   els.text.setRangeText('  ', els.text.selectionStart, els.text.selectionEnd, 'end');
+  drawVisualSoon();
 });
 
 try {
-  const site = await fetch(`${BASE}/content/site.json`).then((r) => r.json());
-  repo = site.cms?.repo;
-  branch = site.cms?.branch || 'main';
-  token = readToken();
+  client = await connect(BASE);
+  ({ repo, branch } = client);
   await listPages();
   fillPicker();
+  drawVisual();
 
   // Opened from the CMS: ?embed=1 inside its panel, ?page=<slug> from a page's edit screen.
   const params = new URLSearchParams(location.search);
