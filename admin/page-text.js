@@ -59,16 +59,9 @@ const el = (tag, props = {}, ...children) => {
 const say = (box, text, tone = '', link = null) => {
   box.className = `status ${tone}`;
   box.textContent = text;
-  // _top, so a link followed from inside the CMS panel leaves the panel.
-  if (link) box.append(' ', el('a', { href: link.href, textContent: link.label, target: link.external ? '_blank' : '_top', rel: 'noopener' }));
+  if (link) box.append(' ', el('a', { href: link.href, textContent: link.label, target: link.external ? '_blank' : '', rel: 'noopener' }));
 };
 const status = (...args) => say(els.status, ...args);
-
-/** Inside the CMS's Versions panel, tell the CMS a save happened: its editor
- *  still holds the old text, and saving that would undo this. */
-const notifyCms = () => {
-  if (window.parent !== window) window.parent.postMessage({ type: 'aiwc-page-text-saved' }, location.origin);
-};
 
 const gh = (...args) => client.gh(...args);
 const readFile = (...args) => client.readFile(...args);
@@ -168,6 +161,9 @@ const setText = (text, label, viewing = false) => {
   els.fileName.textContent = label;
   els.fileName.classList.toggle('viewing', viewing);
   els.save.textContent = viewing ? 'Restore this version' : 'Save to site';
+  // Back to the same page in the CMS. Arriving there reloads the CMS, so its
+  // editor shows what was just saved here rather than a stale copy.
+  $('back').href = loadedSlug ? `./#/collections/pages/entries/${loadedSlug}` : './';
   drawVisual();
 };
 
@@ -386,7 +382,6 @@ const save = async () => {
     const text = `${JSON.stringify(data, null, 2)}\n`;
     const res = await client.writePage(target, text, message, existing?.sha);
     pages.set(target, { sha: res.content.sha });
-    notifyCms();
     fillPicker(target);
     loadedSlug = target;
     currentText = text;
@@ -510,7 +505,6 @@ const runSiteRestore = async (c, head, baseTree, changes, button) => {
     });
     // Not forced: if anyone saved since the comparison, this is refused.
     await gh(`/repos/${repo}/git/refs/heads/${encodeURIComponent(branch)}`, { method: 'PATCH', body: JSON.stringify({ sha: commit.sha, force: false }) });
-    notifyCms();
     els.sitePlan.textContent = '';
     say(els.siteStatus, 'Restored. The site is updating — this usually takes 1–2 minutes… Reload the content admin afterwards so it shows the restored pages.');
     await listPages();
@@ -607,13 +601,18 @@ try {
   fillPicker();
   drawVisual();
 
-  // Opened from the CMS: ?embed=1 inside its panel, ?page=<slug> from a page's edit screen.
-  const params = new URLSearchParams(location.search);
-  if (params.has('embed')) document.documentElement.classList.add('embed');
-  const wanted = params.get('page');
+  // Opened from a page's edit screen in the CMS: ?page=<slug>.
+  const wanted = new URLSearchParams(location.search).get('page');
   if (wanted && pages.has(wanted)) {
     els.page.value = wanted;
     await loadSelected();
+    // Opened by the CMS's "Edit as text" button: land on the text and preview.
+    // After load, and without scroll restoration: the browser otherwise puts
+    // the page back at the top once the preview's images finish loading.
+    history.scrollRestoration = 'manual';
+    const land = () => els.fileName.scrollIntoView({ block: 'start' });
+    if (document.readyState === 'complete') land();
+    else window.addEventListener('load', land, { once: true });
   }
 } catch (err) {
   els.page.textContent = '';

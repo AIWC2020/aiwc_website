@@ -29,9 +29,6 @@
       header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; padding: 14px 24px; background: #0A1A24; color: #fff; }
       header h1 { margin: 0; font-size: 1.05rem; letter-spacing: .04em; }
       header a { color: #CFE7E3; }
-      /* Inside the CMS panel: its own Close button replaces the back link. */
-      .embed header { padding-right: 110px; }
-      .embed header a { display: none; }
       main { max-width: 1100px; margin: 0 auto; padding: 20px 16px 64px; }
       h2 { font-size: 1.05rem; margin: 32px 0 6px; }
       .intro { color: var(--muted); max-width: 75ch; margin: 0 0 16px; }
@@ -93,7 +90,7 @@
   <body>
     <header>
       <h1>Page text &amp; versions</h1>
-      <a href="./">← Back to the content admin</a>
+      <a id="back" href="./">← Back to the content admin</a>
     </header>
     <main>
       <p class="intro">

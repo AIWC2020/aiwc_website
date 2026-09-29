@@ -61,31 +61,20 @@
     <!-- Live preview: renders entries with the site's own renderer
          (/assets/templates.mjs), so it cannot drift from the real page. -->
     <script type="module" src="preview.js"></script>
-    <!-- Versions button (admin/versions-button.js): opens Page text &
-         versions (admin/page-text.html) in a panel over the CMS; on a
-         page's edit screen it opens straight onto that page's versions.
-         Kept outside the CMS app so a CMS upgrade cannot break it. -->
+    <!-- "Edit as text" / "Restore & import" (admin/versions-button.js): a
+         link to Page text & versions (admin/page-text.html) as a full page;
+         on a page's edit screen it opens that page. Kept outside the CMS
+         app so a CMS upgrade cannot break it. -->
     <script type="module" src="versions-button.js"></script>
     <style>
+      /* Bottom-right, over the preview side: bottom-left sat on top of the
+         form's field labels while editing. */
       .versions-button {
-        position: fixed; left: 16px; bottom: 16px; z-index: 1000;
-        padding: 9px 16px; border: 0; border-radius: 999px; background: #0E6F66; color: #fff; cursor: pointer;
-        font: 500 13px/1 system-ui, sans-serif; box-shadow: 0 2px 8px rgba(0,0,0,.18);
+        position: fixed; right: 16px; bottom: 16px; z-index: 1000;
+        padding: 7px 13px; border-radius: 999px; background: #0E6F66; color: #fff; text-decoration: none;
+        font: 500 12px/1 system-ui, sans-serif; box-shadow: 0 2px 8px rgba(0,0,0,.18); opacity: .9;
       }
-      .versions-button:hover { background: #0B5A53; }
-      .versions-overlay {
-        position: fixed; inset: 0; z-index: 2000; background: rgba(10,26,36,.55);
-        display: flex; align-items: center; justify-content: center; padding: 16px;
-      }
-      .versions-panel {
-        position: relative; width: min(1100px, 100%); height: min(92vh, 100%);
-        background: #FAF7F2; border-radius: 10px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,.35);
-      }
-      .versions-panel iframe { width: 100%; height: 100%; border: 0; display: block; }
-      .versions-close {
-        position: absolute; top: 10px; right: 12px; z-index: 1; padding: 6px 12px; border: 1px solid #D9DEE0;
-        border-radius: 6px; background: #fff; color: #1F2A30; font: 500 13px/1 system-ui, sans-serif; cursor: pointer;
-      }
+      .versions-button:hover, .versions-button:focus-visible { background: #0B5A53; opacity: 1; }
     </style>
   </body>
 </html>

@@ -400,7 +400,7 @@ const restoreVersion = async (slug, state) => {
       return;
     }
     if (data.slug !== slug) {
-      state.note = { tone: 'bad', text: `This version has a different page address (“${data.slug}”), so restoring it here would not match the page. Use Page text & versions instead.` };
+      state.note = { tone: 'bad', text: `This version has a different page address (“${data.slug}”), so restoring it here would not match the page. Use the “Restore & import” button instead.` };
       return;
     }
     const ok = confirm(`Restore “${data.menuName}” to the version from ${old.when}?\n\n` +
