@@ -1194,7 +1194,7 @@ export const brandMarkSvg = (shape = 'drop', variant = 'chrome') => {
     : 'M24 27.5 C23.6 31, 24.3 34, 24 38';
 
   const favicon = variant === 'favicon';
-  const frame = favicon ? 'var(--frame)' : 'rgba(255,255,255,.55)';
+  const frame = favicon ? 'var(--frame)' : 'rgba(255,255,255,.85)';
   const flow = favicon ? 'var(--flow)' : '#EAF4F2';
   const faviconStyle = favicon
     ? '<style>:root{--frame:#0A1A24;--flow:#0A1A24}@media(prefers-color-scheme:dark){:root{--frame:rgba(255,255,255,.75);--flow:#EAF4F2}}</style>'

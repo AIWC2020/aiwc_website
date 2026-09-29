@@ -613,4 +613,9 @@ collections:
               - { label: "Circle", value: "circle" }
               - { label: "Squircle", value: "squircle" }
               - { label: "Pebble", value: "pebble" }
-            hint: "The container around the confluence glyph — two streams meeting as one — shown in the rail, the mobile bar and the browser tab. Every shape keeps the same line work, so the mark stays on-design."
+            hint: "The container around the confluence glyph — two streams meeting as one — shown in the rail, the mobile bar and the browser tab. Every shape keeps the same line work, so the mark stays on-design. Ignored while a logo image is set."
+          - label: "Logo image"
+            name: "logo"
+            widget: "image"
+            required: false
+            hint: "Optional. Upload your own logo to use instead of the drawn mark, in the menu, the mobile bar and the browser tab. A square PNG or SVG with a transparent background works best — it sits on the dark menu. Remove it to go back to the drawn mark."

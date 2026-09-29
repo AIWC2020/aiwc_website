@@ -28,6 +28,9 @@ const SITE = loadSite(ROOT);
 const BRAND_FILE = join(ROOT, 'content/brand.json');
 const BRAND_RAW = existsSync(BRAND_FILE) ? JSON.parse(readFileSync(BRAND_FILE, 'utf8')) : {};
 const BRAND_SHAPE = BRAND_SHAPES.includes(BRAND_RAW.shape) ? BRAND_RAW.shape : 'drop';
+// An uploaded logo replaces the drawn mark everywhere it appears. Stored with
+// the public_folder path the CMS writes, so it is rebased like any image.
+const BRAND_LOGO = typeof BRAND_RAW.logo === 'string' && BRAND_RAW.logo.trim() ? BRAND_RAW.logo.trim() : null;
 const BASE = SITE.base;
 const SITE_URL = SITE.url.replace(/\/$/, '');
 const LANGS = SITE.languages;
@@ -202,15 +205,18 @@ function composeDocument(lang, activeSlug, panel, { langBase = '' } = {}) {
 
   /* the brand mark — the confluence glyph in the shape content/brand.json
      picked. The chrome's CSS-drawn fallback stays for anything unbuilt. */
+  const markHtml = () => (BRAND_LOGO
+    ? `<img src="${logoSrc()}" alt="">`
+    : brandMarkSvg(BRAND_SHAPE, 'chrome'));
   document.querySelectorAll('.brand-mark').forEach((n) => {
-    n.innerHTML = brandMarkSvg(BRAND_SHAPE, 'chrome');
+    n.innerHTML = markHtml();
   });
   const mobileBrand = document.querySelector('.mobile-brand');
   if (mobileBrand && !mobileBrand.querySelector('.brand-mark')) {
     const mark = document.createElement('span');
     mark.className = 'brand-mark brand-mark--bar';
     mark.setAttribute('aria-hidden', 'true');
-    mark.innerHTML = brandMarkSvg(BRAND_SHAPE, 'chrome');
+    mark.innerHTML = markHtml();
     mobileBrand.prepend(mark);
   }
 
@@ -312,8 +318,12 @@ function applyHead(document, { lang, title, description, canonical, image, alter
   link('canonical', canonical);
   const icon = document.createElement('link');
   icon.setAttribute('rel', 'icon');
-  icon.setAttribute('type', 'image/svg+xml');
-  icon.setAttribute('href', `${BASE}/assets/brand-mark.svg`);
+  if (BRAND_LOGO) {
+    icon.setAttribute('href', logoSrc());
+  } else {
+    icon.setAttribute('type', 'image/svg+xml');
+    icon.setAttribute('href', `${BASE}/assets/brand-mark.svg`);
+  }
   head.appendChild(icon);
   alternates.forEach(([l, url]) => link('alternate', url, l));
 
@@ -330,6 +340,9 @@ function applyHead(document, { lang, title, description, canonical, image, alter
   meta('name', 'twitter:image', image);
 }
 
+// Site-relative path of the uploaded logo, whether the CMS wrote it with or
+// without the base path.
+const logoSrc = () => (BRAND_LOGO.startsWith('http') || BRAND_LOGO.startsWith(`${BASE}/`) ? BRAND_LOGO : BASE + BRAND_LOGO);
 const absImage = (src) => (src ? (src.startsWith('http') ? src : SITE_URL + (src.startsWith(BASE) ? src : BASE + src)) : null);
 
 /* ── run ────────────────────────────────────────────────────────────── */

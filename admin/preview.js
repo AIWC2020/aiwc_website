@@ -17,7 +17,7 @@
 
 const BASE = new URL('.', import.meta.url).pathname.replace(/\/admin\/$/, '');
 
-const { renderPage, renderPerson, renderPartner } = await import(`${BASE}/assets/templates.mjs`);
+const { renderPage, renderPerson, renderPartner, brandMarkSvg } = await import(`${BASE}/assets/templates.mjs`);
 
 // Researchers and partners now live inside the block being edited, so the
 // preview gets them for free. The published index is still read as a
@@ -59,6 +59,17 @@ CMS.registerPreviewStyle(
     padding: 44px; font: 400 .95rem/1.6 system-ui, sans-serif; color: #5C6B72;
   }
   .cms-preview-empty p { margin: 0 0 .75em; max-width: 60ch; }
+  .brand-preview { padding: 32px; font: 400 .9rem/1.5 system-ui, sans-serif; color: #5C6B72; }
+  .brand-preview h3 { margin: 24px 0 8px; font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: #1F2A30; }
+  .brand-preview .bp-bar { display: flex; align-items: center; gap: 14px; padding: 18px 22px; background: #0A1A24; color: #fff; border-radius: 8px; width: max-content; }
+  .brand-preview .bp-bar .brand-word { color: #fff; }
+  .brand-preview .bp-tabs { display: flex; gap: 12px; }
+  .brand-preview .bp-tab { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 8px; font-size: .8rem; }
+  .brand-preview .bp-tab.light { background: #F1F3F4; color: #1F2A30; }
+  .brand-preview .bp-tab.dark { background: #202124; color: #E8EAED; }
+  .brand-preview .bp-fav { position: relative; width: 16px; height: 16px; flex: 0 0 16px; }
+  .brand-preview .bp-fav svg, .brand-preview .bp-fav img { width: 100%; height: 100%; display: block; object-fit: contain; }
+  .brand-preview .bp-note { margin-top: 20px; max-width: 60ch; }
   .cms-preview-empty .cms-preview-title { font-weight: 600; color: #1F2A30; }
   .cms-preview-empty .cms-preview-warn { color: #9A3412; }
   .cms-preview-empty summary { cursor: pointer; font-size: .85rem; }
@@ -188,6 +199,78 @@ const paneFor = (render, emptyMessage) => ({ entry, getAsset }) => {
     },
   });
 };
+
+/* ---------- Site → Brand mark ---------- */
+
+/**
+ * Shows the mark where the site actually uses it: the dark menu at full size,
+ * the mobile bar, and a browser tab in both themes. Uses the same brandMarkSvg
+ * as the build, so a shape change here is exactly what ships.
+ */
+CMS.registerPreviewTemplate('brand', ({ entry, getAsset }) => {
+  const data = toData(entry, getAsset);
+  const logo = typeof data.logo === 'string' && data.logo ? data.logo : null;
+
+  return h('div', {
+    className: 'brand-preview',
+    ref: (el) => {
+      if (!el) return;
+      const d = el.ownerDocument;
+      el.textContent = '';
+      const make = (tag, className, text) => {
+        const n = d.createElement(tag);
+        if (className) n.className = className;
+        if (text) n.textContent = text;
+        return n;
+      };
+      const mark = (className, variant) => {
+        const m = make('span', className);
+        if (logo) {
+          const img = make('img');
+          img.src = logo;
+          img.alt = '';
+          m.appendChild(img);
+        } else {
+          m.innerHTML = brandMarkSvg(data.shape || 'drop', variant);
+        }
+        return m;
+      };
+
+      el.appendChild(make('h3', '', 'Menu'));
+      const bar = make('div', 'bp-bar');
+      bar.append(mark('brand-mark', 'chrome'), make('span', 'brand-word', 'AIWC'));
+      el.appendChild(bar);
+
+      el.appendChild(make('h3', '', 'Mobile bar'));
+      const small = make('div', 'bp-bar');
+      small.append(mark('brand-mark brand-mark--bar', 'chrome'), make('span', 'brand-word', 'AIWC'));
+      el.appendChild(small);
+
+      el.appendChild(make('h3', '', 'Browser tab'));
+      const tabs = make('div', 'bp-tabs');
+      for (const theme of ['light', 'dark']) {
+        const tab = make('div', `bp-tab ${theme}`);
+        const fav = mark('bp-fav', 'favicon');
+        // The favicon SVG picks its colours with prefers-color-scheme, which
+        // the preview cannot switch per tab; pin them to each tab's theme.
+        const svg = fav.querySelector('svg');
+        if (svg) {
+          svg.querySelector('style')?.remove();
+          const ink = theme === 'dark' ? '#EAF4F2' : '#0A1A24';
+          svg.style.setProperty('--frame', ink);
+          svg.style.setProperty('--flow', ink);
+        }
+        tab.append(fav, make('span', '', 'AIWC — Australia India…'));
+        tabs.appendChild(tab);
+      }
+      el.appendChild(tabs);
+
+      el.appendChild(make('p', 'bp-note', logo
+        ? 'Using your uploaded logo. Remove the logo image to go back to the drawn mark.'
+        : 'Using the drawn mark in the chosen shape. Upload a logo image to replace it.'));
+    },
+  });
+});
 
 /* ---------- the three collections ---------- */
 
