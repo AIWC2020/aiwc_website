@@ -162,6 +162,21 @@ if (existsSync(builtCms)) {
   }
 }
 
+/* preview styles load as files. The CMS turns an inline style string into a
+   blob: URL, which the admin's Content-Security-Policy (style-src 'self')
+   blocks without any visible error — the logo preview and the version
+   picker shipped unstyled that way. */
+const previewJs = join(OUT, 'admin/preview.js');
+if (existsSync(previewJs)) {
+  const js = readFileSync(previewJs, 'utf8');
+  if (/raw:\s*true/.test(js)) {
+    fail('admin/preview.js', 'registers an inline preview style ({ raw: true }); the admin CSP blocks it — put the CSS in admin/preview.css');
+  }
+  for (const [, href] of js.matchAll(/registerPreviewStyle\(`\$\{BASE\}\/([^`]+)`/g)) {
+    if (!existsSync(join(OUT, href))) fail('admin/preview.js', `preview stylesheet ${href} is not in the built site`);
+  }
+}
+
 /* the CMS can edit every block the renderer can draw, and vice versa */
 const cmsPath = join(ROOT, 'admin/config.yml');
 if (existsSync(cmsPath)) {

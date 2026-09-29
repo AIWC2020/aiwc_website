@@ -40,57 +40,12 @@ const { CMS, h } = window;
 // makes the preview look like the site rather than an approximation.
 CMS.registerPreviewStyle(`${BASE}/assets/site.css`);
 
-// Preview-only layout corrections, shared with Page text & versions.
-CMS.registerPreviewStyle(`${BASE}/admin/preview-fixes.css`);
-
-// The empty/failed states and the version picker.
-CMS.registerPreviewStyle(
-  `
-  .cms-preview-empty {
-    padding: 44px; font: 400 .95rem/1.6 system-ui, sans-serif; color: #5C6B72;
-  }
-  .cms-preview-empty p { margin: 0 0 .75em; max-width: 60ch; }
-  /* Version picker pinned above the page preview. */
-  .version-bar {
-    position: sticky; top: 0; z-index: 50; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px;
-    padding: 10px 14px; background: #fff; border-bottom: 1px solid #D9DEE0;
-    font: 400 13px/1.4 system-ui, sans-serif; color: #1F2A30;
-  }
-  .version-bar label { display: flex; align-items: center; gap: 8px; font-weight: 600; }
-  .version-bar select { font: inherit; font-weight: 400; padding: 5px 8px; border: 1px solid #D9DEE0; border-radius: 6px; background: #fff; max-width: 100%; }
-  .version-hint { color: #5C6B72; }
-  .version-note {
-    flex-basis: 100%; display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
-    padding: 8px 10px; border-radius: 6px; background: #FFF4E5; color: #9A3412;
-  }
-  .version-note span { flex: 1 1 220px; }
-  .version-bar button { font: inherit; padding: 5px 12px; border-radius: 6px; cursor: pointer; }
-  .version-primary { background: #0E6F66; border: 1px solid #0E6F66; color: #fff; }
-  .version-primary:disabled { opacity: .6; cursor: default; }
-  .version-secondary { background: #fff; border: 1px solid #D9DEE0; color: #1F2A30; }
-  .version-status { flex-basis: 100%; white-space: pre-line; padding: 6px 10px; border-radius: 6px; }
-  .version-status.info { background: #EEF4F6; color: #1F2A30; }
-  .version-status.good { background: #E7F5EC; color: #1B7A43; }
-  .version-status.bad { background: #FCEBEA; color: #B42318; }
-  .version-status a { color: inherit; }
-  .brand-preview { padding: 32px; font: 400 .9rem/1.5 system-ui, sans-serif; color: #5C6B72; }
-  .brand-preview h3 { margin: 24px 0 8px; font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: #1F2A30; }
-  .brand-preview .bp-bar { display: flex; align-items: center; gap: 14px; padding: 18px 22px; background: #0A1A24; color: #fff; border-radius: 8px; width: max-content; }
-  .brand-preview .bp-bar .brand-word { color: #fff; }
-  .brand-preview .bp-tabs { display: flex; gap: 12px; }
-  .brand-preview .bp-tab { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 8px; font-size: .8rem; }
-  .brand-preview .bp-tab.light { background: #F1F3F4; color: #1F2A30; }
-  .brand-preview .bp-tab.dark { background: #202124; color: #E8EAED; }
-  .brand-preview .bp-fav { position: relative; width: 16px; height: 16px; flex: 0 0 16px; }
-  .brand-preview .bp-fav svg, .brand-preview .bp-fav img { width: 100%; height: 100%; display: block; object-fit: contain; }
-  .brand-preview .bp-note { margin-top: 20px; max-width: 60ch; }
-  .cms-preview-empty .cms-preview-title { font-weight: 600; color: #1F2A30; }
-  .cms-preview-empty .cms-preview-warn { color: #9A3412; }
-  .cms-preview-empty summary { cursor: pointer; font-size: .85rem; }
-  .cms-preview-empty code { display: block; margin-top: .5em; font-size: .8rem; white-space: pre-wrap; }
-  `,
-  { raw: true }
-);
+// Everything the preview adds: layout corrections, the empty and failed
+// states, the version picker and the logo preview. A file, not an inline
+// string: the admin's Content-Security-Policy only allows stylesheets from
+// this site ('self'), and the CMS turns an inline string into a blob: URL,
+// which the policy blocks — so inline preview styles never applied.
+CMS.registerPreviewStyle(`${BASE}/admin/preview.css`);
 
 /* ---------- entry -> plain object ---------- */
 
@@ -332,6 +287,11 @@ const PENDING_KEY = 'aiwc-restore-pending';
 const versionState = (slug) => {
   if (!client) return null;
   let state = versionStates.get(slug);
+  // Not signed in yet (the CMS may still be restoring its session): try again.
+  if (state?.retryAt && Date.now() >= state.retryAt) {
+    versionStates.delete(slug);
+    state = null;
+  }
   if (!state) {
     state = { list: null, error: null, selected: '', old: null, busy: false, note: null };
     versionStates.set(slug, state);
@@ -347,7 +307,13 @@ const loadVersionList = async (slug, state) => {
     state.list = (await client.commitsFor(pagePath(slug), 1, 30)).filter((c) => !/^Delete page/.test(what(c)));
   } catch (err) {
     state.list = [];
-    state.error = err instanceof NotSignedIn ? null : err.message;
+    if (err instanceof NotSignedIn) {
+      // No GitHub call was made; retry shortly rather than showing nothing for good.
+      state.retryAt = Date.now() + 3000;
+      setTimeout(redrawPagePane, 3100);
+    } else {
+      state.error = err.message;
+    }
   }
   redrawPagePane();
 };

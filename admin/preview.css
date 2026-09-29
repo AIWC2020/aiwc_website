@@ -1,0 +1,69 @@
+/* Styles for the CMS preview (preview.js) and the live preview on the
+   Page text & versions screen (page-text.js).
+
+   Kept as a file on purpose: the admin's Content-Security-Policy allows
+   stylesheets only from this site, and the CMS loads inline preview styles
+   as blob: URLs, which that policy blocks. */
+
+/* Layout corrections: the site's layout offsets content by a fixed rail
+   that does not exist inside a preview. */
+html, body { margin: 0; background: var(--paper, #FAF7F2); }
+.cms-preview-root { display: block; }
+.cms-preview-root main { margin-left: 0; }
+.cms-preview-root .panel { min-height: 0; }
+.cms-preview-root .home-hero { min-height: 60svh; }
+.cms-preview-root .panel:not(#panel-home) .page-head {
+  min-height: 38svh; padding: 90px max(4vw, 32px) 48px;
+}
+.cms-preview-root .content-wrap { width: min(920px, calc(100% - 40px)); }
+.cms-preview-root .motion-item { opacity: 1 !important; transform: none !important; }
+.cms-preview-root .wrap,
+.cms-preview-root .wrap-tight { width: min(1000px, calc(100% - 44px)); }
+/* Reveals never fire without the site's IntersectionObserver. */
+.cms-preview-root .reveal { opacity: 1 !important; transform: none !important; }
+
+/* Empty and failed states: "Preview unavailable" and why. */
+.cms-preview-empty {
+  padding: 44px; font: 400 .95rem/1.6 system-ui, sans-serif; color: #5C6B72;
+}
+.cms-preview-empty p { margin: 0 0 .75em; max-width: 60ch; }
+/* Version picker pinned above the page preview. */
+.version-bar {
+  position: sticky; top: 0; z-index: 50; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px;
+  padding: 10px 14px; background: #fff; border-bottom: 1px solid #D9DEE0;
+  font: 400 13px/1.4 system-ui, sans-serif; color: #1F2A30;
+}
+/* The dropdown sizes itself to its longest option; min-width: 0 lets it
+   shrink to the pane instead of running past it on narrow screens. */
+.version-bar label { display: flex; align-items: center; gap: 8px; font-weight: 600; flex: 0 1 auto; min-width: 0; max-width: 100%; }
+.version-bar select { font: inherit; font-weight: 400; padding: 5px 8px; border: 1px solid #D9DEE0; border-radius: 6px; background: #fff; min-width: 0; flex: 1 1 auto; max-width: 100%; text-overflow: ellipsis; }
+.version-hint { color: #5C6B72; }
+.version-note {
+  flex-basis: 100%; display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+  padding: 8px 10px; border-radius: 6px; background: #FFF4E5; color: #9A3412;
+}
+.version-note span { flex: 1 1 220px; }
+.version-bar button { font: inherit; padding: 5px 12px; border-radius: 6px; cursor: pointer; }
+.version-primary { background: #0E6F66; border: 1px solid #0E6F66; color: #fff; }
+.version-primary:disabled { opacity: .6; cursor: default; }
+.version-secondary { background: #fff; border: 1px solid #D9DEE0; color: #1F2A30; }
+.version-status { flex-basis: 100%; white-space: pre-line; padding: 6px 10px; border-radius: 6px; }
+.version-status.info { background: #EEF4F6; color: #1F2A30; }
+.version-status.good { background: #E7F5EC; color: #1B7A43; }
+.version-status.bad { background: #FCEBEA; color: #B42318; }
+.version-status a { color: inherit; }
+.brand-preview { padding: 32px; font: 400 .9rem/1.5 system-ui, sans-serif; color: #5C6B72; }
+.brand-preview h3 { margin: 24px 0 8px; font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: #1F2A30; }
+.brand-preview .bp-bar { display: flex; align-items: center; gap: 14px; padding: 18px 22px; background: #0A1A24; color: #fff; border-radius: 8px; width: max-content; }
+.brand-preview .bp-bar .brand-word { color: #fff; }
+.brand-preview .bp-tabs { display: flex; gap: 12px; }
+.brand-preview .bp-tab { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 8px; font-size: .8rem; }
+.brand-preview .bp-tab.light { background: #F1F3F4; color: #1F2A30; }
+.brand-preview .bp-tab.dark { background: #202124; color: #E8EAED; }
+.brand-preview .bp-fav { position: relative; width: 16px; height: 16px; flex: 0 0 16px; }
+.brand-preview .bp-fav svg, .brand-preview .bp-fav img { width: 100%; height: 100%; display: block; object-fit: contain; }
+.brand-preview .bp-note { margin-top: 20px; max-width: 60ch; }
+.cms-preview-empty .cms-preview-title { font-weight: 600; color: #1F2A30; }
+.cms-preview-empty .cms-preview-warn { color: #9A3412; }
+.cms-preview-empty summary { cursor: pointer; font-size: .85rem; }
+.cms-preview-empty code { display: block; margin-top: .5em; font-size: .8rem; white-space: pre-wrap; }

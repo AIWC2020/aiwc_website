@@ -109,7 +109,7 @@ const drawVisual = () => {
     doc.open();
     doc.write('<!DOCTYPE html><html><head><meta charset="utf-8"></head><body></body></html>');
     doc.close();
-    for (const [id, href] of [['site-css', `${BASE}/assets/site.css`], ['fixes-css', `${BASE}/admin/preview-fixes.css`]]) {
+    for (const [id, href] of [['site-css', `${BASE}/assets/site.css`], ['preview-css', `${BASE}/admin/preview.css`]]) {
       doc.head.append(Object.assign(doc.createElement('link'), { id, rel: 'stylesheet', href }));
     }
     const own = doc.createElement('style');
