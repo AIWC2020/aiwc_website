@@ -57,7 +57,8 @@ const el = (tag, props = {}, ...children) => {
 const say = (box, text, tone = '', link = null) => {
   box.className = `status ${tone}`;
   box.textContent = text;
-  if (link) box.append(' ', el('a', { href: link.href, textContent: link.label, target: link.external ? '_blank' : '', rel: 'noopener' }));
+  // _top, so a link followed from inside the CMS panel leaves the panel.
+  if (link) box.append(' ', el('a', { href: link.href, textContent: link.label, target: link.external ? '_blank' : '_top', rel: 'noopener' }));
 };
 const status = (...args) => say(els.status, ...args);
 
@@ -110,6 +111,12 @@ const toBase64 = (text) => {
   let bin = '';
   for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
   return btoa(bin);
+};
+
+/** Inside the CMS's Versions panel, tell the CMS a save happened: its editor
+ *  still holds the old text, and saving that would undo this. */
+const notifyCms = () => {
+  if (window.parent !== window) window.parent.postMessage({ type: 'aiwc-page-text-saved' }, location.origin);
 };
 
 const pagePath = (slug) => `content/pages/${slug}.json`;
@@ -454,6 +461,7 @@ const save = async () => {
       body: JSON.stringify({ message, content: toBase64(text), branch, ...(existing ? { sha: existing.sha } : {}) }),
     });
     pages.set(target, { sha: res.content.sha });
+    notifyCms();
     fillPicker(target);
     loadedSlug = target;
     currentText = text;
@@ -577,6 +585,7 @@ const runSiteRestore = async (c, head, baseTree, changes, button) => {
     });
     // Not forced: if anyone saved since the comparison, this is refused.
     await gh(`/repos/${repo}/git/refs/heads/${encodeURIComponent(branch)}`, { method: 'PATCH', body: JSON.stringify({ sha: commit.sha, force: false }) });
+    notifyCms();
     els.sitePlan.textContent = '';
     say(els.siteStatus, 'Restored. The site is updating — this usually takes 1–2 minutes… Reload the content admin afterwards so it shows the restored pages.');
     await listPages();
@@ -671,6 +680,15 @@ try {
   token = readToken();
   await listPages();
   fillPicker();
+
+  // Opened from the CMS: ?embed=1 inside its panel, ?page=<slug> from a page's edit screen.
+  const params = new URLSearchParams(location.search);
+  if (params.has('embed')) document.documentElement.classList.add('embed');
+  const wanted = params.get('page');
+  if (wanted && pages.has(wanted)) {
+    els.page.value = wanted;
+    await loadSelected();
+  }
 } catch (err) {
   els.page.textContent = '';
   els.page.append(new Option('Pages unavailable', ''));
