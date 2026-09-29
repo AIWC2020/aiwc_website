@@ -598,10 +598,12 @@ collections:
   # Site-wide settings live in their own tiny files, so editing them can
   # never touch the deployment fields in site.json.
   - name: "site"
-    label: "Site"
+    label: "Logo & site settings"
+    icon: "palette"
+    description: "The logo shown in the menu, the mobile bar and the browser tab."
     files:
       - name: "brand"
-        label: "Brand mark"
+        label: "Logo"
         file: "content/brand.json"
         fields:
           - label: "Icon shape"

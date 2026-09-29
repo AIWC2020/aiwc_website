@@ -24,7 +24,7 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = join(ROOT, '_site');
 
 const SITE = loadSite(ROOT);
-// The brand mark's container shape, editable in the CMS (Site → Brand mark).
+// The brand mark's container shape, editable in the CMS (Logo & site settings → Logo).
 const BRAND_FILE = join(ROOT, 'content/brand.json');
 const BRAND_RAW = existsSync(BRAND_FILE) ? JSON.parse(readFileSync(BRAND_FILE, 'utf8')) : {};
 const BRAND_SHAPE = BRAND_SHAPES.includes(BRAND_RAW.shape) ? BRAND_RAW.shape : 'drop';

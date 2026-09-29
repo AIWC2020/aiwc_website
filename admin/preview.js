@@ -200,7 +200,7 @@ const paneFor = (render, emptyMessage) => ({ entry, getAsset }) => {
   });
 };
 
-/* ---------- Site → Brand mark ---------- */
+/* ---------- Logo & site settings → Logo ---------- */
 
 /**
  * Shows the mark where the site actually uses it: the dark menu at full size,
