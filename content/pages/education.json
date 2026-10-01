@@ -8,7 +8,7 @@
     "eyebrow": "Our work · Education",
     "title": "Master’s Program in\nSustainable Water Management",
     "lede": "A comprehensive and transdisciplinary education that equips participants with the knowledge, skills, and expertise to address the complex challenges of water sustainability.",
-    "eyebrowSize": 100,
+    "eyebrowSize": 60,
     "titleSize": 70,
     "ledeSize": 70,
     "textAlign": "left",
@@ -36,7 +36,7 @@
     {
       "type": "banner",
       "eyebrow": "The programme",
-      "title": "Education xxx",
+      "title": "Education",
       "tabLabel": "",
       "lede": "",
       "accent": ""
