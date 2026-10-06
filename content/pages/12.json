@@ -23,5 +23,49 @@
   "introTab": "Overview",
   "startCollapsed": false,
   "hero": null,
-  "blocks": []
+  "blocks": [
+    {
+      "type": "imageText",
+      "eyebrow": "",
+      "heading": "Webinar Series 2026",
+      "body": "AIWC Water Talks Series Webinar 6: 8 October 2026",
+      "photo": {
+        "image": "/assets/photos/Webinar 6 - 8 October 2026.pdf",
+        "alt": "",
+        "zoom": 100,
+        "positionX": 50,
+        "positionY": 50,
+        "fit": "auto"
+      },
+      "photoSide": "left"
+    },
+    {
+      "type": "text",
+      "eyebrow": "Speaker 1:",
+      "heading": "",
+      "body": "Dr. Gopal Krishan\nScientist – E, Officer-in-charge, National Hydrology Laboratory, National Institute of Hydrology Roorkee",
+      "align": "left"
+    },
+    {
+      "type": "text",
+      "eyebrow": "Title of the talk",
+      "heading": "",
+      "body": "\"Applications of Isotopes in Water Resources Management: Advancing Sustainable Assessment, Monitoring, and Decision-Making\"",
+      "align": ""
+    },
+    {
+      "type": "text",
+      "eyebrow": "Speaker 2:",
+      "heading": "",
+      "body": "Professor Faisal Hai\nProfessor and the Head of the School of Engineering, University of Wollongong (UOW), Australia",
+      "align": "left"
+    },
+    {
+      "type": "text",
+      "eyebrow": "Title of the talk",
+      "heading": "",
+      "body": "\"Beyond Infiltration: Does Pervious Concrete Deliver the Stormwater Quality Benefits We Expect?”",
+      "align": "left"
+    }
+  ]
 }
