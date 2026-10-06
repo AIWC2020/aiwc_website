@@ -26,8 +26,8 @@
   "blocks": [
     {
       "type": "imageText",
-      "eyebrow": "",
-      "heading": "Webinar Series 2026",
+      "eyebrow": "Webinar Series 2026",
+      "heading": "Upcoming Events",
       "body": "AIWC Water Talks Series Webinar 6: 8 October 2026",
       "photo": {
         "image": "/assets/photos/Webinar 6 - 8 October 2026.pdf",
@@ -43,7 +43,7 @@
       "type": "text",
       "eyebrow": "Speaker 1:",
       "heading": "",
-      "body": "Dr. Gopal Krishan\nScientist – E, Officer-in-charge, National Hydrology Laboratory, National Institute of Hydrology Roorkee",
+      "body": "Dr. Gopal Krishan\nScientist – E, Officer-in-charge, Nuclear Hydrology Laboratory, National Institute of Hydrology Roorkee",
       "align": "left"
     },
     {
