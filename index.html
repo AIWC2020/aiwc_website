@@ -885,6 +885,15 @@
     .cms-block-imageText { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; align-items: center; }
     .cms-block-imageText[data-photo-side="right"] .cms-block-photo { order: 2; }
     .cms-block-photo img { width: 100%; border-radius: var(--radius); }
+    .cms-block-pdf {
+      display: grid; justify-items: center; align-content: center; gap: 6px;
+      min-height: 260px; padding: 32px; text-align: center; text-decoration: none;
+      background: var(--sky); border: 1px solid var(--sky-line); border-radius: var(--radius); color: var(--deep);
+    }
+    .cms-block-pdf svg { width: 56px; height: 56px; margin-bottom: 8px; color: var(--accent-ink); }
+    .cms-block-pdf strong { font-size: var(--t-h3); }
+    .cms-block-pdf span { color: var(--muted); font-size: var(--t-small); }
+    .cms-block-pdf:hover { border-color: var(--deep); }
     div.cms-block-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
     div.cms-block-gallery figure { margin: 0; }
     div.cms-block-gallery img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 4px; }

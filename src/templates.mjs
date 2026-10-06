@@ -1045,7 +1045,21 @@ const cmsCopy = (document, section, block) => {
 };
 const cmsPhoto = (document, section, entry) => {
   const frame = el(document, 'div', { class: 'cms-block-photo' });
-  frame.appendChild(photo(document, entry, { alt: '' }));
+  // Editors sometimes upload a flyer as a PDF into the photo slot. A browser
+  // cannot draw a PDF as an image (it shows a broken one), so offer it as a
+  // document to open instead.
+  if (/\.pdf$/i.test(entry.image || '')) {
+    const doc = el(document, 'a', { class: 'cms-block-pdf' });
+    doc.setAttribute('href', entry.image);
+    doc.setAttribute('target', '_blank');
+    doc.setAttribute('rel', 'noopener');
+    doc.innerHTML = '<svg viewBox="0 0 32 32" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3.5h11l6 6V28a.5.5 0 0 1-.5.5h-16A.5.5 0 0 1 8 28V3.5Z"/><path d="M19 3.5v6h6M12 16h9M12 20.5h9M12 25h6"/></svg>';
+    doc.appendChild(el(document, 'strong', { text: entry.alt || 'View the flyer' }));
+    doc.appendChild(el(document, 'span', { text: 'PDF · opens in a new tab' }));
+    frame.appendChild(doc);
+  } else {
+    frame.appendChild(photo(document, entry, { alt: '' }));
+  }
   section.appendChild(frame);
 };
 
