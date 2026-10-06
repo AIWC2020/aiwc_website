@@ -1,0 +1,72 @@
+{
+  "menuName": "Young Water Professionals",
+  "slug": "young-water-professionals",
+  "order": 18,
+  "published": true,
+  "template": "standard",
+  "intro": {
+    "eyebrow": "",
+    "title": "The Young Water Professionals Program",
+    "lede": "A transdisciplinary training program for young professionals from India’s central and state water departments.",
+    "eyebrowSize": 100,
+    "titleSize": 100,
+    "ledeSize": 100,
+    "textAlign": "left",
+    "textPosition": "bottom",
+    "textWidth": 100,
+    "textOffsetX": 0,
+    "textOffsetY": 0
+  },
+  "heroImage": {
+    "image": "/assets/photos/the-young-water-professionals-program-ywp-0.jpg",
+    "zoom": 100,
+    "positionX": 50,
+    "positionY": 50,
+    "fit": "cover",
+    "alt": "Young Water Professionals in a training session"
+  },
+  "menuImage": {
+    "image": "/assets/photos/the-young-water-professionals-program-ywp-0.jpg",
+    "zoom": 100,
+    "positionX": 50,
+    "positionY": 50,
+    "fit": "cover"
+  },
+  "sectionNav": "none",
+  "blocks": [
+    {
+      "type": "banner",
+      "eyebrow": "02 — Programme",
+      "title": "The Young Water Professionals Program (YWP)",
+      "lede": "",
+      "tabLabel": "YWP"
+    },
+    {
+      "type": "split",
+      "left": {
+        "kind": "prose",
+        "paragraphs": [
+          "The YWP program is a unique, transdisciplinary training initiative aimed at equipping young professionals with skills in leadership, critical and transdisciplinary thinking, and effective communication, along with technical, social, water policy and governance knowledge, to address India’s complex water challenges. The training focuses beyond traditional disciplinary boundaries, integrating insights from various fields to foster a holistic understanding of water resource management.",
+          "In late 2024, the Australia India Water Centre (AIWC) proudly celebrated the achievements of 20 exceptional young professionals from India’s central and state water departments through the Young Water Professionals (YWP) Training Program, funded by India’s National Hydrology Project, National Water Academy. This was the second cohort of YWPs.",
+          "As part of their training, the YWPs worked on a client-based project called Situation Understanding and Improvement Projects (SUIP). The SUIP is the ‘heart’ of this training program, helping YWPs develop recommendations for the client to act upon and develop their skills in leadership, critical and transdisciplinary thinking, networking and effective communication.",
+          "To date, forty dynamic professionals have been trained with the necessary skills, knowledge, behaviours and networks to better enable them to contribute to the development and management of water resources and water management reforms in India. They are set to apply their knowledge in real-world settings, advancing sustainable water management throughout India.",
+          "What made this workshop unique?"
+        ]
+      },
+      "right": {
+        "kind": "prose",
+        "paragraphs": [
+          "• Transdisciplinary Approach: We went beyond traditional boundaries, integrating knowledge from diverse fields like engineering, hydrology, social science, and policy.",
+          "• Hands-On Learning: Participants tackled real-world water challenges by developing the Situation Understanding and Improvement Project (SUIP) proposal, paving the way for practical experience and making a tangible impact.",
+          "• Mentorship and Networking: YWPs connected with experienced professionals, building valuable relationships and expanding their networks.",
+          "• Focus on Sustainability: We emphasised the importance of sustainable water management practices in addressing India’s pressing water challenges."
+        ]
+      }
+    },
+    {
+      "type": "callout",
+      "heading": "Training is expanding under the 2030 agenda.",
+      "body": "Partners at AIWC@5 recommended expanding the Young Water Professionals model, developing micro-credentials, and building shared training modules across IITs, ICAR institutes, Australian universities and State Agricultural Universities."
+    }
+  ]
+}

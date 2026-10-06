@@ -10,7 +10,7 @@
     "title": "Training that moves practice,\nnot just knowledge.",
     "lede": "Five programmes, from village-level groundwater monitoring in Rajasthan and Gujarat to dam safety training for India’s Central Water Commission officers in New South Wales.",
     "eyebrowSize": 100,
-    "titleSize": 70,
+    "titleSize": 100,
     "ledeSize": 100,
     "textAlign": "left",
     "textPosition": "bottom",
@@ -35,7 +35,8 @@
             "positionX": 50,
             "positionY": 50,
             "fit": "cover"
-          }
+          },
+          "page": "marvi"
         },
         {
           "label": "02",
@@ -47,7 +48,8 @@
             "positionX": 50,
             "positionY": 50,
             "fit": "cover"
-          }
+          },
+          "page": "young-water-professionals"
         },
         {
           "label": "03",
@@ -59,7 +61,9 @@
             "positionX": 50,
             "positionY": 50,
             "fit": "cover"
-          }
+          },
+          "page": "training",
+          "section": "s-dam-rehabilitation-improvement-project-drip-ii"
         },
         {
           "label": "04",
@@ -71,7 +75,9 @@
             "positionX": 50,
             "positionY": 50,
             "fit": "cover"
-          }
+          },
+          "page": "training",
+          "section": "s-training-program-on-dam-safety-and-risk-management-in-austra"
         },
         {
           "label": "05",
@@ -83,69 +89,11 @@
             "positionX": 50,
             "positionY": 50,
             "fit": "cover"
-          }
+          },
+          "page": "marvi",
+          "section": "s-village-groundwater-cooperatives-vgcs"
         }
       ]
-    },
-    {
-      "type": "banner",
-      "eyebrow": "01 — Programme",
-      "title": "Managing Aquifer Recharge and Sustaining Groundwater Use through Village-level Interventions (MARVI)",
-      "lede": "",
-      "tabLabel": "MARVI"
-    },
-    {
-      "type": "split",
-      "left": {
-        "kind": "prose",
-        "paragraphs": [
-          "The MARVI project is focused on developing a village level participatory approach, models and tools to assist in improving groundwater supplies and reducing its demand through the direct involvement of farmers and other affected stakeholders.",
-          "A unique feature of MARVI is the use of scientific measurements by citizens through the engagement of Bhujal Jankaars (BJs), a Hindi word meaning ‘groundwater informed’ volunteers. With appropriate training and capacity building, BJs monitor groundwater levels and quality, making sense for the village perspective of what is happening to village groundwater availability. BJs convey this information to farmers and others in their own language.",
-          "Groundwater level represents the integration of recharge, pumping and flow processes and is a direct measure of groundwater availability and the success of any collective management practices. BJs are an effective, trusted and valuable interface between village communities and government agencies, NGOs and researchers.",
-          "An approach for community based participatory groundwater monitoring and management has been developed through a close collaboration with research and development agencies and village communities.",
-          "Watertable data monitored by both BJs and sensors have enabled the estimation of local hydro-geologic parameters and the development of simple groundwater balance. The monitoring of rainfall and water levels in checkdams has led to partition of aquifer recharge due to checkdams and natural recharge in relation to subsequent groundwater use.",
-          "The SMS system and MyWell app developed helps with easy collection of watertable, rainfall and checkdam water level data from any location in India and making those data available on the web."
-        ]
-      },
-      "right": {
-        "kind": "prose",
-        "paragraphs": [
-          "BJs are proving to be significant change agents and through their scientific measurement, understanding and communication in the two watersheds. They are also an important interface between researchers and village communities.",
-          "As a result of the effective engagement of village communities and evidence shown through local data collected over the last four years, there is an indication that farmers now have started to understand their local groundwater system, accept that groundwater is limited and that the falling watertable is a village level issue and it needs to be tackled at the village level.",
-          "The work through MARVI has strengthened the farmers’ view that individual effort alone will not work to solve their groundwater problem. The groundwater level data reveals that deepening wells or installing deeper tubewells is like snatching each other’s groundwater, and overall, no extra water is to be gained by drilling deeper. They have already taken measures to stop deeper drilling, to remove sediment from recharge structures, to determine rabi crop areas from post-monsoon groundwater levels and to improve mulching and water use efficiency and diversify crop types. The farming community in the two watersheds is now debating the concept of sharing groundwater through ‘village groundwater cooperatives’ (VGC). The concept of water productivity, rather than crop productivity, is gaining momentum among the farmers. These are important outcomes from MARVI.",
-          "The developed MARVI approach has been tested in two watersheds in Rajasthan and Gujarat over four years, and it is now ready for upscaling to other areas in the two states.",
-          "Currently AIWC are in discussions to move towards out scaling MARVI through Southeast Asia, China and Africa."
-        ]
-      }
-    },
-    {
-      "type": "banner",
-      "eyebrow": "02 — Programme",
-      "title": "The Young Water Professionals Program (YWP)",
-      "lede": "",
-      "tabLabel": "YWP"
-    },
-    {
-      "type": "split",
-      "left": {
-        "kind": "prose",
-        "paragraphs": [
-          "The YWP program is a unique, transdisciplinary training initiative aimed at equipping young professionals with skills in leadership, critical and transdisciplinary thinking, and effective communication, along with technical, social, water policy and governance knowledge, to address India’s complex water challenges. The training focuses beyond traditional disciplinary boundaries, integrating insights from various fields to foster a holistic understanding of water resource management.",
-          "In late 2024, the Australia India Water Centre (AIWC) proudly celebrated the achievements of 20 exceptional young professionals from India’s central and state water departments through the Young Water Professionals (YWP) Training Program, funded by India’s National Hydrology Project, National Water Academy. This was the second cohort of YWPs.",
-          "As part of their training, the YWPs worked on a client-based project called Situation Understanding and Improvement Projects (SUIP). The SUIP is the ‘heart’ of this training program, helping YWPs develop recommendations for the client to act upon and develop their skills in leadership, critical and transdisciplinary thinking, networking and effective communication.",
-          "To date, forty dynamic professionals have been trained with the necessary skills, knowledge, behaviours and networks to better enable them to contribute to the development and management of water resources and water management reforms in India. They are set to apply their knowledge in real-world settings, advancing sustainable water management throughout India.",
-          "What made this workshop unique?"
-        ]
-      },
-      "right": {
-        "kind": "prose",
-        "paragraphs": [
-          "• Transdisciplinary Approach: We went beyond traditional boundaries, integrating knowledge from diverse fields like engineering, hydrology, social science, and policy.",
-          "• Hands-On Learning: Participants tackled real-world water challenges by developing the Situation Understanding and Improvement Project (SUIP) proposal, paving the way for practical experience and making a tangible impact.",
-          "• Mentorship and Networking: YWPs connected with experienced professionals, building valuable relationships and expanding their networks.",
-          "• Focus on Sustainability: We emphasised the importance of sustainable water management practices in addressing India’s pressing water challenges."
-        ]
-      }
     },
     {
       "type": "banner",
@@ -229,31 +177,6 @@
           "This initiative has laid a robust foundation for ongoing bilateral engagement, facilitating future knowledge and expertise exchanges. Participants are now equipped with actionable insights and strategies to advance dam safety and risk management practices in India.",
           "The dedication, collaborative spirit, and enthusiasm exhibited throughout this training program added to a positive learning environment. We eagerly anticipate witnessing the transformative outcomes and the lasting positive impacts these valuable lessons will have on India’s dam safety landscape and water resource management.",
           "This initiative strengthens global collaboration in dam safety and risk management, ensuring more resilient and sustainable water infrastructure for future generations."
-        ]
-      }
-    },
-    {
-      "type": "banner",
-      "eyebrow": "05 — Programme",
-      "title": "Village Groundwater Cooperatives (VGCs)",
-      "lede": "",
-      "tabLabel": "VGCs"
-    },
-    {
-      "type": "split",
-      "left": {
-        "kind": "prose",
-        "paragraphs": [
-          "Emerging from the MARVI initiative, Village Groundwater Cooperatives (VGCs) offer a promising institutional mechanism for community-led groundwater governance. These cooperatives bring together farmers and local stakeholders to share groundwater information, plan water-saving measures, and collectively recharge and manage their aquifer. The concept builds on the participatory ethos of MARVI and adapts Australia’s rich experience with cooperative groundwater management frameworks to suit Indian village contexts.",
-          "Piloted in selected villages in Rajasthan and Gujarat, VGCs are designed to be inclusive, democratic, and data driven. VGC members meet regularly to review rainfall and groundwater trends, supported by the information generated by Bhujal Jaankaars and the MyWell app. These meetings serve as forums for discussing seasonal cropping decisions, organising recharge activities, and addressing local water-sharing conflicts. Importantly, women are actively involved in many of these cooperative operations, contributing to gender equity in water governance.",
-          "The VGC model fosters a sense of ownership over groundwater as a shared resource, rather than a private commodity. This has helped sharing of groundwater among themselves, increased groundwater recharge, and promoted more sustainable farming practices. VGCs also serve as a platform for dialogue between villagers and externals, such as NGOs, researchers, and government agencies."
-        ]
-      },
-      "right": {
-        "kind": "prose",
-        "paragraphs": [
-          "Supported by the Australian Water Partnership and Australian Centre for International Agricultural Research and implemented in partnership with the ICICI Foundation, local NGOs and Panchayats, VGCs are now being recognised as a potential institutional innovation that can be scaled across other parts of India. They illustrate how sustained engagement, local empowerment, and Australian cooperation can generate lasting solutions to complex water challenges.",
-          "The Village Groundwater Cooperative in Rajasthan – the implementation of the VGC led to significant increases in wheat production this year. Normally they harvest 15,000 kg from the VGC area and this year they have harvested close to 70,000 kg due to fencing of the area to protect the crop from ‘blue bull’, access to more groundwater and improved seed varieties."
         ]
       }
     },

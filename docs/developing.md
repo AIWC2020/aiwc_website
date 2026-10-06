@@ -19,7 +19,7 @@ npm run check     # all three
 npm run serve     # build + serve on :8913
 ```
 
-**`index.html` is the chrome template only** — head, CSS, rail, footer. It
+**`index.html` is the chrome template only** — head, CSS, header, footer. It
 contains no page content. The build strips external scripts and renders every
 panel from data through `src/templates.mjs`, so there is exactly one rendering
 path and the CMS preview cannot drift from the real page.
@@ -42,6 +42,56 @@ To preview the project-page layout locally, serve the parent of `_site` with
 `_site` linked as `aiwc_website/`, or just visit
 `http://127.0.0.1:8913/aiwc_website/` after `npm run serve` from a directory
 arranged that way.
+
+## Header navigation
+
+The header lists a handful of entries, some opening a submenu. Its shape is
+`nav` in `content/site.json`:
+
+```jsonc
+"nav": [
+  { "page": "about", "children": ["aiwc5"] },
+  { "page": "work",  "children": ["research", "education", "training", "outreach"] },
+  { "page": "people" },
+  { "page": "contact", "button": true }   // drawn as the filled button
+]
+```
+
+The home page is never an entry — the logo links to it. `npm run verify`
+fails if a published page is missing from the header, so a new page needs a
+line here (or a rule in `placeUnlistedPages` in `src/registry.mjs` that
+places it automatically). The breadcrumb on a child page is derived from the
+same list.
+
+## Design rules
+
+- **Cobalt bar, navy menu, one vermilion.** `--bar` (cobalt) is the brand
+  row; deep navy (`--deep`) is the menu bar, hero veil, page heads, deep bands
+  and footer. Vermilion (`--orange`, 5.0:1 with white) is reserved for the one
+  action — Collaborate with us and the hero button. `--accent` (river aqua)
+  marks details only: the current menu item, rules, timeline years and dots,
+  figures on navy; `--accent-ink` is its 5.5:1 text form on white. Pale blue
+  (`--sky`) is the light band; warm sand (`--sand`) is the closing callout.
+- **River lines.** `assets/brand/flow.svg` — flowing strokes with light
+  travelling along them — sits over the hero photograph, under the navy veil,
+  and fades in behind page titles and the footer. Its animation is inside the
+  SVG and stops for `prefers-reduced-motion`.
+- **The logo on the top bar is the white version** (`assets/brand/aiwc-logo-white.png`,
+  set in content/brand.json); the footer uses the same file.
+- **Motion is light and arrival-only.** The hero copy rises in once, the
+  photograph drifts slowly, blocks float up as they scroll into view
+  (`setupMotion` in `src/app.mjs`), figures count up once, and cards, icons,
+  buttons and menu underlines respond to the pointer. Transforms and opacity
+  only; all of it is inside `prefers-reduced-motion: no-preference`, and with
+  reduced motion nothing is hidden or animated. Print shows everything.
+- **Background bands.** A section heading's "Background" (White, Pale blue,
+  Deep blue) colours it and everything up to the next heading; consecutive
+  headings with the same background share one band. Deep blue at most once
+  per page — on the home page it holds "Who we are" and the timeline.
+- **Long pages are read top to bottom.** A page set to "tabs" in the CMS now
+  renders an "On this page" list of jump links; nothing is hidden.
+- **Preview builds** set `"noindex": true` in `content/site.json`, which adds
+  `<meta name="robots" content="noindex">` and a disallow-all `robots.txt`.
 
 ## Structure
 

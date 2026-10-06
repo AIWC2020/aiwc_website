@@ -9,7 +9,7 @@
     "title": "Thirty-three institutions,\ntwo countries.",
     "lede": "Universities, national research institutes, government departments and water businesses — the consortium that established the Centre and sustains it.",
     "eyebrowSize": 100,
-    "titleSize": 70,
+    "titleSize": 100,
     "ledeSize": 100,
     "textAlign": "left",
     "textPosition": "bottom",
@@ -32,6 +32,11 @@
     "fit": "cover"
   },
   "blocks": [
+    {
+      "type": "banner",
+      "title": "Who is in the room.",
+      "lede": "Universities, national institutes, government departments and water businesses — eleven partners in Australia, twenty-two in India."
+    },
     {
       "type": "partnerDirectory",
       "items": [

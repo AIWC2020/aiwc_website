@@ -75,14 +75,26 @@ for (const file of docs) {
     fail(rel, 'missing canonical link');
   }
 
+  /* the behaviour script is on every page — without it the filters, menus,
+     search and groups all stop working while the page still looks fine */
+  if (!file.endsWith('404.html') && !document.querySelector('script[type="module"][src$="/assets/app.mjs"]')) {
+    fail(rel, 'the page does not load /assets/app.mjs, so filters, menus and search would not work');
+  }
+
   /* exactly one h1, and it is not empty */
   const h1s = document.querySelectorAll('h1');
   if (h1s.length !== 1) fail(rel, `expected 1 <h1>, found ${h1s.length}`);
   else if (!h1s[0].textContent.trim()) fail(rel, 'empty <h1>');
 
-  /* navigation present and pointing somewhere real */
-  if (document.querySelectorAll('.side-nav .nav-tab').length !== PAGES.length) {
-    fail(rel, 'rail navigation does not list every page');
+  /* navigation present and pointing somewhere real: the logo is home, and
+     every other published page is reachable from the header menu */
+  const navSlugs = new Set(
+    [...document.querySelectorAll('[data-site-nav] a[data-tab]')].map((a) => a.getAttribute('data-tab'))
+  );
+  if (PAGES[0] && document.querySelector('.brand[href]')) navSlugs.add(PAGES[0].slug);
+  const missing = PAGES.filter((p) => !navSlugs.has(p.slug)).map((p) => p.slug);
+  if (missing.length) {
+    fail(rel, `header navigation does not list: ${missing.join(', ')} — add them in the CMS under Logo & site settings → Header menu`);
   }
 
   /* internal links resolve to a built file */
@@ -112,6 +124,36 @@ for (const file of docs) {
     if (!band.textContent.trim() && !band.querySelector('img')) {
       fail(rel, 'a band rendered with no content');
     }
+  }
+}
+
+/* ── header menu and card links that jump to a section ────────────────
+   A section address that no longer exists (a heading was renamed) still
+   lands on the right page, just at the top — so this warns, it does not
+   stop the site publishing. */
+
+const sectionLinks = [];
+const navFile = join(ROOT, 'content/navigation.json');
+if (existsSync(navFile)) {
+  for (const tab of JSON.parse(readFileSync(navFile, 'utf8')).tabs || []) {
+    for (const item of tab.items || []) if (item.page && item.section) sectionLinks.push([`Header menu → ${tab.label} → ${item.label}`, item.page, item.section]);
+  }
+}
+for (const page of PAGES) {
+  (page.blocks || []).forEach((block) => {
+    if (block.type !== 'storyCards') return;
+    (block.items || []).forEach((item) => {
+      if (item.page && item.section && !item.url) sectionLinks.push([`${page.slug} → card “${item.title}”`, item.page, item.section]);
+    });
+  });
+}
+const staleSections = [];
+for (const [where, slug, section] of sectionLinks) {
+  const page = PAGES.find((p) => p.slug === slug);
+  if (!page) continue;
+  const file = join(OUT, slug === PAGES[0].slug ? '' : slug, 'index.html');
+  if (existsSync(file) && !readFileSync(file, 'utf8').includes(`id="${String(section).replace(/^#/, '')}"`)) {
+    staleSections.push(`${where}: no section “${section}” on ${slug}`);
   }
 }
 
@@ -270,6 +312,11 @@ if (noPortrait.length) {
     `\n${noPortrait.length} profile${noPortrait.length > 1 ? 's have' : ' has'} no portrait ` +
       `(shown as initials until one is uploaded): ${noPortrait.join(', ')}`
   );
+}
+
+if (staleSections.length) {
+  console.warn(`\n${staleSections.length} link${staleSections.length > 1 ? 's jump' : ' jumps'} to a section that does not exist (the page still opens, at the top):`);
+  for (const line of staleSections) console.warn('  ! ' + line);
 }
 
 if (problems.length) {

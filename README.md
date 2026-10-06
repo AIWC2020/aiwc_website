@@ -6,13 +6,15 @@
 | **Edit the site** | <https://aiwc2020.github.io/aiwc_website/admin/> — sign in with a GitHub access token ([how](#signing-in)) |
 | **Published by** | GitHub Actions, on every push to `main` ([what to do when a change does not appear](#my-change-is-not-on-the-site)) |
 
-The Centre's website: 15 pages, 108 researcher profiles and 33 partner
+The Centre's website: 20 pages, 108 researcher profiles and 33 partner
 institutions, built as static HTML and published to GitHub Pages.
 
 Content from [aiwc.org.au](https://aiwc.org.au), built on the MARVI site's
-structure: the same chrome, the same 24 block types, the same per-block layout
-controls and the same CMS. The palette is AIWC's own — cool deep water,
-indigo and ochre for the two countries, rather than MARVI's green and copper.
+structure: the same block types, the same per-block layout controls and the
+same CMS. The design ("Flow") puts the AIWC navigation guide's seven-tab
+structure on a cobalt brand row and a deep navy menu bar, with one vermilion
+action (Collaborate with us), a full-width field photograph crossed by
+flowing river lines, and the Anek Latin typeface throughout.
 
 Two things exist here that the MARVI site has no equivalent for, because AIWC
 has content MARVI does not: the searchable **researcher directory** and the
@@ -41,6 +43,8 @@ itself in public. Write a token instead and the build fills in the real figure:
 | `{{researchers}}` | 108 | researchers on the site |
 | `{{researcherInstitutions}}` | 27 | institutions those researchers belong to |
 | `{{partnerInstitutions}}` | 33 | partner institutions |
+| `{{researchersInAustralia}}` | 49 | researchers based in Australia |
+| `{{researchersInIndia}}` | 59 | researchers based in India |
 
 Each also has `…InWords` ("one hundred and eight") and `…InWords` capitalised
 for the start of a sentence — `{{ResearchersInWords}}`.

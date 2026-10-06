@@ -1,5 +1,5 @@
 /**
- * Browser-only behaviour: motion, gallery, search, lightbox, menu.
+ * Browser-only behaviour: menu, directories, gallery, search, lightbox.
  *
  * Content and translation are baked in at build time (see hydrate.mjs), so
  * nothing here fetches copy or swaps languages — the language switcher is a
@@ -7,109 +7,52 @@
  * lookup below must tolerate its target being absent.
  */
 
-const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* ---------- motion ----------
+ * Light and arrival-only. Blocks float up as they scroll into view and the
+ * partnership figures count up once; everything else is CSS (see the motion
+ * block in index.html). With reduced motion requested nothing is hidden or
+ * animated: blocks are simply there and the figures show their final values. */
 
-/* ---------- motion ---------- */
+const REVEAL =
+  '.story-card, .process-step, .metric, .partner-country, .section-head, .explore-head, ' +
+  '.split > *, .cms-block-callout, .tool-card, .home-statement';
+
+function countUp(node) {
+  if (!node || node.dataset.counted) return;
+  node.dataset.counted = '1';
+  const match = node.textContent.trim().match(/^(\d[\d,]*)(.*)$/s);
+  if (!match) return;
+  const end = Number(match[1].replace(/,/g, ''));
+  if (!Number.isFinite(end) || end < 2) return;
+  const started = performance.now();
+  const tick = (now) => {
+    const progress = Math.min((now - started) / 1300, 1);
+    node.textContent = Math.round(end * (1 - Math.pow(1 - progress, 3))).toLocaleString() + match[2];
+    if (progress < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
 
 function setupMotion() {
-  document.body.classList.add('motion-ready');
-  // Story cards are excluded: their pointer-tilt writes inline transforms,
-  // and a transform transition would drag behind the pointer.
-  const motionItems = [
-    ...document.querySelectorAll(
-      '.project-card, .process-step, .media-card, .video-card, .people-card, .metric, ' +
-      '.pub-card, .tool-card, .portrait-card, .cms-block, .data-panel, .editorial-image, .photo-ribbon figure'
-    )
-  ];
-  motionItems.forEach((item, index) => {
-    item.classList.add('motion-item');
-    item.style.setProperty('--motion-delay', (index % 4) * 65 + 'ms');
+  if (!window.matchMedia('(prefers-reduced-motion: no-preference)').matches || !('IntersectionObserver' in window)) return;
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        const node = entry.target;
+        node.classList.add('is-in');
+        if (node.matches('.metric')) countUp(node.querySelector('strong'));
+        node.querySelectorAll('.metric strong').forEach(countUp);
+        observer.unobserve(node);
+      }
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -6% 0px' }
+  );
+  document.querySelectorAll(REVEAL).forEach((node, index) => {
+    node.style.setProperty('--d', (index % 4) * 90 + 'ms');
+    node.classList.add('will-reveal');
+    observer.observe(node);
   });
-
-  if (reduceMotion || !('IntersectionObserver' in window)) {
-    motionItems.forEach((item) => item.classList.add('is-inview'));
-  } else {
-    const motionObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add('is-inview');
-          motionObserver.unobserve(entry.target);
-        });
-      },
-      { threshold: 0.14, rootMargin: '0px 0px -5% 0px' }
-    );
-    motionItems.forEach((item) => motionObserver.observe(item));
-  }
-
-  // Big numbers count up the first time they scroll into view. The suffix
-  // split is what lets "10,000+" animate: the digits run 0→10,000 while the
-  // "+" stays put. Anything that does not lead with a digit is left alone.
-  const counters = [...document.querySelectorAll('.metric strong, .data-value, .image-data-overlay strong')];
-  const animateCounter = (node) => {
-    if (node.dataset.animated) return;
-    node.dataset.animated = 'true';
-    const match = node.textContent.trim().match(/^([\d][\d,]*)(.*)$/s);
-    if (!match || reduceMotion) return;
-    const end = Number(match[1].replace(/,/g, ''));
-    const suffix = match[2];
-    if (!Number.isFinite(end) || end === 0) return;
-    const started = performance.now();
-    const tick = (now) => {
-      const progress = Math.min((now - started) / 1100, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      node.textContent = Math.round(end * eased).toLocaleString() + suffix;
-      if (progress < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  };
-  if (counters.length && !reduceMotion && 'IntersectionObserver' in window) {
-    const counterObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          animateCounter(entry.target);
-          counterObserver.unobserve(entry.target);
-        });
-      },
-      { threshold: 0.4 }
-    );
-    counters.forEach((counter) => counterObserver.observe(counter));
-  }
-
-  if (!reduceMotion && window.matchMedia('(pointer: fine)').matches) {
-    document.querySelectorAll('.story-card').forEach((card) => {
-      card.addEventListener('pointermove', (event) => {
-        const bounds = card.getBoundingClientRect();
-        const x = (event.clientX - bounds.left) / bounds.width;
-        const y = (event.clientY - bounds.top) / bounds.height;
-        card.style.setProperty('--spot-x', (x * 100).toFixed(1) + '%');
-        card.style.setProperty('--spot-y', (y * 100).toFixed(1) + '%');
-        card.style.transform = `perspective(1000px) rotateX(${((0.5 - y) * 3.5).toFixed(2)}deg) rotateY(${((x - 0.5) * 4.5).toFixed(2)}deg) translateY(-4px)`;
-      });
-      card.addEventListener('pointerleave', () => {
-        card.style.transform = '';
-        card.style.removeProperty('--spot-x');
-        card.style.removeProperty('--spot-y');
-      });
-    });
-  }
-
-  const progressBar = document.getElementById('scroll-progress');
-  if (progressBar) {
-    let progressFrame = 0;
-    const updateProgress = () => {
-      progressFrame = 0;
-      const distance = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = distance > 0 ? Math.min(window.scrollY / distance, 1) : 0;
-      progressBar.style.transform = `scaleX(${progress})`;
-    };
-    window.addEventListener('scroll', () => {
-      if (!progressFrame) progressFrame = requestAnimationFrame(updateProgress);
-    }, { passive: true });
-    window.addEventListener('resize', updateProgress);
-    updateProgress();
-  }
 }
 
 /**
@@ -128,12 +71,6 @@ function refreshTextScales() {
     node.style.fontSize = '';
     const baseline = Number.parseFloat(getComputedStyle(node).fontSize);
     if (Number.isFinite(baseline)) node.style.fontSize = (baseline * percentage) / 100 + 'px';
-  });
-}
-
-function showReveals(root) {
-  root.querySelectorAll('.reveal').forEach((element, index) => {
-    window.setTimeout(() => element.classList.add('is-visible'), Math.min(index * 90, 420) + 60);
   });
 }
 
@@ -434,9 +371,16 @@ function setupSectionNav() {
   // no such wrapper — its blocks are direct children of the panel — so the
   // panel itself is the container there.
   const body = panel.querySelector('.section-body') || panel;
-  const banners = [...body.querySelectorAll(':scope > [data-section-anchor]')];
+  // Headings sit directly in the body, or one level down inside a coloured
+  // background band (see toneBands in templates.mjs).
+  const banners = [...body.querySelectorAll(':scope > [data-section-anchor], :scope > .tone-band > [data-section-anchor]')];
   if (banners.length < 2) return;
-  const mode = panel.getAttribute('data-section-nav');
+  // "tabs" hid every section but one behind a sticky bar, which is most of
+  // what made long pages feel crowded. It now renders as jump links: the
+  // whole page stays readable top to bottom, and the bar is just a contents
+  // list. "collapse" is unchanged — it is an explicit editorial choice.
+  const raw = panel.getAttribute('data-section-nav');
+  const mode = raw === 'tabs' ? 'jump' : raw;
 
   // A section runs until the next banner — or until the trailing
   // .cms-sections wrapper, which holds page-level blocks (the closing
@@ -627,11 +571,135 @@ function setupSectionNav() {
 
 function setupMenu() {
   const menuButton = document.querySelector('.menu-toggle');
-  if (!menuButton) return;
-  menuButton.addEventListener('click', () => {
-    const open = document.body.classList.toggle('menu-open');
-    menuButton.setAttribute('aria-expanded', String(open));
-    menuButton.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+  if (menuButton) {
+    menuButton.addEventListener('click', () => {
+      const open = document.body.classList.toggle('menu-open');
+      menuButton.setAttribute('aria-expanded', String(open));
+      menuButton.querySelector('.menu-toggle-text').textContent = open ? 'Close' : 'Menu';
+    });
+  }
+
+  // Submenus open on hover for a mouse (CSS) and on the chevron button for
+  // touch and keyboard. Only one is open at a time.
+  const items = [...document.querySelectorAll('.nav-item.has-menu')];
+  const close = (except) => items.forEach((item) => {
+    if (item === except) return;
+    item.classList.remove('is-open');
+    item.querySelector('.nav-more')?.setAttribute('aria-expanded', 'false');
+  });
+  items.forEach((item) => {
+    const more = item.querySelector('.nav-more');
+    more?.addEventListener('click', () => {
+      const open = !item.classList.contains('is-open');
+      close(item);
+      item.classList.toggle('is-open', open);
+      more.setAttribute('aria-expanded', String(open));
+    });
+    item.addEventListener('focusout', (event) => {
+      if (!item.contains(event.relatedTarget)) close();
+    });
+  });
+  document.addEventListener('click', (event) => {
+    if (!event.target.closest('.nav-item.has-menu')) close();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    const open = items.find((item) => item.classList.contains('is-open'));
+    if (open) {
+      close();
+      open.querySelector('.nav-more')?.focus();
+    } else if (document.body.classList.contains('menu-open')) {
+      menuButton?.click();
+      menuButton?.focus();
+    }
+  });
+}
+
+/* ---------- site search ----------
+ * The header's search button opens a panel over the page. The index
+ * (assets/search.json: pages, sections, researchers, partners and
+ * publications) is fetched the first time it opens, then every keystroke is a
+ * local filter: all words must match, and title matches rank first. */
+function setupSearch() {
+  const panel = document.getElementById('search-panel');
+  const toggle = document.querySelector('.search-toggle');
+  if (!panel || !toggle) return;
+  const input = panel.querySelector('#site-search');
+  const results = panel.querySelector('#search-results');
+  const base = document.body.dataset.base || '';
+  let index = null;
+  let lastFocus = null;
+
+  const load = async () => {
+    if (index) return index;
+    try {
+      const res = await fetch(base + '/assets/search.json');
+      index = (await res.json()).map((e) => ({ ...e, hay: [e.t, e.x, e.s, e.k].filter(Boolean).join(' ').toLowerCase(), title: e.t.toLowerCase() }));
+    } catch {
+      index = [];
+    }
+    return index;
+  };
+
+  const hint = (text) => {
+    results.textContent = '';
+    const li = document.createElement('li');
+    li.className = 'search-hint';
+    li.textContent = text;
+    results.appendChild(li);
+  };
+
+  const run = async () => {
+    const q = input.value.trim().toLowerCase();
+    if (q.length < 2) return hint('Type at least two letters — a topic, a researcher, an institution or a paper.');
+    const words = q.split(/\s+/);
+    const found = (await load())
+      .filter((e) => words.every((w) => e.hay.includes(w)))
+      .map((e) => ({ e, score: (e.title.startsWith(q) ? 3 : 0) + words.filter((w) => e.title.includes(w)).length }))
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 30);
+    if (!found.length) return hint(`Nothing matches “${input.value.trim()}”. Try fewer or shorter words.`);
+    results.textContent = '';
+    for (const { e } of found) {
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = e.u;
+      for (const [cls, text] of [['k', e.k], ['t', e.t], ['x', e.x]]) {
+        if (!text) continue;
+        const span = document.createElement('span');
+        span.className = cls;
+        span.textContent = text;
+        a.appendChild(span);
+      }
+      li.appendChild(a);
+      results.appendChild(li);
+    }
+  };
+
+  const open = () => {
+    lastFocus = document.activeElement;
+    panel.hidden = false;
+    document.body.style.overflow = 'hidden';
+    input.focus();
+    run();
+  };
+  const close = () => {
+    panel.hidden = true;
+    document.body.style.overflow = '';
+    lastFocus?.focus();
+  };
+
+  toggle.addEventListener('click', open);
+  panel.querySelector('.search-close').addEventListener('click', close);
+  panel.addEventListener('click', (event) => { if (event.target === panel) close(); });
+  input.addEventListener('input', run);
+  // A result that only jumps within the current page leaves the panel open
+  // over it; close on any click on a result.
+  results.addEventListener('click', (event) => { if (event.target.closest('a')) close(); });
+  document.addEventListener('keydown', (event) => {
+    if (!panel.hidden && event.key === 'Escape') { event.preventDefault(); close(); }
+    const typing = /^(input|textarea|select)$/i.test(event.target.tagName || '') || event.target.isContentEditable;
+    if (panel.hidden && event.key === '/' && !typing) { event.preventDefault(); open(); }
   });
 }
 
@@ -656,7 +724,7 @@ function setupLanguageSwitcher() {
 function redirectLegacyHash() {
   const hash = location.hash.slice(1);
   if (!hash) return false;
-  const link = document.querySelector('.nav-tab[data-tab="' + CSS.escape(hash) + '"]');
+  const link = document.querySelector('[data-site-nav] a[data-tab="' + CSS.escape(hash) + '"]');
   const href = link && link.getAttribute('href');
   if (!href || href === location.pathname) return false;
   location.replace(href);
@@ -675,14 +743,14 @@ if (!redirectLegacyHash()) {
   });
   setupDisclosureGroups();
   setupSectionNav();
-  setupMotion();
   setupMenu();
+  setupSearch();
+  setupMotion();
   setupLanguageSwitcher();
   setupMediaSearch();
   setupArchive();
   setupPublications();
   setupLightbox();
-  showReveals(document);
 }
 
 /* ── directories: shuffle, sort, and a one-row preview ────────────────
@@ -759,8 +827,12 @@ function setupDirectory({ gridSel, filtersSel, searchSel, instSel, countSel, emp
       let shown = 0;
       g.cards.forEach((card) => { const ok = matches(card); card.hidden = !ok; if (ok) shown++; });
 
+      // The one-row preview is for browsing. Once someone filters or
+      // searches they asked for those results, so every match is shown
+      // rather than six of eighteen behind another click.
+      const filtering = Boolean(state.country || state.inst || state.query);
       let previewed = shown;
-      if (!g.open) {
+      if (!g.open && !filtering) {
         const perRow = firstRowCount(g);
         let seen = 0;
         g.cards.forEach((card) => {

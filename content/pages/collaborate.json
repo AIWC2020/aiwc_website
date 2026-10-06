@@ -1,0 +1,162 @@
+{
+  "menuName": "Collaborate with us",
+  "slug": "collaborate",
+  "order": 19,
+  "published": true,
+  "template": "standard",
+  "intro": {
+    "eyebrow": "",
+    "title": "Collaborate with us",
+    "lede": "AIWC is built on equal partnership between Australia and India, with support for all partners for their growth and benefits. If your institution works on water, we would like to talk.",
+    "eyebrowSize": 100,
+    "titleSize": 100,
+    "ledeSize": 100,
+    "textAlign": "left",
+    "textPosition": "bottom",
+    "textWidth": 100,
+    "textOffsetX": 0,
+    "textOffsetY": 0
+  },
+  "heroImage": {
+    "image": "/assets/photos/page-aiwc5-conference-3.jpg",
+    "zoom": 100,
+    "positionX": 50,
+    "positionY": 50,
+    "fit": "cover",
+    "alt": "Partners in a round-table discussion at AIWC@5"
+  },
+  "menuImage": {
+    "image": "/assets/photos/page-aiwc5-conference-3.jpg",
+    "zoom": 100,
+    "positionX": 50,
+    "positionY": 50,
+    "fit": "cover"
+  },
+  "sectionNav": "jump",
+  "blocks": [
+    {
+      "type": "banner",
+      "title": "Research collaboration",
+      "lede": ""
+    },
+    {
+      "type": "split",
+      "left": {
+        "kind": "prose",
+        "lead": "Looking for a research collaborator?",
+        "paragraphs": [
+          "{{ResearchersInWords}} researchers across {{researcherInstitutions}} institutions, with their areas of interest, current projects and key publications on record.",
+          "Joint projects run across Australian and Indian institutions, several of them funded under India’s Scheme for Promotion of Academic and Research Collaboration (SPARC)."
+        ],
+        "actions": [
+          {
+            "label": "Find an expert",
+            "page": "people",
+            "primary": true
+          },
+          {
+            "label": "Research & innovation",
+            "page": "research"
+          }
+        ]
+      },
+      "right": {
+        "kind": "image",
+        "photo": {
+          "image": "/assets/photos/page-our-work-0.jpg",
+          "zoom": 100,
+          "positionX": 50,
+          "positionY": 50,
+          "fit": "cover",
+          "alt": "Field researchers sampling water"
+        }
+      }
+    },
+    {
+      "type": "banner",
+      "title": "Training & capacity building",
+      "lede": ""
+    },
+    {
+      "type": "split",
+      "left": {
+        "kind": "prose",
+        "lead": "Training is expanding under the 2030 agenda.",
+        "paragraphs": [
+          "Partners at AIWC@5 recommended expanding the Young Water Professionals model, developing micro-credentials, and building shared training modules across IITs, ICAR institutes, Australian universities and State Agricultural Universities.",
+          "Five programmes, from village-level groundwater monitoring in Rajasthan and Gujarat to dam safety training for India’s Central Water Commission officers in New South Wales."
+        ],
+        "actions": [
+          {
+            "label": "Training programmes",
+            "page": "training",
+            "primary": true
+          },
+          {
+            "label": "Education",
+            "page": "education"
+          }
+        ]
+      },
+      "right": {
+        "kind": "image",
+        "photo": {
+          "image": "/assets/photos/page-our-work-2.jpg",
+          "zoom": 100,
+          "positionX": 50,
+          "positionY": 50,
+          "fit": "cover",
+          "alt": "Training participants at a field site"
+        }
+      }
+    },
+    {
+      "type": "banner",
+      "title": "Become a partner",
+      "lede": ""
+    },
+    {
+      "type": "split",
+      "left": {
+        "kind": "prose",
+        "lead": "AIWC is looking for partners for the 2030 agenda.",
+        "paragraphs": [
+          "Climate-resilient agriculture, groundwater security, PFAS and water quality, digital water tools, joint degree programmes and micro-credentials — the priorities set by partners at AIWC@5. If your institution works in any of them, we would like to hear from you.",
+          "AIWC is built on equal partnership between Australia and India, with support for all partners for their growth and benefits. If your institution works on water, we would like to talk."
+        ],
+        "actions": [
+          {
+            "label": "Partner institutions",
+            "page": "partners",
+            "primary": true
+          },
+          {
+            "label": "Contact the Centre",
+            "page": "contact"
+          }
+        ]
+      },
+      "right": {
+        "kind": "image",
+        "photo": {
+          "image": "/assets/photos/page-aiwc5-conference-1.jpg",
+          "zoom": 100,
+          "positionX": 50,
+          "positionY": 50,
+          "fit": "cover",
+          "alt": "Partners at AIWC@5"
+        }
+      }
+    },
+    {
+      "type": "callout",
+      "heading": "The next five years start with partners.",
+      "body": "Collectively, the AIWC@5 sessions generated a coherent set of actions that will guide the development of an AIWC 2030 Vision and Implementation Plan."
+    },
+    {
+      "type": "button",
+      "label": "Contact the Centre",
+      "url": "/contact/"
+    }
+  ]
+}

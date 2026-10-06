@@ -1,7 +1,7 @@
 /**
  * Static site build: content/ → _site/, one real document per URL.
  *
- * index.html is the chrome template only — head, CSS, rail, footer. The
+ * index.html is the chrome template only — head, CSS, header, footer. The
  * build renders every page and every collection entry from data through
  * src/templates.mjs, so there is exactly one rendering path and the CMS
  * preview can import the same module.
@@ -18,7 +18,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseHTML } from 'linkedom';
 import { renderPage, renderPerson, renderPartner, brandMarkSvg, BRAND_SHAPES } from '../src/templates.mjs';
-import { buildRegistry, loadCollections, loadSite, navTree, urlFor, urlForEntry } from '../src/registry.mjs';
+import { buildRegistry, buildNav, loadCollections, loadNavConfig, loadSite, navParentOf, urlFor, urlForEntry } from '../src/registry.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = join(ROOT, '_site');
@@ -72,6 +72,8 @@ const COUNTS = {
   researchers: people.length,
   partnerInstitutions: partners.length,
   researcherInstitutions: new Set(people.map((p) => p.institute).filter(Boolean)).size,
+  researchersInAustralia: people.filter((p) => p.country === 'Australia').length,
+  researchersInIndia: people.filter((p) => p.country === 'India').length,
 };
 
 /* Each count offers three forms: digits, words, and words for the start of a
@@ -115,6 +117,8 @@ if (unknownTokens.size) {
 
 // Built after substitution, or the lookup would hand back the unfilled copies.
 const pageById = new Map(PAGES.map((p) => [p.slug, p]));
+// The header menu, as editors set it in the CMS (content/navigation.json).
+const NAV = buildNav(PAGES, loadNavConfig(ROOT, SITE));
 
 
 const href = (lang, page) => urlFor(lang, page, PAGES, BASE);
@@ -126,6 +130,12 @@ const entryHref = (lang, kind, slug) => urlForEntry(lang, kind, slug, BASE);
  * and partner records and a way to link to their pages, so the context is
  * MARVI's plus those three.
  */
+/** The breadcrumb for a page nested under a header entry. */
+const parentLink = (lang, page) => {
+  const parent = navParentOf(NAV, page.slug);
+  return parent ? { label: parent.menuName, href: href(lang, parent) } : null;
+};
+
 const ctxFor = (lang, extra = {}) => ({
   people,
   partners,
@@ -138,7 +148,7 @@ const ctxFor = (lang, extra = {}) => ({
 /* ── chrome ─────────────────────────────────────────────────────────── */
 
 /**
- * Build the shell once: rail navigation, language switch, footer links.
+ * Build the shell once: header navigation, language switch, footer links.
  * `activeSlug` marks the current page; `panel` is the rendered content.
  */
 function composeDocument(lang, activeSlug, panel, { langBase = '' } = {}) {
@@ -153,40 +163,59 @@ function composeDocument(lang, activeSlug, panel, { langBase = '' } = {}) {
   // Only external scripts are stripped — behaviour ships as /assets/app.mjs.
   document.querySelectorAll('script[src]').forEach((n) => n.remove());
 
-  /* rail navigation, from the registry */
-  for (const nav of document.querySelectorAll('.side-nav')) {
-    nav.textContent = '';
-    // MARVI's rail markup exactly: thumbnail, number, name, arrow. The
-    // stylesheet targets these class names, so they are not negotiable.
-    let top = 0;
-    navTree(PAGES).forEach(({ page, depth }) => {
-      const link = document.createElement('a');
-      link.className = 'nav-tab' + (depth ? ' is-child' : '');
-      link.setAttribute('href', href(lang, page));
-      link.setAttribute('data-tab', page.slug);
-      if (page.slug === activeSlug) link.setAttribute('aria-current', 'page');
-
-      const thumb = document.createElement('img');
-      thumb.className = 'nav-thumb';
-      thumb.setAttribute('alt', '');
-      thumb.setAttribute('aria-hidden', 'true');
-      const menuImage = page.menuImage || page.heroImage;
-      if (menuImage?.image) thumb.setAttribute('src', menuImage.image);
-
-      const number = document.createElement('span');
-      number.className = 'nav-number';
-      number.textContent = depth ? '—' : String(++top).padStart(2, '0');
-
-      const name = document.createElement('span');
-      name.className = 'nav-name';
-      name.textContent = page.menuName;
-
-      const arrow = document.createElement('span');
-      arrow.className = 'nav-arrow';
-      arrow.textContent = '↗';
-
-      link.append(thumb, number, name, arrow);
-      nav.appendChild(link);
+  /* header navigation, from the CMS Header menu (content/navigation.json) */
+  const CHEVRON = '<svg viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2 4.5 6 8.5 10 4.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>';
+  const itemLink = (item, className) => {
+    const a = document.createElement('a');
+    if (className) a.className = className;
+    if (item.url) {
+      a.setAttribute('href', item.url);
+      a.setAttribute('target', '_blank');
+      a.setAttribute('rel', 'noopener');
+      a.setAttribute('data-external', '');
+    } else {
+      a.setAttribute('href', href(lang, item.page) + (item.section ? '#' + item.section : ''));
+      a.setAttribute('data-tab', item.page.slug);
+      if (item.page.slug === activeSlug && !item.section) a.setAttribute('aria-current', 'page');
+    }
+    a.textContent = item.label;
+    return a;
+  };
+  // The highlighted tab sits in the brand row on wide screens and at the foot
+  // of the menu on phones, so it is drawn into both lists; the main bar
+  // carries every other tab.
+  const lists = [
+    ...[...document.querySelectorAll('[data-site-actions]')].map((list) => ({ list, filter: (tab) => tab.button, suffix: '' })),
+    ...[...document.querySelectorAll('[data-site-nav]')].map((list) => ({ list, filter: () => true, suffix: '-m' })),
+  ];
+  for (const { list, filter, suffix } of lists) {
+    list.textContent = '';
+    NAV.filter(filter).forEach((tab) => {
+      const li = document.createElement('li');
+      const current = tab.page.slug === activeSlug || tab.items.some((i) => i.page?.slug === activeSlug);
+      li.className = 'nav-item' + (tab.button ? ' nav-item--cta' : '') + (tab.items.length ? ' has-menu' : '') + (current ? ' is-current' : '');
+      li.appendChild(itemLink({ label: tab.label, page: tab.page }, tab.button ? 'nav-cta' : 'nav-link'));
+      if (tab.items.length) {
+        const menuId = 'menu-' + tab.page.slug + (tab.button ? suffix : '');
+        const more = document.createElement('button');
+        more.className = 'nav-more';
+        more.setAttribute('type', 'button');
+        more.setAttribute('aria-expanded', 'false');
+        more.setAttribute('aria-controls', menuId);
+        more.setAttribute('aria-label', 'More in ' + tab.label);
+        more.innerHTML = CHEVRON;
+        li.appendChild(more);
+        const menu = document.createElement('ul');
+        menu.className = 'nav-menu';
+        menu.id = menuId;
+        tab.items.forEach((item) => {
+          const entry = document.createElement('li');
+          entry.appendChild(itemLink(item));
+          menu.appendChild(entry);
+        });
+        li.appendChild(menu);
+      }
+      list.appendChild(li);
     });
   }
 
@@ -195,30 +224,14 @@ function composeDocument(lang, activeSlug, panel, { langBase = '' } = {}) {
     n.setAttribute('href', href(lang, PAGES[0]));
   });
 
-  /* The rail foot's institution count comes from the real partner records,
-     so it can never drift from the site again (it shipped as "27" for a
-     while after the partner list had grown to 33). */
-  const foot = document.querySelector('.sidebar-foot');
-  if (foot && foot.firstChild?.nodeType === 3 && partners.length) {
-    foot.firstChild.textContent = `${partners.length} institutions`;
-  }
-
-  /* the brand mark — the confluence glyph in the shape content/brand.json
-     picked. The chrome's CSS-drawn fallback stays for anything unbuilt. */
+  /* the brand mark — the uploaded logo, or the drawn confluence glyph in
+     the shape content/brand.json picked when there is none. */
   const markHtml = () => (BRAND_LOGO
     ? `<img src="${logoSrc()}" alt="">`
     : brandMarkSvg(BRAND_SHAPE, 'chrome'));
   document.querySelectorAll('.brand-mark').forEach((n) => {
     n.innerHTML = markHtml();
   });
-  const mobileBrand = document.querySelector('.mobile-brand');
-  if (mobileBrand && !mobileBrand.querySelector('.brand-mark')) {
-    const mark = document.createElement('span');
-    mark.className = 'brand-mark brand-mark--bar';
-    mark.setAttribute('aria-hidden', 'true');
-    mark.innerHTML = markHtml();
-    mobileBrand.prepend(mark);
-  }
 
   /* language switch — only meaningful once a second language exists */
   const select = document.getElementById('lang-select');
@@ -240,17 +253,19 @@ function composeDocument(lang, activeSlug, panel, { langBase = '' } = {}) {
   const footerNav = document.querySelector('[data-footer-nav]');
   if (footerNav) {
     footerNav.textContent = '';
-    for (const page of PAGES.filter((p) => !p.parent).slice(0, 6)) {
+    for (const { page, label } of NAV) {
       const li = document.createElement('li');
       const a = document.createElement('a');
       a.setAttribute('href', href(lang, page));
-      a.textContent = page.menuName;
+      a.textContent = label;
       li.appendChild(a);
       footerNav.appendChild(li);
     }
   }
 
   document.getElementById('content').appendChild(panel);
+  // app.mjs needs the base path to fetch the search index.
+  document.body.setAttribute('data-base', BASE);
 
   const app = document.createElement('script');
   app.setAttribute('type', 'module');
@@ -315,10 +330,15 @@ function applyHead(document, { lang, title, description, canonical, image, alter
   };
 
   meta('name', 'description', description);
+  // A preview copy of the site (content/site.json "noindex": true) must not
+  // compete with aiwc.org.au in search results.
+  if (SITE.noindex) meta('name', 'robots', 'noindex, nofollow');
   link('canonical', canonical);
   const icon = document.createElement('link');
   icon.setAttribute('rel', 'icon');
-  if (BRAND_LOGO) {
+  if (existsSync(join(ROOT, 'assets/brand/aiwc-river.png'))) {
+    icon.setAttribute('href', `${BASE}/assets/brand/aiwc-river.png`);
+  } else if (BRAND_LOGO) {
     icon.setAttribute('href', logoSrc());
   } else {
     icon.setAttribute('type', 'image/svg+xml');
@@ -372,7 +392,7 @@ for (const lang of LANGS) {
     const panel = renderPage(
       parseHTML('<div></div>').document,
       page,
-      ctxFor(lang, { index: i + 1, total: PAGES.length })
+      ctxFor(lang, { index: i + 1, total: PAGES.length, parent: parentLink(lang, page) })
     );
     const isHome = page.slug === PAGES[0].slug;
     const rel = href(lang, page);
@@ -484,7 +504,10 @@ cpSync(join(ROOT, 'src/templates.mjs'), join(OUT, 'assets/templates.mjs'));
 
 // The CMS preview iframe needs the site's CSS as a standalone file.
 const styles = [...parseHTML(template).document.querySelectorAll('style')].map((n) => n.textContent).join('\n');
-write('assets/site.css', styles);
+// url("/assets/…") in the stylesheet needs the base path here too, or the
+// CMS preview draws the page without its river lines on a project page.
+write('assets/site.css', BASE ? styles.replace(/url\(\s*(['"]?)(\/(?!\/)[^'")]+)\1\s*\)/g, (whole, q, path) =>
+  path.startsWith(BASE + '/') ? whole : `url(${q}${BASE}${path}${q})`) : styles);
 
 /**
  * A blank example of every list item the content uses, keyed by the path the
@@ -527,6 +550,33 @@ write('assets/shapes.json', JSON.stringify(shapes));
 // Blocks like peopleGrid and logoWall render from the whole collection, which
 // the CMS does not hand to a preview — it only has the entry being edited.
 // Publishing a trimmed index lets the preview draw them for real.
+/* ── the search index ──────────────────────────────────────────────────
+   One small JSON file the header search reads on first use: every page and
+   its section headings, every researcher, partner and publication. */
+const sectionId = (title) =>
+  's-' + String(title || '').toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60);
+const searchEntries = [];
+const plain = (v) => String(v || '').replace(/\s+/g, ' ').trim();
+for (const page of PAGES) {
+  const url = href('en', page);
+  searchEntries.push({ k: 'Page', t: plain(page.intro?.title) || page.menuName, u: url, x: plain(page.intro?.lede).slice(0, 180) });
+  (page.blocks || []).forEach((b) => {
+    if (b.type === 'banner' && plain(b.title) && plain(b.title) !== '.') {
+      searchEntries.push({ k: page.menuName, t: plain(b.title), u: url + '#' + sectionId(b.title), x: plain(b.lede || b.eyebrow).slice(0, 160) });
+    }
+    if (b.type === 'publicationList') {
+      (b.items || []).forEach((item) => searchEntries.push({ k: 'Publication', t: plain(item.title).slice(0, 200), u: url, x: plain(item.meta) }));
+    }
+  });
+}
+for (const p of people) {
+  searchEntries.push({ k: 'Researcher', t: p.name, u: entryHref('en', 'people', p.slug), x: [p.designation, p.institute].filter(Boolean).join(', '), s: plain(p.interests).slice(0, 240) });
+}
+for (const p of partners) {
+  searchEntries.push({ k: 'Partner institution', t: p.name, u: entryHref('en', 'partners', p.slug), x: p.country || '' });
+}
+write('assets/search.json', JSON.stringify(searchEntries));
+
 write(
   'assets/collections.json',
   JSON.stringify({
@@ -557,7 +607,12 @@ write(
     urls.map((u) => `  <url><loc>${SITE_URL}${u}</loc></url>`).join('\n') +
     '\n</urlset>\n'
 );
-write('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}${BASE}/sitemap.xml\n`);
+write(
+  'robots.txt',
+  SITE.noindex
+    ? 'User-agent: *\nDisallow: /\n'
+    : `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}${BASE}/sitemap.xml\n`
+);
 
 console.log(
   `Built ${count} documents into _site/ ` +

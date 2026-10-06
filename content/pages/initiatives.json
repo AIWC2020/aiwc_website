@@ -1,0 +1,196 @@
+{
+  "menuName": "Initiatives",
+  "slug": "initiatives",
+  "order": 16,
+  "published": true,
+  "template": "standard",
+  "intro": {
+    "eyebrow": "",
+    "title": "Initiatives",
+    "lede": "Flagship programmes run by AIWC partners across Australia and India.",
+    "eyebrowSize": 100,
+    "titleSize": 100,
+    "ledeSize": 100,
+    "textAlign": "left",
+    "textPosition": "bottom",
+    "textWidth": 100,
+    "textOffsetX": 0,
+    "textOffsetY": 0
+  },
+  "heroImage": {
+    "image": "/assets/photos/managing-groundwater-use-and-sustaining-aquifer-recharge-through-village-level-interventions-marvi-0.jpg",
+    "zoom": 100,
+    "positionX": 50,
+    "positionY": 50,
+    "fit": "cover",
+    "alt": "Villagers at a MARVI groundwater meeting"
+  },
+  "menuImage": {
+    "image": "/assets/photos/managing-groundwater-use-and-sustaining-aquifer-recharge-through-village-level-interventions-marvi-0.jpg",
+    "zoom": 100,
+    "positionX": 50,
+    "positionY": 50,
+    "fit": "cover"
+  },
+  "sectionNav": "none",
+  "blocks": [
+    {
+      "type": "storyCards",
+      "title": "Flagship initiatives",
+      "lede": "",
+      "items": [
+        {
+          "page": "marvi",
+          "label": "Groundwater",
+          "title": "MARVI",
+          "text": "Village-level groundwater monitoring and management with farmer volunteers, the Bhujal Jankaars, in Rajasthan and Gujarat.",
+          "photo": {
+            "image": "/assets/photos/managing-groundwater-use-and-sustaining-aquifer-recharge-through-village-level-interventions-marvi-0.jpg",
+            "zoom": 100,
+            "positionX": 50,
+            "positionY": 50,
+            "fit": "cover",
+            "alt": "Villagers at a MARVI groundwater meeting"
+          }
+        },
+        {
+          "page": "initiatives",
+          "url": "https://marvi-groundwater.github.io/OurWater/",
+          "label": "App",
+          "title": "OurWater",
+          "text": "A free, community-focused water monitoring and learning app built on the MARVI approach.",
+          "photo": {
+            "image": "/assets/photos/page-our-work-0.jpg",
+            "zoom": 100,
+            "positionX": 50,
+            "positionY": 50,
+            "fit": "cover",
+            "alt": "Field researchers sampling water"
+          }
+        },
+        {
+          "page": "young-water-professionals",
+          "label": "Training",
+          "title": "Young Water Professionals",
+          "text": "Transdisciplinary training for young professionals from India’s central and state water departments.",
+          "photo": {
+            "image": "/assets/photos/the-young-water-professionals-program-ywp-0.jpg",
+            "zoom": 100,
+            "positionX": 50,
+            "positionY": 50,
+            "fit": "cover",
+            "alt": "Young Water Professionals in a training session"
+          }
+        },
+        {
+          "page": "aiwc5",
+          "section": "s-the-2030-agenda-set-by-the-partners",
+          "label": "Strategy",
+          "title": "AIWC 2030",
+          "text": "The agenda partners set at AIWC@5: climate-resilient agriculture, groundwater security, water quality, digital tools and joint education.",
+          "photo": {
+            "image": "/assets/photos/page-aiwc5-conference-4.jpg",
+            "zoom": 100,
+            "positionX": 50,
+            "positionY": 50,
+            "fit": "cover",
+            "alt": "Delegates at AIWC@5"
+          }
+        },
+        {
+          "page": "waterwise",
+          "label": "Blog",
+          "title": "WaterWise",
+          "text": "A virtual water dialogue where participants are active contributors, not passive receivers of knowledge.",
+          "photo": {
+            "image": "/assets/photos/page-waterwise-blog-0.png",
+            "zoom": 100,
+            "positionX": 50,
+            "positionY": 42,
+            "fit": "cover",
+            "alt": "The WaterWise logo"
+          }
+        }
+      ]
+    },
+    {
+      "type": "storyCards",
+      "title": "Other initiatives",
+      "lede": "",
+      "items": [
+        {
+          "page": "resources",
+          "label": "Seminar series",
+          "title": "Dams for Life",
+          "text": "Managing the safety and risks of dams for sustainable water futures.",
+          "photo": {
+            "image": "/assets/photos/dams-safety-and-rehabilitation-0.jpg",
+            "zoom": 100,
+            "positionX": 50,
+            "positionY": 50,
+            "fit": "cover",
+            "alt": "A dam"
+          }
+        },
+        {
+          "page": "training",
+          "section": "s-dam-rehabilitation-improvement-project-drip-ii",
+          "label": "Training",
+          "title": "Dam Rehabilitation Improvement Project (DRIP II)",
+          "text": "",
+          "photo": {
+            "image": "/assets/photos/dam-rehabilitation-improvement-project-drip-ii.jpg",
+            "zoom": 100,
+            "positionX": 50,
+            "positionY": 50,
+            "fit": "cover",
+            "alt": "DRIP II participants"
+          }
+        },
+        {
+          "page": "training",
+          "section": "s-training-program-on-dam-safety-and-risk-management-in-austra",
+          "label": "Training",
+          "title": "Dam Safety and Risk Management in Australia",
+          "text": "",
+          "photo": {
+            "image": "/assets/photos/training-program-on-dam-safety-and-risk-management-in-australia-0.jpg",
+            "zoom": 100,
+            "positionX": 50,
+            "positionY": 50,
+            "fit": "cover",
+            "alt": "Dam safety training participants"
+          }
+        },
+        {
+          "page": "12",
+          "label": "Webinars",
+          "title": "Jal Varta | Water Dialogues",
+          "text": "Bridging policy, science and practice, with speakers from India and Australia.",
+          "photo": {
+            "image": "/assets/photos/inception-webinar-0.jpg",
+            "zoom": 100,
+            "positionX": 50,
+            "positionY": 6,
+            "fit": "cover",
+            "alt": "Flyer for the webinar series"
+          }
+        },
+        {
+          "page": "outreach",
+          "label": "Exchange",
+          "title": "Australia India Technical Exchange Program",
+          "text": "The Water and Food Security workshop series.",
+          "photo": {
+            "image": "/assets/photos/page-our-work-3.jpg",
+            "zoom": 100,
+            "positionX": 50,
+            "positionY": 50,
+            "fit": "cover",
+            "alt": "Workshop participants"
+          }
+        }
+      ]
+    }
+  ]
+}
