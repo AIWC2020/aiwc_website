@@ -19,11 +19,11 @@
   },
   "heroImage": {
     "image": "/assets/photos/rejuvenation-of-the-springs-in-the-himalayan-region-evaluation-of-options-and-strategies-mr-neeraj-pant-phd-candidate-3.jpg",
+    "alt": "A community meeting on spring rejuvenation in the Himalayan region",
     "zoom": 100,
     "positionX": 50,
     "positionY": 45,
-    "fit": "cover",
-    "alt": "A community meeting on spring rejuvenation in the Himalayan region"
+    "fit": "cover"
   },
   "menuImage": {
     "image": "/assets/photos/page-aiwc5-conference-0.jpg",
@@ -32,6 +32,8 @@
     "positionY": 50,
     "fit": "cover"
   },
+  "sectionNav": "none",
+  "introTab": "",
   "hero": {
     "imageAlt": "A community meeting on spring rejuvenation in the Himalayan region",
     "actions": [
@@ -47,14 +49,15 @@
       }
     ]
   },
-  "sectionNav": "none",
   "blocks": [
     {
       "type": "banner",
-      "tone": "sky",
       "eyebrow": "Our impact at a glance",
+      "tone": "sky",
       "title": "A network, not a project.",
-      "lede": "Leading Australian and Indian institutions, government agencies and water businesses came together to form the Australia India Water Centre. Five years on, this is its shape."
+      "tabLabel": "",
+      "lede": "Leading Australian and Indian institutions, government agencies and water businesses came together to form the Australia India Water Centre. Five years on, this is its shape.",
+      "accent": ""
     },
     {
       "type": "statement",
@@ -76,22 +79,15 @@
         {
           "value": "{{researchersInIndia}}",
           "label": "Based in India"
-        },
-        {
-          "value": "10,000+",
-          "label": "Villages reached by the MARVI groundwater programme"
         }
       ]
     },
     {
       "type": "storyCards",
-      "look": "icons",
+      "eyebrow": "",
       "title": "Our work",
-      "lede": "AIWC’s key activities are structured into four distinct areas. Each has two or more programme leaders, who meet six times a year to plan, design and oversee activities across partners and stakeholders.",
       "items": [
         {
-          "page": "research",
-          "icon": "research",
           "title": "Research & innovation",
           "text": "Co-developing solutions for real-world water challenges.",
           "photo": {
@@ -100,11 +96,14 @@
             "positionX": 50,
             "positionY": 50,
             "fit": "cover"
-          }
+          },
+          "page": "research",
+          "label": "",
+          "icon": "research",
+          "section": "",
+          "url": ""
         },
         {
-          "page": "education",
-          "icon": "education",
           "title": "Education",
           "text": "Building the next generation of water leaders.",
           "photo": {
@@ -113,11 +112,14 @@
             "positionX": 50,
             "positionY": 50,
             "fit": "cover"
-          }
+          },
+          "page": "education",
+          "label": "",
+          "icon": "education",
+          "section": "",
+          "url": ""
         },
         {
-          "page": "training",
-          "icon": "training",
           "title": "Training & capacity building",
           "text": "Strengthening skills, knowledge and institutional capability.",
           "photo": {
@@ -126,11 +128,14 @@
             "positionX": 50,
             "positionY": 50,
             "fit": "cover"
-          }
+          },
+          "page": "training",
+          "label": "",
+          "icon": "training",
+          "section": "",
+          "url": ""
         },
         {
-          "page": "outreach",
-          "icon": "outreach",
           "title": "Engagement & outreach",
           "text": "Connecting communities, practitioners and policy makers.",
           "photo": {
@@ -139,135 +144,143 @@
             "positionX": 50,
             "positionY": 50,
             "fit": "cover"
-          }
+          },
+          "page": "outreach",
+          "label": "",
+          "icon": "outreach",
+          "section": "",
+          "url": ""
         }
-      ]
+      ],
+      "look": "icons",
+      "tabLabel": "",
+      "lede": "AIWC’s key activities are structured into four distinct areas. Each has two or more programme leaders, who meet six times a year to plan, design and oversee activities across partners and stakeholders."
     },
     {
       "type": "storyCards",
       "title": "Featured initiatives",
-      "lede": "",
       "items": [
         {
-          "page": "marvi",
-          "label": "Groundwater",
           "title": "MARVI",
           "text": "Village-level groundwater monitoring and management with farmer volunteers, the Bhujal Jankaars, in Rajasthan and Gujarat.",
           "photo": {
             "image": "/assets/photos/managing-groundwater-use-and-sustaining-aquifer-recharge-through-village-level-interventions-marvi-0.jpg",
+            "alt": "Villagers at a MARVI groundwater meeting",
             "zoom": 100,
             "positionX": 50,
             "positionY": 50,
-            "fit": "cover",
-            "alt": "Villagers at a MARVI groundwater meeting"
-          }
+            "fit": "cover"
+          },
+          "page": "marvi",
+          "label": "Groundwater"
         },
         {
-          "page": "initiatives",
-          "url": "https://marvi-groundwater.github.io/OurWater/",
-          "label": "App",
           "title": "OurWater",
           "text": "A free, community-focused water monitoring and learning app built on the MARVI approach.",
           "photo": {
             "image": "/assets/photos/page-our-work-0.jpg",
+            "alt": "Field researchers sampling water",
             "zoom": 100,
             "positionX": 50,
             "positionY": 50,
-            "fit": "cover",
-            "alt": "Field researchers sampling water"
-          }
+            "fit": "cover"
+          },
+          "page": "initiatives",
+          "label": "App",
+          "url": "https://marvi-groundwater.github.io/OurWater/"
         },
         {
-          "page": "young-water-professionals",
-          "label": "Training",
           "title": "Young Water Professionals",
           "text": "Transdisciplinary training for young professionals from India’s central and state water departments.",
           "photo": {
             "image": "/assets/photos/the-young-water-professionals-program-ywp-0.jpg",
+            "alt": "Young Water Professionals in a training session",
             "zoom": 100,
             "positionX": 50,
             "positionY": 50,
-            "fit": "cover",
-            "alt": "Young Water Professionals in a training session"
-          }
+            "fit": "cover"
+          },
+          "page": "young-water-professionals",
+          "label": "Training"
         },
         {
-          "page": "aiwc5",
-          "section": "s-the-2030-agenda-set-by-the-partners",
-          "label": "Strategy",
           "title": "AIWC 2030",
           "text": "The agenda partners set at AIWC@5: climate-resilient agriculture, groundwater security, water quality, digital tools and joint education.",
           "photo": {
             "image": "/assets/photos/page-aiwc5-conference-4.jpg",
+            "alt": "Delegates at AIWC@5",
             "zoom": 100,
             "positionX": 50,
             "positionY": 50,
-            "fit": "cover",
-            "alt": "Delegates at AIWC@5"
-          }
+            "fit": "cover"
+          },
+          "page": "aiwc5",
+          "label": "Strategy",
+          "section": "s-the-2030-agenda-set-by-the-partners"
         }
-      ]
+      ],
+      "lede": ""
     },
     {
       "type": "storyCards",
       "tone": "sky",
       "title": "Latest from AIWC",
-      "lede": "Symposia, podcasts and the WATER TALKS webinar series — open to researchers, policy-makers, practitioners and students across Australia, India and the Asia Pacific.",
       "items": [
         {
-          "page": "news",
-          "section": "s-aiwc-5-international-symposium",
-          "label": "Event",
           "title": "AIWC@5 International Symposium: Water Futures and Climate Resilience",
           "text": "18–19 November 2025, Western Sydney University.",
           "photo": {
             "image": "/assets/photos/page-aiwc5-conference-0.jpg",
+            "alt": "Speakers at the AIWC@5 symposium",
             "zoom": 100,
             "positionX": 50,
             "positionY": 50,
-            "fit": "cover",
-            "alt": "Speakers at the AIWC@5 symposium"
-          }
+            "fit": "cover"
+          },
+          "page": "news",
+          "label": "Event",
+          "section": "s-aiwc-5-international-symposium"
         },
         {
-          "page": "news",
-          "section": "s-water-talks-2025",
-          "label": "Webinar",
           "title": "WATER TALKS 2025",
           "text": "The AIWC webinar series, open to researchers, policy-makers, practitioners and students.",
           "photo": {
             "image": "/assets/photos/bonus-lecture-webinar-0.jpg",
+            "alt": "Webinar flyer",
             "zoom": 100,
             "positionX": 50,
             "positionY": 6,
-            "fit": "cover",
-            "alt": "Webinar flyer"
-          }
+            "fit": "cover"
+          },
+          "page": "news",
+          "label": "Webinar",
+          "section": "s-water-talks-2025"
         },
         {
-          "page": "publications",
-          "icon": "publication",
-          "label": "Publication",
           "title": "Geospatial data and web-based tools for managing irrigation infrastructure expansion projects",
           "text": "World Water Policy, 2023.",
-          "photo": {}
+          "photo": {},
+          "page": "publications",
+          "label": "Publication",
+          "icon": "publication"
         },
         {
-          "page": "waterwise",
-          "section": "s-rejuvenation-of-the-springs-in-the-himalayan-region-evaluati",
-          "label": "Blog",
           "title": "Rejuvenation of the springs in the Himalayan region",
           "text": "From the WaterWise blog.",
           "photo": {
             "image": "/assets/photos/rejuvenation-of-the-springs-in-the-himalayan-region-evaluation-of-options-and-strategies-mr-neeraj-pant-phd-candidate-3.jpg",
+            "alt": "A spring rejuvenation meeting",
             "zoom": 100,
             "positionX": 50,
             "positionY": 50,
-            "fit": "cover",
-            "alt": "A spring rejuvenation meeting"
-          }
+            "fit": "cover"
+          },
+          "page": "waterwise",
+          "label": "Blog",
+          "section": "s-rejuvenation-of-the-springs-in-the-himalayan-region-evaluati"
         }
-      ]
+      ],
+      "lede": "Symposia, podcasts and the WATER TALKS webinar series — open to researchers, policy-makers, practitioners and students across Australia, India and the Asia Pacific."
     },
     {
       "type": "banner",
@@ -280,42 +293,42 @@
     },
     {
       "type": "banner",
-      "tone": "sand",
       "eyebrow": "Collaborate with AIWC",
+      "tone": "sand",
       "title": "AIWC is looking for partners for the 2030 agenda.",
       "lede": "Climate-resilient agriculture, groundwater security, PFAS and water quality, digital water tools, joint degree programmes and micro-credentials — the priorities set by partners at AIWC@5. If your institution works in any of them, we would like to hear from you."
     },
     {
       "type": "storyCards",
-      "look": "icons",
       "title": "",
-      "lede": "",
       "items": [
         {
-          "page": "collaborate",
-          "section": "s-research-collaboration",
-          "icon": "collaborate",
           "title": "Research collaboration",
           "text": "Partner with us to co-develop solutions for greater impact.",
-          "photo": {}
+          "photo": {},
+          "page": "collaborate",
+          "icon": "collaborate",
+          "section": "s-research-collaboration"
         },
         {
-          "page": "collaborate",
-          "section": "s-training-capacity-building",
-          "icon": "training",
           "title": "Training & capacity building",
           "text": "Build skills and knowledge together.",
-          "photo": {}
+          "photo": {},
+          "page": "collaborate",
+          "icon": "training",
+          "section": "s-training-capacity-building"
         },
         {
-          "page": "collaborate",
-          "section": "s-become-a-partner",
-          "icon": "partner",
           "title": "Become a partner",
           "text": "Join our network to support sustainable water futures.",
-          "photo": {}
+          "photo": {},
+          "page": "collaborate",
+          "icon": "partner",
+          "section": "s-become-a-partner"
         }
-      ]
+      ],
+      "look": "icons",
+      "lede": ""
     }
   ]
 }
