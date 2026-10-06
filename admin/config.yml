@@ -159,7 +159,9 @@ collections:
                 value_field: "slug"
                 display_fields: ["menuName"]
                 search_fields: ["menuName", "slug"]
+                required: false
                 hint: "Choose a page on this site."
+              - { label: "Or open an outside website", name: "url", widget: "string", required: false, hint: "Optional, e.g. https://marvi-groundwater.github.io/OurWater/. Used instead of the page when filled in; opens in a new tab." }
               - { label: "Filled style", name: "primary", widget: "boolean", default: false, required: false }
           - { label: "i18n", name: "i18n", widget: "hidden", required: false }
 

@@ -54,8 +54,7 @@
           }
         },
         {
-          "page": "initiatives",
-          "url": "https://marvi-groundwater.github.io/OurWater/",
+          "page": "ourwater",
           "label": "App",
           "title": "OurWater",
           "text": "A free, community-focused water monitoring and learning app built on the MARVI approach.",

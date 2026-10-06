@@ -4,59 +4,135 @@
       "label": "About",
       "page": "about",
       "items": [
-        { "label": "Who we are", "page": "about", "section": "s-two-countries-one-water-problem" },
-        { "label": "Vision & principles", "page": "about", "section": "s-six-things-the-centre-set-out-to-do" },
-        { "label": "Our journey", "page": "about", "section": "s-five-years-and-the-next-five" },
-        { "label": "Governance", "page": "about", "section": "s-how-the-centre-is-run" },
-        { "label": "AIWC@5", "page": "aiwc5" },
-        { "label": "AIWC 2030", "page": "aiwc5", "section": "s-the-2030-agenda-set-by-the-partners" }
+        {
+          "label": "Who we are",
+          "page": "about",
+          "section": "s-two-countries-one-water-problem"
+        },
+        {
+          "label": "Vision & principles",
+          "page": "about",
+          "section": "s-six-things-the-centre-set-out-to-do"
+        },
+        {
+          "label": "Our journey",
+          "page": "about",
+          "section": "s-five-years-and-the-next-five"
+        },
+        {
+          "label": "Governance",
+          "page": "about",
+          "section": "s-how-the-centre-is-run"
+        },
+        {
+          "label": "AIWC@5",
+          "page": "aiwc5"
+        },
+        {
+          "label": "AIWC 2030",
+          "page": "aiwc5",
+          "section": "s-the-2030-agenda-set-by-the-partners"
+        }
       ]
     },
     {
       "label": "Our Work",
       "page": "work",
       "items": [
-        { "label": "Research & innovation", "page": "research" },
-        { "label": "Education", "page": "education" },
-        { "label": "Training & capacity building", "page": "training" },
-        { "label": "Engagement & outreach", "page": "outreach" }
+        {
+          "label": "Research & innovation",
+          "page": "research"
+        },
+        {
+          "label": "Education",
+          "page": "education"
+        },
+        {
+          "label": "Training & capacity building",
+          "page": "training"
+        },
+        {
+          "label": "Engagement & outreach",
+          "page": "outreach"
+        }
       ]
     },
     {
       "label": "Initiatives",
       "page": "initiatives",
       "items": [
-        { "label": "MARVI", "page": "marvi" },
-        { "label": "OurWater", "url": "https://marvi-groundwater.github.io/OurWater/" },
-        { "label": "Young Water Professionals", "page": "young-water-professionals" },
-        { "label": "WaterWise", "page": "waterwise" },
-        { "label": "Other initiatives", "page": "initiatives", "section": "s-other-initiatives" }
+        {
+          "label": "MARVI",
+          "page": "marvi"
+        },
+        {
+          "label": "OurWater",
+          "page": "ourwater"
+        },
+        {
+          "label": "Young Water Professionals",
+          "page": "young-water-professionals"
+        },
+        {
+          "label": "WaterWise",
+          "page": "waterwise"
+        },
+        {
+          "label": "Other initiatives",
+          "page": "initiatives",
+          "section": "s-other-initiatives"
+        }
       ]
     },
     {
       "label": "People & Partners",
       "page": "people",
       "items": [
-        { "label": "Researchers", "page": "people" },
-        { "label": "Partner institutions", "page": "partners" }
+        {
+          "label": "Researchers",
+          "page": "people"
+        },
+        {
+          "label": "Partner institutions",
+          "page": "partners"
+        }
       ]
     },
     {
       "label": "Knowledge & Resources",
       "page": "publications",
       "items": [
-        { "label": "Publications", "page": "publications" },
-        { "label": "Videos & webinars", "page": "resources" },
-        { "label": "Webinar series", "page": "12" }
+        {
+          "label": "Publications",
+          "page": "publications"
+        },
+        {
+          "label": "Videos & webinars",
+          "page": "resources"
+        },
+        {
+          "label": "Webinar series",
+          "page": "12"
+        }
       ]
     },
     {
       "label": "News & Events",
       "page": "news",
       "items": [
-        { "label": "Latest news", "page": "news" },
-        { "label": "Past events", "page": "news", "section": "s-aiwc-5-international-symposium" },
-        { "label": "Webinar series", "page": "12" }
+        {
+          "label": "Latest news",
+          "page": "news"
+        },
+        {
+          "label": "Past events",
+          "page": "news",
+          "section": "s-aiwc-5-international-symposium"
+        },
+        {
+          "label": "Webinar series",
+          "page": "12"
+        }
       ]
     },
     {
@@ -64,10 +140,25 @@
       "page": "collaborate",
       "button": true,
       "items": [
-        { "label": "Research collaboration", "page": "collaborate", "section": "s-research-collaboration" },
-        { "label": "Training & capacity building", "page": "collaborate", "section": "s-training-capacity-building" },
-        { "label": "Become a partner", "page": "collaborate", "section": "s-become-a-partner" },
-        { "label": "Contact", "page": "contact" }
+        {
+          "label": "Research collaboration",
+          "page": "collaborate",
+          "section": "s-research-collaboration"
+        },
+        {
+          "label": "Training & capacity building",
+          "page": "collaborate",
+          "section": "s-training-capacity-building"
+        },
+        {
+          "label": "Become a partner",
+          "page": "collaborate",
+          "section": "s-become-a-partner"
+        },
+        {
+          "label": "Contact",
+          "page": "contact"
+        }
       ]
     }
   ]

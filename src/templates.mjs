@@ -148,10 +148,17 @@ const ytId = (url) => {
 /* Each takes (document, block, ctx) where ctx = { urlFor(pageId), t(path) }.
  * t(path) resolves the data-i18n key: legacy (block.i18n) or generated. */
 
-const pageLink = (document, ctx, { label, page, primary, key }) => {
+const pageLink = (document, ctx, { label, page, url, primary, key }) => {
   const a = el(document, 'a', { class: 'button' + (primary ? ' primary' : '') });
-  a.setAttribute('data-open', page);           // i18n slot + old-link compatibility
-  a.setAttribute('href', ctx.urlFor(page));
+  if (url) {
+    // An outside site (OurWater, a partner) opens in a new tab.
+    a.setAttribute('href', url);
+    a.setAttribute('target', '_blank');
+    a.setAttribute('rel', 'noopener');
+  } else {
+    a.setAttribute('data-open', page);         // i18n slot + old-link compatibility
+    a.setAttribute('href', ctx.urlFor(page));
+  }
   a.textContent = label || '';
   if (key) a.setAttribute('data-i18n', key);
   return a;

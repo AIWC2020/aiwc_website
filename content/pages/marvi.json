@@ -104,8 +104,9 @@
           "meta": "",
           "name": "OurWater",
           "description": "A free, community-focused water monitoring and learning app built on the MARVI approach.",
-          "url": "https://marvi-groundwater.github.io/OurWater/",
-          "linkLabel": "Open OurWater"
+          "url": "",
+          "linkLabel": "About OurWater",
+          "target": "ourwater"
         }
       ]
     }

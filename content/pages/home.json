@@ -185,9 +185,8 @@
             "positionY": 50,
             "fit": "cover"
           },
-          "page": "initiatives",
-          "label": "App",
-          "url": "https://marvi-groundwater.github.io/OurWater/"
+          "page": "ourwater",
+          "label": "App"
         },
         {
           "title": "Young Water Professionals",
