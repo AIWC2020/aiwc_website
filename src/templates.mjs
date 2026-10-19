@@ -347,9 +347,7 @@ const BLOCKS = {
     // no title are visual interludes and never split a section.
     const title = (block.title || '').trim();
     if (title) {
-      const anchor = 's-' + title.toLowerCase().normalize('NFKD')
-        .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60);
-      wrap.setAttribute('id', anchor);
+      wrap.setAttribute('id', sectionAnchor(title));
       wrap.setAttribute('data-section-anchor', '');
       if (block.tabLabel) wrap.setAttribute('data-tab-label', block.tabLabel);
     }
@@ -1151,6 +1149,13 @@ const partnerShowcase = (document, groups, ctx, { limited, total }) => {
 
 const slugish = (value) =>
   String(value || '').toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+
+/**
+ * The anchor id a titled banner gets — "How the Centre is run" →
+ * "s-how-the-centre-is-run". Exported because the header menu links to these
+ * (see monthItems in registry.mjs), and the two must never disagree.
+ */
+export const sectionAnchor = (title) => 's-' + slugish(String(title || '').trim()).slice(0, 60);
 
 /**
  * Group records by country, with the Centre's two partners first and any

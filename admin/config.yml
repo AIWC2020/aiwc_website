@@ -683,6 +683,7 @@ collections:
                 display_fields: ["menuName"]
                 search_fields: ["menuName", "slug"]
               - { label: "Show as the highlighted button", name: "button", widget: "boolean", default: false, required: false, hint: "Use for one tab only — Collaborate with us." }
+              - { label: "List this page's months in the dropdown", name: "monthsFromPage", widget: "boolean", default: false, required: false, hint: "For News & events. Every section heading on the page that is a month and year, e.g. January 2027, is added to the dropdown in page order, after any items below. Add or remove a month on the page and the menu follows." }
               - label: "Dropdown items"
                 name: "items"
                 widget: "list"

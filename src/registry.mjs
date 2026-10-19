@@ -16,6 +16,7 @@
 
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
+import { sectionAnchor } from './templates.mjs';
 
 const readJSONDir = (dir) => {
   if (!existsSync(dir)) return [];
@@ -98,12 +99,13 @@ export function navTree(pages) {
  * The header menu, as editors set it in the CMS (Logo & site settings →
  * Header menu, stored in content/navigation.json):
  *
- *   { tabs: [{ label, page, button?, items?: [{ label, page?, section?, url? }] }] }
+ *   { tabs: [{ label, page, button?, monthsFromPage?, items?: [{ label, page?, section?, url? }] }] }
  *
  * A tab opens its own page and, when it has items, a dropdown. An item opens
  * a page, a section of a page (`section` is the heading's anchor, e.g.
  * "s-how-the-centre-is-run"), or an outside address (`url`). The home page
- * is never a tab; the logo is its link.
+ * is never a tab; the logo is its link. A tab with `monthsFromPage` also
+ * lists its page's month headings, after any items (see monthItems).
  *
  * Returns tabs with `page` resolved to page records and every item carrying
  * either `page` (a record) or `url`. Items naming a page that does not exist
@@ -136,10 +138,35 @@ export function buildNav(pages, navConfig = {}) {
         url,
       });
     }
+    if (tab.monthsFromPage === true) items.push(...monthItems(page));
     nav.push({ label: tab.label || page.menuName, page, button: tab.button === true, items });
   }
   const unlisted = pages.filter((p) => !placed.has(p.slug));
   return unlisted.length ? placeUnlistedPages(nav, unlisted) : nav;
+}
+
+/**
+ * A page's month headings as dropdown items, in page order — for a tab with
+ * "List this page's months in the dropdown" ticked (News & events).
+ *
+ * Editors list events under a heading per month ("January 2027", newest
+ * first). Deriving the menu from those headings means adding or removing a
+ * month is one edit, on the page; nobody has to type a section address into
+ * the Header menu, where a typo only shows up as a build warning.
+ */
+export function monthItems(page) {
+  return (page.blocks || [])
+    .filter((block) => block?.type === 'banner' && isMonthHeading(block.title))
+    .map((block) => ({ label: block.title.trim(), page, section: sectionAnchor(block.title), url: null }));
+}
+
+const MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'july',
+  'august', 'september', 'october', 'november', 'december'];
+
+/** "January 2027" — a full month name and a four-digit year, nothing else. */
+export function isMonthHeading(title) {
+  const match = /^([a-z]+)\s+(\d{4})$/i.exec(String(title || '').trim());
+  return Boolean(match) && MONTHS.includes(match[1].toLowerCase());
 }
 
 /**

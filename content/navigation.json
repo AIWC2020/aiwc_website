@@ -119,21 +119,8 @@
     {
       "label": "News & Events",
       "page": "news",
-      "items": [
-        {
-          "label": "Latest news",
-          "page": "news"
-        },
-        {
-          "label": "Past events",
-          "page": "news",
-          "section": "s-aiwc-5-international-symposium"
-        },
-        {
-          "label": "Webinar series",
-          "page": "12"
-        }
-      ]
+      "monthsFromPage": true,
+      "items": []
     },
     {
       "label": "Collaborate with Us",
