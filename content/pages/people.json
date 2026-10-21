@@ -4818,6 +4818,32 @@
             }
           ],
           "instituteSlug": "university-of-melbourne"
+        },
+        {
+          "photo": {
+            "image": "/assets/photos/Prof Indumathi.png",
+            "alt": "",
+            "zoom": 100,
+            "positionX": 50,
+            "positionY": 50,
+            "fit": "auto"
+          },
+          "name": "Indumathi M Nambi",
+          "slug": "indumathi",
+          "sortName": "Nambi Indumathi M",
+          "designation": "Professor Environmental Engineering",
+          "institute": "Indian Institute of Technology, Chennai",
+          "country": "India",
+          "qualification": "PhD in Civil and Environmental Engineering",
+          "interests": "Dr. Indumathi’s core research areas are Industrial Waste water treatment, Contaminant fate and transport in ground water specifically organic solvents, petroleum hydrocarbons and heavy metals. Other research areas include Lakes and Wetlands restoration and development of ecofriendly technology for industrial water and waste treatment with reduced carbon , water, chemical and waste footprint. She has been leading the Pan India Carbon Zero Challenge Contest – an initiative to inspire and fund youngsters to innovate technologies for environment protection . This program has supported 200 Clean Tech innovative prototypes and 30 startups have been nurtured in this program.",
+          "email": "indunambi@civil.iitm.ac.in",
+          "homepage": "https://indunambi.com/",
+          "profiles": [],
+          "bio": [
+            "Dr. Indumathi Nambi is Professor at the Environment and Water Resources Division, Department of Civil Engineering, IIT Madras, Chennai. She has received her doctorate in Civil and Environmental Engineering from Clarkson University, Potsdam, NY and has served as a postdoctoral fellow at University of Illinois at Urbana Champaign in U.S.A. Dr. Indu is also the chair person of IITMadras Womens Forum and recently received the highest recognition for engineers as a Fellow of Indian National Academy of Engineers.",
+            "Dr. Indumathi is an Environment expert member of the Ministry of Environment’s State Environmental Appraisal Committee, Jal Jeevan Mission, Unnat Bharat Abhiyan. She is serving in the expert committees of several departments in Tamil Nadu State Government and the Central Government. She has authored over 120 international journal papers, 10 patents, several conference papers, technical articles and book chapters. She has also serving in the editorial board and review committee of international journals ."
+          ],
+          "sections": []
         }
       ]
     }
