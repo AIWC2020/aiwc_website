@@ -4884,6 +4884,38 @@
               ]
             }
           ]
+        },
+        {
+          "photo": {
+            "image": "/assets/photos/VenkatramanSrinivasan.jpg",
+            "alt": "",
+            "zoom": 100,
+            "positionX": 50,
+            "positionY": 50,
+            "fit": "auto"
+          },
+          "name": "Dr. Venkatraman Srinivasan",
+          "slug": "venkatramansrinivasan",
+          "sortName": "Srinivasan Venkatraman",
+          "designation": "Associate Professor, Department of Civil Engineering",
+          "institute": "Indian Institute of Technology Chennai",
+          "country": "India",
+          "qualification": "PhD, University of Illinois Urbana Champaign, USA",
+          "interests": "His research focuses on groundwater hydrology, contaminant transport and remediation, saltwater intrusion in coastal aquifers, and ecohydrological experiments and modelling. He investigates the interactions between hydrological processes, vegetation dynamics, and climate change, with particular emphasis on implications for food and water security. His research interests also include groundwater recharge, ecosystem resilience, and process-based modelling of coupled environmental systems. Through modelling and experimental approaches, his work seeks to improve understanding of complex hydrological and ecological processes and support sustainable water resource management under changing climatic conditions.",
+          "email": "venkatraman@iitm.ac.in",
+          "homepage": "https://home.iitm.ac.in/venkatraman/index.htm",
+          "profiles": [],
+          "bio": [
+            "Dr. Venkatraman Srinivasan is an Associate Professor in the Department of Civil Engineering at the Indian Institute of Technology Madras (IIT Madras), Chennai, India. He holds a Ph.D. in Civil and Environmental Engineering from the University of Illinois Urbana-Champaign, USA, and an M.S. in Civil Engineering from Auburn University, USA."
+          ],
+          "sections": [
+            {
+              "title": "Key Publications / Reports",
+              "items": [
+                "https://doi.org/10.1016/j.jconhyd.2026.105052\nhttps://doi.org/10.1007/s10040-025-02974-4 \nhttps://doi.org/10.1016/j.agrformet.2024.109988\nhttps://doi.org/10.1111/pce.14821"
+              ]
+            }
+          ]
         }
       ]
     }
