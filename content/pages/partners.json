@@ -31,11 +31,15 @@
     "positionY": 50,
     "fit": "cover"
   },
+  "introTab": "",
   "blocks": [
     {
       "type": "banner",
+      "eyebrow": "",
       "title": "Who is in the room.",
-      "lede": "Universities, national institutes, government departments and water businesses — eleven partners in Australia, twenty-two in India."
+      "tabLabel": "",
+      "lede": "Universities, national institutes, government departments and water businesses — eleven partners in Australia, twenty-two in India.",
+      "accent": ""
     },
     {
       "type": "partnerDirectory",
@@ -362,7 +366,7 @@
         },
         {
           "source": null,
-          "name": "Indian Institute of Technology Madras",
+          "name": "Indian Institute of Technology Chennai",
           "slug": "indian-institute-of-technology-madras",
           "country": "India",
           "sections": [],
@@ -530,7 +534,8 @@
           "body": []
         }
       ],
-      "layout": "directory"
+      "layout": "directory",
+      "limit": null
     },
     {
       "type": "callout",
