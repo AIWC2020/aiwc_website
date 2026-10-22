@@ -73,9 +73,10 @@
       "type": "split",
       "left": {
         "kind": "prose",
-        "lead": "",
+        "lead": "Webinar on 3 December 2026 featuring two eminent speakers:",
         "paragraphs": [
-          "Events for December 2026 will be listed here."
+          "Speakers 1: Professor Ataur Rahman - Western Sydney University.",
+          "Speaker 2: Professor Damodhara Mailapalli - IIT Kharagpur"
         ],
         "stat": "",
         "caption": ""
@@ -100,9 +101,10 @@
       "type": "split",
       "left": {
         "kind": "prose",
-        "lead": "",
+        "lead": "Webinar on 5 November 2026 featuring two eminent speakers:",
         "paragraphs": [
-          "Events for November 2026 will be listed here."
+          "Speaker 1: Dr. Prashant Srivastava - CSIRO",
+          "Speaker 2: Professor Sumit Sen - IIT Roorkee"
         ],
         "stat": "",
         "caption": ""
