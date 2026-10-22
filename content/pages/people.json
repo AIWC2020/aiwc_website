@@ -4106,8 +4106,9 @@
         },
         {
           "photo": {
-            "image": "/assets/people/prof-t-g-sitharam.webp",
+            "image": "/assets/photos/Porf_T_G_Sitharam.jpg",
             "alt": "",
+            "zoom": null,
             "positionX": 50,
             "positionY": 22
           },
