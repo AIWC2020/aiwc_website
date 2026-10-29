@@ -4607,6 +4607,52 @@
               ]
             }
           ]
+        },
+        {
+          "photo": {
+            "image": "/assets/photos/Srinivasan Full Size.jpg",
+            "alt": "",
+            "zoom": 100,
+            "positionX": 50,
+            "positionY": 50,
+            "fit": "auto"
+          },
+          "name": "Dr. S Srinivasan",
+          "slug": "s-srinivasan",
+          "sortName": "",
+          "designation": "Associate Professor",
+          "institute": "Indian Institute of Technology Chennai",
+          "country": "India",
+          "qualification": "PhD",
+          "interests": "Technology & People Interaction, Socio-Economic Impact Assessment, Community Participation in Technology Development",
+          "email": "srinivasan@iitm.ac.in",
+          "homepage": "https://doms.iitm.ac.in/index.php/people/faculty/shrinivasans/",
+          "profiles": [
+            "https://orchid.org/0000-0002-0051-0612",
+            "https://scholar.google.com/citations?user=_fUXP_EAAAAJ&hl=en"
+          ],
+          "bio": [
+            "Dr. Srinivasan is an Associate professor in the area of Human Resource Management at the Department of Management Studies, IIT Madras. He works in the area of Human and Technology intersection. He has actively involved in several rural water projects at the capacity of social scientist in enabling community participation in design and development of technology. Also, actively carried out socio-economic impact post the implementation water projects in rural villages in India. He is involved in developing an Index for Socio-Economic Impact of Rural Water Project. He also served as an Assistant Professor at Vinod Gupta School of Management, Indian Institute of Technology Kharagpur (IIT Kharagpur). He has published in various peer-reviewed international journals. He has carried out research projects for various Ministries in India including Ministry of Statistics and Programme Implementation, Ministry of Shipping, Port and Water Ways, Ministry of Jal Shakti, Ministry of Urban and Housing Affairs, Govt. of India. He had also done other research and consultancy projects for NTPC, IDRC, and SSHRC, Canada. He is a Sustainability Auditing Consultant (Certified auditor for The Warehouse Limited, New Zealand, Hasbro, USA, and Nike, USA) for Footprints – Supply chain CSR, Hong Kong -Scope: Labour audit, ESH audit, and compliance audit. He has audited several factories in India and Southeast Asian countries."
+          ],
+          "sections": [
+            {
+              "title": "Research Project",
+              "items": [
+                "1.\tImpact Assessment Study of Jal Jeevan Mission – Har Ghar Jal Rural Water Distribution System in Bundelkhand and Vindhya Region, Uttar Pradesh",
+                "2.\tComprehensive IoT system to the rural water supply scheme in Panchayat, Erode"
+              ]
+            },
+            {
+              "title": "Key Publications / Reports",
+              "items": [
+                "1.\tSrinivasan, S., Sriji, E. S., and J. J. Malakaran (2022), “What determines a country's proactiveness during a pandemic?”, International Journal of Disaster Risk Reduction, Vol. 80, October 2022, 103200, https://doi.org/10.1016/j.ijdrr.2022.103200.",
+                "2.\tMukherjee, S., Iyer, A. C., Das, S., & Srinivasan, S. (2026). Privacy pitfalls: challenges in FemTech app adoption. Information & Computer Security, 1-14.",
+                "3.\tMacDonald M. C., L. Juran, S. Srinivasan, J. Jose, P. Rajagopalan, L. Philip and K. Hall (2017). Assessing participant compliance with point-of-use water treatment: An exploratory investigation. Public works Management & Policy, pp. 1-18.  https://doi.org/10.1177/1087724X17745083 (ABDC-B, SCIMAGO – Q2)",
+                "4.\tMacDonald,  M. C., L. Juran, J. Jose, S. Srinivasan, S. I. Ali, A. J. Kristan and K. Hall (2016). The impact of rainfall and seasonal variability on the removal of bacteria by a point-of-use drinking water treatment intervention in Chennai, India, International Journal of Environmental Health Research, 26(2), pp. 208-221. http://dx.doi.org/10.1080/09603123.2015.1089532",
+                "5.\tMacDonald, M.C., S. Srinivasan, S. I. Ali, P. Rajagopalan, K. Hall and A. J. Kristan (2012). Applying an Extended Ladder of Participation for the Development of a Community-Managed Safe Water System in a Marginalized South Asian Community. Proceedings of the 2012 Technology for Development International Conference; Lausanne, Switzerland, cole Polytechnique Fdrale de Lausanne."
+              ]
+            }
+          ]
         }
       ]
     }
